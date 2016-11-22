@@ -120,16 +120,26 @@ Wie in der Auflistung \ref{helloworldoutput} zu sehen, folgt die Reihenfolge der
 \definecolor{cbwhite}{RGB}{255,255,255}
 \subsection{Aufgabe 4}
 \begin{itemize}
-	\item[a)] Ausführliche Beschreibung der Vorgehensweise... \\
-	\item[b)] Geht nicht... \\
+	\item[a)] Das Problem, das gelöst werden soll...
+	Wie wir es gelöst haben...
+	Zerfall der dünnen Matrix in vier bedingten Beiträgen einer Summe \\
+	
+	\item[b)] Eine naive Parallelisierung des implementierten Gauß-Seidel-Verfahrens ist nicht möglich, da innerhalb der Berechnung von $u^i$ -- eine naive Parallelisierung würde versuchen diese Berechnung zu parallelisieren -- Abhängigkeiten zwischen den einzelnen Einträgen bestehen. Für die Berechnung von $u^{i+1}_{x,y}$ werden diese Abhängigkeiten in Abbildung \ref{gsv_depend} dargestellt.
+	
+	\begin{figure}
+		\centering
+		\def\svgwidth{0.6\textwidth}
+		\input{gsv_node_dependence.pdf_tex}
+		\caption{Abhängigkeiten zu Nachbarknoten, um Knoten $u^{i+1}_{x,y}$ zu berechnen. Es fällt auf, dass zwei Werte der gleichen Iterierten $i+1$ benötigt werden (die roten Knoten). Durch diese Abhängigkeit können nicht alle Einträge einer Iterierten gleichzeitig, das heißt parallel, berechnet werden.}
+		\label{gsv_depend}
+	\end{figure}
+	
+	Eine Mögliche Lösung wäre, zur Berechnung von $u^i$ über die einzelnen Diagonalen zu parallelisieren. Dies würde funktionieren, da diagonal keine Abhängigkeit zwischen den Einträgen besteht. Dennoch ist diese Lösung nicht praktikabel, da der Synchronisationsaufwand aufgrund der Anzahl der Diagonalen zu groß -- und die Anzahl der parallelisierten Einträge nicht selten zu klein ist (abhängig von der Eingabegröße, aber mit größeren Eingaben wächst auch die Anzahl der Diagonalen und der damit verbundene Mehraufwand).\\
+	
 	\item[c)] Ausführliche Beschreibung der Vorgehensweise... \\
-		Abbildung zu Abhängigkeiten
 		
-		\begin{figure}\centering
-			\def\svgwidth{0.6\textwidth}
-			\input{gsv_node_dependence.pdf_tex}
-			\caption{Abhängigkeiten zu Nachbarknoten, um Knoten $u^{i+1}_{x,y}$ zu berechnen. Es fällt auf, dass zwei Werte der gleichen Iterierten $i+1$ benötigt werden (die roten Knoten). Durch diese Abhängigkeit können nicht alle Einträge einer Iterierten gleichzeitig, das heißt parallel, berechnet werden.}
-		\end{figure}
+		
+		
 	
 	
 	
@@ -178,11 +188,11 @@ Wie in der Auflistung \ref{helloworldoutput} zu sehen, folgt die Reihenfolge der
 		&= (M^2+N^2)4\pi^2\sin(2M\pi x)\sin(2N\pi y)
 	\end{split}
 	\end{equation}
-	\item[c)]Da in \ref{fgleichung} $M,N \in\mathbb{N}$ beliebig, wählen wir $M=N=1$ für die Lösung dieser Teilaufgabe. Damit ergibt sich
+	\item[c)]Da in Gleichung \ref{fgleichung} $M,N \in\mathbb{N}$ beliebig, wählen wir der Einfachheit halber $M=N=1$ für die Lösung dieser Teilaufgabe. Damit ergibt sich
 	\begin{equation}
 	f(x,y)=8\pi^2\sin(2\pi x)\sin(2\pi y)
 	\end{equation}
-	Die analytische Lösung $u(x,y)$ ist bereits aus der Aufgabenstellung mit Gleichung \ref{udef} gegeben und wird zur Überprüfung der Berechnung verwendet.
+	Die analytische Lösung $u(x,y)$ ist bereits aus der Aufgabenstellung mit Gleichung \ref{udef} gegeben und wird zur Überprüfung der Ergebnisse verwendet.
 \end{itemize}
 
 \subsection{Aufgabe 6}
