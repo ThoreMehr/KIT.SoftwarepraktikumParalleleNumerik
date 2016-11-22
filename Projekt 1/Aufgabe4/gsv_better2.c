@@ -26,65 +26,67 @@ void solve(double h, double *f, int n, double *u, int *iterations) {
 	int i, j, k;
 	double sum;
 	double base[N];
-	double *uHistory = (double*) malloc(D * N * sizeof(double));
+	int stride = D + 2;
+	double *uHistory = (double*) malloc(D * stride * stride * sizeof(double));
 	*iterations = 0;
 	int smallError[D];
 	
 	for (i = 0; i < n; i++) {
-		for (j = 0; j < D; j++) {
-			uHistory[i + j * N] = 0;
-		}
 		base[i] = h * h * f[i];
 	}
-	
+	for (i = 0; i < D * stride * stride; i++) {
+		uHistory[i] = 0;
+	}
 	for (i = 0; i < D; i++) {
 		smallError[i] = 0;
 	}
 	
 	for (k = 1; ; k++) {
-		int time = (k % D) * N;
-		int lastTime = ((k - 1 + D) % D) * N;
+		int time = (k % D) * stride * stride;
+		int lastTime = ((k - 1 + D) % D) * stride * stride;
 		smallError[k % D] = 1;
 		
 		// Black fields
 		#pragma omp parallel for private(j, sum)
 		for (j = 0; j < N; j += 2) {
+			int idx = j + 2 * (j / D) + stride + 1;
 			int x = j % D;
 			int y = j / D;
 			int diagIndex = (x + y) / 2;
 			
 			if (diagIndex < k) {
 				sum = base[j];
-				if (j - D >= 0) sum += uHistory[j - D + lastTime];
-				if (j + D < n) sum += uHistory[j + D + lastTime];
-				if (j - 1 >= 0 && (j - 1) / D == j / D) sum += uHistory[j - 1 + lastTime];
-				if (j + 1 < n && (j + 1) / D == j / D) sum += uHistory[j + 1 + lastTime];
+				sum += uHistory[idx - stride + lastTime];
+				sum += uHistory[idx + stride + lastTime];
+				sum += uHistory[idx - 1 + lastTime];
+				sum += uHistory[idx + 1 + lastTime];
 				sum /= 4;
 				
-				if (fabs(sum - uHistory[j + lastTime]) >= EPSILON) smallError[(k - diagIndex + D) % D] = 0;
+				if (fabs(sum - uHistory[idx + lastTime]) >= EPSILON) smallError[(k - diagIndex + D) % D] = 0;
 				
-				uHistory[j + time] = sum;
+				uHistory[idx + time] = sum;
 			}
 		}
 		
 		// White fields
 		#pragma omp parallel for private(j, sum)
 		for (j = 1; j < N; j += 2) {
+			int idx = j + 2 * (j / D) + stride + 1;
 			int x = j % D;
 			int y = j / D;
 			int diagIndex = (x + y) / 2;
 			
 			if (diagIndex < k) {
 				sum = base[j];
-				if (j - D >= 0) sum += uHistory[j - D + time];
-				if (j + D < n) sum += uHistory[j + D + time];
-				if (j - 1 >= 0 && (j - 1) / D == j / D) sum += uHistory[j - 1 + time];
-				if (j + 1 < n && (j + 1) / D == j / D) sum += uHistory[j + 1 + time];
+				sum += uHistory[idx - stride + time];
+				sum += uHistory[idx + stride + time];
+				sum += uHistory[idx - 1 + time];
+				sum += uHistory[idx + 1 + time];
 				sum /= 4;
 				
-				if (fabs(sum - uHistory[j + lastTime]) >= EPSILON) smallError[(k - diagIndex + D) % D] = 0;
+				if (fabs(sum - uHistory[idx + lastTime]) >= EPSILON) smallError[(k - diagIndex + D) % D] = 0;
 				
-				uHistory[j + time] = sum;
+				uHistory[idx + time] = sum;
 			}
 		}
 		
@@ -96,10 +98,12 @@ void solve(double h, double *f, int n, double *u, int *iterations) {
 	}
 	
 	for (j = 0; j < N; j++) {
+		int idx = j + 2 * (j / D) + stride + 1;
 		int x = j % D;
 		int y = j / D;
 		int diagIndex = (x + y) / 2;
-		u[j] = uHistory[j + ((k + 1 + diagIndex) % D) * N];
+		int time = ((k + 1 + diagIndex) % D) * stride * stride;
+		u[j] = uHistory[idx + time];
 	}
 	
 	free(uHistory);

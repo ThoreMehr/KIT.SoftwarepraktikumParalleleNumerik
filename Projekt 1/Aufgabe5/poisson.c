@@ -9,14 +9,19 @@
 #include <omp.h>
 #include <math.h>
 
-#include "config.h"
+#define L 8
+#define D ((1 << L) - 1)
+#define N (D * D)
+#define EPSILON 1e-6
+
+#define SHOW_RESULTS 0
 
 double func(double x, double y) {
-	return 32 * (x * (1 - x) + y * (1 - y));
+	return 8 * M_PI * M_PI * sin(2 * M_PI * x) * sin(2 * M_PI * y);
 }
 
 double analyticU(double x, double y) {
-	return 16 * x * (1 - x) * y * (1 - y);
+	return sin(2 * M_PI * x) * sin(2 * M_PI * y);
 }
 
 /*
@@ -114,7 +119,7 @@ int main(void) {
 	
 	printf("Run on system with %d processors and max %d threads\n", omp_get_num_procs(), omp_get_max_threads());
 	
-	printf("l = %d\nd = %d\nn = %d\n\n", L, D, N);
+	printf("l = %d\nd = %d\nn = %d\n", L, D, N);
 	
 	for (i = 0; i < D; i++) {
 		for (j = 0; j < D; j++) {

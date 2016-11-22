@@ -1,12 +1,13 @@
+/*
+ * Compile with
+ * gcc -Wall -g -fopenmp -o $(NAME_PART) $(FILE_NAME) -lm
+ */
 
 #include <omp.h>
 #include <stdio.h>
 #include <omp.h>
 
-#define L 7
-#define D ((1<<L)-1)
-#define N (D*D)
-#define EPSILON 1e-6
+#include "config.h"
 
 double func(double x, double y) {
 	return 32 * (x * (1 - x) + y * (1 - y));
@@ -16,9 +17,13 @@ double analyticU(double x, double y) {
 	return 16 * x * (1 - x) * y * (1 - y);
 }
 
-void solve(double h, double *f, int n, double *u) {
+/*
+ * Solves Au = h²f for with A of size n*n, u, f of size n
+ */
+void solve(double h, double *f, int n, double *u, int *iterations) {
 	int i, j, k;
 	double sum;
+	*iterations = 0;
 	
 	for (i = 0; i < n; i++) {
 		u[i] = 0.0;
@@ -48,6 +53,8 @@ void solve(double h, double *f, int n, double *u) {
 			u[j] = sum;
 		}
 		
+		(*iterations)++;
+		
 		if (maxError < EPSILON) break;
 	}
 }
@@ -68,20 +75,24 @@ int main(void) {
 		}
 	}
 	
-	solve(h, f, N, u);
+	int it;
+	solve(h, f, N, u, &it);
 	
-	printf("\nResult:\n");
-	for (i = 0; i < D; i++) {
-		for (j = 0; j < D; j++) {
-			printf("%8.4f", u[j + D * i]);
+	if (SHOW_RESULTS) {
+		printf("\nResult:\n");
+		for (i = 0; i < D; i++) {
+			for (j = 0; j < D; j++) {
+				printf("%8.4f", u[j + D * i]);
+			}
+			printf("\n");
 		}
-		printf("\n");
-	}
-	
-	printf("\nAnalytic:\n");
-	for (i = 0; i < D; i++) {
-		for (j = 0; j < D; j++) {
-			printf("%8.4f", analyticU(j * h + h, i * h + h));
+		
+		printf("\nAnalytic:\n");
+		for (i = 0; i < D; i++) {
+			for (j = 0; j < D; j++) {
+				printf("%8.4f", analyticU(j * h + h, i * h + h));
+			}
+			printf("\n");
 		}
 		printf("\n");
 	}
@@ -94,7 +105,8 @@ int main(void) {
 			maxError = error > maxError ? error : maxError;
 		}
 	}
-	printf("Max error: %4.8f", maxError);
+	printf("Max error: %4.8f\n", maxError);
+	printf("Iterations: %d\n", it);
 	
 	return 0;
 }
