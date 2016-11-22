@@ -1,0 +1,145 @@
+\documentclass[runningheads]{llncs}
+
+%---- Sonderzeichen-------%
+\usepackage {ngerman}
+%---- Codierung----%
+\usepackage[latin1]{inputenc}	% for Unix and Windows
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{llncsdoc}
+%----- Mathematischer Zeichenvorrat---%
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+% fuer die aktuelle Zeit
+\usepackage{scrtime}
+\usepackage{listings}
+\usepackage{subfigure}
+\usepackage{hyperref}
+
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+
+
+
+\begin{document}
+
+\mainmatter
+\title{Praktikum Parallele Numerik}
+\titlerunning{Arbeit}
+\author{Fabian Miltenberger, Sébastien Thill, Thore Mehr}
+\authorrunning{Parallele Numerik}
+\institute{Betreuer: Markus Hoffmann, Thomas Becker}
+\date{23.07.2007}
+\maketitle
+
+\begin{abstract}Im Rahmen dieses Praktikums haben wir viel gelernt.
+\end{abstract}
+
+\section{Projekt 1}
+\subsection{Aufgabe 1}
+\subsection{Aufgabe 2}
+\subsection{Aufgabe 3}
+\begin{itemize}
+	\item[a)] Im Folgenden einige bekannte Größen der Parallelisierung, wie sie in der Vorlesung Rechnerstrukturen gelehrt wurden. \\
+	
+	Vorab sei $T(n)$ die Ausführungszeit auf n Prozessoren,
+	$P(n)$ die Anzahl der auszuführenden Einheitsoperationen und
+	$I(n)$ der Parallelindex. \\
+	
+	Der Speedup/die Beschleunigung $S(n)$:
+	\begin{equation}
+		S(n) = \frac{T(1)}{T(n)}
+	\end{equation}
+	
+	Die Effizienz $E(n)$:
+	\begin{equation}
+		E(n) = \frac{S(n)}{n} = \frac{T(1)}{n \cdot T(n)}
+	\end{equation}
+	
+	Der Mehraufwand $R(n)$:
+	\begin{equation}
+		R(n) = \frac{P(n)}{P(1)}
+	\end{equation}
+	
+	Die Auslastung $U(n)$:
+	\begin{equation}
+		U(n) = \frac{U(n)}{n} = R(n) \cdot E(n) = \frac{P(n)}{n \cdot T(n)}
+	\end{equation}
+	
+	\item[b)] \begin{description}
+		\item[Race Condition] \hfill \\ Wettlaufsituationen
+		Dabei hängt Ergebnis von konkreter Ausführungsreihenfolge ab (daher Wettlauf)
+		Entsteht, wenn verschiedene Fäden auf gleiche Variable zugreifen, und mindestens ein Faden deren Wert manipuliert
+		Korrektheit der Ergebnisse hängt von Ausführungsreihenfolge ab
+		\item[Dead lock] \hfill \\ Zyklus im Allokationsgraphen
+	\end{description} \hfill
+
+	\item[c)] Die Vor- und Nachteile verschiedener Architekturen bezüglich verschiedener Aspekte:
+	\begin{table}
+		\begin{center}
+			\begin{tabular}{l | p{5cm} p{5cm}}
+				& Anwenderfreundlichkeit & Energieeffizienz \\
+				\hline
+				GPU & Gut & Mittel \\
+				CPU & Gut & Gering \\
+				FPGA & Gering & Sehr gut \\
+				MIC & Gut & Gut
+			\end{tabular}
+		\end{center}
+		\caption{Verschiedene Beschleuniger im Vergleich}
+	\end{table}
+\end{itemize}
+
+\subsection{Aufgabe 4}
+\begin{itemize}
+	\item[a)] Ausführliche Beschreibung der Vorgehensweise...
+	\item[b)] Geht nicht...
+	\item[c)] Ausführliche Beschreibung der Vorgehensweise...
+\end{itemize}
+
+\subsection{Aufgabe 5}
+\begin{itemize}
+	\item[a)] Die Bedingungen lauten nach den Folien der FEM-Einführung: \\
+	$\Omega$ sei ein beschränktes Gebiet\\
+	$\Gamma$ sei hinreichend glatt\\
+	$f:\Omega\rightarrow \mathbb{R}$ gegebene Funktion, wie es hier der Fall ist.\\
+	\item[b)] Gesucht ist $f$ mit
+	\begin{equation}\label{udef}
+		u(x,y)=\sin(2M\pi x)\sin(2N\pi y)
+	\end{equation}
+	Dies kann durch einfache Anwendung des \emph{Laplace-Operators $\Delta$} berechnet werden:
+	\begin{equation}\label{fgleichung}
+	\begin{split}
+		f(x,y)&=-\Delta u(x,y) \\
+		&= -\frac{\partial u}{\partial x^2}-\frac{\partial u}{\partial y^2} \\
+		&= -\frac{\partial}{\partial x}(2M\pi\cos(2M\pi x)\sin(2N\pi y)) -\frac{\partial}{\partial y}(2N\pi\sin(2M\pi x)\cos(2N\pi y)) \\
+		&= 4M^2\pi^2\sin(2M\pi x)\sin(2N\pi y) + 4N^2\pi^2\sin(2M\pi x)\sin(2N\pi y) \\
+		&= (M^2+N^2)4\pi^2\sin(2M\pi x)\sin(2N\pi y)
+	\end{split}
+	\end{equation}
+	\item[c)]Da in \ref{fgleichung} $M,N \in\mathbb{N}$ beliebig, wählen wir $M=N=1$ für die Lösung dieser Teilaufgabe. Damit ergibt sich
+	\begin{equation}
+	f(x,y)=8\pi^2\sin(2\pi x)\sin(2\pi y)
+	\end{equation}
+	Die analytische Lösung $u(x,y)$ ist bereits aus der Aufgabenstellung mit Gleichung \ref{udef} gegeben und wird zur Überprüfung der Berechnung verwendet.
+\end{itemize}
+
+\subsection{Aufgabe 6}
+\begin{itemize}
+	\item[a)]
+	\item[b)]
+	\item[c)]
+\end{itemize}
+
+\section{Parojekt 2}
+
+% Normaler LNCS Zitierstil
+%\bibliographystyle{splncs}
+\bibliographystyle{itmalpha}
+% TODO: Ändern der folgenden Zeile, damit die .bib-Datei gefunden wird
+\bibliography{literatur}
+
+\end{document}
+
