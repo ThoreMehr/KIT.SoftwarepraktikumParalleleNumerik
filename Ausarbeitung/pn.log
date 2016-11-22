@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.4.21)  22 NOV 2016 14:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.4.21)  22 NOV 2016 17:21
 entering extended mode
 **./pn.tex
 (pn.tex
@@ -465,42 +465,80 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 82.
 )
 \Hy@SectionHShift=\skip54
+)
+("C:\Users\Lobby\AppData\Local\Programs\MiKTeX 2.9\tex\latex\tools\tabularx.sty
+"
+Package: tabularx 2014/10/28 v2.10 `tabularx' package (DPC)
+ ("C:\Users\Lobby\AppData\Local\Programs\MiKTeX 2.9\tex\latex\tools\array.sty"
+Package: array 2014/10/28 v2.4c Tabular extension package (FMi)
+\col@sep=\dimen147
+\extrarowheight=\dimen148
+\NC@list=\toks28
+\extratabsurround=\skip55
+\backup@length=\skip56
+)
+\TX@col@width=\dimen149
+\TX@old@table=\dimen150
+\TX@old@col=\dimen151
+\TX@target=\dimen152
+\TX@delta=\dimen153
+\TX@cols=\count151
+\TX@ftn=\toks29
+)
+("C:\Users\Lobby\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\color.sty
+"
+Package: color 2014/10/28 v1.1a Standard LaTeX Color (DPC)
+
+("C:\Users\Lobby\AppData\Local\Programs\MiKTeX 2.9\tex\latex\00miktex\color.cfg
+"
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: pdftex.def on input line 142.
+)
+("C:\Users\Lobby\AppData\Local\Programs\MiKTeX 2.9\tex\latex\colortbl\colortbl.
+sty"
+Package: colortbl 2012/02/13 v1.0a Color table columns (DPC)
+\everycr=\toks30
+\minrowclearance=\skip57
+)
+("C:\Users\Lobby\AppData\Local\Programs\MiKTeX 2.9\tex\latex\import\import.sty"
+Package: import 2009/03/23  v 5.1
 ) (pn.aux)
 \openout1 = `pn.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
 
 ("C:\Users\Lobby\AppData\Local\Programs\MiKTeX 2.9\tex\context\base\supp-pdf.mk
 ii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count151
-\scratchdimen=\dimen147
+\scratchcounter=\count152
+\scratchdimen=\dimen154
 \scratchbox=\box58
-\nofMPsegments=\count152
-\nofMParguments=\count153
-\everyMPshowfont=\toks28
-\MPscratchCnt=\count154
-\MPscratchDim=\dimen148
-\MPnumerator=\count155
-\makeMPintoPDFobject=\count156
-\everyMPtoPDFconversion=\toks29
+\nofMPsegments=\count153
+\nofMParguments=\count154
+\everyMPshowfont=\toks31
+\MPscratchCnt=\count155
+\MPscratchDim=\dimen155
+\MPnumerator=\count156
+\makeMPintoPDFobject=\count157
+\everyMPtoPDFconversion=\toks32
 )
-\c@lstlisting=\count157
+\c@lstlisting=\count158
 \AtBeginShipoutBox=\box59
-Package hyperref Info: Link coloring OFF on input line 28.
+Package hyperref Info: Link coloring OFF on input line 32.
 
 ("C:\Users\Lobby\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\nameref.s
 ty"
@@ -510,21 +548,21 @@ Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 estring.sty"
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count158
+\c@section@level=\count159
 )
-LaTeX Info: Redefining \ref on input line 28.
-LaTeX Info: Redefining \pageref on input line 28.
-LaTeX Info: Redefining \nameref on input line 28.
+LaTeX Info: Redefining \ref on input line 32.
+LaTeX Info: Redefining \pageref on input line 32.
+LaTeX Info: Redefining \nameref on input line 32.
  (pn.out) (pn.out)
 \@outlinefile=\write3
 \openout3 = `pn.out'.
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 38.
+LaTeX Font Info:    Try loading font information for U+msa on input line 42.
 
 ("C:\Users\Lobby\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 38.
+LaTeX Font Info:    Try loading font information for U+msb on input line 42.
 ("C:\Users\Lobby\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
@@ -535,12 +573,12 @@ Package hyperref Warning: bookmark level for unknown title defaults to 0.
 Package hyperref Warning: bookmark level for unknown author defaults to 0.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 65--66
+Underfull \hbox (badness 10000) in paragraph at lines 69--70
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 67--70
+Underfull \hbox (badness 10000) in paragraph at lines 71--74
 
  []
 
@@ -548,34 +586,52 @@ Underfull \hbox (badness 10000) in paragraph at lines 67--70
 
 
 {C:/Users/Lobby/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 124--128
+Underfull \hbox (badness 10000) in paragraph at lines 123--124
 
  []
 
-[2]
-Overfull \hbox (17.0pt too wide) detected at line 141
+
+Underfull \hbox (badness 10000) in paragraph at lines 124--125
+
+ []
+
+(gsv_node_dependence.pdf_tex
+<gsv_node_dependence.pdf, id=64, page=1, 105.04016pt x 105.04016pt>
+File: gsv_node_dependence.pdf Graphic file (type pdf)
+
+<use gsv_node_dependence.pdf, page 1>
+Package pdftex.def Info: gsv_node_dependence.pdf, page1 used on input line 52.
+(pdftex.def)             Requested size: 105.04016pt x 105.0399pt.
+) [2]
+Underfull \hbox (badness 10000) in paragraph at lines 161--165
+
+ []
+
+
+Overfull \hbox (17.0pt too wide) detected at line 178
 [][]
  []
 
+[3 <./gsv_node_dependence.pdf>]
 No file pn.bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 164.
-[3]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 164.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 201.
+[4]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 201.
  (pn.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 164.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 164.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 201.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 201.
 Package rerunfilecheck Info: File `pn.out' has not changed.
 (rerunfilecheck)             Checksum: EBC2180EDCDB500D1199FCB1A8C192E5;642.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 164.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 201.
  ) 
 Here is how much of TeX's memory you used:
- 8909 strings out of 493634
- 127178 string characters out of 3135239
- 236923 words of memory out of 3000000
- 12162 multiletter control sequences out of 15000+200000
- 15290 words of font info for 43 fonts, out of 3000000 for 9000
+ 9165 strings out of 493634
+ 131193 string characters out of 3135239
+ 244009 words of memory out of 3000000
+ 12393 multiletter control sequences out of 15000+200000
+ 16056 words of font info for 44 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
- 36i,15n,36p,594b,1081s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,15n,36p,594b,1083s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\Lobby\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\
 ecbx1000.pk> <C:\Users\Lobby\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\
 ec\dpi600\ecti1000.pk> <C:\Users\Lobby\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour
@@ -586,13 +642,22 @@ cal\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1000.pk> <C:\Users\Lobby\
 AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1440.pk><C:/Use
 rs/Lobby/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi1
 0.pfb><C:/Users/Lobby/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsf
-onts/cm/cmr10.pfb><C:/Users/Lobby/AppData/Local/Programs/MiKTeX 2.9/fonts/type1
-/public/amsfonts/cm/cmr7.pfb><C:/Users/Lobby/AppData/Local/Programs/MiKTeX 2.9/
-fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Lobby/AppData/Local/Program
-s/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on pn.pdf (3 pages, 124974 bytes).
+onts/cm/cmmi5.pfb><C:/Users/Lobby/AppData/Local/Programs/MiKTeX 2.9/fonts/type1
+/public/amsfonts/cm/cmmi6.pfb><C:/Users/Lobby/AppData/Local/Programs/MiKTeX 2.9
+/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/Lobby/AppData/Local/Program
+s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Users/Lobby/AppData/L
+ocal/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Lob
+by/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr5.pfb><C
+:/Users/Lobby/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
+cmr6.pfb><C:/Users/Lobby/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/a
+msfonts/cm/cmr7.pfb><C:/Users/Lobby/AppData/Local/Programs/MiKTeX 2.9/fonts/typ
+e1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Lobby/AppData/Local/Programs/MiKTeX 
+2.9/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/Lobby/AppData/Local/Prog
+rams/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/Lobby/AppDat
+a/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on pn.pdf (4 pages, 195596 bytes).
 PDF statistics:
- 331 PDF objects out of 1000 (max. 8388607)
- 30 named destinations out of 1000 (max. 500000)
- 81 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 374 PDF objects out of 1000 (max. 8388607)
+ 33 named destinations out of 1000 (max. 500000)
+ 86 words of extra memory for PDF output out of 10000 (max. 10000000)
 

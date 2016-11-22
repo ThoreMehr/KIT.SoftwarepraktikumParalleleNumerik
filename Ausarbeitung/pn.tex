@@ -19,6 +19,10 @@
 \usepackage{hyperref}
 
 \usepackage{listings}
+\usepackage{tabularx}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{graphicx,import}
 
 \setcounter{tocdepth}{3}
 \setcounter{secnumdepth}{3}
@@ -53,7 +57,7 @@ Hello World, this is Thread3
 Hello World, this is Thread6
 Hello World, this is Thread2
 \end{lstlisting}
-Wie in der Auflistung \ref{helloworldoutput} zu sehen, folgt die Reihenfolge der ausgeführten Fäden keinem bestimmten Muster. Die Reihenfolgen zwischen verschiedenen Ausführungen sind verschieden.
+Wie in der Auflistung \ref{helloworldoutput} zu sehen, folgt die Reihenfolge der ausgeführten Fäden keinem bestimmten Muster. Die Reihenfolgen zwischen verschiedenen Ausführungen sind in der Regel verschieden.
 
 
 \subsection{Aufgabe 2}
@@ -112,11 +116,44 @@ Wie in der Auflistung \ref{helloworldoutput} zu sehen, folgt die Reihenfolge der
 	\end{table}
 \end{itemize}
 
+\definecolor{cbblack}{RGB}{220,220,220}
+\definecolor{cbwhite}{RGB}{255,255,255}
 \subsection{Aufgabe 4}
 \begin{itemize}
-	\item[a)] Ausführliche Beschreibung der Vorgehensweise...
-	\item[b)] Geht nicht...
-	\item[c)] Ausführliche Beschreibung der Vorgehensweise...
+	\item[a)] Ausführliche Beschreibung der Vorgehensweise... \\
+	\item[b)] Geht nicht... \\
+	\item[c)] Ausführliche Beschreibung der Vorgehensweise... \\
+		Abbildung zu Abhängigkeiten
+		
+		\begin{figure}\centering
+			\resizebox{0.5\textwidth}{!}{
+			\import{}{gsv_node_dependence.pdf_tex}}
+			\caption{Abhängigkeiten eines Knoten der Iterierten $i$ zu Nachbarknoten und deren Iterierten.}
+		\end{figure}
+		
+		\begin{figure}
+			\begin{center}
+				\renewcommand*{\arraystretch}{1.8}
+				\begin{tabular}{|c|c|c|c|c|c|c|}
+					\hline
+					\cellcolor{cbblack}$u^{i+1}_{0,0}$ & \cellcolor{cbwhite}$u^{i+1}_{1,0}$ & \cellcolor{cbblack}$u^{i}_{2,0}$ & \cellcolor{cbwhite}$u^{i}_{3,0}$ & \cellcolor{cbblack}$u^{i-1}_{4,0}$ & \cellcolor{cbwhite}$u^{i-1}_{5,0}$ & \cellcolor{cbblack}$u^{i-2}_{6,0}$ \\
+					\hline
+					\cellcolor{cbwhite}$u^{i+1}_{0,1}$ & \cellcolor{cbblack}$u^{i}_{1,1}$ & \cellcolor{cbwhite}$u^{i}_{2,1}$ & \cellcolor{cbblack}$u^{i-1}_{3,1}$ & \cellcolor{cbwhite}$u^{i-1}_{4,1}$ & \cellcolor{cbblack}$u^{i-2}_{5,1}$ & \cellcolor{cbwhite}$u^{i-2}_{6,1}$ \\
+					\hline
+					\cellcolor{cbblack}$u^{i}_{0,2}$ & \cellcolor{cbwhite}$u^{i}_{1,2}$ & \cellcolor{cbblack}$u^{i-1}_{2,2}$ & \cellcolor{cbwhite}$u^{i-1}_{3,2}$ & \cellcolor{cbblack}$u^{i-2}_{4,2}$ & \cellcolor{cbwhite}$u^{i-2}_{5,2}$ & \cellcolor{cbblack}$u^{i-3}_{6,2}$ \\
+					\hline
+					\cellcolor{cbwhite}$u^{i}_{0,3}$ & \cellcolor{cbblack}$u^{i-1}_{1,3}$ & \cellcolor{cbwhite}$u^{i-1}_{3,3}$ & \cellcolor{cbblack}$u^{i-2}_{3,3}$ & \cellcolor{cbwhite}$u^{i-2}_{5,3}$ & \cellcolor{cbblack}$u^{i-3}_{5,3}$ & \cellcolor{cbwhite}$u^{i-3}_{7,3}$ \\
+					\hline
+					\cellcolor{cbblack}$u^{i-1}_{0,4}$ & \cellcolor{cbwhite}$u^{i-1}_{1,4}$ & \cellcolor{cbblack}$u^{i-2}_{2,4}$ & \cellcolor{cbwhite}$u^{i-2}_{3,4}$ & \cellcolor{cbblack}$u^{i-3}_{4,4}$ & \cellcolor{cbwhite}$u^{i-3}_{5,4}$ & \cellcolor{cbblack}$u^{i-4}_{6,4}$ \\
+					\hline
+					\cellcolor{cbwhite}$u^{i-1}_{0,5}$ & \cellcolor{cbblack}$u^{i-2}_{1,5}$ & \cellcolor{cbwhite}$u^{i-2}_{2,5}$ & \cellcolor{cbblack}$u^{i-3}_{3,5}$ & \cellcolor{cbwhite}$u^{i-3}_{4,5}$ & \cellcolor{cbblack}$u^{i-4}_{5,5}$ & \cellcolor{cbwhite}$u^{i-4}_{6,5}$ \\
+					\hline
+					\cellcolor{cbblack}$u^{i-2}_{0,6}$ & \cellcolor{cbwhite}$u^{i-2}_{1,6}$ & \cellcolor{cbblack}$u^{i-3}_{2,6}$ & \cellcolor{cbwhite}$u^{i-3}_{3,6}$ & \cellcolor{cbblack}$u^{i-4}_{4,6}$ & \cellcolor{cbwhite}$u^{i-4}_{5,6}$ & \cellcolor{cbblack}$u^{i-5}_{6,6}$ \\
+					\hline
+				\end{tabular}
+			\end{center}
+			\caption{Verdeutlichung der Vorgehensweise der Parallelisierung. Zuerst werden diejenigen Einträge von $u$ parallel berechnet, die sich in grau Markierten Feldern befinden. Anschließend parallel die Einträge in den weißen Feldern. Es ist zu beachten, dass die Einträge $u_{x,y}$ für unterschiedliche Iterierte $i$ berechnet werden.}
+		\end{figure}
 \end{itemize}
 
 \subsection{Aufgabe 5}
