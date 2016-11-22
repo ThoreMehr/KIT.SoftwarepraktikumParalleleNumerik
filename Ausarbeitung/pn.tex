@@ -126,11 +126,13 @@ Wie in der Auflistung \ref{helloworldoutput} zu sehen, folgt die Reihenfolge der
 		Abbildung zu Abhängigkeiten
 		
 		\begin{figure}\centering
-			\resizebox{0.5\textwidth}{!}{
-			\import{}{gsv_node_dependence.pdf_tex}}
-			\caption{Abhängigkeiten eines Knoten der Iterierten $i$ zu Nachbarknoten und deren Iterierten.}
+			\def\svgwidth{0.6\textwidth}
+			\input{gsv_node_dependence.pdf_tex}
+			\caption{Abhängigkeiten zu Nachbarknoten, um Knoten $u^{i+1}_{x,y}$ zu berechnen. Es fällt auf, dass zwei Werte der gleichen Iterierten $i+1$ benötigt werden (die roten Knoten). Durch diese Abhängigkeit können nicht alle Einträge einer Iterierten gleichzeitig, das heißt parallel, berechnet werden.}
 		\end{figure}
-		
+	
+	
+	
 		\begin{figure}
 			\begin{center}
 				\renewcommand*{\arraystretch}{1.8}
