@@ -18,6 +18,8 @@
 \usepackage{subfigure}
 \usepackage{hyperref}
 
+\usepackage{listings}
+
 \setcounter{tocdepth}{3}
 \setcounter{secnumdepth}{3}
 
@@ -38,8 +40,26 @@
 \end{abstract}
 
 \section{Projekt 1}
+In diesem Projekt lag der Schwerpunkt auf dem Kennenlernen der Bibliothek \emph{OpenMP} sowie deren Handhabung. Weiter ging es um den \emph{IntelThreadChecker}, ein Programm zum Analysieren von Programmcode auf potentielle Fehler in der Parallelisierung. Zu guter letzt haben wir uns mit der FEM-Methode beschäftigt, dabei im Speziellen mit dem Gauß-Seidel-Verfahren zum Lösen linearer Gleichungen wie sie bei der Differenzenmethode vorkommen. Zu guter letzt betrachteten wir einige andere Verfahren zum Lösen solcher Probleme und haben das CG-Verfahren implementiert.
+
 \subsection{Aufgabe 1}
+\begin{lstlisting}[frame=single, captionpos=b, caption={Beispielhafte Ausgabe des Programms bei Ausführung mit 8 Fäden.}, label ={helloworldoutput}, basicstyle=\footnotesize]
+Hello World, this is Thread0
+Hello World, this is Thread5
+Hello World, this is Thread4
+Hello World, this is Thread7
+Hello World, this is Thread1
+Hello World, this is Thread3
+Hello World, this is Thread6
+Hello World, this is Thread2
+\end{lstlisting}
+Wie in der Auflistung \ref{helloworldoutput} zu sehen, folgt die Reihenfolge der ausgeführten Fäden keinem bestimmten Muster. Die Reihenfolgen zwischen verschiedenen Ausführungen sind verschieden.
+
+
 \subsection{Aufgabe 2}
+
+
+
 \subsection{Aufgabe 3}
 \begin{itemize}
 	\item[a)] Im Folgenden einige bekannte Größen der Parallelisierung, wie sie in der Vorlesung Rechnerstrukturen gelehrt wurden. \\
