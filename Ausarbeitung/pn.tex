@@ -166,6 +166,29 @@ Wie in der Auflistung \ref{helloworldoutput} zu sehen, folgt die Reihenfolge der
 			\end{center}
 			\caption{Verdeutlichung der Vorgehensweise der Parallelisierung. Zuerst werden diejenigen Einträge von $u$ parallel berechnet, die sich in grau Markierten Feldern befinden. Anschließend parallel die Einträge in den weißen Feldern. Es ist zu beachten, dass die Einträge $u_{x,y}$ für unterschiedliche Iterierte $i$ berechnet werden.}
 		\end{figure}
+	
+	\begin{table}
+		\begin{center}
+		\begin{tabular}{|r|r|r||r||r|r||r|r|@{ \dots}|r|r|}
+			\hline
+			\multicolumn{3}{|c||}{Problemgröße} & Seq. & \multicolumn{2}{c||}{2 Threads}  & \multicolumn{2}{c|@{ \dots}|}{4 Threads} & \multicolumn{2}{c|}{32 Threads} \\
+			$l$ & $d$ & $n$ & Laufzeit & Laufzeit & Speedup & Laufzeit & Speedup & Laufzeit & Speedup \\
+			\hline
+			4 & 15 & 225 & 0,005 & 0,007 & 0,357 & 0,008 & 0,625 & 1,361 & 0,0389 \\
+			5 & 31 & 961 & 0,053 & 0,056 & 0,473 & 0,049 & 1,08 & 4,041 & 0,178 \\
+			\hline
+			\hline
+			8 & 255 & 65.025 & 115 & 81 & 1,42 & 45,3 & 2,54 & 25,33 & 4,54 \\
+			9 & 511 & 261.121 & 1340 & 943 & 1,42 & 504 & 2,67 & 177 & 7,57 \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\caption{Laufzeiten unserer Parallelisierung gegenüber der sequentiellen Version.}
+	\label{gsv_runtime}
+	\end{table}
+
+	Die Laufzeiten sind Tabelle \ref{gsv_runtime} zu entnehmen.
+	
 \end{itemize}
 
 \subsection{Aufgabe 5}
