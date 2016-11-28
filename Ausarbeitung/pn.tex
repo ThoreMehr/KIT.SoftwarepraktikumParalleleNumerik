@@ -153,11 +153,11 @@ Die Vor- und Nachteile verschiedener paralleler Architekturen bezüglich zweier A
 	\begin{equation}\label{gsv_unifiedu}
 		u_j=\frac{1}{a_{j,j}}(h^2f_j-\sum_{i=1, i\neq j}^{n}a_{j,1}u_i)
 	\end{equation}
-	Nach der Definition von $A$ ist klar, dass $a_{j,j}=4$ gilt. Für $i\neq j$ gilt $a_{i,j}\in\{0,-1\}$. Um die dünne Struktur von $A$ weiter auszunutzen, betrachten wir anschaulich, von welchen Gitterpunkten die Berechnung für einen Gitterpunkt $(x,y)$ konkret abhängt (genau das wir von $A$ beschrieben). Dargestellt wird dies in Abbildung\ref{gsv_depend}, wobei $A$ genau für die vier Nachbarknoten den Wert $-1$ annimmt. Durch diese Betrachtung zerfällt die Summe der Zuweisung \ref{gsv_unifiedu} zu vier bedingten Additionen, wie in Code \ref{conditionalsum} illustriert.
+	Nach der Definition von $A$ ist klar, dass $a_{j,j}=4$ gilt. Für $i\neq j$ gilt $a_{i,j}\in\{0,-1\}$. Um die dünne Struktur von $A$ weiter auszunutzen, betrachten wir anschaulich, von welchen Gitterpunkten die Berechnung für einen Gitterpunkt $(x,y)$ konkret abhängt (genau das wird von $A$ beschrieben). Dargestellt wird dies in Abbildung\ref{gsv_depend}, wobei $A$ genau für die vier Nachbarknoten den Wert $-1$ annimmt, sonst 0 (außer für den Knoten selbst). Durch diese Betrachtung zerfällt die Summe der Zuweisung \ref{gsv_unifiedu} in vier bedingte Additionen, wie in Code \ref{conditionalsum} illustriert.
 	\begin{lstlisting}[frame=single, captionpos=b, caption={Ausnutzung der dünnen Struktur von $A$ zur Berechnung von $u_j$. Die Zeilen in $u$ sind genau $d$ Elemente lang, daher entspricht bspw. $j - d$ dem Zugriff auf den oberen Nachbar von $j$ aus gesehen. Die Bedingungen Prüfen genau darauf, ob es sich bei einem Nachbarknoten um einen Randpunkt handelt. Falls ja, so ist keine weitere Betrachtung nötig, da dessen Wert $0$ ist.}, label={conditionalsum}, basicstyle=\small, language=C]
 double sum = h * h * f[j];
 if (j % d > 0) sum += u[j - 1];     // Linker Nachbarknoten
-if (j % d < d - 1) sum += u[j + 1]; // Righter Nachbarknoten
+if (j % d < d - 1) sum += u[j + 1]; // Rechter Nachbarknoten
 if (j / d > 0) sum += u[j - d];     // Oberer Nachbarknoten
 if (j / d < d - 1) sum += u[j + d]; // Unterer Nachbarknoten
 u[j] = sum / 4;
