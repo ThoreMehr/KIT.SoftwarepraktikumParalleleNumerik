@@ -14,7 +14,7 @@
 #define N (D * D)
 #define EPSILON 1e-6
 
-#define SHOW_RESULTS 0
+#define SHOW_RESULTS 1
 
 double func(double x, double y) {
 	return 8 * M_PI * M_PI * sin(2 * M_PI * x) * sin(2 * M_PI * y);
