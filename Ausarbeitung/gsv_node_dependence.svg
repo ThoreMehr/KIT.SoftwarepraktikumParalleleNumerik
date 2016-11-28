@@ -270,7 +270,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="7.9195959"
-     inkscape:cx="75.263139"
+     inkscape:cx="51.587689"
      inkscape:cy="56.747518"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -307,7 +307,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -442,7 +442,7 @@
          sodipodi:role="line"
          id="tspan5658"
          x="890.18689"
-         y="117.48078">\Huge{$u^{i+1}_{x,y}$}</tspan></text>
+         y="117.48078">\Huge{$u^{k+1}_{x,y}$}</tspan></text>
     <text
        transform="scale(0.7533556,1.3273944)"
        sodipodi:linespacing="125%"
@@ -454,7 +454,7 @@
          y="228.22707"
          x="400.68967"
          id="tspan5662"
-         sodipodi:role="line">$u^{i+1}_{x-1,y}$</tspan></text>
+         sodipodi:role="line">$u^{k+1}_{x-1,y}$</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:5px;line-height:125%;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -466,7 +466,7 @@
          sodipodi:role="line"
          id="tspan5666"
          x="455.88266"
-         y="196.84367">$u^{i+1}_{x,y-1}$</tspan></text>
+         y="196.84367">$u^{k+1}_{x,y-1}$</tspan></text>
     <text
        transform="scale(0.7533556,1.3273944)"
        sodipodi:linespacing="125%"
@@ -478,7 +478,7 @@
          y="228.22707"
          x="511.34534"
          id="tspan5670"
-         sodipodi:role="line">$u^{i}_{x+1,y}$</tspan></text>
+         sodipodi:role="line">$u^{k}_{x+1,y}$</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:5px;line-height:125%;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -490,6 +490,6 @@
          sodipodi:role="line"
          id="tspan5674"
          x="455.71674"
-         y="259.51627">$u^{i}_{x,y+1}$</tspan></text>
+         y="259.51627">$u^{k}_{x,y+1}$</tspan></text>
   </g>
 </svg>

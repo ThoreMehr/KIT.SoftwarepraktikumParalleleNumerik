@@ -50,10 +50,10 @@
   \makeatother%
   \begin{picture}(1,1)%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{gsv_node_dependence.pdf}}%
-    \put(0.50043782,0.46824821){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{\Huge{$u^{i+1}_{x,y}$}}}}%
-    \put(0.11087539,0.48235332){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{$u^{i+1}_{x-1,y}$}}}%
-    \put(0.49990537,0.87211473){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{$u^{i+1}_{x,y-1}$}}}%
-    \put(0.89083616,0.48235332){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{$u^{i}_{x+1,y}$}}}%
-    \put(0.49873581,0.09376163){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{$u^{i}_{x,y+1}$}}}%
+    \put(0.50043783,0.4682482){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{\Huge{$u^{k+1}_{x,y}$}}}}%
+    \put(0.11087539,0.48235331){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{$u^{k+1}_{x-1,y}$}}}%
+    \put(0.49990534,0.87211481){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{$u^{k+1}_{x,y-1}$}}}%
+    \put(0.89083617,0.48235331){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{$u^{k}_{x+1,y}$}}}%
+    \put(0.49873582,0.09376163){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{$u^{k}_{x,y+1}$}}}%
   \end{picture}%
 \endgroup%

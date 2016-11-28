@@ -60,7 +60,7 @@ Hello World, this is Thread3
 Hello World, this is Thread6
 Hello World, this is Thread2
 \end{lstlisting}
-Wie in der Auflistung \ref{helloworldoutput} zu sehen, folgt die Reihenfolge der ausgeführten Fäden keinem bestimmten Muster. Die Reihenfolgen zwischen verschiedenen Ausführungen sind in der Regel verschieden.
+Wie in der Ausgabe \ref{helloworldoutput} zu sehen, folgt die Reihenfolge der ausgeführten Fäden keinem bestimmten Muster. Auch die Reihenfolge zwischen verschiedenen Ausführungen ist in der Regel verschieden.
 
 \subsection{}\label{p1a2}
 
@@ -124,8 +124,7 @@ Die Vor- und Nachteile verschiedener paralleler Architekturen bezüglich zweier A
 
 
 
-\definecolor{cbblack}{RGB}{220,220,220}
-\definecolor{cbwhite}{RGB}{255,255,255}
+
 \subsection{}\label{p1a4}
 \subsubsection{}\label{p1a4a}
 	Zu aller erst nehmen wir eine Differenzierung der in der Aufgabenstellung genannten Variablen vor. Unser $n$ bezeichne dasjenige, welches in der Beschreibung des Gauß-Seidel-Verfahrens auftritt. Das in dem gegebenen Problem genannte $n$ benennen wir zu $d$ um. Die restlichen Variablen behalten ihren Namen bei. Sei ein $l$ für das Verfahren vorgegeben, dann ergeben sich einige andere Größen wie folgt:
@@ -184,54 +183,66 @@ Eine naive Parallelisierung des in Aufgabe \ref{p1a4a} implementierten Gauß-Seid
 Eine Mögliche, nicht mehr ganz so naive Lösung, bestünde darin, nun über die Diagonalen zu parallelisieren. Innerhalb der Diagonalen (in $(1,-1)-Richtung$) bestehen keine Abhängigkeiten zwischen den Knoten. Dennoch hat sich auch diese Herangehensweise nicht als Vorteilhaft erwiesen. Für jede Iterierte müssten $d$ Thread-Pools mit maximal $2d-1$ Fäden gestartet und synchronisiert werden. Der Synchronisierungsaufwand hierbei scheint um Größenordnungen größer, als die eigentliche Berechnung.
 
 \subsubsection{}\label{p1a4c}	
-In Aufgabe \ref{p1a4b} haben wir erläutert, dass eine naive Herangehensweise an das Parallelisierungsproblem nicht zielführend ist. Insbesondere haben wir hierfür die zahlreichen Abhängigkeiten innerhalb der Berechnung einer Iterierten verantwortlich gemacht. Um also das Gauß-Seidel-Verfahren nun doch effizient zu parallelisieren, ist eine übergeordnete Betrachtung des Problem von Nöten.
+In Aufgabe \ref{p1a4b} haben wir erläutert, dass eine naive Herangehensweise für die Parallelisierung nicht zielführend ist. Insbesondere haben wir hierfür die zahlreichen Abhängigkeiten innerhalb der Berechnung einer Iterierten verantwortlich gemacht. Um also das Gauß-Seidel-Verfahren nun doch effizient zu parallelisieren, ist eine übergeordnete Betrachtung des Problems von Nöten.
+
+Die Idee hinter unserer Lösung besteht darin, in einem parallelisierbaren Schritt Einträge von $u$ für verschiedene Iterierte $k$ der sequentiellen Variante zu berechnen. Wie in Abbildung \ref{gsv_depend} zu sehen, hängt die Berechnung eines Knotens von den \emph{aktuellen} Werten des linken und des oberen Nachbarn ab. Diese müssen also schon vorher berechnet worden sein. Hieraus ergibt sich eine Reihenfolge, in der die Knoten berechnet werden müssen, nämlich von links oben nach rechts unten (in unserer Lösung zu \ref{p1a4b} haben wir die dabei auftretenden, parallelisierbaren Diagonalen bereits erwähnt). Diese Reihenfolge können wir beibehalten, wenn wir für jede Diagonale eine andere Iterierte berechnen.
+
+Angenommen wir berechnen links oben $u^{k+1}_{1,1}$, dann können wir parallel dazu auch $u^{k}_{3,1}$, $u^{k}_{2,2}$ und $u^{k}_{1,3}$ berechnen (sowie auch alle weiteren Diagonalen mit je 2 Abstand). Im nächsten Schritt können wir dann alle nun noch nicht abgedeckten Diagonalen gleichzeitig berechnen. In Abbildung \ref{gsv_parallel} sind all diese Diagonalen noch einmal aufgetragen. Die Felder, über die gleichzeitig berechnet werden kann, bilden ein Schachbrettmuster.
+
+Der Grund, weshalb immer eine Diagonale ausgelassen werden muss, liegt in den vorhandenen Datenabhängigkeiten (dieses Mal in die andere Richtung, also zu den Nachbarn rechts und unten). Angenommen, man möchte $u^{k+1}_{1,1}$ und $u^{k}_{2,1}$ parallel berechnen, dann würde man bereits für ersteren den Wert von letzterem benötigen (gemäß Abbildung \ref{gsv_depend}). Lässt man jedoch eine Diagonale frei, beispielhaft zwischen $u^{k+1}_{1,1}$ und $u^{k}_{3,1}$, so konnte man $u^{k}_{2,1}$ bereits vorher berechnen. Im nächsten Schritt (das heißt nach Synchronisierung) kann aus den berechneten $u^{k+1}_{1,1}$ und $u^{k}_{3,1}$ das dazwischen liegende $u^{k+1}_{2,1}$ berechnet werden usw.
 	
 	
-		\begin{figure}
-			\begin{center}
-				\renewcommand*{\arraystretch}{1.8}
-				\begin{tabular}{|c|c|c|c|c|c|c|}
-					\hline
-					\cellcolor{cbblack}$u^{k+1}_{0,0}$ & \cellcolor{cbwhite}$u^{k+1}_{1,0}$ & \cellcolor{cbblack}$u^{k}_{2,0}$ & \cellcolor{cbwhite}$u^{k}_{3,0}$ & \cellcolor{cbblack}$u^{k-1}_{4,0}$ & \cellcolor{cbwhite}$u^{k-1}_{5,0}$ & \cellcolor{cbblack}$u^{k-2}_{6,0}$ \\
-					\hline
-					\cellcolor{cbwhite}$u^{k+1}_{0,1}$ & \cellcolor{cbblack}$u^{k}_{1,1}$ & \cellcolor{cbwhite}$u^{k}_{2,1}$ & \cellcolor{cbblack}$u^{k-1}_{3,1}$ & \cellcolor{cbwhite}$u^{k-1}_{4,1}$ & \cellcolor{cbblack}$u^{k-2}_{5,1}$ & \cellcolor{cbwhite}$u^{k-2}_{6,1}$ \\
-					\hline
-					\cellcolor{cbblack}$u^{k}_{0,2}$ & \cellcolor{cbwhite}$u^{k}_{1,2}$ & \cellcolor{cbblack}$u^{k-1}_{2,2}$ & \cellcolor{cbwhite}$u^{k-1}_{3,2}$ & \cellcolor{cbblack}$u^{k-2}_{4,2}$ & \cellcolor{cbwhite}$u^{k-2}_{5,2}$ & \cellcolor{cbblack}$u^{k-3}_{6,2}$ \\
-					\hline
-					\cellcolor{cbwhite}$u^{k}_{0,3}$ & \cellcolor{cbblack}$u^{k-1}_{1,3}$ & \cellcolor{cbwhite}$u^{k-1}_{3,3}$ & \cellcolor{cbblack}$u^{k-2}_{3,3}$ & \cellcolor{cbwhite}$u^{k-2}_{5,3}$ & \cellcolor{cbblack}$u^{k-3}_{5,3}$ & \cellcolor{cbwhite}$u^{k-3}_{7,3}$ \\
-					\hline
-					\cellcolor{cbblack}$u^{k-1}_{0,4}$ & \cellcolor{cbwhite}$u^{k-1}_{1,4}$ & \cellcolor{cbblack}$u^{k-2}_{2,4}$ & \cellcolor{cbwhite}$u^{k-2}_{3,4}$ & \cellcolor{cbblack}$u^{k-3}_{4,4}$ & \cellcolor{cbwhite}$u^{k-3}_{5,4}$ & \cellcolor{cbblack}$u^{k-4}_{6,4}$ \\
-					\hline
-					\cellcolor{cbwhite}$u^{k-1}_{0,5}$ & \cellcolor{cbblack}$u^{k-2}_{1,5}$ & \cellcolor{cbwhite}$u^{k-2}_{2,5}$ & \cellcolor{cbblack}$u^{k-3}_{3,5}$ & \cellcolor{cbwhite}$u^{k-3}_{4,5}$ & \cellcolor{cbblack}$u^{k-4}_{5,5}$ & \cellcolor{cbwhite}$u^{k-4}_{6,5}$ \\
-					\hline
-					\cellcolor{cbblack}$u^{k-2}_{0,6}$ & \cellcolor{cbwhite}$u^{k-2}_{1,6}$ & \cellcolor{cbblack}$u^{k-3}_{2,6}$ & \cellcolor{cbwhite}$u^{k-3}_{3,6}$ & \cellcolor{cbblack}$u^{k-4}_{4,6}$ & \cellcolor{cbwhite}$u^{k-4}_{5,6}$ & \cellcolor{cbblack}$u^{k-5}_{6,6}$ \\
-					\hline
-				\end{tabular}
-			\end{center}
-			\caption{Verdeutlichung der Vorgehensweise der Parallelisierung. Zuerst werden diejenigen Einträge von $u$ parallel berechnet, die sich in grau Markierten Feldern befinden. Anschließend parallel die Einträge in den weißen Feldern. Es ist zu beachten, dass die Einträge $u_{x,y}$ für unterschiedliche Iterierte $k$ berechnet werden.}
-		\end{figure}
-	
-	\begin{table}
-		\begin{center}
-		\begin{tabular}{|r|r|r||r||r|r||r|r|@{ \dots}|r|r|}
-			\hline
-			\multicolumn{3}{|c||}{Problemgröße} & Seq. & \multicolumn{2}{c||}{2 Threads}  & \multicolumn{2}{c|@{ \dots}|}{4 Threads} & \multicolumn{2}{c|}{32 Threads} \\
-			$l$ & $d$ & $n$ & Laufzeit & Laufzeit & Speedup & Laufzeit & Speedup & Laufzeit & Speedup \\
-			\hline
-			4 & 15 & 225 & 0,005 & 0,007 & 0,357 & 0,008 & 0,625 & 1,361 & 0,0389 \\
-			5 & 31 & 961 & 0,053 & 0,056 & 0,473 & 0,049 & 1,08 & 4,041 & 0,178 \\
-			\hline
-			\hline
-			8 & 255 & 65.025 & 115 & 81 & 1,42 & 45,3 & 2,54 & 25,33 & 4,54 \\
-			9 & 511 & 261.121 & 1340 & 943 & 1,42 & 504 & 2,67 & 177 & 7,57 \\
-			\hline
-		\end{tabular}
-	\end{center}
+\begin{figure}
+	\centering
+	\definecolor{cbblack}{RGB}{250,200,200}
+	\definecolor{cbwhite}{RGB}{255,255,255}
+	\renewcommand*{\arraystretch}{2}
+	\begin{tabular}{|c|c|c|c|c|c|c|}
+		\hline
+		\cellcolor{cbblack}$u^{k+1}_{1,1}$ & \cellcolor{cbwhite}$u^{k+1}_{2,1}$ & \cellcolor{cbblack}$u^{k}_{3,1}$ & \cellcolor{cbwhite}$u^{k}_{4,1}$ & \cellcolor{cbblack}$u^{k-1}_{5,1}$ & \cellcolor{cbwhite}$u^{k-1}_{6,1}$ & \cellcolor{cbblack}$u^{k-2}_{7,1}$ \\
+		\hline
+		\cellcolor{cbwhite}$u^{k+1}_{1,2}$ & \cellcolor{cbblack}$u^{k}_{2,2}$ & \cellcolor{cbwhite}$u^{k}_{3,2}$ & \cellcolor{cbblack}$u^{k-1}_{4,2}$ & \cellcolor{cbwhite}$u^{k-1}_{5,2}$ & \cellcolor{cbblack}$u^{k-2}_{6,2}$ & \cellcolor{cbwhite}$u^{k-2}_{7,2}$ \\
+		\hline
+		\cellcolor{cbblack}$u^{k}_{1,3}$ & \cellcolor{cbwhite}$u^{k}_{2,3}$ & \cellcolor{cbblack}$u^{k-1}_{3,3}$ & \cellcolor{cbwhite}$u^{k-1}_{4,3}$ & \cellcolor{cbblack}$u^{k-2}_{5,3}$ & \cellcolor{cbwhite}$u^{k-2}_{6,3}$ & \cellcolor{cbblack}$u^{k-3}_{7,3}$ \\
+		\hline
+		\cellcolor{cbwhite}$u^{k}_{1,4}$ & \cellcolor{cbblack}$u^{k-1}_{2,4}$ & \cellcolor{cbwhite}$u^{k-1}_{3,4}$ & \cellcolor{cbblack}$u^{k-2}_{4,4}$ & \cellcolor{cbwhite}$u^{k-2}_{5,4}$ & \cellcolor{cbblack}$u^{k-3}_{6,4}$ & \cellcolor{cbwhite}$u^{k-3}_{7,4}$ \\
+		\hline
+		\cellcolor{cbblack}$u^{k-1}_{1,5}$ & \cellcolor{cbwhite}$u^{k-1}_{2,5}$ & \cellcolor{cbblack}$u^{k-2}_{3,5}$ & \cellcolor{cbwhite}$u^{k-2}_{4,5}$ & \cellcolor{cbblack}$u^{k-3}_{5,5}$ & \cellcolor{cbwhite}$u^{k-3}_{6,5}$ & \cellcolor{cbblack}$u^{k-4}_{7,5}$ \\
+		\hline
+		\cellcolor{cbwhite}$u^{k-1}_{1,6}$ & \cellcolor{cbblack}$u^{k-2}_{2,6}$ & \cellcolor{cbwhite}$u^{k-2}_{3,6}$ & \cellcolor{cbblack}$u^{k-3}_{4,6}$ & \cellcolor{cbwhite}$u^{k-3}_{5,6}$ & \cellcolor{cbblack}$u^{k-4}_{6,6}$ & \cellcolor{cbwhite}$u^{k-4}_{7,6}$ \\
+		\hline
+		\cellcolor{cbblack}$u^{k-2}_{1,7}$ & \cellcolor{cbwhite}$u^{k-2}_{2,7}$ & \cellcolor{cbblack}$u^{k-3}_{3,7}$ & \cellcolor{cbwhite}$u^{k-3}_{4,7}$ & \cellcolor{cbblack}$u^{k-4}_{5,7}$ & \cellcolor{cbwhite}$u^{k-4}_{6,7}$ & \cellcolor{cbblack}$u^{k-5}_{7,7}$ \\
+		\hline
+	\end{tabular}
+	\caption{Verdeutlichung der Vorgehensweise der Parallelisierung. Zuerst werden diejenigen Einträge von $u$ parallel berechnet, die sich in grau Markierten Feldern befinden. Anschließend parallel die Einträge in den weißen Feldern. Es ist zu beachten, dass die Einträge $u_{x,y}$ für unterschiedliche Iterierte $k$ berechnet werden.}
+	\label{gsv_parallel}
+\end{figure}
+
+Durch diese Schachbrett-artige Parallelisierung hat ein Berechnungsschritt die Gestalt:
+\begin{itemize}
+	\item Berechne Parallel über alle schwarzen Felder
+	\item Berechne Parallel über alle weißen Felder
+\end{itemize}
+Es sei nicht zu verschweigen, dass hier im Gegensatz zur seriellen Variante sehr wohl mehrere $u$ gleichzeitig zu speichern sind. Sobald in einem Berechnungsschritt das Feld ganz rechts unten, also $u^{k+2-d}_{d,d}$, berechnet wurde, müssen im Falle des Abbruchs (weil das Abbruchkriterium aus \ref{p1a4a} erfüllt ist), alle $u^{k+2-d}_{x,y}$ noch immer bekannt sein, um $u^{k+2-d}$ als Ergebnis ausgeben zu können. Ebenso muss das Abbruchkriterium stets auf den Werten der gleichen Iterierten arbeiten, um exakt das gleiche Resultat wie die serielle Variante zu erhalten.
+
+In jedem Berechnungsschritt wird genaue eine Iterierte des Verfahrens berechnet. Allerdings gilt dies erst, sobald $d-1$ Schritte ausgeführt wurden, denn erst dann ist schließlich der Eintrag rechts unten $u^{k+2-d}_{d,d}=u^{1}_{d,d}$ berechnet (die \emph{Historie} muss erst gefüllt werden). So kommt es, dass die parallele Version bei gleichen Eingaben exakt die gleichen Ergebnisse wie die serielle Version ausgibt, jedoch dabei genau $d-1$ Iterationen mehr benötigt. Wie der Tabelle \ref{gsv_runtime} zu entnehmen, ist die parallele Version mit 32 Kernen bei großer Problemgröße ($l=9$) mit einem \emph{Speedup} von $7,57$ aber immerhin noch deutlich schneller. Die eher geringe Effizienz schreiben wir dem Synchronisationsaufwand sowie den eher Cache-unfreundlichen Speicherzugriffen zu.
+
+\begin{table}
+	\centering
+	\begin{tabular}{r|r|r||r||r|r||r|r|@{ \dots}|r|r}
+		\multicolumn{3}{c||}{Problemgröße} & Seq. & \multicolumn{2}{c||}{2 Threads}  & \multicolumn{2}{c|@{ \dots}|}{4 Threads} & \multicolumn{2}{c}{32 Threads} \\
+		$l$ & $d$ & $n$ & Laufzeit & Laufzeit & Speedup & Laufzeit & Speedup & Laufzeit & Speedup \\
+		\hline
+		4 & 15 & 225 & 0,005 & 0,007 & 0,357 & 0,008 & 0,625 & 1,361 & 0,0389 \\
+		5 & 31 & 961 & 0,053 & 0,056 & 0,473 & 0,049 & 1,08 & 4,041 & 0,178 \\
+		\hline
+		\hline
+		8 & 255 & 65.025 & 115 & 81 & 1,42 & 45,3 & 2,54 & 25,33 & 4,54 \\
+		9 & 511 & 261.121 & 1340 & 943 & 1,42 & 504 & 2,67 & 177 & 7,57 \\
+	\end{tabular}
 	\caption{Laufzeiten unserer Parallelisierung gegenüber der sequentiellen Version.}
 	\label{gsv_runtime}
-	\end{table}
-
-	Die Laufzeiten sind Tabelle \ref{gsv_runtime} zu entnehmen.
+\end{table}
 	
 	
 
@@ -262,33 +273,42 @@ Gesucht ist $f$ mit
 
 \subsubsection{}
 Da in Gleichung \ref{fgleichung} $M,N \in\mathbb{N}$ beliebig, wählen wir der Einfachheit halber $M=N=1$ zur Lösung dieser Teilaufgabe. Damit ergibt sich
-	\begin{equation}
-	f(x,y)=8\pi^2\sin(2\pi x)\sin(2\pi y)
-	\end{equation}
-	Dieses $f$ kann einfach in den Code der vorangegangenen Aufgabe eingesetzt werden. Es ergeben sich die in Abbildung \ref{grapha5} gezeigten Näherungen. Mit zunehmendem $l$ bzw. abnehmender Gitterkonstante $h$ werden die Lösungen nicht nur feiner, sondern der maximale Fehler zur analytischen Lösung von $u$ auch kleiner.
-	
-	Die analytische Lösung $u(x,y)$ ist bereits aus der Aufgabenstellung mit Gleichung \ref{udef} gegeben und wird zur Überprüfung der Ergebnisse verwendet.
-	
-	\begin{figure}
-		\centering
-		\includegraphics[scale=0.18]{a5l2}
-		\includegraphics[scale=0.18]{a5l3}
-		\includegraphics[scale=0.18]{a5l4}
-		\caption{Näherungsweise Lösung für $u$, berechnet mittels Gauß-Seidel-Verfahren. Von links nach rechts: $l=2, l=3, l=4$.}
-		\label{grapha5}
-	\end{figure}
+\begin{equation}\label{fdef}
+f(x,y)=8\pi^2\sin(2\pi x)\sin(2\pi y)
+\end{equation}
+Die dazugehörige analytische Lösung ist nach Aufgabenstellung gegeben als
+\begin{equation}
+u(x,y)=\sin(2\pi x)\sin(2\pi y)
+\end{equation}
+und wurde verwendet um den maximalen Fehler der Näherung zu berechnen.
 
-	\begin{table}
-		\begin{tabular}{r||r|r|r|r|r|r|r|r}
-			$l$ & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
-			$h$ & 0,25 & 0,125 & 0,0625 & 0,0313 & 0,0156 & 0,00781 & 0,00391 & 0,00195 \\
-			\hline
-			Maximaler Fehler & 0,234 & 0,053 & 0,0130 & 0,00326 & 0,000866 & 0,000326 & 0,00174 \\
-			Iterationen & 21 & 64 & 175 & 409 & 1148 & 3515 & 11043
-		\end{tabular}
-		\caption{Maximaler Fehler und Anzahl der durchgeführten Operationen in Abhängigkeit von $l$ bzw. Gitterkonstante $h$.}
-		\label{tablea5}
-	\end{table}
+Das $f$ auf Gleichung \ref{fdef} kann einfach in den Code der vorangegangenen Aufgabe eingesetzt werden. Es ergeben sich die in Abbildung \ref{grapha5} gezeigten Näherungen. Mit zunehmendem $l$ bzw. abnehmender Gitterkonstante $h$ werden die Lösungen nicht nur feiner, sondern der maximale Fehler zur analytischen Lösung von $u$ auch kleiner wird. Ab $l=8$ wird der Fehler allerdings wieder größer, wie Tabelle \ref{tablea5} entnommen werden kann.
+An dieser Stelle scheint das für das Abbruchkriterium gewählte $\epsilon_{Error}$ aus Aufgabe \ref{p1a4a} zu grob gewählt zu sein, denn eine weitere Verfeinerung dessen reduzierte den Fehler der Näherung (nur) für große $l$ deutlich (was die Frage aufwirft, ob man $\epsilon_{Error}$ abhängig von $l$ wählen sollte).
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.18]{a5l2}
+	\includegraphics[scale=0.18]{a5l3}
+	\includegraphics[scale=0.18]{a5l4}
+	\caption{Näherungsweise Lösung für $u$, berechnet mittels Gauß-Seidel-Verfahren. Von links nach rechts: $l=2, l=3, l=4$.}
+	\label{grapha5}
+\end{figure}
+
+\begin{table}
+	\centering
+	\begin{tabular}{r||r|r|r|r|r|r|r|r}
+		$l$ & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+		$d$ & 3 & 7 & 15 & 31 & 63 & 127 & 255 & 511 \\
+		$h$ & 0,25 & 0,125 & 0,0625 & 0,0313 & 0,0156 & 0,00781 & 0,00391 & 0,00195 \\
+		\hline
+		Maximaler Fehler & 0,234 & 0,053 & 0,0130 & 0,00326 & 0,000866 & 0,000326 & 0,00174 & 0.0266 \\
+		Iterationen & 21 & 64 & 175 & 409 & 1148 & 3515 & 11043 & 98558
+	\end{tabular}
+	\caption{Maximaler Fehler und Anzahl der durchgeführten Operationen in Abhängigkeit von $l$ bzw. Gitterkonstante $h$.}
+	\label{tablea5}
+\end{table}
+
+
 
 \subsection{}\label{p1a6}
 \subsubsection{}
