@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.4.21)  29 NOV 2016 11:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.4.21)  30 NOV 2016 00:25
 entering extended mode
 **./pn.tex
 (pn.tex
@@ -921,24 +921,26 @@ File: gsv_node_dependence.pdf Graphic file (type pdf)
 Package pdftex.def Info: gsv_node_dependence.pdf, page1 used on input line 52.
 (pdftex.def)             Requested size: 208.27623pt x 208.30603pt.
 ) [4] [5 <./gsv_node_dependence.pdf>]
-[6]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [6]
 Underfull \hbox (badness 10000) in paragraph at lines 251--255
 
  []
 
-[7] <a5l2.pdf, id=195, 614.295pt x 794.97pt>
+[7] <a5l2.pdf, id=194, 614.295pt x 794.97pt>
 File: a5l2.pdf Graphic file (type pdf)
  <use a5l2.pdf>
 Package pdftex.def Info: a5l2.pdf used on input line 290.
 (pdftex.def)             Requested size: 110.56831pt x 143.08842pt.
 
-<a5l3.pdf, id=196, 614.295pt x 794.97pt>
+<a5l3.pdf, id=195, 614.295pt x 794.97pt>
 File: a5l3.pdf Graphic file (type pdf)
  <use a5l3.pdf>
 Package pdftex.def Info: a5l3.pdf used on input line 291.
 (pdftex.def)             Requested size: 110.56831pt x 143.08842pt.
 
-<a5l4.pdf, id=197, 614.295pt x 794.97pt>
+<a5l4.pdf, id=196, 614.295pt x 794.97pt>
 File: a5l4.pdf Graphic file (type pdf)
  <use a5l4.pdf>
 Package pdftex.def Info: a5l4.pdf used on input line 292.
@@ -958,7 +960,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 336.
 Here is how much of TeX's memory you used:
  18920 strings out of 493634
  352158 string characters out of 3135239
- 426169 words of memory out of 3000000
+ 426199 words of memory out of 3000000
  22049 multiletter control sequences out of 15000+200000
  26695 words of font info for 81 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
@@ -990,7 +992,7 @@ ta/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users
 fb><C:/Users/Lobby/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfont
 s/cm/cmsy9.pfb><C:/Users/Lobby/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pu
 blic/amsfonts/symbols/msbm10.pfb>
-Output written on pn.pdf (9 pages, 517453 bytes).
+Output written on pn.pdf (9 pages, 517473 bytes).
 PDF statistics:
  569 PDF objects out of 1000 (max. 8388607)
  65 named destinations out of 1000 (max. 500000)

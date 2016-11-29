@@ -9,12 +9,7 @@
 #include <omp.h>
 #include <math.h>
 
-#define L 8
-#define D ((1 << L) - 1)
-#define N (D * D)
-#define EPSILON 1e-6
-
-#define SHOW_RESULTS 1
+#include "config.h"
 
 double func(double x, double y) {
 	return 8 * M_PI * M_PI * sin(2 * M_PI * x) * sin(2 * M_PI * y);

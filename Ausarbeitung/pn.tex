@@ -91,36 +91,36 @@ Wie in der Ausgabe \ref{helloworldoutput} zu sehen, folgt die Reihenfolge der au
 	
 	Die Auslastung $U(n)$:
 	\begin{equation}
-		U(n) = \frac{U(n)}{n} = R(n) \cdot E(n) = \frac{P(n)}{n \cdot T(n)}
+		U(n) = \frac{I(n)}{n} = R(n) \cdot E(n) = \frac{P(n)}{n \cdot T(n)}
 	\end{equation}
 
 
 \subsubsection{}	
 \begin{description}
-		\item[Race Condition] \hfill \\ Wettlaufsituationen
-		Dabei hängt Ergebnis von konkreter Ausführungsreihenfolge ab (daher Wettlauf)
-		Entsteht, wenn verschiedene Fäden auf gleiche Variable zugreifen, und mindestens ein Faden deren Wert manipuliert
-		Korrektheit der Ergebnisse hängt von Ausführungsreihenfolge ab
-		\item[Dead lock] \hfill \\ Zyklus im Allokationsgraphen
-	\end{description} \hfill
+	\item[Race Condition] \hfill \\ Wettlaufsituationen
+	Dabei hängt Ergebnis von konkreter Ausführungsreihenfolge ab (daher Wettlauf)
+	Entsteht, wenn verschiedene Fäden auf gleiche Variable zugreifen, und mindestens ein Faden deren Wert manipuliert
+	Korrektheit der Ergebnisse hängt von Ausführungsreihenfolge ab
+	\item[Dead lock] \hfill \\ Zyklus im Allokationsgraphen
+\end{description}
 
 
 \subsubsection{}
 Die Vor- und Nachteile verschiedener paralleler Architekturen bezüglich zweier Aspekte sind in Tabelle \ref{parallelarch} aufgetragen.
-	\begin{table}
-		\begin{center}
-			\begin{tabular}{l | p{4cm} p{4cm}}
-				Architektur & Anwenderfreundlichkeit & Energieeffizienz \\
-				\hline
-				GPU & Gut & Mittel \\
-				CPU & Gut & Gering \\
-				FPGA & Gering & Sehr gut \\
-				MIC & Gut & Gut
-			\end{tabular}
-		\end{center}
-		\caption{Verschiedene Beschleuniger im Vergleich}
-		\label{parallelarch}
-	\end{table}
+\begin{table}
+	\begin{center}
+		\begin{tabular}{l | p{4cm} p{4cm}}
+			Architektur & Anwenderfreundlichkeit & Energieeffizienz \\
+			\hline
+			GPU & Gut & Mittel \\
+			CPU & Gut & Gering \\
+			FPGA & Gering & Sehr gut \\
+			MIC & Gut & Gut
+		\end{tabular}
+	\end{center}
+	\caption{Verschiedene Beschleuniger im Vergleich}
+	\label{parallelarch}
+\end{table}
 
 
 
@@ -180,9 +180,9 @@ u[j] = sum / 4;
 \subsubsection{}\label{p1a4b}
 Eine naive Parallelisierung des in Aufgabe \ref{p1a4a} implementierten Gauß-Seidel-Verfahrens ist nicht möglich, da innerhalb der Berechnung von $u^{k+1}$ -- eine naive Parallelisierung würde versuchen genau diese Berechnung zu parallelisieren, also eine einzelne Iterierte -- Abhängigkeiten zwischen den Einträgen bestehen. Für die Berechnung von $u^{i+k}_{x,y}$ werden diese Abhängigkeiten in Abbildung \ref{gsv_depend} dargestellt. Um etwa $u^{i+k}_{x,y}$ zu berechnen, werden zu erst die Werte von $u^{i+k}_{x-1,y}$ und $u^{i+k}_{x,y-1}$ aus der gleichen Iteration benötigt. Diese wiederum benötigen in gleicher Weise aktuelle Werte von Nachbarknoten.
 
-Eine Mögliche, nicht mehr ganz so naive Lösung, bestünde darin, nun über die Diagonalen zu parallelisieren. Innerhalb der Diagonalen (in $(1,-1)-Richtung$) bestehen keine Abhängigkeiten zwischen den Knoten. Dennoch hat sich auch diese Herangehensweise nicht als Vorteilhaft erwiesen. Für jede Iterierte müssten $d$ Thread-Pools mit maximal $2d-1$ Fäden gestartet und synchronisiert werden. Der Synchronisierungsaufwand hierbei scheint um Größenordnungen größer, als die eigentliche Berechnung.
+Eine Mögliche, nicht mehr ganz so naive Lösung, bestünde darin, nun über die Diagonalen zu parallelisieren. Innerhalb der Diagonalen (in $(1,-1)-Richtung$) bestehen keine Abhängigkeiten zwischen den Knoten. Dennoch hat sich auch diese Herangehensweise nicht als Vorteilhaft erwiesen. Für jede Iterierte müssten $d$ Thread-Pools mit maximal $2d-1$ Fäden gestartet und synchronisiert werden. Der Synchronisierungsaufwand hierbei scheint um Größenordnungen größer, als die eigentliche Berechnung (in der Literatur ist dieses Verfahren auch unter dem Namen Wavefront zu finden).
 
-\subsubsection{}\label{p1a4c}	
+\subsubsection{}\label{p1a4c}
 In Aufgabe \ref{p1a4b} haben wir erläutert, dass eine naive Herangehensweise für die Parallelisierung nicht zielführend ist. Insbesondere haben wir hierfür die zahlreichen Abhängigkeiten innerhalb der Berechnung einer Iterierten verantwortlich gemacht. Um also das Gauß-Seidel-Verfahren nun doch effizient zu parallelisieren, ist eine übergeordnete Betrachtung des Problems von Nöten.
 
 Die Idee hinter unserer Lösung besteht darin, in einem parallelisierbaren Schritt Einträge von $u$ für verschiedene Iterierte $k$ der sequentiellen Variante zu berechnen. Wie in Abbildung \ref{gsv_depend} zu sehen, hängt die Berechnung eines Knotens von den \emph{aktuellen} Werten des linken und des oberen Nachbarn ab. Diese müssen also schon vorher berechnet worden sein. Hieraus ergibt sich eine Reihenfolge, in der die Knoten berechnet werden müssen, nämlich von links oben nach rechts unten (in unserer Lösung zu \ref{p1a4b} haben wir die dabei auftretenden, parallelisierbaren Diagonalen bereits erwähnt). Diese Reihenfolge können wir beibehalten, wenn wir für jede Diagonale eine andere Iterierte berechnen.
@@ -290,7 +290,7 @@ An dieser Stelle scheint das für das Abbruchkriterium gewählte $\epsilon_{Error}
 	\includegraphics[scale=0.18]{a5l2}
 	\includegraphics[scale=0.18]{a5l3}
 	\includegraphics[scale=0.18]{a5l4}
-	\caption{Näherungsweise Lösung für $u$, berechnet mittels Gauß-Seidel-Verfahren. Von links nach rechts: $l=2, l=3, l=4$.}
+	\caption{Näherungsweise Lösung für $u$, berechnet mittels Gauß-Seidel-Verfahren. Von links nach rechts: $l=2, l=3, l=4$. Geplottet mittels GNU~Octave.}
 	\label{grapha5}
 \end{figure}
 
