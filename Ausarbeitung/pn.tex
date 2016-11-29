@@ -240,7 +240,7 @@ In jedem Berechnungsschritt wird genaue eine Iterierte des Verfahrens berechnet.
 		8 & 255 & 65.025 & 115 & 81 & 1,42 & 45,3 & 2,54 & 25,33 & 4,54 \\
 		9 & 511 & 261.121 & 1340 & 943 & 1,42 & 504 & 2,67 & 177 & 7,57 \\
 	\end{tabular}
-	\caption{Laufzeiten unserer Parallelisierung gegenüber der sequentiellen Version.}
+	\caption{Laufzeiten unserer Parallelisierung gegenüber der sequentiellen Version. Getestet wurde auf dem Rechner \emph{i82sn07}. Um Ungenauigkeiten auszugleichen wurden die Zeiten jeweils über $100$ (für große Eingaben über $10$) Durchläufe gemittelt.}
 	\label{gsv_runtime}
 \end{table}
 	
@@ -276,11 +276,11 @@ Da in Gleichung \ref{fgleichung} $M,N \in\mathbb{N}$ beliebig, wählen wir der Ei
 \begin{equation}\label{fdef}
 f(x,y)=8\pi^2\sin(2\pi x)\sin(2\pi y)
 \end{equation}
-Die dazugehörige analytische Lösung ist nach Aufgabenstellung gegeben als
+Die dazugehörige analytische Lösung ist dann nach Aufgabenstellung gegeben als
 \begin{equation}
 u(x,y)=\sin(2\pi x)\sin(2\pi y)
 \end{equation}
-und wurde verwendet um den maximalen Fehler der Näherung zu berechnen.
+und wird verwendet um den maximalen Fehler der Näherung zu berechnen.
 
 Das $f$ auf Gleichung \ref{fdef} kann einfach in den Code der vorangegangenen Aufgabe eingesetzt werden. Es ergeben sich die in Abbildung \ref{grapha5} gezeigten Näherungen. Mit zunehmendem $l$ bzw. abnehmender Gitterkonstante $h$ werden die Lösungen nicht nur feiner, sondern der maximale Fehler zur analytischen Lösung von $u$ auch kleiner wird. Ab $l=8$ wird der Fehler allerdings wieder größer, wie Tabelle \ref{tablea5} entnommen werden kann.
 An dieser Stelle scheint das für das Abbruchkriterium gewählte $\epsilon_{Error}$ aus Aufgabe \ref{p1a4a} zu grob gewählt zu sein, denn eine weitere Verfeinerung dessen reduzierte den Fehler der Näherung (nur) für große $l$ deutlich (was die Frage aufwirft, ob man $\epsilon_{Error}$ abhängig von $l$ wählen sollte).
@@ -308,12 +308,18 @@ An dieser Stelle scheint das für das Abbruchkriterium gewählte $\epsilon_{Error}
 	\label{tablea5}
 \end{table}
 
+Das verwendete Vorgehen wird als \emph{h-FEM} bezeichnet, da wir lediglich die Gitterkonstante $h$ anpassen. Eine \emph{p-FEM}- oder gar \emph{hp-FEM}-Methodik würde den Grad des zum Abtasten verwendeten Polynoms erhöhen.
+
 
 
 \subsection{}\label{p1a6}
 \subsubsection{}
+Implementierung soll mit Hilfe der \emph{kennengelernten Werkzeuge} analysiert werden.
 
 \subsubsection{}
+Zu bestimmen: \emph{Speedup} und \emph{Efficiency}
+
+Wie auch unsere Implementierung des Gauß-Seidel-Verfahrens aus Aufgabe \ref{p1a4}, nutzen wir hier für unsere Implementierung die dünne Struktur der Matrix $A$ aus. Eine Vorkonditionierung würde diese günstige Struktur beeinträchtigen, wodurch ein sehr viel höherer Rechenaufwand zu erwarten wäre. Gesetzt den Fall unsere Matrix $A$ wäre nicht dünn besetzt, so könnte eine Vorkonditionierung Sinn machen, um die Stabilität des Algorithmus ggf. zu erhöhen.
 
 \subsubsection{}
 
