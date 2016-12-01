@@ -1,0 +1,664 @@
+\frametitle{Aufgabe}
+		b) Beschreiben Sie, wie man eine \texttt{do-while}-Schleife in die strukturerhaltende
+		Zwischensprache aus der Vorlesung überführen kann. Geben Sie zur Veranschaulichung
+		das entstehende Zwischensprachprogramm für unten stehende \texttt{do-while}-Schleife
+		an
+		\begin{lstlisting}[do-while-Schleife]
+do {
+    statements;
+} while (condition);
+		\end{lstlisting}
+	\end{frame}
+
+	\begin{frame}[fragile]
+		\frametitle{Lösung}
+		\vspace{0.25cm}
+		\begin{enumerate}[1.]
+			\item \texttt{do}-Zeile entfernen
+			\item Befehle \texttt{statements} der Schleife übernehmen
+			\item \texttt{while (condition)} in \\
+				\texttt{if (condition) goto „1. Befehl in der Schleife“} umwandeln
+				(Keine Negation der Bedingung)
+		\end{enumerate}
+		Programm in Zwischensprache:
+		\begin{lstlisting}[numbers=none]
+(10  -)
+20  statements;
+30  if (condition) goto 20
+		\end{lstlisting}
+	\end{frame}
+
+	\begin{frame}[fragile]
+		\frametitle{Aufgabe}
+
+		c) Gegeben sei folgende Java-Methode:
+		{\tiny
+		\begin{lstlisting}[Algorithmus,frame=single]
+public static double median(double[] d) {
+    double median = Double.NaN;
+    if (d != null && d.length > 0) {
+        if (d.length == 1) {
+        	median = d[0];
+        } else {
+            Arrays.sort(d);  // sortiert d aufsteigend
+            int mid = d.length / 2;
+            if (d.length % 2 != 0) {
+            	median = d[mid];
+            } else {
+            	median = (d[mid - 1] + d[mid]) / 2;
+            }
+        }
+    }
+    return median;
+}
+		\end{lstlisting}}
+		Begründen Sie: Was wäre die Folge, wenn man das \texttt{\&\&} in Zeile 3 durch ein \texttt{\&} ersetzt?
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Lösung}
+
+		Keine Kurzauswertung $\rightarrow$ Bei \texttt{null} als Eingabe gäbe es eine
+		\texttt{NullPointerExeption} bei \texttt{d.length}
+	\end{frame}
+
+	\begin{frame}[fragile]
+		\frametitle{Aufgabe}
+
+		d) Erstellen Sie auf der folgenden Seite den Kontrollflussgraphen der Methode \texttt{median(...)}. Bitte schreiben Sie den Quelltext in Kästchen, Verweise auf die Zeilennummern der Methode sind nicht ausreichend.
+		{\tiny
+		\begin{lstlisting}[Algorithmus,frame=single]
+public static double median(double[] d) {
+    double median = Double.NaN;
+    if (d != null && d.length > 0) {
+        if (d.length == 1) {
+        	median = d[0];
+        } else {
+            Arrays.sort(d);  // sortiert d aufsteigend
+            int mid = d.length / 2;
+            if (d.length % 2 != 0) {
+            	median = d[mid];
+            } else {
+            	median = (d[mid - 1] + d[mid]) / 2;
+            }
+        }
+    }
+    return median;
+}
+		\end{lstlisting}}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Lösung}
+
+		\begin{center}
+			\includegraphics[scale=0.28]{Kontrollflussorientierte_Testverfahren_SS2009_Loesung.png}
+		\end{center}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Aufgabe}
+
+		e) Geben Sie eine minimale Testfallmenge an, welche für die Methode \texttt{median(...)} die Anweisungsüberdeckung erfüllt. Geben Sie die durchlaufenen Pfade an.
+
+		\begin{center}
+			\includegraphics[scale=0.24]{Kontrollflussorientierte_Testverfahren_SS2009_Loesung.png}
+		\end{center}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Lösung}
+
+		$\{1\}: n_{start}, n_1, n_2, n_4, n_{stopp}$ \\
+		$\{1, 2\}: n_{start}, n_1, n_2, n_3, n_5, n_{stopp}$ \\
+		$\{1, 2, 3\}: n_{start}, n_1, n_2, n_3, n_6, n_{stopp}$ \\
+
+		\begin{center}
+			\includegraphics[scale=0.23]{Kontrollflussorientierte_Testverfahren_SS2009_Loesung.png}
+		\end{center}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Aufgabe}
+
+		f) Ergänzen Sie die Testfallmenge aus e) so, dass Sie eine min. Menge erhalten, welche die Zweigüberdeckung für die Methode \texttt{median(...)} erfüllt. Geben Sie für die neuen Testfälle die durchlaufenen Pfade an.
+
+		\begin{center}
+			\includegraphics[scale=0.24]{Kontrollflussorientierte_Testverfahren_SS2009_Loesung.png}
+		\end{center}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Lösung}
+
+		null oder $\{\}: n_{start}, n_1, n_{stopp}$ \\
+
+		\begin{center}
+			\includegraphics[scale=0.24]{Kontrollflussorientierte_Testverfahren_SS2009_Loesung.png}
+		\end{center}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Aufgabe}
+
+		g) Erfüllt die minimale Testfallmenge aus f), welche die Zweigüberdeckung erfüllt, auch die Pfadüberdeckung für die Methode \texttt{median(...)}? Begründen Sie Ihre Antwort.
+
+		\begin{center}
+			\includegraphics[scale=0.24]{Kontrollflussorientierte_Testverfahren_SS2009_Loesung.png}
+		\end{center}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Lösung}
+
+		Ja, es gibt in diesem Fall so viele Pfade wie Zweige (allgemein gilt dies nicht).
+	\end{frame}
+
+	\subsection{Fragerunde}
+	\begin{frame}
+		\frametitle{Fragerunde}
+
+		\begin{enumerate}
+			\item Die einfache Bedingungsüberdeckung fordert, dass die Kombinationen der atomaren Bedingungen mit allen möglichen Permutationen der Wahrheitswerte Wahr und Falsch belegt werden. \false
+			\item Kontrollflussorientierte Tests und datenflussorientierte Tests gehören zu der statischen Analyse von Programmen. \false
+			\item Kontrollflussorientierte Tests gehören zu den statischen Testverfahren. \false
+			\item Durchsichten sind auf Code und Testfälle anwendbar. \true
+		\end{enumerate}
+	\end{frame}
+
+
+
+	\section{Aufwand}
+	\subsection{Aufwand}
+	\begin{frame}
+		\frametitle{Teufelsquadrat}
+
+		\begin{center}
+			\includegraphics[scale=0.4]{teufelsquadrat.png}
+		\end{center}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Aufwandsabschätzung}
+
+		Methoden:
+		\begin{itemize}
+			\item Analogiemethode
+			\item Relationsmethode
+			\item Multiplikatormethode
+			\item Phasenaufteilung
+			\item COCOMO II
+			\item Konsens-Schätzmethoden
+			\begin{itemize}
+				\item Delphi-Methode
+				\item Planungspoker
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Analogiemethode}
+
+		\begin{itemize}
+			\item Schätzung anhand Ähnlichkeit zu bereits abgeschlossenen Projekten
+			\item Ähnlichkeitskriterien:
+			\begin{itemize}
+				\item Anwendungsgebiet
+				\item Produktumfang
+				\item Komplexität
+				\item Programmiersprache
+				\item Programmierumgebung
+			\end{itemize}
+			\item[\pro] Vorteile
+			\begin{itemize}
+				\item Sehr einfach
+			\end{itemize}
+			\item[\contra] Nachteile
+			\begin{itemize}
+				\item Sehr subjektiv
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Relationsmethode}
+
+		\begin{itemize}
+			\item Funktioniert wie Analogiemethode, jedoch mit genau festgelegten Verhältnissen
+			\item[\pro] Vorteile
+			\begin{itemize}
+				\item Sehr einfach
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Multiplikatormethode}
+
+		\begin{itemize}
+			\item Synonym: Aufwand-pro-Einheit-Methode
+			\item System in Teilprodukte aufteilen
+			\item Aufwand für Teilprodukten aus Analyse  vorhandener Produkte ermitteln
+			\item Aufteilung der Teilprodukte beispielsweise in
+			\begin{itemize}
+				\item Steuerprogramme
+				\item E/A-Programme
+				\item Datenverwaltungsroutinen
+				\item Algorithmen
+			\end{itemize}
+			\item[\pro] Vorteile
+			\begin{itemize}
+				\item Klares Vorgehen
+			\end{itemize}
+			\item[\contra] Nachteile
+			\begin{itemize}
+				\item Umfangreiche Datensammlung notwendig
+				\item Können sich mit technischem Fortschritt schnell ändern
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Phasenaufteilung}
+
+		\begin{itemize}
+			\item Aus abgeschlossener Phase oder detailierter Abschätzung der ersten Phase den Aufwand restlicher Phasen schlussfolgern
+			\item[\pro] Vorteile
+			\begin{itemize}
+				\item Kann frühzeitig angewandt werden
+			\end{itemize}
+			\item[\contra] Nachteile
+			\begin{itemize}
+				\item Zu ungenau, Aufwand anderer Phasen variiert zu sehr
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{COCOMO II}
+
+		\begin{itemize}
+			\item Berechnet Gesamtdauer aus geschätzter Größe und 22 Einflussfaktoren
+			\item Ergebnis in Personenmonaten
+			\item Größe wird in KLOC geschätzt
+			\item[\pro] Vorteile
+			\begin{itemize}
+				\item Wenn korrekte Daten vorhanden sehr zuverlässig
+			\end{itemize}
+			\item[\contra] Nachteile
+			\begin{itemize}
+				\item Benötigt genaue Kenntnis der Einflussfaktoren
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Konsens-Schätzmethoden}
+		\begin{itemize}
+			\item Beruhen auf dem Schätzwert verschiedener Experten
+			\item Methoden:
+			\begin{itemize}
+				\item Delphi-Methode
+				\item Planungspoker
+			\end{itemize}
+			\item[\pro] Vorteile
+			\begin{itemize}
+				\item Einfach umzusetzen
+			\end{itemize}
+			\item[\contra] Nachteile
+			\begin{itemize}
+				\item Keine Garantien
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+
+	\subsection{Fragerunde}
+	\begin{frame}
+		\frametitle{Fragerunde}
+
+		\begin{enumerate}
+			\item Ein Stresstest testet das Verhalten des Systems beim Überschreiten der definierten Grenzen. \true
+			\item COCOMO II betrachtet neben den multiplikativen Kostenfaktoren auch Skalierungsfaktoren für die Zusammenarbeit im Entwicklungsteam. \true
+			\item Die Multiplikatormethode ermöglicht eine Aufwandsschätzung ohne umfangreiche empirische Datensammlung. \false
+			\item Die Entwicklungskosten eines Software-Systems bestehen zum Größten Teil aus Personalkosten. \true
+			\item Für ein Softwareentwicklungsprojekte gilt die Faustregel: Der Aufwand für Wartung und Pflege ist typischerweise um einen Faktor von 2 bis 4 größer als der Entwicklungsaufwand. \true
+			\item Das einzige Ziel der Softwaretechnik ist es, die Kosten der Erstellung von Software zu senken. \false
+		\end{enumerate}
+	\end{frame}
+
+
+
+	\section{Prozessmodelle}
+	\subsection{Stoff}
+
+	\begin{frame}
+		\frametitle{Prozessmodelle}
+
+		Übersicht:
+		\begin{itemize}
+			\item Programmieren durch Probieren
+			\item Wasserfallmodell
+			\item V-Modell
+			\item Prototypenmodell
+			\item Iteratives Modell
+			\item Synchronisiere und Stabilisiere
+			\item Agile Methoden (spez. Extreme Programming)
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Programmieren durch Probieren}
+
+		\begin{itemize}
+			\item Vorgehen
+			\begin{itemize}
+				\item Vorläufiges Programm erstellen
+				\item Über Anforderungen, Entwurf, Testen und Wartung nachdenken
+				\item Programm entsprechend anpassen
+			\end{itemize}
+			\item[\pro] Vorteile
+			\begin{itemize}
+				\item Sofort Code
+			\end{itemize}
+			\item[\contra] Nachteile
+			\begin{itemize}
+				\item Schlechte Codestruktur
+				\item Keine Dokumentation
+				\item Wartung/Pflege kostspielig
+				\item Nicht messbare Aufgabenerfüllung
+				\item Keine Teamarbeit möglich
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Wasserfallmodell}
+
+		\begin{itemize}
+			\item Vorgehen
+			\begin{itemize}
+				\item Fest vorgegebene Reihenfolge der Aktivitäten
+			\end{itemize}
+			\item[\pro] Vorteile
+			\begin{itemize}
+				\item Einfach
+				\item Verständlich
+			\end{itemize}
+			\item[\contra] Nachteile
+			\begin{itemize}
+				\item Sehr statisch, nachträgliche Änderungen schwierig
+				\item Phasen müssen nacheinander abgearbeitet werden
+				\item Genaue Spezifikation anfangs oft schwierig
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Wasserfallmodell}
+		\begin{center}
+			\includegraphics[scale=0.25]{Wasserfallmodell.png}
+		\end{center}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{V-Modell}
+		\begin{center}
+			\includegraphics[scale=0.25]{V-Modell.png}
+		\end{center}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Prototyp}
+
+		\begin{itemize}
+			\item Sinnvoll, wenn Experimente notwendig für Spezifikation
+			\item Kann Kundenvertrauen stärken
+			\item Wird weggeworfen \\
+		\end{itemize}
+
+		\begin{center}
+			\includegraphics[scale=0.2]{muell.jpg}
+		\end{center}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Synchronisiere und Stabilisiere}
+		\begin{itemize}
+			\item Synonym: „Microsoft-Modell“
+			\item Vorgehen
+			\begin{itemize}
+				\item Organisation der 200 Programmierer in „kleinen Hacker-Teams“ \\ $\rightarrow$ Freiheit für eigene Ideen/Entwürfe
+				\item Regelmäßige Synchronisation (nächtlich)
+				\item Regelmäßige Stabilisierung (Meilensteine, 3 Monate)
+			\end{itemize}
+			\item Phasen
+			\begin{enumerate}
+				\item Planungsphase (3-12 Monate)
+				\item Entwicklungsphase in 3 Meilensteinen (9 Monate)
+				\item Stabilisierungsphase (3-8 Monate)
+			\end{enumerate}
+			\item[\pro] Vorteile
+			\begin{itemize}
+				\item Effektiv
+				\item Fortschritt auch ohne vollständige Spezifikation
+			\end{itemize}
+			\item[\contra] Nachteile
+			\begin{itemize}
+				\item Nicht immer geeignet
+				\item Hohe Kosten
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Agile Prozesse}
+		\begin{itemize}
+			\item Minimum an Vorausplanung
+			\item Inkrementelle Planung
+			\item Vermeiden unterstützender Dokumente
+			\item Schnelle Reaktion auf Änderungen
+			\item Einbeziehung des Kunden in die Entwicklung
+			\item Vertreter: z.B. Extreme Programmierung (XP), Scrum
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Extreme Programming (XP)}
+		\begin{itemize}
+			\item Vorgehen
+			\begin{itemize}
+				\item Paarprogrammierung
+				\item Testgetriebene Entwicklung
+				\item Aktive Beteiligung des Kunden
+				\item Inkrementeller Entwurf durch Umstrukturierungen
+				\item Fortlaufende Integration und Umstrukturierung des Codes
+			\end{itemize}
+			\item Vor-/Nachteile
+			\begin{itemize}
+				\item Unbekannt
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Testgetriebene Entwicklung}
+		\begin{center}
+			\includegraphics[scale=0.25]{Zustandsdiagramm_testgetriebene_Entwicklung.png}
+		\end{center}
+		\vspace{0.25cm}
+		\begin{itemize}
+			\item Testcode vor Anwendungscode schreiben
+			\item Inkrementeller Entwurf (immer nur so viel, wie gerade gebraucht wird)
+		\end{itemize}
+	\end{frame}
+
+	\subsection{Klausuraufgabe 2012-1}
+	\begin{frame}
+		\frametitle{Aufgabe}
+		\begin{tabular}{p{8cm}|cc}
+			\textbf{Aussage} & \textbf{wahr} & \textbf{falsch} \\
+			\hline
+			Beim Prozessmodell „Synchronisiere und Stabilisiere“ folgt auf das Ende der
+			Entwicklungsphase eine Stabilisierungsphase, in der die Integration und die
+			Komponententests durchgeführt werden & & \visible<2->{$\times$} \\
+			\hline
+			Im Prozessmodell „Synchronisiere und Stabilisiere“ ist die Priorisierung nach
+			Funktionen nicht möglich & & \visible<3->{$\times$} \\
+			\hline
+			Bei agilen Softwareentwicklungsprozessen beschränkt man die Vorausplanung auf
+			das Nötigste und plant inkrementell & \visible<4->{$\times$} & \\
+			\hline
+			Beim Prozessmodell „Extreme Programming“ entscheiden die Entwickler, welche
+			Priorität die Funktionalitäten eines Produkts haben & & \visible<5->{$\times$} \\
+		\end{tabular}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Aufgabe}
+		\begin{tabular}{p{8cm}|cc}
+			\textbf{Aussage} & \textbf{wahr} & \textbf{falsch} \\
+			\hline
+			Beim Prozessmodell „Extreme  Programming“  sind Codeinspektionen Teil der
+			normalen Arbeitszeit und finden im wöchentlichen Rhythmus
+			statt & & \visible<2->{$\times$} \\
+			\hline
+			Beim Prozessmodell „Extreme Programming“ werden Akzeptanztests vom Kunden
+			spezifiziert und müssen spätestens bei der Auslieferung „grün“ sein, d.h. sie
+			dürfen keine Fehler melden & \visible<3->{$\times$} & \\
+			\hline
+			Der Integrationstest im V-Modell ist der abschließende Test des Auftragnehmers
+			in einer realistischen Umgebung ohne den Kunden & & \visible<4->{$\times$} \\
+			\hline
+			Das V-Modell XT besteht aus den vier Submodellen Projektmanagement,
+			Qualitätssicherung, Konfigurationsmanagement und
+			Systemerstellung & \visible<5->{$\times$} & \\
+		\end{tabular}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Aufgabe}
+		\begin{tabular}{p{8cm}|cc}
+			\textbf{Aussage} & \textbf{wahr} & \textbf{falsch} \\
+			\hline
+			In der Implementierungsphase des Wasserfallmodells finden die Umsetzung der
+			Spezifikation in korrekte, lauffähige Programme und deren Dokumentation
+			statt & \visible<2->{$\times$} & \\
+			\hline
+			In der letzten Phase des Wasserfallmodells finden Einsatz und Wartung
+			statt & \visible<3->{$\times$} & \\
+			\hline
+			Das Prototypmodell eignet sich für Systeme, die keine vollständige Spezifikation
+			haben und bei denen diese Spezifikation ohne explorative Entwicklung bzw.
+			Experimente nicht erstellt werden kann & \visible<4->{$\times$} & \\
+			\hline
+			Die Durchführbarkeitsuntersuchung ist Teil der Planungsphase des
+			Wasserfallmodells & \visible<5->{$\times$} & \\
+		\end{tabular}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Aufgabe}
+		\begin{tabular}{p{8cm}|cc}
+			\textbf{Aussage} & \textbf{wahr} & \textbf{falsch} \\
+			\hline
+			Das iterative Modell als Erweiterung der Prototypenidee eignet sich dann,
+			wenn zumindest Teile der Funktionalität klar definiert und Funktionalitäten
+			dem Produkt Schritt für Schritt hinzugefügt werden können
+			& \visible<2->{$\times$} & \\
+			\hline
+			Im Prozessmodell „Prototyp“ wird der Prototyp iterativ entwickelt und nach der
+			Testphase produktiv eingesetzt und gewartet & & \visible<3->{$\times$} \\
+			\hline
+			Beim Prozessmodell „Scrum“ enthält die Aufgabenliste (sprint backlog) die
+			Produktanforderungen und eine Liste aller Projektarbeiten
+			& & \visible<4->{$\times$} \\
+			\hline
+			Der „Scrum Master“ legt die Anforderungen an das Produkt fest sowie dessen
+			Auslieferungstermin & & \visible<5->{$\times$} \\
+		\end{tabular}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Aufgabe}
+		\begin{tabular}{p{8cm}|cc}
+			\textbf{Aussage} & \textbf{wahr} & \textbf{falsch} \\
+			\hline
+			Das Prozessmodell „Extreme Programming“ bezieht den Kunden stärker in den
+			Entwicklungsprozess ein als das Wasserfallmodell & \visible<2->{$\times$} & \\
+			\hline
+			Aufgrund der permanenten gegenseitigen Kontrolle ist die Paarprogrammierung
+			gegenüber der Einzelprogrammierung mit Inspektionen klar im Vorteil, was das
+			Verhältnis Kosten zu Nutzen angeht & & \visible<3->{$\times$} \\
+			\hline
+			Dank kollektivem Codebesitz darf jeder Entwickler Änderungen am gesamten Produkt
+			vornehmen, z.B. bei Umstrukturierungen (refactoring) & \visible<4->{$\times$} & \\
+			\hline
+			Dank Test-Zuerst, kontinuierlichem Integrieren und Regressionstesten sind agil
+			entwickelte Programmkomponenten fehlerfrei & & \visible<5->{$\times$} \\
+		\end{tabular}
+	\end{frame}
+
+	\subsection{Fragerunde}
+	\begin{frame}
+		\frametitle{Fragerunde}
+
+		\begin{enumerate}
+			\item Im Wasserfallmodell ist das Pflichtenheft ein Ergebnisartefakt der Planungsphase. \false
+			\item Das Lastenheft ist eine Verfeinerung des Pflichtenheftes. \false
+			\item Beim Prototyp-Prozessmodell wird aus einem Prototypen Stück für Stück das finale Softwareprodukt entwickelt. \false
+			\item Nicht-funktionale Anforderungen sind sowohl Teil des Pflichtenhefts als auch des Lastenhefts. \true
+			\item Bei der testgetriebenen Entwicklung dienen die Tests unter anderem zur Schnittstellendefinition. \true
+			\item Im Prozessmodell „Prototyp“ wird der Prototyp iterativ entwickelt und nach der Testphase produktiv eingesetzt und gewartet. \false
+		\end{enumerate}
+	\end{frame}
+
+
+
+	\section{Klausur}
+	\subsection{Klausur}
+	\begin{frame}
+		\frametitle{Organisatorisches}
+		Hauptklausur: 11.08.2014, 14 Uhr \\
+		Nachklausur: 08.10.2014, 14 Uhr
+		\\
+		\vspace{1cm}
+		60 Minuten Bearbeitungszeit, 60 Punkte \\
+		$\rightarrow$ Eine Minute Zeit für jeden Punkt
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Vorbereitung}
+
+		Quellen:
+		\begin{itemize}
+			\item Vorlesungsfolien
+			\item Altklausuren
+			\item Übungsblätter
+			\item Literaturhinweise der Vorlesung
+			\item \href{https://studwww.informatik.kit.edu/~s_milten/tut/swt1_ss14/}{Tutoriumsfolien}
+		\end{itemize}
+
+		\begin{center}
+			\includegraphics[scale=0.25]{page.png}
+		\end{center}
+	\end{frame}
+
+	\section{Abschluss}
+	\subsection{Abschluss}
+	\begin{frame}
+		\frametitle{Abschluss}
+		Dies war das letzte Tutorium \frownie
+
+		\vspace{0.5cm}
+		Bei Fragen oder Anregungen auch in Zukunft:
+		\begin{itemize}
+			\item Jetzt
+			\item Jetzt gleich
+			\item Per E-Post an fabian.miltenberger@student.kit.edu
+		\end{itemize}
+
+		\vspace{0.5cm}
+		Vielen Dank. Ihr wart ein tolles Publikum.
+	\end{frame}
+
+\end{document}

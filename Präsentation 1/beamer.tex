@@ -1,0 +1,85 @@
+\documentclass[german,notes,18pt]{beamer}
+\mode<presentation>
+%\usepackage[ngerman, english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{listings}
+\usepackage{eurosym}
+\usepackage{multirow}
+\usepackage{color}
+\usepackage{pdfpages}
+\usepackage{graphicx}
+\usepackage{wasysym}
+\graphicspath{{Bilder/}}
+%\beamertemplatenavigationsymbolsempty
+
+\usetheme{kit}
+
+\title{Projekt 1}
+\subtitle{Arbeiten mit OpenMP und FEM}
+\author{Thore Mehr, Fabian Miltenberger, Sebastíen Thill}
+\date{11.01.2017}
+\institute{Lehrstuhl für Rechnerarchitektur und Parallelverarbeitung}
+
+\definecolor{kit}{HTML}{009682}
+\definecolor{darkgreen}{RGB}{0, 180, 0}
+\definecolor{darkred}{RGB}{180, 0, 0}
+\newcommand{\pro}{$\oplus$}
+\newcommand{\contra}{$\ominus$}
+
+\definecolor{shinygray}{RGB}{245,245,245}
+\lstset{language=Java,
+		keywordstyle=\color{blue}\bfseries,
+		numberstyle=\color{blue},
+		numbers=left,
+		tabsize=4,
+		xleftmargin=3.5em,
+		xrightmargin=2em}
+
+\begin{document}
+	\selectlanguage{ngerman}
+	
+	\frame{\titlepage}
+	
+	\section{Sektion}
+	\subsection{Intro}
+	\begin{frame}
+		\frametitle{Intro}
+		
+		\begin{enumerate}
+			\item Parallelitätsfehler
+			\begin{itemize}
+				\item Fehlerursache beschreiben
+				\item Testfall Zuverlässigkeit
+				\item Zwei Mögliche Lösungen mit Begründung \\
+				$\rightarrow$ Begründung und zweite Variante nicht vergessen
+			\end{itemize}
+		\end{enumerate}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Philosophische Überlegungen}
+		Es gibt beim parallelen Ablauf Verzögerungen. Manchmal geht es gerade noch gut, manchmal hat man Pech.
+		\\
+		\vspace{1cm}
+		\onslide<2->
+		$\hookrightarrow$ Dies war eine Abgabe für Aufgabe 1 b).
+	\end{frame}
+	
+	
+	
+	\section{Anderes Kapitel}
+	\subsection{Unterkapitel}
+	\begin{frame}
+		\frametitle{Kontrollflussgraphen (KFG)}
+		
+		Was wollen wir erreichen?
+		\begin{itemize}
+			\item Programm in Zwischensprache übersetzen
+			\item KFG aus Zwischensprache generieren
+			\item Anhand KFG Aussagen über Abdeckung treffen
+		\end{itemize}
+	\end{frame}
+
+\end{document}
