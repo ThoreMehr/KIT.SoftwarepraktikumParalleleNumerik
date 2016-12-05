@@ -24,6 +24,8 @@
 \usepackage{colortbl}
 \usepackage{graphicx,import}
 \usepackage{siunitx}
+\usepackage[numbers]{natbib}
+\usepackage{multirow}
 
 \renewcommand{\thesection}{Projekt \arabic{section}}
 \renewcommand{\thesubsection}{Aufgabe \arabic{section}.\arabic{subsection}}
@@ -97,12 +99,33 @@ Wie in der Ausgabe \ref{helloworldoutput} zu sehen, folgt die Reihenfolge der au
 
 \subsubsection{}	
 \begin{description}
-	\item[Race Condition] \hfill \\ Wettlaufsituationen
-	Dabei hängt Ergebnis von konkreter Ausführungsreihenfolge ab (daher Wettlauf)
-	Entsteht, wenn verschiedene Fäden auf gleiche Variable zugreifen, und mindestens ein Faden deren Wert manipuliert
-	Korrektheit der Ergebnisse hängt von Ausführungsreihenfolge ab
-	\item[Dead lock] \hfill \\ Zyklus im Allokationsgraphen
+	\item[Race Condition] \hfill \\
+	Auch bekannt als Wettlaufsituation. Mehrere Fäden greifen lesend und schreibend auf die gleiche Variable zu. Durch den gleichzeitigen Zugriff auf die Variable durch die anderen Fäden hängt das Ergebnis von der konkreten Ausführungsreihenfolge ab. Das Ergebnis kann der Erwartung entsprechen, muss aber nicht. Die Lösung hierfür ist Synchronisation, beispielsweise mittels atomarer Variablenzugriffe oder Barriere. Damit kann sicher gestellt werden, dass kein anderer Faden die Variable manipuliert während ein Faden mit ihr arbeitet.
+	
+	\item[Dead lock] \hfill \\
+	Auch bekannt als Verklemmung. Erfordert mindestens zwei Fäden, die gegenseitig auf eine Resource warten, die gerade vom jeweils anderen Faden bereits allokiert wurde (formal: Zyklus im Allokationsgraphen). Damit tatsächlich alle Beteiligten Fäden nicht mehr weiter laufen können, müssen folgende Bedingungen erfüllt sein:
+	\begin{itemize}
+		\item Resourcen können nicht von außen freigegeben werden
+		\item Fäden können weitere Resourcen anfordern, und gleichzeitig weiterhin andere halten
+		\item Eine Resource kann immer nur von einem Faden gehalten betreten werden
+		\item Es besteht eine zyklische Abhängigkeit im Allokationsgraphen
+	\end{itemize}
+
+	\item[Bibliotheken] \hfill \\
+	Eine Fehlerquelle kann die Verwendung von Bibliotheken in einem parallelen Kontext darstellen, die nicht hierfür konstruiert wurden. Wenn eine Bibliothek beispielsweise von verschiedenen Fäden aus aufgerufen wird, aber intern keine Synchronisationsmechanismen bereithält, kann es auch hier zu Wettlaufsituationen kommen, die jedoch unter Umständen noch schwieriger zu lokalisieren sind.
+	Auch kann es passieren, dass eine geplante Parallelisierung sich aufgrund Synchronisationsmechanismen innerhalb einer Bibliothek nicht wie erwartet umsetzen lässt. In diesem Fall wird die Implementierung der Bibliothek zum Flaschenhals der Parallelisierung.
+	Um solche Fehler zu vermeiden, blockieren manche Bibliotheken Aufrufe, die nicht aus einem bestimmten Faden stammen. Verlassen sollte sich der Entwickler auf solche Mechanismen jedoch nicht. Viele Bibliotheken geben inzwischen in ihrer Dokumentation Hinweise auf den möglichen Einsatz im parallelen Kontext.
+	
+	\item[Messeffekt] \hfill \\
+	Wenn man das Debuggen zum Softwareentwurf zählt, so wären als weitere Fehlerquelle auch \emph{Messeffekte} zu nennen. Verbreitete Methoden zum Debuggen, wie etwa die Ausgabe von Information auf der Konsole, können bereits selbst die Ausführung des parallelen Programms beeinflussen. So kann es passieren, dass die Mechanismen, die einen Fehler aufspüren sollen, dazu führen, dass dieser nicht weiter auftritt.
+	
+	\item[Cacheeffekte] \hfill \\
+	Spielt ebenfalls weniger im Entwurf eine Rolle, als in der Implementierung. Die meisten Prozessoren haben einen eigenen Cache für jeden Rechenkern. Wenn nun verschiedene Fäden auf verschiedenen Kernen gleichzeitig auf der gleichen Variablen arbeiten, so kann es passieren, dass mangels Synchronisation zwischen den Caches der eine Faden die vom anderen Faden verursache Änderung nicht \emph{sieht}. Lösung hierfür sind spezielle Mechanismen des Prozessors, um Caches bei bedarf zu Synchronisieren. In C kann man hierfür eine Variable als \texttt{volatile} definieren.
 \end{description}
+
+
+
+
 
 
 \subsubsection{}
@@ -314,6 +337,49 @@ Das verwendete Vorgehen wird als \emph{h-FEM} bezeichnet, da wir lediglich die G
 
 \subsection{}\label{p1a6}
 \subsubsection{}
+Alphabetische Liste gängiger Krylow-Unterraum-Verfahren (nach \cite{KrylowUnterraumWiki}):
+\begin{itemize}
+	\item Arnoldi-Verfahren, zur Eigenwertapproximation
+	\item BiCG, das CG-Verfahren für nicht SPD-Matrizen
+	\item BiCGSTAB, Stabilisierung von CGS
+	\item BiCGSTAB(ell), Stabilisierung von CGS
+	\item BiCGSTABTFQMR, der Ansatz hinter TFQMR angewandt auf BiCGSTAB
+	\item BiOres, eine Variante des BiCG-Verfahrens
+	\item BiOmin, eine Variante des BiCG-Verfahrens
+	\item BiOdir, eine Variante des BiCG-Verfahrens
+	\item CG, zur approximativen Lösung linearer Gleichungssysteme
+	\item CGNE, CG-Verfahren auf den Normalgleichungen, Variante 1
+	\item CGNR, CG-Verfahren auf den Normalgleichungen, Variante 2
+	\item CGS-Verfahren, quadrierte BiCG-Rekursion
+	\item FOM, zur approximativen Lösung linearer Gleichungssysteme
+	\item GMRES, zur approximativen Lösung linearer Gleichungssysteme
+	\item Hessenberg-Verfahren, zur Eigenwertapproximation
+	\item Lanczos-Verfahren, zur Eigenwertapproximation
+	\item MinRes, zur approximativen Lösung linearer Gleichungssysteme
+	\item Orthores, Orthomin und Orthodir, Verallgemeinerungen des CG-Verfahrens
+	\item Ores, eine Variante des CG-Verfahrens
+	\item Omin, eine Variante des CG-Verfahrens
+	\item Odir, eine Variante des CG-Verfahrens
+	\item Potenzmethode, älteste Methode zur Eigenwertapproximation
+	\item QMR, zur approximativen Lösung linearer Gleichungssysteme
+	\item Richardson-Iteration, bei geeigneter Interpretation
+	\item SymmLQ, zur approximativen Lösung linearer Gleichungssysteme
+	\item TFQMR, zur approximativen Lösung linearer Gleichungssysteme
+\end{itemize}
+
+
+Die häufig verwendeten Grundverfahren sind: CG-Verfahren, GMRES und Lanczos-Verfahren
+
+CG-Verfahren: Hierbei handelt es sich um einen iterativen Algorithmus und ist gedacht für große lineare, symmetrische, positiv definite und dünn besetzte Gleichungssysteme. Das CG-Verfahren liefert nach spätestens n (Dimension der Matrix) Schritten die exakte Lösung.
+
+GMRES: Ein iteratives Verfahren welches sich besonders für große, dünn besetzte lineare Gleichungssysteme eignet. GMRES kann und wird für nicht-symmetrische Matrizen eingesetzt, allerdings wird die exakte Lösung erst nach endlich vielen Schritten geliefert.
+
+Lanczos-Verfahren: Ebenfalls ein iterativer Algorithmus, welcher Eigenwerte mit den entsprechenden Eigenvektoren bestimmen kann, als auch lineare Gleichungssysteme lösen. Die Konvergenz vom Algorithmus ist von den Eigenwerten abhängig.
+
+Bei der Auswahl von diesen drei Verfahren für unser Problem, eignet sich das CG-Verfahren am besten, da die vom Problem gegebene Matrix alle Kriterien erfüllt. Des Weiteren ist die Konvergenz $n$ (nach \cite{Numa}) von Vorteil, da wir davon ausgehen können, dass wir schon viel früher eine Lösung erreicht haben werden welche unter einer gewissen Toleranz \emph{gut genug} sein wird.
+Gegen GMRES spricht nur die möglicherweise langsamere Konvergenz und die hier nicht benötigte Flexibilität auch nicht-symmetrische Matrizen bearbeiten zu können.
+Das Lanczos-Verfahren wäre eine Alternative, vor allem da die Eigenwerte und somit die Konvergenz im Voraus bekannt sind.
+
 Implementierung soll mit Hilfe der \emph{kennengelernten Werkzeuge} analysiert werden.
 
 \subsubsection{}
@@ -322,14 +388,47 @@ Zu bestimmen: \emph{Speedup} und \emph{Efficiency}
 Wie auch unsere Implementierung des Gauß-Seidel-Verfahrens aus Aufgabe \ref{p1a4}, nutzen wir hier für unsere Implementierung die dünne Struktur der Matrix $A$ aus. Eine Vorkonditionierung würde diese günstige Struktur beeinträchtigen, wodurch ein sehr viel höherer Rechenaufwand zu erwarten wäre. Gesetzt den Fall unsere Matrix $A$ wäre nicht dünn besetzt, so könnte eine Vorkonditionierung Sinn machen, um die Stabilität des Algorithmus ggf. zu erhöhen.
 
 \subsubsection{}
+In Tabelle \ref{MathBibs} haben wir ein drei Bibliotheken zur Anwendung der Finiten Elemente Methode aufgelistet und verglichen. Weitere Bibliotheken, die es nicht in die Tabelle geschafft haben, wären beispielsweise Feel++\cite{Feel++} und
+Libmesh\cite{Libmesh}.
 
+Im Rahmen dieses Praktikums würde sich, zumindest für Projekt 1, \emph{HiFlow3} am gut eignen, da hier eine ausgereifte OpenMP Funktionalität gegeben zu sein scheint, die den Portierungsaufwand stark verringert.
+
+\begin{table}
+	\centering
+	\begin{tabular}{l|p{0.6\textwidth}|l}
+		Bibliothek & Unterschiede & Gemeinsamkeiten \\
+		\hline
+		HiFlow3\cite{HiFlow3} &
+		MPI und OpenMP basiert, \\
+		&Hohe Parallelität (von Laptop bis zu Cluster), \\
+		&Keine externen Bibliotheken benötigt (optional Libraries, unter anderem OpenMP)
+		& \multirow{9}{0.3\textwidth}{Für C++ gedacht, \newline
+			Implementieren Krylov-Unterraumverfahren,
+			Diskretisierung wählbar} \\
+		
+		\cline{1-2}
+		MFEM\cite{MFEM} &
+		MPI basiert (und experimenteller OpenMP Support), \\
+		&Sehr hohe Parallelität (mehrere Hundert Tausend Kerne), \\
+		&Keine externen Bibliotheken benötigt \\
+		
+		\cline{1-2}
+		Deal.II\cite{Deal.II} &
+		MPI basiert, \\
+		&Hohe Parallelität (16000 Kerne mindestens), \\
+		&Keine externen Bibliotheken benötigt (optional Libraries)
+	\end{tabular}
+	\caption{Ausgewählte Bibliotheken zur Anwendung der Finiten Elemente Methode im Vergleich.}
+	\label{MathBibs}
+\end{table}
 
 
 \section{}
 
 % Normaler LNCS Zitierstil
 %\bibliographystyle{splncs}
-\bibliographystyle{itmalpha}
+%\bibliographystyle{itmalpha}
+\bibliographystyle{natdin}
 % TODO: Ändern der folgenden Zeile, damit die .bib-Datei gefunden wird
 \bibliography{literatur}
 
