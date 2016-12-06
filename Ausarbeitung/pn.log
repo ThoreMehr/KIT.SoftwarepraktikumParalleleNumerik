@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.4.21)  5 DEC 2016 19:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.4.21)  6 DEC 2016 14:45
 entering extended mode
 **./pn.tex
 (pn.tex
@@ -935,7 +935,7 @@ File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 202.
  (gsv_node_dependence.pdf_tex
-<gsv_node_dependence.pdf, id=169, page=1, 85.82553pt x 85.82553pt>
+<gsv_node_dependence.pdf, id=171, page=1, 85.82553pt x 85.82553pt>
 File: gsv_node_dependence.pdf Graphic file (type pdf)
 
 <use gsv_node_dependence.pdf, page 1>
@@ -947,46 +947,46 @@ Underfull \hbox (badness 10000) in paragraph at lines 295--299
 
  []
 
-[8] <a5l2.pdf, id=223, 614.295pt x 794.97pt>
+[8] <a5l2.pdf, id=229, 614.295pt x 794.97pt>
 File: a5l2.pdf Graphic file (type pdf)
  <use a5l2.pdf>
 Package pdftex.def Info: a5l2.pdf used on input line 334.
 (pdftex.def)             Requested size: 110.56831pt x 143.08842pt.
 
-<a5l3.pdf, id=224, 614.295pt x 794.97pt>
+<a5l3.pdf, id=230, 614.295pt x 794.97pt>
 File: a5l3.pdf Graphic file (type pdf)
  <use a5l3.pdf>
 Package pdftex.def Info: a5l3.pdf used on input line 335.
 (pdftex.def)             Requested size: 110.56831pt x 143.08842pt.
 
-<a5l4.pdf, id=225, 614.295pt x 794.97pt>
+<a5l4.pdf, id=231, 614.295pt x 794.97pt>
 File: a5l4.pdf Graphic file (type pdf)
  <use a5l4.pdf>
 Package pdftex.def Info: a5l4.pdf used on input line 336.
 (pdftex.def)             Requested size: 110.56831pt x 143.08842pt.
- [9] [10 <./a5l2.pdf> <./a5l3.pdf> <./a5l4.pdf>]
-Overfull \hbox (18.03008pt too wide) in paragraph at lines 419--442
+ [9] [10 <./a5l2.pdf> <./a5l3.pdf> <./a5l4.pdf>] [11]
+Overfull \hbox (18.03008pt too wide) in paragraph at lines 440--463
  [][] 
  []
 
-[11] (pn.bbl [12])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 456.
- [13
+(pn.bbl [12] [13])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 477.
+ [14
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 456.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 477.
  (pn.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 456.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 456.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 477.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 477.
 Package rerunfilecheck Info: File `pn.out' has not changed.
-(rerunfilecheck)             Checksum: 8A0139F0BD6E4337422968925C5A23F7;1739.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 456.
+(rerunfilecheck)             Checksum: D21BEE1CF5522E3FC6F07E8F00FA979E;1852.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 477.
  ) 
 Here is how much of TeX's memory you used:
- 19342 strings out of 493634
- 358033 string characters out of 3135239
- 434513 words of memory out of 3000000
- 22437 multiletter control sequences out of 15000+200000
+ 19360 strings out of 493634
+ 358396 string characters out of 3135239
+ 434983 words of memory out of 3000000
+ 22450 multiletter control sequences out of 15000+200000
  27681 words of font info for 83 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
  37i,15n,51p,10383b,1438s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1019,9 +1019,9 @@ C:/Users/Lobby/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
 /amsfonts/cm/cmsy7.pfb><C:/Users/Lobby/AppData/Local/Programs/MiKTeX 2.9/fonts/
 type1/public/amsfonts/cm/cmsy9.pfb><C:/Users/Lobby/AppData/Local/Programs/MiKTe
 X 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on pn.pdf (13 pages, 552612 bytes).
+Output written on pn.pdf (14 pages, 562620 bytes).
 PDF statistics:
- 704 PDF objects out of 1000 (max. 8388607)
- 84 named destinations out of 1000 (max. 500000)
+ 736 PDF objects out of 1000 (max. 8388607)
+ 89 named destinations out of 1000 (max. 500000)
  245 words of extra memory for PDF output out of 10000 (max. 10000000)
 

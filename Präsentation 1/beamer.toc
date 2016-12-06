@@ -1,7 +1,11 @@
 \beamer@endinputifotherversion {3.36pt}
 \select@language {ngerman}
 \select@language {ngerman}
-\beamer@sectionintoc {1}{Sektion}{2}{0}{1}
-\beamer@subsectionintoc {1}{1}{Intro}{2}{0}{1}
-\beamer@sectionintoc {2}{Anderes Kapitel}{5}{0}{2}
-\beamer@subsectionintoc {2}{1}{Unterkapitel}{5}{0}{2}
+\beamer@sectionintoc {1}{Gliederung}{2}{0}{1}
+\beamer@sectionintoc {2}{OpenMP und Tools}{3}{0}{2}
+\beamer@subsectionintoc {2}{1}{OpenMP}{3}{0}{2}
+\beamer@subsectionintoc {2}{2}{Tools}{4}{0}{2}
+\beamer@sectionintoc {3}{Parallelisierung}{5}{0}{3}
+\beamer@sectionintoc {4}{Partielle Differentialgleichungen}{5}{0}{4}
+\beamer@sectionintoc {5}{Fazit}{5}{0}{5}
+\beamer@subsectionintoc {5}{1}{Fazit}{5}{0}{5}
