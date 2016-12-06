@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.4.21)  6 DEC 2016 14:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.4.21)  6 DEC 2016 15:15
 entering extended mode
 **./pn.tex
 (pn.tex
@@ -965,6 +965,11 @@ File: a5l4.pdf Graphic file (type pdf)
 Package pdftex.def Info: a5l4.pdf used on input line 336.
 (pdftex.def)             Requested size: 110.56831pt x 143.08842pt.
  [9] [10 <./a5l2.pdf> <./a5l3.pdf> <./a5l4.pdf>] [11]
+Overfull \hbox (10.20184pt too wide) in paragraph at lines 413--424
+ [][] 
+ []
+
+
 Overfull \hbox (18.03008pt too wide) in paragraph at lines 440--463
  [][] 
  []
@@ -985,7 +990,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 477.
 Here is how much of TeX's memory you used:
  19360 strings out of 493634
  358396 string characters out of 3135239
- 434983 words of memory out of 3000000
+ 435075 words of memory out of 3000000
  22450 multiletter control sequences out of 15000+200000
  27681 words of font info for 83 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
@@ -1019,9 +1024,9 @@ C:/Users/Lobby/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
 /amsfonts/cm/cmsy7.pfb><C:/Users/Lobby/AppData/Local/Programs/MiKTeX 2.9/fonts/
 type1/public/amsfonts/cm/cmsy9.pfb><C:/Users/Lobby/AppData/Local/Programs/MiKTe
 X 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on pn.pdf (14 pages, 562620 bytes).
+Output written on pn.pdf (14 pages, 563590 bytes).
 PDF statistics:
- 736 PDF objects out of 1000 (max. 8388607)
+ 739 PDF objects out of 1000 (max. 8388607)
  89 named destinations out of 1000 (max. 500000)
  245 words of extra memory for PDF output out of 10000 (max. 10000000)
 

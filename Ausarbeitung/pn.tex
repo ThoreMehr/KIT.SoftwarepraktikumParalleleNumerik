@@ -406,22 +406,22 @@ Implementierung soll mit Hilfe der \emph{kennengelernten Werkzeuge} analysiert w
 
 
 \subsubsection{}\label{p1a6b}
-Zu bestimmen: \emph{Speedup} und \emph{Efficiency}
+Unsere parallele Version des CG-Verfahrens konnte gegenüber dem Gauß-Seidel-Verfahren das Problem aus Aufgabe \ref{p1a5} bis zu $40$-mal so schnell lösen. Eine Übersicht über den \emph{Speedup} sowie die \emph{Efficiency} ist in Tabelle \ref{a5a6speedupefficiency} zu finden.
 
 \begin{table}
 	\centering
 	\begin{tabular}{r|r|r||r||r|r|@{ \dots}|r|r||r|r}
-		\multicolumn{3}{c||}{Problemgröße} & Seq. & \multicolumn{2}{c|@{ \dots}|}{4 Threads} & \multicolumn{2}{c||}{16 Threads}  & \multicolumn{2}{c}{32 Threads} \\
-		$l$ & $d$ & $n$ & Laufzeit & Laufzeit & Speedup & Laufzeit & Speedup & Laufzeit & Speedup \\
+		\multicolumn{3}{c||}{Problemgröße} & Seq. & \multicolumn{2}{c|@{ \dots}|}{2 Threads} & \multicolumn{2}{c||}{16 Threads}  & \multicolumn{2}{c}{32 Threads} \\
+		$l$ & $d$ & $n$ & Speedup & Speedup & Efficiency & Speedup & Efficiency & Speedup & Efficiency \\
 		\hline
-		4 & 15 & 225 & 0,005 & 0,007 & 0,357 & 0,008 & 0,625 & 1,361 & 0,0389 \\
-		5 & 31 & 961 & 0,053 & 0,056 & 0,473 & 0,049 & 1,08 & 4,041 & 0,178 \\
+		4 & 15 & 225 & 1,74 & 1,81 & 0,906 & 2,44 & 0,153 & 2,93 & 0,0917 \\
+		5 & 31 & 961 & 4,01 & 3,71 & 1,86 & 1,44 & 0,0898 & 3,46 & 0,109 \\
 		\hline
 		\hline
-		8 & 255 & 65.025 & 115 & 81 & 1,42 & 45,3 & 2,54 & 25,33 & 4,54 \\
-		9 & 511 & 261.121 & 1340 & 943 & 1,42 & 504 & 2,67 & 177 & 7,57 \\
+		8 & 255 & 65.025 & 17,9 & 16,5 & 8,27 & 16,8 & 1,05 & 4,05 & 0,127 \\
+		9 & 511 & 261.121 & 27,6 & 25,9 & 12,9 & 39,5 & 2,47 & 37,9 & 1,18
 	\end{tabular}
-	\caption{\emph{Speedup} und \emph{Efficiency} zwischen Gauß-Seidel-Verfahren und CG-Verfahren für das Problem aus Aufgabe \ref{p1a5}.}
+	\caption{\emph{Speedup} und \emph{Efficiency} für das CG-Verfahren gegenüber dem Gauß-Seidel-Verfahren für das Problem aus Aufgabe \ref{p1a5}. Die zugrunde liegenden Laufzeiten wurden anhand des Rechners \emph{i82sn07} ermittelt.}
 	\label{a5a6speedupefficiency}
 \end{table}
 
