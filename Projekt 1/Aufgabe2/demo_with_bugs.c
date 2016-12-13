@@ -61,11 +61,11 @@ int main(void) {
 	/* Example 3 (this example contains an OpenMP parallelization error) */
 	/* --------- */
 	
-	// # pragma omp parallel for
-	// for (i=1; i<N; i++) {
-		// x = sqrt(b[i]) - 1;
-		// a[i] = x*x + 2*x + 1;
-	// }
+	 # pragma omp parallel for
+	 for (i=1; i<N; i++) {
+		 x = sqrt(b[i]) - 1;
+		 a[i] = x*x + 2*x + 1;
+	 }
 	
 	/* testing the correctness of the numerical result: */
 	sum=0; for (i=1; i<N; i++) { sum = sum + a[i]; }

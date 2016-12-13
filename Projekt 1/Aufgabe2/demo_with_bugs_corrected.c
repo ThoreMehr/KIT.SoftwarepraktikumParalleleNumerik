@@ -1,6 +1,6 @@
 
 /*
- * compile: gcc -Wall -g -fopenmp -o demo_with_bugs demo_with_bugs.c -lm
+ * compile: gcc -Wall -g -fopenmp -o demo_with_bugs_corrected demo_with_bugs_corrected.c -lm
  */
 
 #include <stdio.h>
