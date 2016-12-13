@@ -1,0 +1,35 @@
+__________________________________________________________________________________________
+|ID|Short Des|Seve|Co|Context|Description                            |1st Acces|2nd Acces|
+|  |cription |rity|un|[Best] |                                       |s[Best]  |s[Best]  |
+|  |         |Name|t |       |                                       |         |         |
+__________________________________________________________________________________________
+|1 |Write -> |Erro|1 |"demo_w|Memory read at "demo_with_bugs.c":27   |"demo_wit|"demo_wit|
+|  |Read     |r   |  |ith_bug|conflicts with a prior memory write at |h_bugs.c"|h_bugs.c"|
+|  |data-race|    |  |s.c":24|"demo_with_bugs.c":26 (flow dependence)|:26      |:27      |
+__________________________________________________________________________________________
+|2 |Write -> |Erro|1 |"demo_w|Memory read at "demo_with_bugs.c":50   |"demo_wit|"demo_wit|
+|  |Read     |r   |  |ith_bug|conflicts with a prior memory write at |h_bugs.c"|h_bugs.c"|
+|  |data-race|    |  |s.c":41|"demo_with_bugs.c":45 (flow dependence)|:45      |:50      |
+__________________________________________________________________________________________
+|3 |Write -> |Erro|11|"demo_w|Memory read at "demo_with_bugs.c":98   |"demo_wit|"demo_wit|
+|  |Read     |r   |  |ith_bug|conflicts with a prior memory write at |h_bugs.c"|h_bugs.c"|
+|  |data-race|    |  |s.c":96|"demo_with_bugs.c":98 (flow dependence)|:98      |:98      |
+__________________________________________________________________________________________
+|4 |Write -> |Erro|11|"demo_w|Memory write at "demo_with_bugs.c":98  |"demo_wit|"demo_wit|
+|  |Write    |r   |  |ith_bug|conflicts with a prior memory write at |h_bugs.c"|h_bugs.c"|
+|  |data-race|    |  |s.c":96|"demo_with_bugs.c":98 (output          |:98      |:98      |
+|  |         |    |  |       |dependence)                            |         |         |
+__________________________________________________________________________________________
+|5 |Thread te|Info|1 |Whole  |Thread termination at                  |"demo_wit|"demo_wit|
+|  |rmination|rmat|  |Program|"demo_with_bugs.c":24 - includes stack |h_bugs.c"|h_bugs.c"|
+|  |         |ion |  |1      |allocation of 2,004 MB and use of 4,793|:24      |:24      |
+|  |         |    |  |       |KB                                     |         |         |
+__________________________________________________________________________________________
+|6 |Thread te|Info|1 |Whole  |Thread termination at                  |"demo_wit|"demo_wit|
+|  |rmination|rmat|  |Program|"demo_with_bugs.c":24 - includes stack |h_bugs.c"|h_bugs.c"|
+|  |         |ion |  |2      |allocation of 68 KB and use of 3,246 KB|:24      |:24      |
+__________________________________________________________________________________________
+|7 |Thread te|Info|1 |Whole  |Thread termination at                  |"demo_wit|"demo_wit|
+|  |rmination|rmat|  |Program|"demo_with_bugs.c":16 - includes stack |h_bugs.c"|h_bugs.c"|
+|  |         |ion |  |3      |allocation of 8 MB and use of 2,793 KB |:16      |:16      |
+__________________________________________________________________________________________
