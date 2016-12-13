@@ -80,7 +80,24 @@ legt wahrscheinlich an dem Aufwand der getrieben werden muss, um die Threads zu 
 \subsection{Testtools}\label{p1a2}
 
 \subsubsection{}\label{p1a2a}
-Hier kommt der Text zum a-Teil.
+\begin{enumerate}
+	\item {Memory read at$ ''demo_with_bugs.c'':27$ conflicts with a prior memory write at $''demo_with_bugs.c'':26$ (flow dependence)\\
+		Kann behoben werden, indem die Schleife aufgeteilt wird in zwei Schleifen mit \#pragma omp prallel for simd.\\
+		}
+	\item {Memory read at $''demo_with_bugs.c'':50$ conflicts with a prior memory write at $''demo_with_bugs.c'':45$ (flow dependence)\\
+		Kann behoben werden, indem das nowait statement weggelassen wird.
+		} 
+	\item {Memory read at $''demo_with_bugs.c'':66$ conflicts with a prior memory write at $''demo_with_bugs.c'':66$ (flow dependence)\\
+		Memory write at $''demo_with_bugs.c'':67$ conflicts with a prior memory write at$ ''demo_with_bugs.c'':66$ (anti dependence)\\
+		Kann behoben werden, indem das x private gesetzt wird, indem das pragma zu \#pragma omp parallel for private(x) geändert wird.\\
+		}
+	\item{ Vom Thread Checker nicht erkannt.\\ Kann behoben werden in dem das Pragma auf \#pragma omp parallel for lastprivate(x) geändert wird.}
+	\item {Memory read at $''demo_with_bugs.c'':98$ conflicts with a prior memory write at $''demo_with_bugs.c'':98$ (flow dependence)\\
+		Memory write at $''demo_with_bugs.c'':98$ conflicts with a prior memory write at $''demo_with_bugs.c'':98$ (OUTPUT dependence)\\
+		 Kann behoben werden in dem das Pragma auf \#pragma omp parallel for reduction(+:sum) geändert wird.}
+	
+	
+\end{enumerate}
 
 \subsubsection{}\label{p1a2b}
 Hier kommt der Text zum b-Teil.
