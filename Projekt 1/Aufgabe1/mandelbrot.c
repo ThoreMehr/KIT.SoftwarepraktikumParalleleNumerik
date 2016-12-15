@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
-#define N 5000 /* NxN grid size */
+//#define N 5000 /* NxN grid size */
 #define maxiter 500
 
 typedef struct {
