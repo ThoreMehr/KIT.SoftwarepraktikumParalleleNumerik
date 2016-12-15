@@ -40,7 +40,7 @@ int main() {
 	
 	T = (int*) malloc(sizeof(int)*N*N);
 	float tp;
-	printf("Starting calculation for N=%d...\n", N);
+	printf("Starting calculation for N=%d... with %d threads", N,omp_get_max_threads());
 	struct timeval time1,time2;
 	struct timezone zone;	
 	gettimeofday(&time1,&zone);
