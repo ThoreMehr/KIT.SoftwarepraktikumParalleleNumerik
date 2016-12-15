@@ -8,9 +8,11 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/time.h>
-#define N 5000 /* NxN grid size */
+#include <omp.h>
+
+#define N 2000 /* NxN grid size */
 #define maxiter 500
+
 
 typedef struct {
 	float re, im;
@@ -39,11 +41,10 @@ int main() {
 	int *T;
 	
 	T = (int*) malloc(sizeof(int)*N*N);
-	float tl,tp;
+	
 	printf("Starting calculation for N=%d...\n", N);
-	struct timeval time1,time2;
-	struct timezone zone;	
-	#pragma omp parallel for private(j,z,kappa,k) shared(T)
+	
+	#pragma omp parallel for private(z, kappa, i, j, k)
 	for (i=0; i<N; i++) {
 		for (j=0; j<N; j++) {
 			z.re = kappa.re = (4.0*(i-N/2))/N;
@@ -58,10 +59,7 @@ int main() {
 			}
 		}
 	}
-	gettimeofday(&time2,&zone);
-	tp=((time2.tv_usec-time1.tv_usec)+(time2.tv_sec-time1.tv_sec)*1000000)/1000000.0;	
-	printf("time:%f s\n",tp);
-	printf("speedup:%f\n",tl/tp);
+	
 	#ifdef IMAGE_OUTPUT
 	printf("Writing simple image file...\n");
 	
