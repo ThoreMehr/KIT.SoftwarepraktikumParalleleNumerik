@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2016.12.13)  16 DEC 2016 15:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2016.12.13)  16 DEC 2016 19:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -763,11 +763,7 @@ LaTeX Info: Redefining \cite on input line 694.
 )
 (/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty
 \bigstrutjot=\dimen197
-) (./pn.aux
-
-LaTeX Warning: Label `p1a1c' multiply defined.
-
-)
+) (./pn.aux)
 \openout1 = `pn.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 38.
@@ -784,7 +780,8 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 38.
 LaTeX Font Info:    ... okay on input line 38.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 38.
 LaTeX Font Info:    ... okay on input line 38.
- (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count198
 \scratchdimen=\dimen198
@@ -861,27 +858,32 @@ Package hyperref Warning: bookmark level for unknown title defaults to 0.
 
 Package hyperref Warning: bookmark level for unknown author defaults to 0.
 
+
+Overfull \hbox (52.60373pt too wide) in paragraph at lines 74--88
+ [][] 
+ []
+
 [1
 
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
-Underfull \hbox (badness 10000) in paragraph at lines 142--143
+Underfull \hbox (badness 10000) in paragraph at lines 149--150
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 144--147
+Underfull \hbox (badness 10000) in paragraph at lines 151--154
 
  []
 
 
-Overfull \hbox (1.93427pt too wide) in paragraph at lines 171--173
+Overfull \hbox (1.93427pt too wide) in paragraph at lines 178--180
 \T1/cmr/m/n/10 Auch be-kannt als Wett-lauf-si-tua-ti-on. Meh-re-re Fä-den grei-
 fen le-send und schrei-
  []
 
 [3]
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 192.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 199.
 
  (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
@@ -892,17 +894,17 @@ File: lstlang1.sty 2015/06/04 1.6 listings language file
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 )
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 250.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 257.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 250.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 257.
 
 (./gsv_node_dependence.pdf_tex
-<gsv_node_dependence.pdf, id=187, page=1, 85.82553pt x 85.82553pt>
+<gsv_node_dependence.pdf, id=186, page=1, 85.82553pt x 85.82553pt>
 File: gsv_node_dependence.pdf Graphic file (type pdf)
 
 <use gsv_node_dependence.pdf, page 1>
@@ -910,68 +912,60 @@ Package pdftex.def Info: gsv_node_dependence.pdf, page1 used on input line 52.
 (pdftex.def)             Requested size: 208.27623pt x 208.30603pt.
 ) [6] [7 <./gsv_node_dependence.pdf>]
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 343--347
+Underfull \hbox (badness 10000) in paragraph at lines 350--354
 
  []
 
-
-Underfull \vbox (badness 1661) has occurred while \output is active []
-
- [9]
-<a5l2.pdf, id=246, 614.295pt x 794.97pt>
+[9] [10] <a5l2.pdf, id=255, 614.295pt x 794.97pt>
 File: a5l2.pdf Graphic file (type pdf)
  <use a5l2.pdf>
-Package pdftex.def Info: a5l2.pdf used on input line 382.
+Package pdftex.def Info: a5l2.pdf used on input line 389.
 (pdftex.def)             Requested size: 110.56831pt x 143.08842pt.
 
-<a5l3.pdf, id=247, 614.295pt x 794.97pt>
+<a5l3.pdf, id=256, 614.295pt x 794.97pt>
 File: a5l3.pdf Graphic file (type pdf)
  <use a5l3.pdf>
-Package pdftex.def Info: a5l3.pdf used on input line 383.
+Package pdftex.def Info: a5l3.pdf used on input line 390.
 (pdftex.def)             Requested size: 110.56831pt x 143.08842pt.
 
-<a5l4.pdf, id=248, 614.295pt x 794.97pt>
+<a5l4.pdf, id=257, 614.295pt x 794.97pt>
 File: a5l4.pdf Graphic file (type pdf)
  <use a5l4.pdf>
-Package pdftex.def Info: a5l4.pdf used on input line 384.
+Package pdftex.def Info: a5l4.pdf used on input line 391.
 (pdftex.def)             Requested size: 110.56831pt x 143.08842pt.
- [10] [11 <./a5l2.pdf> <./a5l3.pdf> <./a5l4.pdf>] [12]
-Overfull \hbox (1.22313pt too wide) in paragraph at lines 456--457
+ [11 <./a5l2.pdf> <./a5l3.pdf> <./a5l4.pdf>] [12]
+Overfull \hbox (1.22313pt too wide) in paragraph at lines 463--464
 [][]\T1/cmr/bx/n/14.4 Implementierung soll mit Hil-fe der \T1/cmr/bx/it/14.4 ke
 n-nen-ge-lern-
  []
 
 
-Overfull \hbox (10.20184pt too wide) in paragraph at lines 463--474
+Overfull \hbox (10.20184pt too wide) in paragraph at lines 470--481
  [][] 
  []
 
 
-Overfull \hbox (18.03008pt too wide) in paragraph at lines 490--513
+Overfull \hbox (18.03008pt too wide) in paragraph at lines 497--520
  [][] 
  []
 
 (./pn.bbl [13] [14])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 527.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 534.
  [15
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 527.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 534.
  (./pn.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 527.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 527.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 534.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 534.
 Package rerunfilecheck Info: File `pn.out' has not changed.
-(rerunfilecheck)             Checksum: 169F2B78CBCB75F1D5B6FFEC3B1CEDDC;1893.
-
-
-LaTeX Warning: There were multiply-defined labels.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 527.
+(rerunfilecheck)             Checksum: B3342D89B66BDDB043E5D53E2A92D515;1817.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 534.
  ) 
 Here is how much of TeX's memory you used:
  19419 strings out of 493013
- 354804 string characters out of 6135681
- 437977 words of memory out of 5000000
+ 354769 string characters out of 6135681
+ 439707 words of memory out of 5000000
  22648 multiletter control sequences out of 15000+600000
  28382 words of font info for 84 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -986,23 +980,24 @@ amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 r17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb>
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/sh
-are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/font
-s/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf/fonts/type1/public
-/cm-super/sfbi1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx0900.p
-fb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf
-/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/
-cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1000.pf
-b></usr/share/texmf/fonts/type1/public/cm-super/sfrm0900.pfb></usr/share/texmf/
-fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/c
-m-super/sfti0900.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1000.pfb
-></usr/share/texmf/fonts/type1/public/cm-super/sftt1000.pfb>
-Output written on pn.pdf (15 pages, 655379 bytes).
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/symbols/msbm10.pfb></usr/share/texmf/fonts/type1/public/cm-supe
+r/sfbi1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx0900.pfb></usr
+/share/texmf/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf/fonts/t
+ype1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super
+/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1000.pfb></usr/
+share/texmf/fonts/type1/public/cm-super/sfrm0900.pfb></usr/share/texmf/fonts/ty
+pe1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/
+sfti0900.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1000.pfb></usr/s
+hare/texmf/fonts/type1/public/cm-super/sftt1000.pfb>
+Output written on pn.pdf (15 pages, 661216 bytes).
 PDF statistics:
- 428 PDF objects out of 1000 (max. 8388607)
- 376 compressed objects within 4 object streams
+ 430 PDF objects out of 1000 (max. 8388607)
+ 377 compressed objects within 4 object streams
  97 named destinations out of 1000 (max. 500000)
- 253 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 245 words of extra memory for PDF output out of 10000 (max. 10000000)
 

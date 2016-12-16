@@ -69,10 +69,28 @@ Hello World, this is Thread2
 \end{lstlisting}
 
 \subsubsection{}\label{p1a1b}
-Für die Variante mit reduction nähert sich der Speed up mit steigendem N der Anzahl der Kerne an.\\
+\begin{table}
+	\centering
+	\begin{tabular}{r||r||r|r||r|r||r|r||r|r}
+		\multicolumn{1}{c||}{Problemgröße} & Seq. & \multicolumn{2}{c||}{2 Threads}  & \multicolumn{2}{c||}{16 Threads} & \multicolumn{2}{c||}{32 Threads} &
+		\multicolumn{2}{c}{64 Threads} \\
+		$N$ & Laufzeit & Laufzeit & Speedup & Laufzeit & Speedup & Laufzeit & Speedup & Laufzeit & Speedup \\
+		\hline
+		\hline
+		$10^7$ critical & 0,49 & 1,02 & 0,48 & 39,33 & 0,012 & 65,18& 0,008 & -& -\\
+		\hline
+		\hline
+		$10^7$ reduction & 0,29 & 0,15 & 1,99 & 0,044 & 6,59 & 0,041& 7,07 & 0,05& 5,8\\
+		\hline
+		$10^8$ reduction & 2,96 & 1,48 & 2 & 0,215 & 13,78 & 0,157& 18,85 & 0,185& 16\\
+		$10^9$ reduction & 28,76 & 14,77 & 1,95 & 1,86 & 15,46 &0,99 &29,05& 1,14 & 25,25\\
+	\end{tabular}
+	\caption{Laufzeiten unserer Parallelisierung gegenüber der sequentiellen Version. Getestet wurde auf dem Rechner \emph{i82sn07}. Um Ungenauigkeiten auszugleichen wurden die Zeiten jeweils über $10$ (für große Eingaben über $5$) Durchläufe gemittelt.}
+	\label{pi_runtime}
+\end{table}
+Wie an der Tabelle \ref{pi_runtime} abgelesen werden kann, nähert sich der Speed up mit steigendem N der Speedup in der Variane mit reduction der Anzahl der Kerne an.\\
 Die manuelle Variante hat eine schlechtere Performance, als die Variante ohne parralelisierung. Dies 
-legt wahrscheinlich an dem Aufwand der getrieben werden muss, um die Threads zu organisieren, daher anzuhalten und wieder zu starten bei jedem critical.
-<<<<<<< HEAD
+liegt wahrscheinlich an dem Aufwand der getrieben werden muss, um die Threads zu organisieren, daher anzuhalten und wieder zu starten bei jedem critical.
 \subsubsection{}\label{p1a1c}
 \begin{table}
 	\centering
@@ -95,17 +113,6 @@ legt wahrscheinlich an dem Aufwand der getrieben werden muss, um die Threads zu 
 	\label{mandel_runtime}
 \end{table}
 Wie an der Tabbele \ref{mandel_runtime} abgelesen werden kann, beträgt die Beschleunigung für 2 Threads etwa 1,4, für 16 Threads etwa 4 und für 32 Threads etwa 8. Das die Beschleunigung schlächter ist, als bei der Berechnung von PI liegt meiner Meinung nach daran, das Speicherverwaltung und Caches einen wesentlichen Anteil der Laufzeit ausmachen.
-=======
-
-\TODO{Wie groß ist der Performanceunterschied?}
-\TODO{Was macht Reduction anders als kritischer Abschnitt?}
-
-\subsubsection{}\label{p1a1c}
-\TODO{Aufgabe 1 c) Kommt hier hin}
-
->>>>>>> 273ca235b66c5b9fddbae285259d72b23eb843bf
-
-
 
 \subsection{Testtools}\label{p1a2}
 
