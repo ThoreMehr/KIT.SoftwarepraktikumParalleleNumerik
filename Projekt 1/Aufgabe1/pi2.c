@@ -1,5 +1,5 @@
 
-#include <omp.h>
+//#include <omp.h>
 #include <stdio.h>
 #include <sys/time.h>
 #include <stdlib.h>
@@ -7,7 +7,8 @@
 
 int main(int argc, char* argv[]) {
 	long num_steps =1;
-	for(int i =0 ;i<atoi(argv[1]);i++)
+	int i;
+	for(i =0 ;i<atoi(argv[1]);i++)
 		num_steps*=10;
 	omp_set_num_threads(atoi(argv[2]));
 	long i;
