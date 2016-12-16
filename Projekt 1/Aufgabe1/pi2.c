@@ -7,8 +7,8 @@
 
 int main(int argc, char* argv[]) {
 	long num_steps =1;
-	int i;
-	for(i =0 ;i<atoi(argv[1]);i++)
+	int j;
+	for(j =0 ;j<atoi(argv[1]);j++)
 		num_steps*=10;
 	omp_set_num_threads(atoi(argv[2]));
 	long i;
