@@ -72,8 +72,27 @@ Für die Variante mit reduction nähert sich der Speed up mit steigendem N der Anz
 Die manuelle Variante hat eine schlechtere Performance, als die Variante ohne parralelisierung. Dies 
 legt wahrscheinlich an dem Aufwand der getrieben werden muss, um die Threads zu organisieren, daher anzuhalten und wieder zu starten bei jedem critical.
 \subsubsection{}\label{p1a1c}
-
-
+\begin{table}
+	\centering
+	\begin{tabular}{r||r||r|r||r|r||r|r}
+		\multicolumn{1}{c||}{Problemgröße} & Seq. & \multicolumn{2}{c||}{2 Threads}  & \multicolumn{2}{c||}{16 Threads} & \multicolumn{2}{c}{32 Threads} \\
+		 $N$ & Laufzeit & Laufzeit & Speedup & Laufzeit & Speedup & Laufzeit & Speedup \\
+		\hline
+		\hline
+		1000 & 6,02 & 4,35 & 1,38 & 1,51 & 3,99 & 0,77 & 7,88 \\
+		\hline
+		2000 & 24,65 & 17,41 & 1,44 & 5,92 & 4,16 & 3,11 & 7,92 \\
+		\hline
+		
+		4000 & 96,24 & 70,47 & 1,37 & 23,66 & 4,07 & 11,913 & 8,07  \\
+		\hline
+		8000 & 394,05 & 278,34 & 1,44 & 94,60 & 4,16 & 47,85 & 8,24  \\
+		\hline
+	\end{tabular}
+	\caption{Laufzeiten unserer Parallelisierung gegenüber der sequentiellen Version. Getestet wurde auf dem Rechner \emph{i82sn07}. Um Ungenauigkeiten auszugleichen wurden die Zeiten jeweils über $10$ (für große Eingaben über $5$) Durchläufe gemittelt.}
+	\label{mandel_runtime}
+\end{table}
+Wie an der Tabbele \ref{mandel_runtime} abgelesen werden kann, beträgt die Beschleunigung für 2 Threads etwa 1,4, für 16 Threads etwa 4 und für 32 Threads etwa 8. Das die Beschleunigung schlächter ist, als bei der Berechnung von PI liegt meiner Meinung nach daran, das Speicherverwaltung und Caches einen wesentlichen Anteil der Laufzeit ausmachen.
 
 
 
