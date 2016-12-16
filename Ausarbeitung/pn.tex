@@ -30,6 +30,7 @@
 \renewcommand{\thesection}{Projekt \arabic{section}}
 \renewcommand{\thesubsection}{Aufgabe \arabic{section}.\arabic{subsection}}
 \renewcommand{\thesubsubsection}{\arabic{section}.\arabic{subsection}.\alph{subsubsection})}
+\newcommand{\TODO}[1]{\textbf{\Large\color{red}#1}}
 
 \setcounter{tocdepth}{3}
 \setcounter{secnumdepth}{3}
@@ -37,11 +38,11 @@
 \begin{document}
 
 \mainmatter
-\title{Praktikum Parallele Numerik}
-\titlerunning{Arbeit}
-\author{Fabian Miltenberger, Sébastien Thill, Thore Mehr}
-\authorrunning{Parallele Numerik}
-\institute{Betreuer: Markus Hoffmann, Thomas Becker}
+\title{Softwarepraktikum Parallele Numerik}
+\titlerunning{Parallele Numerik}
+\author{Fabian Immanuel Miltenberger, Sébastien Thill, Thore Mehr}
+\authorrunning{F. Miltenberger, S. Thill, T. Mehr}
+\institute{Betreuer: Markus Hoffmann, Thomas Becker\\Lehrstuhl für Rechnerarchitektur und Parallelverarbeitung}
 \date{23.07.2007}
 \maketitle
 
@@ -71,6 +72,7 @@ Hello World, this is Thread2
 Für die Variante mit reduction nähert sich der Speed up mit steigendem N der Anzahl der Kerne an.\\
 Die manuelle Variante hat eine schlechtere Performance, als die Variante ohne parralelisierung. Dies 
 legt wahrscheinlich an dem Aufwand der getrieben werden muss, um die Threads zu organisieren, daher anzuhalten und wieder zu starten bei jedem critical.
+<<<<<<< HEAD
 \subsubsection{}\label{p1a1c}
 \begin{table}
 	\centering
@@ -93,6 +95,15 @@ legt wahrscheinlich an dem Aufwand der getrieben werden muss, um die Threads zu 
 	\label{mandel_runtime}
 \end{table}
 Wie an der Tabbele \ref{mandel_runtime} abgelesen werden kann, beträgt die Beschleunigung für 2 Threads etwa 1,4, für 16 Threads etwa 4 und für 32 Threads etwa 8. Das die Beschleunigung schlächter ist, als bei der Berechnung von PI liegt meiner Meinung nach daran, das Speicherverwaltung und Caches einen wesentlichen Anteil der Laufzeit ausmachen.
+=======
+
+\TODO{Wie groß ist der Performanceunterschied?}
+\TODO{Was macht Reduction anders als kritischer Abschnitt?}
+
+\subsubsection{}\label{p1a1c}
+\TODO{Aufgabe 1 c) Kommt hier hin}
+
+>>>>>>> 273ca235b66c5b9fddbae285259d72b23eb843bf
 
 
 
@@ -100,29 +111,29 @@ Wie an der Tabbele \ref{mandel_runtime} abgelesen werden kann, beträgt die Besch
 
 \subsubsection{}\label{p1a2a}
 \begin{enumerate}
-	\item {Memory read at$ ''demo_with_bugs.c'':27$ conflicts with a prior memory write at $''demo_with_bugs.c'':26$ (flow dependence)\\
-		Kann behoben werden, indem die Schleife aufgeteilt wird in zwei Schleifen mit \#pragma omp prallel for simd.\\
+	\item {Memory read at \textbf{''demo\_with\_bugs.c'':27} conflicts with a prior memory write at \textbf{''demo\_with\_bugs.c'':26} (flow dependence)\\
+		Kann behoben werden, indem die Schleife aufgeteilt wird in zwei Schleifen mit \#pragma omp prallel for simd.
 		}
-	\item {Memory read at $''demo_with_bugs.c'':50$ conflicts with a prior memory write at $''demo_with_bugs.c'':45$ (flow dependence)\\
+	\item {Memory read at \textbf{''demo\_with\_bugs.c'':50} conflicts with a prior memory write at \textbf{''demo\_with\_bugs.c'':45} (flow dependence)\\
 		Kann behoben werden, indem das nowait statement weggelassen wird.
 		} 
-	\item {Memory read at $''demo_with_bugs.c'':66$ conflicts with a prior memory write at $''demo_with_bugs.c'':66$ (flow dependence)\\
-		Memory write at $''demo_with_bugs.c'':67$ conflicts with a prior memory write at$ ''demo_with_bugs.c'':66$ (anti dependence)\\
-		Kann behoben werden, indem das x private gesetzt wird, indem das pragma zu \#pragma omp parallel for private(x) geändert wird.\\
+	\item {Memory read at \textbf{''demo\_with\_bugs.c'':66} conflicts with a prior memory write at \textbf{''demo\_with\_bugs.c'':66} (flow dependence)\\
+		Memory write at \textbf{''demo\_with\_bugs.c'':67} conflicts with a prior memory write at \textbf{''demo\_with\_bugs.c'':66} (anti dependence)\\
+		Kann behoben werden, indem das x private gesetzt wird, indem das pragma zu \#pragma omp parallel for private(x) geändert wird.
 		}
 	\item{ Vom Thread Checker nicht erkannt.\\ Kann behoben werden in dem das Pragma auf \#pragma omp parallel for lastprivate(x) geändert wird.}
-	\item {Memory read at $''demo_with_bugs.c'':98$ conflicts with a prior memory write at $''demo_with_bugs.c'':98$ (flow dependence)\\
-		Memory write at $''demo_with_bugs.c'':98$ conflicts with a prior memory write at $''demo_with_bugs.c'':98$ (OUTPUT dependence)\\
+	\item {Memory read at \textbf{''demo\_with\_bugs.c'':98} conflicts with a prior memory write at \textbf{''demo\_with\_bugs.c'':98} (flow dependence)\\
+		Memory write at \textbf{''demo\_with\_bugs.c'':98} conflicts with a prior memory write at \textbf{''demo\_with\_bugs.c'':98} (OUTPUT dependence)\\
 		 Kann behoben werden in dem das Pragma auf \#pragma omp parallel for reduction(+:sum) geändert wird.}
 	
 	
 \end{enumerate}
 
 \subsubsection{}\label{p1a2b}
-Hier kommt der Text zum b-Teil.
+\TODO{Hier kommt der Text zum b-Teil}
 
 \subsubsection{}\label{p1a2c}
-Hier kommt der Text zum c-Teil.
+\TODO{Hier kommt der Text zum c-Teil}
 
 
 
@@ -393,6 +404,10 @@ Das verwendete Vorgehen wird als \emph{h-FEM} bezeichnet, da wir lediglich die G
 
 
 
+
+
+
+
 \subsection{Partielle Differentialgleichungen}\label{p1a6}
 \subsubsection{}\label{p1a6a}
 Alphabetische Liste gängiger Krylow-Unterraum-Verfahren (nach \cite{KrylowUnterraumWiki}):
@@ -438,9 +453,7 @@ Bei der Auswahl von diesen drei Verfahren für unser Problem, eignet sich das CG-
 Gegen GMRES spricht nur die möglicherweise langsamere Konvergenz und die hier nicht benötigte Flexibilität auch nicht-symmetrische Matrizen bearbeiten zu können.
 Das Lanczos-Verfahren wäre eine Alternative, vor allem da die Eigenwerte und somit die Konvergenz im Voraus bekannt sind.
 
-Implementierung soll mit Hilfe der \emph{kennengelernten Werkzeuge} analysiert werden.
-
-
+\TODO{Implementierung soll mit Hilfe der \emph{kennengelernten Werkzeuge} analysiert werden.}
 
 \subsubsection{}\label{p1a6b}
 Unsere parallele Version des CG-Verfahrens konnte gegenüber dem Gauß-Seidel-Verfahren das Problem aus Aufgabe \ref{p1a5} bis zu $40$-mal so schnell lösen. Eine Übersicht über den \emph{Speedup} sowie die \emph{Efficiency} ist in Tabelle \ref{a5a6speedupefficiency} zu finden.
@@ -467,7 +480,7 @@ Wie auch unsere Implementierung des Gauß-Seidel-Verfahrens aus Aufgabe \ref{p1a4
 
 
 \subsubsection{}\label{p1a6c}
-In Tabelle \ref{MathBibs} haben wir ein drei Bibliotheken zur Anwendung der Finiten Elemente Methode aufgelistet und verglichen. Weitere Bibliotheken, die es nicht in die Tabelle geschafft haben, wären beispielsweise Feel++\cite{Feel++} und
+In Tabelle \ref{MathBibs} haben wir drei Bibliotheken zur Anwendung der Finiten Elemente Methode aufgelistet und verglichen. Weitere Bibliotheken, die es nicht in die Tabelle geschafft haben, wären beispielsweise Feel++\cite{Feel++} und
 Libmesh\cite{Libmesh}.
 
 Im Rahmen dieses Praktikums würde sich, zumindest für Projekt 1, \emph{HiFlow3} am gut eignen, da hier eine ausgereifte OpenMP Funktionalität gegeben zu sein scheint, die den Portierungsaufwand stark verringert.
