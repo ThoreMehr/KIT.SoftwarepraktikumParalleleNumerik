@@ -42,6 +42,10 @@
     
    		pFile = fopen (argv[3], "wb");
 	  	fwrite (m3 , sizeof(float), N*N, pFile);
-  		fclose (pFile);		
+  		fclose (pFile);	
+		free(m1);
+		free(m2);
+		free(m3);	
+	
 }
 
