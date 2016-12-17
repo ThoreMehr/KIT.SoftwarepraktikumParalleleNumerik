@@ -12,7 +12,7 @@
 		<pminver>2</pminver>
 		<thrfile>threadchecker.thr</thrfile>
 		<thrdir>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2</thrdir>
-		<startdate>1481632986</startdate>
+		<startdate>1481637086</startdate>
 	</globals>
 	<dstart>
 		<dyn>1</dyn>
@@ -25,8 +25,8 @@
 		<rtnnd>__libc_csu_init</rtnnd>
 		<rtnnm>__libc_csu_init</rtnnm>
 		<modn>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2/./demo_with_bugs</modn>
-		<fRVA>0x00001560</fRVA>
-		<sRVA>0x000015ab</sRVA>
+		<fRVA>0x000095a0</fRVA>
+		<sRVA>0x000095eb</sRVA>
 		<srcm>2</srcm>
 	</parent>
 	<parent>
@@ -40,7 +40,7 @@
 		<rtnnd>main</rtnnd>
 		<rtnnm>main</rtnnm>
 		<modn>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2/./demo_with_bugs</modn>
-		<fRVA>0x00000848</fRVA>
+		<fRVA>0x00000bc8</fRVA>
 		<col>0</col>
 		<lnn>16</lnn>
 		<srcm>2</srcm>
@@ -56,8 +56,8 @@
 		<rtnnd>main</rtnnd>
 		<rtnnm>main</rtnnm>
 		<modn>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2/./demo_with_bugs</modn>
-		<fRVA>0x00000848</fRVA>
-		<sRVA>0x00000952</sRVA>
+		<fRVA>0x00000bc8</fRVA>
+		<sRVA>0x00000cd2</sRVA>
 		<col>0</col>
 		<lnn>24</lnn>
 		<srcm>2</srcm>
@@ -80,8 +80,8 @@
 		<rtnnd>main</rtnnd>
 		<rtnnm>main</rtnnm>
 		<modn>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2/./demo_with_bugs</modn>
-		<fRVA>0x00000848</fRVA>
-		<sRVA>0x00000952</sRVA>
+		<fRVA>0x00000bc8</fRVA>
+		<sRVA>0x00000cd2</sRVA>
 		<col>0</col>
 		<lnn>24</lnn>
 		<srcm>2</srcm>
@@ -104,8 +104,8 @@
 		<rtnnd>main</rtnnd>
 		<rtnnm>main</rtnnm>
 		<modn>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2/./demo_with_bugs</modn>
-		<fRVA>0x00000848</fRVA>
-		<sRVA>0x00000952</sRVA>
+		<fRVA>0x00000bc8</fRVA>
+		<sRVA>0x00000cd2</sRVA>
 		<col>0</col>
 		<lnn>24</lnn>
 		<srcm>2</srcm>
@@ -121,7 +121,7 @@
 		<rtnnd>L_main_24__par_loop0_2.0</rtnnd>
 		<rtnnm>L_main_24__par_loop0_2.0</rtnnm>
 		<modn>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2/./demo_with_bugs</modn>
-		<fRVA>0x00000a25</fRVA>
+		<fRVA>0x00000da5</fRVA>
 		<col>0</col>
 		<lnn>24</lnn>
 		<srcm>2</srcm>
@@ -137,8 +137,8 @@
 		<rtnnd>main</rtnnd>
 		<rtnnm>main</rtnnm>
 		<modn>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2/./demo_with_bugs</modn>
-		<fRVA>0x00000848</fRVA>
-		<sRVA>0x00000952</sRVA>
+		<fRVA>0x00000bc8</fRVA>
+		<sRVA>0x00000cd2</sRVA>
 		<col>0</col>
 		<lnn>24</lnn>
 		<srcm>2</srcm>
@@ -154,7 +154,7 @@
 		<rtnnd>L_main_24__par_loop0_2.0</rtnnd>
 		<rtnnm>L_main_24__par_loop0_2.0</rtnnm>
 		<modn>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2/./demo_with_bugs</modn>
-		<fRVA>0x00000a25</fRVA>
+		<fRVA>0x00000da5</fRVA>
 		<col>0</col>
 		<lnn>24</lnn>
 		<srcm>2</srcm>
@@ -170,8 +170,8 @@
 		<rtnnd>main</rtnnd>
 		<rtnnm>main</rtnnm>
 		<modn>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2/./demo_with_bugs</modn>
-		<fRVA>0x00000848</fRVA>
-		<sRVA>0x00000952</sRVA>
+		<fRVA>0x00000bc8</fRVA>
+		<sRVA>0x00000cd2</sRVA>
 		<col>0</col>
 		<lnn>24</lnn>
 		<srcm>2</srcm>
@@ -187,7 +187,7 @@
 		<rtnnd>L_main_41__par_region1_2.1</rtnnd>
 		<rtnnm>L_main_41__par_region1_2.1</rtnnm>
 		<modn>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2/./demo_with_bugs</modn>
-		<fRVA>0x00000c7a</fRVA>
+		<fRVA>0x00000ffa</fRVA>
 		<col>0</col>
 		<lnn>41</lnn>
 		<srcm>2</srcm>
@@ -203,8 +203,8 @@
 		<rtnnd>L_main_24__par_loop0_2.0</rtnnd>
 		<rtnnm>L_main_24__par_loop0_2.0</rtnnm>
 		<modn>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2/./demo_with_bugs</modn>
-		<fRVA>0x00000848</fRVA>
-		<sRVA>0x00000c6d</sRVA>
+		<fRVA>0x00000bc8</fRVA>
+		<sRVA>0x00000fed</sRVA>
 		<col>0</col>
 		<lnn>41</lnn>
 		<srcm>2</srcm>
@@ -220,7 +220,7 @@
 		<rtnnd>L_main_41__par_region1_2.1</rtnnd>
 		<rtnnm>L_main_41__par_region1_2.1</rtnnm>
 		<modn>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2/./demo_with_bugs</modn>
-		<fRVA>0x00000c7a</fRVA>
+		<fRVA>0x00000ffa</fRVA>
 		<col>0</col>
 		<lnn>41</lnn>
 		<srcm>2</srcm>
@@ -232,14 +232,14 @@
 		<mid>15</mid>
 		<srcfp>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2</srcfp>
 		<srcfn>demo_with_bugs.c</srcfn>
-		<rtnn>main</rtnn>
-		<rtnnd>main</rtnnd>
-		<rtnnm>main</rtnnm>
+		<rtnn>L_main_41__par_region1_2.1</rtnn>
+		<rtnnd>L_main_41__par_region1_2.1</rtnnd>
+		<rtnnm>L_main_41__par_region1_2.1</rtnnm>
 		<modn>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2/./demo_with_bugs</modn>
-		<fRVA>0x00000848</fRVA>
-		<sRVA>0x00000952</sRVA>
+		<fRVA>0x00000bc8</fRVA>
+		<sRVA>0x0000141b</sRVA>
 		<col>0</col>
-		<lnn>24</lnn>
+		<lnn>64</lnn>
 		<srcm>2</srcm>
 	</parent>
 	<parent>
@@ -249,13 +249,13 @@
 		<mid>16</mid>
 		<srcfp>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2</srcfp>
 		<srcfn>demo_with_bugs.c</srcfn>
-		<rtnn>L_main_96__par_loop5_2.3</rtnn>
-		<rtnnd>L_main_96__par_loop5_2.3</rtnnd>
-		<rtnnm>L_main_96__par_loop5_2.3</rtnnm>
+		<rtnn>L_main_64__par_loop4_2.2</rtnn>
+		<rtnnd>L_main_64__par_loop4_2.2</rtnnd>
+		<rtnnm>L_main_64__par_loop4_2.2</rtnnm>
 		<modn>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2/./demo_with_bugs</modn>
-		<fRVA>0x00001427</fRVA>
+		<fRVA>0x000014ee</fRVA>
 		<col>0</col>
-		<lnn>96</lnn>
+		<lnn>64</lnn>
 		<srcm>2</srcm>
 	</parent>
 	<parent>
@@ -265,14 +265,14 @@
 		<mid>17</mid>
 		<srcfp>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2</srcfp>
 		<srcfn>demo_with_bugs.c</srcfn>
-		<rtnn>L_main_80__par_loop4_2.2</rtnn>
-		<rtnnd>L_main_80__par_loop4_2.2</rtnnd>
-		<rtnnm>L_main_80__par_loop4_2.2</rtnnm>
+		<rtnn>main</rtnn>
+		<rtnnd>main</rtnnd>
+		<rtnnm>main</rtnnm>
 		<modn>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2/./demo_with_bugs</modn>
-		<fRVA>0x00000848</fRVA>
-		<sRVA>0x00001354</sRVA>
+		<fRVA>0x00000bc8</fRVA>
+		<sRVA>0x00000cd2</sRVA>
 		<col>0</col>
-		<lnn>96</lnn>
+		<lnn>24</lnn>
 		<srcm>2</srcm>
 	</parent>
 	<parent>
@@ -282,11 +282,77 @@
 		<mid>18</mid>
 		<srcfp>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2</srcfp>
 		<srcfn>demo_with_bugs.c</srcfn>
-		<rtnn>L_main_96__par_loop5_2.3</rtnn>
-		<rtnnd>L_main_96__par_loop5_2.3</rtnnd>
-		<rtnnm>L_main_96__par_loop5_2.3</rtnnm>
+		<rtnn>L_main_64__par_loop4_2.2</rtnn>
+		<rtnnd>L_main_64__par_loop4_2.2</rtnnd>
+		<rtnnm>L_main_64__par_loop4_2.2</rtnnm>
 		<modn>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2/./demo_with_bugs</modn>
-		<fRVA>0x00001427</fRVA>
+		<fRVA>0x000014ee</fRVA>
+		<col>0</col>
+		<lnn>64</lnn>
+		<srcm>2</srcm>
+	</parent>
+	<parent>
+		<dyn>2</dyn>
+		<bin>1</bin>
+		<pid>2</pid>
+		<mid>19</mid>
+		<srcfp>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2</srcfp>
+		<srcfn>demo_with_bugs.c</srcfn>
+		<rtnn>main</rtnn>
+		<rtnnd>main</rtnnd>
+		<rtnnm>main</rtnnm>
+		<modn>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2/./demo_with_bugs</modn>
+		<fRVA>0x00000bc8</fRVA>
+		<sRVA>0x00000cd2</sRVA>
+		<col>0</col>
+		<lnn>24</lnn>
+		<srcm>2</srcm>
+	</parent>
+	<parent>
+		<dyn>11</dyn>
+		<bin>1</bin>
+		<pid>19</pid>
+		<mid>20</mid>
+		<srcfp>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2</srcfp>
+		<srcfn>demo_with_bugs.c</srcfn>
+		<rtnn>L_main_96__par_loop6_2.4</rtnn>
+		<rtnnd>L_main_96__par_loop6_2.4</rtnnd>
+		<rtnnm>L_main_96__par_loop6_2.4</rtnnm>
+		<modn>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2/./demo_with_bugs</modn>
+		<fRVA>0x00001a5e</fRVA>
+		<col>0</col>
+		<lnn>96</lnn>
+		<srcm>2</srcm>
+	</parent>
+	<parent>
+		<dyn>2</dyn>
+		<bin>1</bin>
+		<pid>2</pid>
+		<mid>21</mid>
+		<srcfp>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2</srcfp>
+		<srcfn>demo_with_bugs.c</srcfn>
+		<rtnn>L_main_80__par_loop5_2.3</rtnn>
+		<rtnnd>L_main_80__par_loop5_2.3</rtnnd>
+		<rtnnm>L_main_80__par_loop5_2.3</rtnnm>
+		<modn>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2/./demo_with_bugs</modn>
+		<fRVA>0x00000bc8</fRVA>
+		<sRVA>0x0000198b</sRVA>
+		<col>0</col>
+		<lnn>96</lnn>
+		<srcm>2</srcm>
+	</parent>
+	<parent>
+		<dyn>12</dyn>
+		<bin>1</bin>
+		<pid>21</pid>
+		<mid>22</mid>
+		<srcfp>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2</srcfp>
+		<srcfn>demo_with_bugs.c</srcfn>
+		<rtnn>L_main_96__par_loop6_2.4</rtnn>
+		<rtnnd>L_main_96__par_loop6_2.4</rtnnd>
+		<rtnnm>L_main_96__par_loop6_2.4</rtnnm>
+		<modn>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2/./demo_with_bugs</modn>
+		<fRVA>0x00001a5e</fRVA>
 		<col>0</col>
 		<lnn>96</lnn>
 		<srcm>2</srcm>
@@ -416,9 +482,9 @@
 	<majerr>
 		<maj>2</maj>
 		<min>0</min>
-		<type>3</type>
+		<type>1</type>
 		<sev>4</sev>
-		<occs>6</occs>
+		<occs>48</occs>
 		<time>0</time>
 		<id>3</id>
 		<pos>
@@ -426,13 +492,13 @@
 			<bin>1</bin>
 			<srcfp>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2\</srcfp>
 			<srcfn>demo_with_bugs.c</srcfn>
-			<rtnn>L_main_96__par_loop5_2.3</rtnn>
-			<rtnnd>L_main_96__par_loop5_2.3</rtnnd>
-			<rtnnm>L_main_96__par_loop5_2.3</rtnnm>
+			<rtnn>L_main_64__par_loop4_2.2</rtnn>
+			<rtnnd>L_main_64__par_loop4_2.2</rtnnd>
+			<rtnnm>L_main_64__par_loop4_2.2</rtnnm>
 			<modn>demo_with_bugs</modn>
 			<sRVA>0000000000</sRVA>
 			<col>0</col>
-			<lnn>96</lnn>
+			<lnn>64</lnn>
 		</pos>
 		<def>
 			<dyn>2</dyn>
@@ -452,34 +518,34 @@
 			<bin>1</bin>
 			<srcfp>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2\</srcfp>
 			<srcfn>demo_with_bugs.c</srcfn>
-			<rtnn>L_main_96__par_loop5_2.3</rtnn>
-			<rtnnd>L_main_96__par_loop5_2.3</rtnnd>
-			<rtnnm>L_main_96__par_loop5_2.3</rtnnm>
+			<rtnn>L_main_64__par_loop4_2.2</rtnn>
+			<rtnnd>L_main_64__par_loop4_2.2</rtnnd>
+			<rtnnm>L_main_64__par_loop4_2.2</rtnnm>
 			<modn>demo_with_bugs</modn>
 			<sRVA>0000000000</sRVA>
 			<col>0</col>
-			<lnn>98</lnn>
+			<lnn>66</lnn>
 		</src>
 		<dst>
 			<dyn>9</dyn>
 			<bin>1</bin>
 			<srcfp>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2\</srcfp>
 			<srcfn>demo_with_bugs.c</srcfn>
-			<rtnn>L_main_96__par_loop5_2.3</rtnn>
-			<rtnnd>L_main_96__par_loop5_2.3</rtnnd>
-			<rtnnm>L_main_96__par_loop5_2.3</rtnnm>
+			<rtnn>L_main_64__par_loop4_2.2</rtnn>
+			<rtnnd>L_main_64__par_loop4_2.2</rtnnd>
+			<rtnnm>L_main_64__par_loop4_2.2</rtnnm>
 			<modn>demo_with_bugs</modn>
 			<sRVA>0000000000</sRVA>
 			<col>0</col>
-			<lnn>98</lnn>
+			<lnn>66</lnn>
 		</dst>
 	</majerr>
 	<minerr>
 		<maj>2</maj>
 		<min>1</min>
-		<type>3</type>
+		<type>1</type>
 		<sev>4</sev>
-		<occs>5</occs>
+		<occs>47</occs>
 		<time>0</time>
 		<id>5</id>
 		<pos>
@@ -487,13 +553,13 @@
 			<bin>1</bin>
 			<srcfp>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2\</srcfp>
 			<srcfn>demo_with_bugs.c</srcfn>
-			<rtnn>L_main_96__par_loop5_2.3</rtnn>
-			<rtnnd>L_main_96__par_loop5_2.3</rtnnd>
-			<rtnnm>L_main_96__par_loop5_2.3</rtnnm>
+			<rtnn>L_main_64__par_loop4_2.2</rtnn>
+			<rtnnd>L_main_64__par_loop4_2.2</rtnnd>
+			<rtnnm>L_main_64__par_loop4_2.2</rtnnm>
 			<modn>demo_with_bugs</modn>
 			<sRVA>0000000000</sRVA>
 			<col>0</col>
-			<lnn>96</lnn>
+			<lnn>64</lnn>
 		</pos>
 		<def>
 			<dyn>2</dyn>
@@ -513,34 +579,34 @@
 			<bin>1</bin>
 			<srcfp>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2\</srcfp>
 			<srcfn>demo_with_bugs.c</srcfn>
-			<rtnn>L_main_96__par_loop5_2.3</rtnn>
-			<rtnnd>L_main_96__par_loop5_2.3</rtnnd>
-			<rtnnm>L_main_96__par_loop5_2.3</rtnnm>
+			<rtnn>L_main_64__par_loop4_2.2</rtnn>
+			<rtnnd>L_main_64__par_loop4_2.2</rtnnd>
+			<rtnnm>L_main_64__par_loop4_2.2</rtnnm>
 			<modn>demo_with_bugs</modn>
 			<sRVA>0000000000</sRVA>
 			<col>0</col>
-			<lnn>98</lnn>
+			<lnn>66</lnn>
 		</src>
 		<dst>
 			<dyn>10</dyn>
 			<bin>1</bin>
 			<srcfp>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2\</srcfp>
 			<srcfn>demo_with_bugs.c</srcfn>
-			<rtnn>L_main_96__par_loop5_2.3</rtnn>
-			<rtnnd>L_main_96__par_loop5_2.3</rtnnd>
-			<rtnnm>L_main_96__par_loop5_2.3</rtnnm>
+			<rtnn>L_main_64__par_loop4_2.2</rtnn>
+			<rtnnd>L_main_64__par_loop4_2.2</rtnnd>
+			<rtnnm>L_main_64__par_loop4_2.2</rtnnm>
 			<modn>demo_with_bugs</modn>
 			<sRVA>0000000000</sRVA>
 			<col>0</col>
-			<lnn>98</lnn>
+			<lnn>66</lnn>
 		</dst>
 	</minerr>
 	<majerr>
 		<maj>3</maj>
 		<min>0</min>
-		<type>1</type>
+		<type>2</type>
 		<sev>4</sev>
-		<occs>6</occs>
+		<occs>48</occs>
 		<time>0</time>
 		<id>4</id>
 		<pos>
@@ -548,13 +614,13 @@
 			<bin>1</bin>
 			<srcfp>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2\</srcfp>
 			<srcfn>demo_with_bugs.c</srcfn>
-			<rtnn>L_main_96__par_loop5_2.3</rtnn>
-			<rtnnd>L_main_96__par_loop5_2.3</rtnnd>
-			<rtnnm>L_main_96__par_loop5_2.3</rtnnm>
+			<rtnn>L_main_64__par_loop4_2.2</rtnn>
+			<rtnnd>L_main_64__par_loop4_2.2</rtnnd>
+			<rtnnm>L_main_64__par_loop4_2.2</rtnnm>
 			<modn>demo_with_bugs</modn>
 			<sRVA>0000000000</sRVA>
 			<col>0</col>
-			<lnn>96</lnn>
+			<lnn>64</lnn>
 		</pos>
 		<def>
 			<dyn>2</dyn>
@@ -574,34 +640,34 @@
 			<bin>1</bin>
 			<srcfp>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2\</srcfp>
 			<srcfn>demo_with_bugs.c</srcfn>
-			<rtnn>L_main_96__par_loop5_2.3</rtnn>
-			<rtnnd>L_main_96__par_loop5_2.3</rtnnd>
-			<rtnnm>L_main_96__par_loop5_2.3</rtnnm>
+			<rtnn>L_main_64__par_loop4_2.2</rtnn>
+			<rtnnd>L_main_64__par_loop4_2.2</rtnnd>
+			<rtnnm>L_main_64__par_loop4_2.2</rtnnm>
 			<modn>demo_with_bugs</modn>
 			<sRVA>0000000000</sRVA>
 			<col>0</col>
-			<lnn>98</lnn>
+			<lnn>67</lnn>
 		</src>
 		<dst>
 			<dyn>9</dyn>
 			<bin>1</bin>
 			<srcfp>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2\</srcfp>
 			<srcfn>demo_with_bugs.c</srcfn>
-			<rtnn>L_main_96__par_loop5_2.3</rtnn>
-			<rtnnd>L_main_96__par_loop5_2.3</rtnnd>
-			<rtnnm>L_main_96__par_loop5_2.3</rtnnm>
+			<rtnn>L_main_64__par_loop4_2.2</rtnn>
+			<rtnnd>L_main_64__par_loop4_2.2</rtnnd>
+			<rtnnm>L_main_64__par_loop4_2.2</rtnnm>
 			<modn>demo_with_bugs</modn>
 			<sRVA>0000000000</sRVA>
 			<col>0</col>
-			<lnn>98</lnn>
+			<lnn>66</lnn>
 		</dst>
 	</majerr>
 	<minerr>
 		<maj>3</maj>
 		<min>1</min>
-		<type>1</type>
+		<type>2</type>
 		<sev>4</sev>
-		<occs>5</occs>
+		<occs>47</occs>
 		<time>0</time>
 		<id>6</id>
 		<pos>
@@ -609,13 +675,13 @@
 			<bin>1</bin>
 			<srcfp>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2\</srcfp>
 			<srcfn>demo_with_bugs.c</srcfn>
-			<rtnn>L_main_96__par_loop5_2.3</rtnn>
-			<rtnnd>L_main_96__par_loop5_2.3</rtnnd>
-			<rtnnm>L_main_96__par_loop5_2.3</rtnnm>
+			<rtnn>L_main_64__par_loop4_2.2</rtnn>
+			<rtnnd>L_main_64__par_loop4_2.2</rtnnd>
+			<rtnnm>L_main_64__par_loop4_2.2</rtnnm>
 			<modn>demo_with_bugs</modn>
 			<sRVA>0000000000</sRVA>
 			<col>0</col>
-			<lnn>96</lnn>
+			<lnn>64</lnn>
 		</pos>
 		<def>
 			<dyn>2</dyn>
@@ -635,22 +701,144 @@
 			<bin>1</bin>
 			<srcfp>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2\</srcfp>
 			<srcfn>demo_with_bugs.c</srcfn>
-			<rtnn>L_main_96__par_loop5_2.3</rtnn>
-			<rtnnd>L_main_96__par_loop5_2.3</rtnnd>
-			<rtnnm>L_main_96__par_loop5_2.3</rtnnm>
+			<rtnn>L_main_64__par_loop4_2.2</rtnn>
+			<rtnnd>L_main_64__par_loop4_2.2</rtnnd>
+			<rtnnm>L_main_64__par_loop4_2.2</rtnnm>
 			<modn>demo_with_bugs</modn>
 			<sRVA>0000000000</sRVA>
 			<col>0</col>
-			<lnn>98</lnn>
+			<lnn>67</lnn>
 		</src>
 		<dst>
 			<dyn>10</dyn>
 			<bin>1</bin>
 			<srcfp>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2\</srcfp>
 			<srcfn>demo_with_bugs.c</srcfn>
-			<rtnn>L_main_96__par_loop5_2.3</rtnn>
-			<rtnnd>L_main_96__par_loop5_2.3</rtnnd>
-			<rtnnm>L_main_96__par_loop5_2.3</rtnnm>
+			<rtnn>L_main_64__par_loop4_2.2</rtnn>
+			<rtnnd>L_main_64__par_loop4_2.2</rtnnd>
+			<rtnnm>L_main_64__par_loop4_2.2</rtnnm>
+			<modn>demo_with_bugs</modn>
+			<sRVA>0000000000</sRVA>
+			<col>0</col>
+			<lnn>66</lnn>
+		</dst>
+	</minerr>
+	<majerr>
+		<maj>4</maj>
+		<min>0</min>
+		<type>3</type>
+		<sev>4</sev>
+		<occs>5</occs>
+		<time>0</time>
+		<id>7</id>
+		<pos>
+			<dyn>11</dyn>
+			<bin>1</bin>
+			<srcfp>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2\</srcfp>
+			<srcfn>demo_with_bugs.c</srcfn>
+			<rtnn>L_main_96__par_loop6_2.4</rtnn>
+			<rtnnd>L_main_96__par_loop6_2.4</rtnnd>
+			<rtnnm>L_main_96__par_loop6_2.4</rtnnm>
+			<modn>demo_with_bugs</modn>
+			<sRVA>0000000000</sRVA>
+			<col>0</col>
+			<lnn>96</lnn>
+		</pos>
+		<def>
+			<dyn>2</dyn>
+			<bin>1</bin>
+			<srcfp>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2\</srcfp>
+			<srcfn>demo_with_bugs.c</srcfn>
+			<rtnn>main</rtnn>
+			<rtnnd>main</rtnnd>
+			<rtnnm>main</rtnnm>
+			<modn>demo_with_bugs</modn>
+			<sRVA>0000000000</sRVA>
+			<col>0</col>
+			<lnn>16</lnn>
+		</def>
+		<src>
+			<dyn>12</dyn>
+			<bin>1</bin>
+			<srcfp>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2\</srcfp>
+			<srcfn>demo_with_bugs.c</srcfn>
+			<rtnn>L_main_96__par_loop6_2.4</rtnn>
+			<rtnnd>L_main_96__par_loop6_2.4</rtnnd>
+			<rtnnm>L_main_96__par_loop6_2.4</rtnnm>
+			<modn>demo_with_bugs</modn>
+			<sRVA>0000000000</sRVA>
+			<col>0</col>
+			<lnn>98</lnn>
+		</src>
+		<dst>
+			<dyn>11</dyn>
+			<bin>1</bin>
+			<srcfp>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2\</srcfp>
+			<srcfn>demo_with_bugs.c</srcfn>
+			<rtnn>L_main_96__par_loop6_2.4</rtnn>
+			<rtnnd>L_main_96__par_loop6_2.4</rtnnd>
+			<rtnnm>L_main_96__par_loop6_2.4</rtnnm>
+			<modn>demo_with_bugs</modn>
+			<sRVA>0000000000</sRVA>
+			<col>0</col>
+			<lnn>98</lnn>
+		</dst>
+	</majerr>
+	<minerr>
+		<maj>4</maj>
+		<min>1</min>
+		<type>3</type>
+		<sev>4</sev>
+		<occs>4</occs>
+		<time>0</time>
+		<id>9</id>
+		<pos>
+			<dyn>12</dyn>
+			<bin>1</bin>
+			<srcfp>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2\</srcfp>
+			<srcfn>demo_with_bugs.c</srcfn>
+			<rtnn>L_main_96__par_loop6_2.4</rtnn>
+			<rtnnd>L_main_96__par_loop6_2.4</rtnnd>
+			<rtnnm>L_main_96__par_loop6_2.4</rtnnm>
+			<modn>demo_with_bugs</modn>
+			<sRVA>0000000000</sRVA>
+			<col>0</col>
+			<lnn>96</lnn>
+		</pos>
+		<def>
+			<dyn>2</dyn>
+			<bin>1</bin>
+			<srcfp>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2\</srcfp>
+			<srcfn>demo_with_bugs.c</srcfn>
+			<rtnn>main</rtnn>
+			<rtnnd>main</rtnnd>
+			<rtnnm>main</rtnnm>
+			<modn>demo_with_bugs</modn>
+			<sRVA>0000000000</sRVA>
+			<col>0</col>
+			<lnn>16</lnn>
+		</def>
+		<src>
+			<dyn>11</dyn>
+			<bin>1</bin>
+			<srcfp>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2\</srcfp>
+			<srcfn>demo_with_bugs.c</srcfn>
+			<rtnn>L_main_96__par_loop6_2.4</rtnn>
+			<rtnnd>L_main_96__par_loop6_2.4</rtnnd>
+			<rtnnm>L_main_96__par_loop6_2.4</rtnnm>
+			<modn>demo_with_bugs</modn>
+			<sRVA>0000000000</sRVA>
+			<col>0</col>
+			<lnn>98</lnn>
+		</src>
+		<dst>
+			<dyn>12</dyn>
+			<bin>1</bin>
+			<srcfp>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2\</srcfp>
+			<srcfn>demo_with_bugs.c</srcfn>
+			<rtnn>L_main_96__par_loop6_2.4</rtnn>
+			<rtnnd>L_main_96__par_loop6_2.4</rtnnd>
+			<rtnnm>L_main_96__par_loop6_2.4</rtnnm>
 			<modn>demo_with_bugs</modn>
 			<sRVA>0000000000</sRVA>
 			<col>0</col>
@@ -658,15 +846,137 @@
 		</dst>
 	</minerr>
 	<majerr>
-		<maj>4</maj>
+		<maj>5</maj>
+		<min>0</min>
+		<type>1</type>
+		<sev>4</sev>
+		<occs>5</occs>
+		<time>0</time>
+		<id>8</id>
+		<pos>
+			<dyn>11</dyn>
+			<bin>1</bin>
+			<srcfp>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2\</srcfp>
+			<srcfn>demo_with_bugs.c</srcfn>
+			<rtnn>L_main_96__par_loop6_2.4</rtnn>
+			<rtnnd>L_main_96__par_loop6_2.4</rtnnd>
+			<rtnnm>L_main_96__par_loop6_2.4</rtnnm>
+			<modn>demo_with_bugs</modn>
+			<sRVA>0000000000</sRVA>
+			<col>0</col>
+			<lnn>96</lnn>
+		</pos>
+		<def>
+			<dyn>2</dyn>
+			<bin>1</bin>
+			<srcfp>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2\</srcfp>
+			<srcfn>demo_with_bugs.c</srcfn>
+			<rtnn>main</rtnn>
+			<rtnnd>main</rtnnd>
+			<rtnnm>main</rtnnm>
+			<modn>demo_with_bugs</modn>
+			<sRVA>0000000000</sRVA>
+			<col>0</col>
+			<lnn>16</lnn>
+		</def>
+		<src>
+			<dyn>12</dyn>
+			<bin>1</bin>
+			<srcfp>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2\</srcfp>
+			<srcfn>demo_with_bugs.c</srcfn>
+			<rtnn>L_main_96__par_loop6_2.4</rtnn>
+			<rtnnd>L_main_96__par_loop6_2.4</rtnnd>
+			<rtnnm>L_main_96__par_loop6_2.4</rtnnm>
+			<modn>demo_with_bugs</modn>
+			<sRVA>0000000000</sRVA>
+			<col>0</col>
+			<lnn>98</lnn>
+		</src>
+		<dst>
+			<dyn>11</dyn>
+			<bin>1</bin>
+			<srcfp>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2\</srcfp>
+			<srcfn>demo_with_bugs.c</srcfn>
+			<rtnn>L_main_96__par_loop6_2.4</rtnn>
+			<rtnnd>L_main_96__par_loop6_2.4</rtnnd>
+			<rtnnm>L_main_96__par_loop6_2.4</rtnnm>
+			<modn>demo_with_bugs</modn>
+			<sRVA>0000000000</sRVA>
+			<col>0</col>
+			<lnn>98</lnn>
+		</dst>
+	</majerr>
+	<minerr>
+		<maj>5</maj>
+		<min>1</min>
+		<type>1</type>
+		<sev>4</sev>
+		<occs>4</occs>
+		<time>0</time>
+		<id>10</id>
+		<pos>
+			<dyn>12</dyn>
+			<bin>1</bin>
+			<srcfp>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2\</srcfp>
+			<srcfn>demo_with_bugs.c</srcfn>
+			<rtnn>L_main_96__par_loop6_2.4</rtnn>
+			<rtnnd>L_main_96__par_loop6_2.4</rtnnd>
+			<rtnnm>L_main_96__par_loop6_2.4</rtnnm>
+			<modn>demo_with_bugs</modn>
+			<sRVA>0000000000</sRVA>
+			<col>0</col>
+			<lnn>96</lnn>
+		</pos>
+		<def>
+			<dyn>2</dyn>
+			<bin>1</bin>
+			<srcfp>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2\</srcfp>
+			<srcfn>demo_with_bugs.c</srcfn>
+			<rtnn>main</rtnn>
+			<rtnnd>main</rtnnd>
+			<rtnnm>main</rtnnm>
+			<modn>demo_with_bugs</modn>
+			<sRVA>0000000000</sRVA>
+			<col>0</col>
+			<lnn>16</lnn>
+		</def>
+		<src>
+			<dyn>11</dyn>
+			<bin>1</bin>
+			<srcfp>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2\</srcfp>
+			<srcfn>demo_with_bugs.c</srcfn>
+			<rtnn>L_main_96__par_loop6_2.4</rtnn>
+			<rtnnd>L_main_96__par_loop6_2.4</rtnnd>
+			<rtnnm>L_main_96__par_loop6_2.4</rtnnm>
+			<modn>demo_with_bugs</modn>
+			<sRVA>0000000000</sRVA>
+			<col>0</col>
+			<lnn>98</lnn>
+		</src>
+		<dst>
+			<dyn>12</dyn>
+			<bin>1</bin>
+			<srcfp>/home/prakspc01/KIT.SoftwarepraktikumParalleleNumerik/Projekt 1/Aufgabe2\</srcfp>
+			<srcfn>demo_with_bugs.c</srcfn>
+			<rtnn>L_main_96__par_loop6_2.4</rtnn>
+			<rtnnd>L_main_96__par_loop6_2.4</rtnnd>
+			<rtnnm>L_main_96__par_loop6_2.4</rtnnm>
+			<modn>demo_with_bugs</modn>
+			<sRVA>0000000000</sRVA>
+			<col>0</col>
+			<lnn>98</lnn>
+		</dst>
+	</minerr>
+	<majerr>
+		<maj>6</maj>
 		<min>0</min>
 		<type>22</type>
 		<sev>1</sev>
 		<occs>1</occs>
 		<time>0</time>
-		<id>7</id>
+		<id>11</id>
 		<ident>1</ident>
-		<arg1>4908</arg1>
+		<arg1>6032</arg1>
 		<arg2>2101248</arg2>
 		<str1>pthread_create</str1>
 		<pos>
@@ -723,13 +1033,13 @@
 		</dst>
 	</majerr>
 	<majerr>
-		<maj>5</maj>
+		<maj>7</maj>
 		<min>0</min>
 		<type>22</type>
 		<sev>1</sev>
 		<occs>1</occs>
 		<time>0</time>
-		<id>8</id>
+		<id>12</id>
 		<ident>2</ident>
 		<arg1>3324</arg1>
 		<arg2>69632</arg2>
@@ -788,15 +1098,15 @@
 		</dst>
 	</majerr>
 	<majerr>
-		<maj>6</maj>
+		<maj>8</maj>
 		<min>0</min>
 		<type>22</type>
 		<sev>1</sev>
 		<occs>1</occs>
 		<time>0</time>
-		<id>9</id>
+		<id>13</id>
 		<ident>3</ident>
-		<arg1>2860</arg1>
+		<arg1>7312</arg1>
 		<arg2>8388608</arg2>
 		<pos>
 			<dyn>2</dyn>
@@ -852,6 +1162,6 @@
 		</dst>
 	</majerr>
 	<summary>
-		<stopdate>1481632986</stopdate>
+		<stopdate>1481637086</stopdate>
 	</summary>
 </txf>
