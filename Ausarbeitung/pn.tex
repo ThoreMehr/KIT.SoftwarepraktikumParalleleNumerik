@@ -137,8 +137,28 @@ Wie an der Tabbele \ref{mandel_runtime} abgelesen werden kann, beträgt die Besch
 \end{enumerate}
 
 \subsubsection{}\label{p1a2b}
-\TODO{Hier kommt der Text zum b-Teil}
+Um die Ausnutzung des Caches zu gewährleisten, wird die eine Matrix als Zeilen-, die andere als Splatenmatrix verarbeitet und nach dem ikj-Algorithmus multipliziert. Es wurden eine lineare Version, sowie drei parralelierte Versionen untersucht. Die Paralelisierten sind erstens eine Version, in der die innerste Schleife mit reduction parralelesiert wurde, zweitens eine in der die mittlere und eine in der die äußere schleife parralelesiert wurden. In den Tabellen \ref{2b_2000} und \ref{2b_1000} wird der Einfluss von Optimierungsoptionen vom GCC und ICC untersucht. Die Messungen wurden auf i82pc31 ausgeführt, da dieser über einen Intel CPU verfügt. Wie aus den Tabellen leicht abgelesen werden kann, sind die unterschiede bei den Stuffen O0 bis O3 gering. GCC schein etwas schnelleren Linearen Code zu generieren, ICC schnelleren parallelen. Wenn hingegen Vektorisierung benutzt werden kann, beim ICC mit der Option fast, wird der Code viel schneller.
 
+\begin{table}
+	\centering
+	\begin{tabular}{|r||r|r|r|r|r||r|r|r|r|}
+		\hline
+		&\multicolumn{5}{c||}{ICC}&\multicolumn{4}{c|}{GCC}\\
+		\hline
+		Optionen& O0&O1&O2&O3&fast&O0&O1&O2&O3\\		
+		\hline
+		linear &74,58&9,9&9,88&9,86&2,27&76,75&9,76&9,75&9,73\\
+		\hline
+		reduction&36,67&10,99&10,98&10,95&8,54&43,20&13,76&12,54&12,48\\
+		\hline
+		mittlere&47,04&9,01&8,66&8,37&7,95&54,19&30,05&9,60&9,50\\
+		\hline
+		äußere&46,50&5,19&4,95&4,92&1,15&44,83&15,07&6,93&6,84\\
+		\hline
+	\end{tabular}
+	\caption{Laufzeiten in s mit N=2000. Getestet wurde auf dem Rechner \emph{i82pc31}. Um Ungenauigkeiten auszugleichen wurden die Zeiten jeweils über $10$ Durchläufe gemittelt.}
+	\label{2b_2000}
+\end{table}
 \subsubsection{}\label{p1a2c}
 \TODO{Hier kommt der Text zum c-Teil}
 

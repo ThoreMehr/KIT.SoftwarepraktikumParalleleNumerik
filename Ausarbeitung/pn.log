@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2016.12.13)  16 DEC 2016 22:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2016.12.13)  17 DEC 2016 18:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -867,106 +867,114 @@ Overfull \hbox (52.60373pt too wide) in paragraph at lines 74--88
 
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
-Underfull \hbox (badness 10000) in paragraph at lines 149--150
+
+LaTeX Warning: Reference `2b_1000' on page 3 undefined on input line 140.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 169--170
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 151--154
+Underfull \hbox (badness 10000) in paragraph at lines 171--174
 
  []
 
-
-Overfull \hbox (1.93427pt too wide) in paragraph at lines 178--180
+[3]
+Overfull \hbox (1.93427pt too wide) in paragraph at lines 198--200
 \T1/cmr/m/n/10 Auch be-kannt als Wett-lauf-si-tua-ti-on. Meh-re-re Fä-den grei-
 fen le-send und schrei-
  []
 
-[3]
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 199.
+[4]
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 219.
 
  (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-) [4] [5]
+) [5] [6]
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 )
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 257.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 277.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 257.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 277.
 
 (./gsv_node_dependence.pdf_tex
-<gsv_node_dependence.pdf, id=186, page=1, 85.82553pt x 85.82553pt>
+<gsv_node_dependence.pdf, id=195, page=1, 85.82553pt x 85.82553pt>
 File: gsv_node_dependence.pdf Graphic file (type pdf)
 
 <use gsv_node_dependence.pdf, page 1>
 Package pdftex.def Info: gsv_node_dependence.pdf, page1 used on input line 52.
 (pdftex.def)             Requested size: 208.27623pt x 208.30603pt.
-) [6] [7 <./gsv_node_dependence.pdf>]
-[8]
-Underfull \hbox (badness 10000) in paragraph at lines 350--354
+) [7] [8 <./gsv_node_dependence.pdf>]
+[9]
+Underfull \hbox (badness 10000) in paragraph at lines 370--374
 
  []
 
-[9] [10] <a5l2.pdf, id=255, 614.295pt x 794.97pt>
+[10] <a5l2.pdf, id=252, 614.295pt x 794.97pt>
 File: a5l2.pdf Graphic file (type pdf)
  <use a5l2.pdf>
-Package pdftex.def Info: a5l2.pdf used on input line 389.
+Package pdftex.def Info: a5l2.pdf used on input line 409.
 (pdftex.def)             Requested size: 110.56831pt x 143.08842pt.
 
-<a5l3.pdf, id=256, 614.295pt x 794.97pt>
+<a5l3.pdf, id=253, 614.295pt x 794.97pt>
 File: a5l3.pdf Graphic file (type pdf)
  <use a5l3.pdf>
-Package pdftex.def Info: a5l3.pdf used on input line 390.
+Package pdftex.def Info: a5l3.pdf used on input line 410.
 (pdftex.def)             Requested size: 110.56831pt x 143.08842pt.
 
-<a5l4.pdf, id=257, 614.295pt x 794.97pt>
+<a5l4.pdf, id=254, 614.295pt x 794.97pt>
 File: a5l4.pdf Graphic file (type pdf)
  <use a5l4.pdf>
-Package pdftex.def Info: a5l4.pdf used on input line 391.
+Package pdftex.def Info: a5l4.pdf used on input line 411.
 (pdftex.def)             Requested size: 110.56831pt x 143.08842pt.
- [11 <./a5l2.pdf> <./a5l3.pdf> <./a5l4.pdf>] [12]
-Overfull \hbox (1.22313pt too wide) in paragraph at lines 463--464
+ [11] [12 <./a5l2.pdf> <./a5l3.pdf> <./a5l4.pdf>]
+Overfull \hbox (1.22313pt too wide) in paragraph at lines 483--484
 [][]\T1/cmr/bx/n/14.4 Implementierung soll mit Hil-fe der \T1/cmr/bx/it/14.4 ke
 n-nen-ge-lern-
  []
 
 
-Overfull \hbox (10.20184pt too wide) in paragraph at lines 470--481
+Overfull \hbox (10.20184pt too wide) in paragraph at lines 490--501
  [][] 
  []
 
-
-Overfull \hbox (18.03008pt too wide) in paragraph at lines 497--520
+[13]
+Overfull \hbox (18.03008pt too wide) in paragraph at lines 517--540
  [][] 
  []
 
-(./pn.bbl [13] [14])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 534.
+(./pn.bbl [14])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 554.
  [15
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 534.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 554.
  (./pn.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 534.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 534.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 554.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 554.
 Package rerunfilecheck Info: File `pn.out' has not changed.
 (rerunfilecheck)             Checksum: B3342D89B66BDDB043E5D53E2A92D515;1817.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 534.
+
+
+LaTeX Warning: There were undefined references.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 554.
  ) 
 Here is how much of TeX's memory you used:
- 19419 strings out of 493013
- 354769 string characters out of 6135681
- 439707 words of memory out of 5000000
- 22648 multiletter control sequences out of 15000+600000
+ 19422 strings out of 493013
+ 354796 string characters out of 6135681
+ 438871 words of memory out of 5000000
+ 22650 multiletter control sequences out of 15000+600000
  28382 words of font info for 84 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  38i,15n,51p,10381b,1438s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -994,10 +1002,10 @@ share/texmf/fonts/type1/public/cm-super/sfrm0900.pfb></usr/share/texmf/fonts/ty
 pe1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/
 sfti0900.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1000.pfb></usr/s
 hare/texmf/fonts/type1/public/cm-super/sftt1000.pfb>
-Output written on pn.pdf (15 pages, 661219 bytes).
+Output written on pn.pdf (15 pages, 664018 bytes).
 PDF statistics:
- 430 PDF objects out of 1000 (max. 8388607)
- 377 compressed objects within 4 object streams
- 97 named destinations out of 1000 (max. 500000)
+ 432 PDF objects out of 1000 (max. 8388607)
+ 379 compressed objects within 4 object streams
+ 98 named destinations out of 1000 (max. 500000)
  245 words of extra memory for PDF output out of 10000 (max. 10000000)
 
