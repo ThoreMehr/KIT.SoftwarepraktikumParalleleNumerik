@@ -183,8 +183,7 @@ Um die Ausnutzung des Caches zu gewährleisten, wird die eine Matrix als Zeilen-,
 	Im Folgenden einige bekannte Größen der Parallelisierung, wie sie etwa in der Vorlesung Rechnerstrukturen \cite{RechnerstrukturenVL} gelehrt wurden. \\
 	
 	Vorab sei $T(n)$ die Ausführungszeit auf n Prozessoren,
-	$P(n)$ die Anzahl der auszuführenden Einheitsoperationen und
-	$I(n)$ der Parallelindex. \\
+	$P(n)$ die Anzahl der auszuführenden Einheitsoperationen \\
 	
 	Der Speedup/die Beschleunigung $S(n)$:
 	\begin{equation}
@@ -199,6 +198,11 @@ Um die Ausnutzung des Caches zu gewährleisten, wird die eine Matrix als Zeilen-,
 	Der Mehraufwand $R(n)$:
 	\begin{equation}
 		R(n) = \frac{P(n)}{P(1)}
+	\end{equation}
+	
+	Der Parallelindex $I(n)$:
+	\begin{equation}
+		I(n)=\frac{P(n)}{T(n)}
 	\end{equation}
 	
 	Die Auslastung $U(n)$:
@@ -241,16 +245,15 @@ Um die Ausnutzung des Caches zu gewährleisten, wird die eine Matrix als Zeilen-,
 \subsubsection{}
 Die Vor- und Nachteile verschiedener paralleler Architekturen bezüglich zweier Aspekte sind in Tabelle \ref{parallelarch} aufgetragen.
 \begin{table}
-	\begin{center}
-		\begin{tabular}{l | p{4cm} p{4cm}}
-			Architektur & Anwenderfreundlichkeit & Energieeffizienz \\
-			\hline
-			GPU & Gut & Mittel \\
-			CPU & Gut & Gering \\
-			FPGA & Gering & Sehr gut \\
-			MIC & Gut & Gut
-		\end{tabular}
-	\end{center}
+	\centering
+	\begin{tabular}{l | p{4cm} p{4cm}}
+		Architektur & Anwenderfreundlichkeit & Energieeffizienz \\
+		\hline
+		GPU & Gut & Mittel \\
+		CPU & Gut & Gering \\
+		FPGA & Gering & Sehr gut \\
+		MIC & Gut & Gut
+	\end{tabular}
 	\caption{Verschiedene Beschleuniger im Vergleich}
 	\label{parallelarch}
 \end{table}
@@ -307,8 +310,8 @@ u[j] = sum / 4;
 	
 	Es wurde gezeigt, wie eine einzelne Iterierte $k$ von $u$ sich berechnen lässt. Würde man dies nun immer wiederholen, so würde sich die Lösung $u$ einem Optimum annähern. Nun haben wir aber eine begrenzte Rechenzeit und müssen daher die Berechnung irgendwann abbrechen, sobald uns das Ergebnis \emph{gut genug} ist. In der Regel kennen wir jedoch die analytische Lösung nicht und wissen daher nicht, wie gut unsere bisherige Lösung ist (sie kann ohnehin durch das Verfahren selbst stark davon abweichen, wie wir in Aufgabe \ref{p1a5} sehen werden).
 	Um das Problem zu lösen, brechen wir ab, sobald der \emph{Fortschritt} zwischen zwei Iterationen klein genug ist. Die Annahme hierbei ist, dass sich die Lösung auch durch weitere Iterationen nur noch wenig ändert.
-	Konkret betrachten wir die maximale Veränderung eines Eintrags zwischen den Iterierten $k$ und $k+1$ von $u$. Formal $maxError:=\|u^{k+1}-u^k\|_{max}$. Unsere Lösung nehmen wir als gut genug an, sobald $maxError<\epsilon_{Error}$ für eine Schranke $\epsilon_{Error}$.
-	Für unsere Implementierung verwenden wir $\epsilon_{Error}=\num{1e-6}$, da es einerseits ausreichend klein ist, um in unseren Tests gute Ergebnisse zu liefern, andererseits groß genug, um in absehbarer Zeit berechnet werden zu können.
+	Konkret betrachten wir die maximale Veränderung eines Eintrags zwischen den Iterierten $k$ und $k+1$ von $u$. Formal $maxError:=\|u^{k+1}-u^k\|_{max}$. Unsere Lösung nehmen wir als gut genug an, sobald $maxError<\varepsilon_{Error}$ für eine Schranke $\varepsilon_{Error}$.
+	Für unsere Implementierung verwenden wir $\varepsilon_{Error}=\num{1e-6}$, da es einerseits ausreichend klein ist, um in unseren Tests gute Ergebnisse zu liefern, andererseits groß genug, um in absehbarer Zeit berechnet werden zu können.
 
 \subsubsection{}\label{p1a4b}
 Eine naive Parallelisierung des in Aufgabe \ref{p1a4a} implementierten Gauß-Seidel-Verfahrens ist nicht möglich, da innerhalb der Berechnung von $u^{k+1}$ -- eine naive Parallelisierung würde versuchen genau diese Berechnung zu parallelisieren, also eine einzelne Iterierte -- Abhängigkeiten zwischen den Einträgen bestehen. Für die Berechnung von $u^{i+k}_{x,y}$ werden diese Abhängigkeiten in Abbildung \ref{gsv_depend} dargestellt. Um etwa $u^{i+k}_{x,y}$ zu berechnen, werden zu erst die Werte von $u^{i+k}_{x-1,y}$ und $u^{i+k}_{x,y-1}$ aus der gleichen Iteration benötigt. Diese wiederum benötigen in gleicher Weise aktuelle Werte von Nachbarknoten.
@@ -381,10 +384,12 @@ In jedem Berechnungsschritt wird genaue eine Iterierte des Verfahrens berechnet.
 
 \subsection{Partielle Differentialgleichungen}\label{p1a5}
 \subsubsection{}
-Die Bedingungen lauten nach den Folien der FEM-Einführung: \\
-	$\Omega$ sei ein beschränktes Gebiet\\
-	$\Gamma$ sei hinreichend glatt\\
-	$f:\Omega\rightarrow \mathbb{R}$ gegebene Funktion, wie es hier der Fall ist.\\
+Die Bedingungen lauten nach den Folien der FEM-Einführung:
+\begin{itemize}
+	\item $\Omega$ sei ein beschränktes Gebiet\\
+	\item $\Gamma$ sei hinreichend glatt\\
+	\item $f:\Omega\rightarrow \mathbb{R}$ gegebene Funktion, wie es hier der Fall ist.
+\end{itemize}
 
 
 \subsubsection{}
@@ -416,14 +421,16 @@ u(x,y)=\sin(2\pi x)\sin(2\pi y)
 und wird verwendet um den maximalen Fehler der Näherung zu berechnen.
 
 Das $f$ auf Gleichung \ref{fdef} kann einfach in den Code der vorangegangenen Aufgabe eingesetzt werden. Wie auch \cite{FiniteElemente} entnommen werden kann, lässt sich das Problem mit dem in Aufgabe \ref{p1a4a} gelösten Problem lösen. Es ergeben sich die in Abbildung \ref{grapha5} gezeigten Näherungen. Mit zunehmendem $l$ bzw. abnehmender Gitterkonstante $h$ werden die Lösungen nicht nur feiner, sondern der maximale Fehler zur analytischen Lösung von $u$ auch kleiner wird. Ab $l=8$ wird der Fehler allerdings wieder größer, wie Tabelle \ref{tablea5} entnommen werden kann.
-An dieser Stelle scheint das für das Abbruchkriterium gewählte $\epsilon_{Error}$ aus Aufgabe \ref{p1a4a} zu grob gewählt zu sein, denn eine weitere Verfeinerung dessen reduzierte den Fehler der Näherung (nur) für große $l$ deutlich (was die Frage aufwirft, ob man $\epsilon_{Error}$ abhängig von $l$ wählen sollte).
+An dieser Stelle scheint das für das Abbruchkriterium gewählte $\varepsilon_{Error}$ aus Aufgabe \ref{p1a4a} zu grob gewählt zu sein, denn eine weitere Verfeinerung dessen reduzierte den Fehler der Näherung (nur) für große $l$ deutlich (was die Frage aufwirft, ob man $\varepsilon_{Error}$ abhängig von $l$ wählen sollte).
 
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.18]{a5l2}
+	\vspace{-3em}
 	\includegraphics[scale=0.18]{a5l3}
 	\includegraphics[scale=0.18]{a5l4}
-	\caption{Näherungsweise Lösung für $u$, berechnet mittels Gauß-Seidel-Verfahren. Von links nach rechts: $l=2, l=3, l=4$. Geplottet mittels GNU~Octave.}
+	\includegraphics[scale=0.18]{a5l5}
+	\vspace{-5em}
+	\caption{Näherungsweise Lösung für $u$, berechnet mittels Gauß-Seidel-Verfahren. Von links nach rechts: $l=3, l=4, l=5$ bzw. $h=\frac{1}{8}, h=\frac{1}{16}, h=\frac{1}{32}$. Geplottet mittels GNU~Octave.}
 	\label{grapha5}
 \end{figure}
 
@@ -494,6 +501,8 @@ Bei der Auswahl von diesen drei Verfahren für unser Problem, eignet sich das CG-
 Gegen GMRES spricht nur die möglicherweise langsamere Konvergenz und die hier nicht benötigte Flexibilität auch nicht-symmetrische Matrizen bearbeiten zu können.
 Das Lanczos-Verfahren wäre eine Alternative, vor allem da die Eigenwerte und somit die Konvergenz im Voraus bekannt sind.
 
+Unsere Parallelisierung arbeitet auf der Ebene der Vektoreinträge, da diese zu großen Teilen unabhängig von einander berechnet werden können (ganz im Gegensatz zum Gauß-Seidel-Verfahren aus \ref{p1a4}). Auch hier kann die dünne Struktur von $A$ dahingehend ausgenutzt werden, dass Berechnungen der Art $A\cdot x$ im Algorithmus für jeden Eintrag im Ergebnisvektor zu vier bedingten Additionen zerfallen. Auch hier muss $A$ daher nicht explizit gespeichert oder berechnet werden.
+
 \TODO{Implementierung soll mit Hilfe der \emph{kennengelernten Werkzeuge} analysiert werden.}
 
 \subsubsection{}\label{p1a6b}
@@ -524,14 +533,14 @@ Wie auch unsere Implementierung des Gauß-Seidel-Verfahrens aus Aufgabe \ref{p1a4
 In Tabelle \ref{MathBibs} haben wir drei Bibliotheken zur Anwendung der Finiten Elemente Methode aufgelistet und verglichen. Weitere Bibliotheken, die es nicht in die Tabelle geschafft haben, wären beispielsweise Feel++\cite{Feel++} und
 Libmesh\cite{Libmesh}.
 
-Im Rahmen dieses Praktikums würde sich, zumindest für Projekt 1, \emph{HiFlow3} am gut eignen, da hier eine ausgereifte OpenMP Funktionalität gegeben zu sein scheint, die den Portierungsaufwand stark verringert.
+Im Rahmen dieses Praktikums würde sich, zumindest für Projekt 1, \emph{HiFlow\textsuperscript{3}} gut eignen, da hier eine ausgereifte OpenMP Funktionalität gegeben zu sein scheint, die den Portierungsaufwand stark verringert.
 
 \begin{table}
 	\centering
 	\begin{tabular}{l|p{0.6\textwidth}|l}
 		Bibliothek & Unterschiede & Gemeinsamkeiten \\
 		\hline
-		HiFlow3\cite{HiFlow3} &
+		HiFlow\textsuperscript{3}\cite{HiFlow3} &
 		MPI und OpenMP basiert, \\
 		&Hohe Parallelität (von Laptop bis zu Cluster), \\
 		&Keine externen Bibliotheken benötigt (optional Libraries, unter anderem OpenMP)
@@ -542,7 +551,7 @@ Im Rahmen dieses Praktikums würde sich, zumindest für Projekt 1, \emph{HiFlow3} 
 		\cline{1-2}
 		MFEM\cite{MFEM} &
 		MPI basiert (und experimenteller OpenMP Support), \\
-		&Sehr hohe Parallelität (mehrere Hundert Tausend Kerne), \\
+		&Sehr hohe Parallelität (mehrere hunderttausend Kerne), \\
 		&Keine externen Bibliotheken benötigt \\
 		
 		\cline{1-2}
