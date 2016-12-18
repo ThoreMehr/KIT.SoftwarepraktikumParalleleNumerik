@@ -9,8 +9,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
-//#define N 5000 /* NxN grid size */
-#define maxiter 500
+#ifndef N
+	#define N 5000 /* NxN grid size */
+#endif
+#ifndef maxiter
+	#define maxiter 500
+#endif
 
 typedef struct {
 	float re, im;
@@ -44,7 +48,15 @@ int main() {
 	struct timeval time1,time2;
 	struct timezone zone;	
 	gettimeofday(&time1,&zone);
-	#pragma omp parallel for private(j,z,kappa,k) shared(T)
+	#ifndef scheduleType
+		#pragma omp parallel for private(j,z,kappa,k) shared(T)
+	#else
+		#ifndef chunksize
+	 		#pragma omp parallel for private(j,z,kappa,k) shared(T) schedule(scheduleType)
+		#else
+			#pragma omp parallel for private(j,z,kappa,k) shared(T) schedule(scheduleType,chunksize)
+		#endif
+	#endif
 	for (i=0; i<N; i++) {
 		for (j=0; j<N; j++) {
 			z.re = kappa.re = (4.0*(i-N/2))/N;
