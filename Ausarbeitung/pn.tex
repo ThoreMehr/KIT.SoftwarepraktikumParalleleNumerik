@@ -138,6 +138,20 @@ Wie an der Tabbele \ref{mandel_runtime} abgelesen werden kann, beträgt die Besch
 
 \subsubsection{}\label{p1a2b}
 Um die Ausnutzung des Caches zu gewährleisten, wird die eine Matrix als Zeilen-, die andere als Splatenmatrix verarbeitet und nach dem ikj-Algorithmus multipliziert. Es wurden eine lineare Version, sowie drei parralelierte Versionen untersucht. Die Paralelisierten sind erstens eine Version, in der die innerste Schleife mit reduction parralelesiert wurde, zweitens eine in der die mittlere und eine in der die äußere schleife parralelesiert wurden. In den Tabellen \ref{2b_1000} und \ref{2b_2000} wird der Einfluss von Optimierungsoptionen vom GCC und ICC untersucht. Die Messungen wurden auf i82pc31 ausgeführt, da dieser über einen Intel CPU verfügt. Wie aus den Tabellen leicht abgelesen werden kann, sind die unterschiede bei den Stuffen O0 bis O3 gering. GCC schein etwas schnelleren Linearen Code zu generieren, ICC schnelleren parallelen. Wenn hingegen Vektorisierung benutzt werden kann, beim ICC mit der Option fast, wird der Code viel schneller, allerdings auf kosten der Größe, das Binary hat ~1,4 MB statt ~30kB. Im algemeinen ist das Binary, das vom ICC erzeugt wird etwa doppelt so groß, wie das, dass vom GCC erzeugt wird.
+\begin{table}
+	\centering
+	\begin{tabular}{|r||r|r|r|r|r||r|r|r|r|}
+		\hline
+		          &     \multicolumn{5}{c||}{ICC}     &  \multicolumn{4}{c|}{GCC}  \\ \hline
+		 Optionen &   O0 &   O1 &   O2 &    O3 & fast &   O0 &   O1 &   O2 &    O3 \\ \hline
+		   linear & 9,26 & 1,19 & 1,17 &  1,17 & 0,25 & 9,56 & 1,16 & 1,16 &  1,16 \\ \hline
+		reduction & 4,99 & 1,90 & 1,88 & 1,88 & 1,40 & 6,06 & 2,21 & 2,21 & 2,21 \\ \hline
+		 mittlere & 5,88 & 1,02 & 1,02 &  1,02 & 0,96 & 6,95 & 2,55 & 1,12 &  1,18 \\ \hline
+		   äußere & 5,67 & 0,59 & 0,59 &  0,59 & 0,014 & 6,02 & 1,81 & 0,82 &  0,82 \\ \hline
+	\end{tabular}
+	\caption{Laufzeiten in s mit N=1000. Getestet wurde auf dem Rechner \emph{i82pc31}. Um Ungenauigkeiten auszugleichen wurden die Zeiten jeweils über $10$ Durchläufe gemittelt.}
+	\label{2b_1000}
+\end{table}
 
 \begin{table}
 	\centering
