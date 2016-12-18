@@ -25,7 +25,7 @@
 		struct timeval time1,time2;
 		struct timezone zone;	
 		gettimeofday(&time1,&zone);
-  		cblas_dgemm(CblasRowMajor,CblasNoTrans,CblasNoTrans,N,N,N,1.0,m1,N,m2,N,0.0,m3,N);
+  		cblas_sgemm(CblasRowMajor,CblasNoTrans,CblasNoTrans,N,N,N,1.0,m1,N,m2,N,0.0,m3,N);
     	gettimeofday(&time2,&zone);
     	
 		float t=((time2.tv_usec-time1.tv_usec)+(time2.tv_sec-time1.tv_sec)*1000000)/1000000.0;	
