@@ -143,15 +143,29 @@
 		
 		\begin{table}
 			\centering
-			\begin{tabular}{l | p{4cm} p{4cm}}
-				Architektur & Anwenderfreundlichkeit & Energieeffizienz \\
+			\begin{tabular}{l | p{3.5cm} p{4.5cm}}
+				Beschleuniger & Parallelität & Anwenderfreundlichkeit \\
 				\hline
-				GPU & Gut & Mittel \\
-				CPU & Gut & Gering \\
-				FPGA & Gering & Sehr gut \\
-				MIC & Gut & Gut
+				CPU & Niedrig & Gut \\
+				GPU & Sehr hoch & Mittel \\
+				FPGA & Hoch & Abhängig von Bibliotheken \\
+				MIC & (Sehr) hoch & Gut
 			\end{tabular}
 		\end{table}
+	
+	\begin{itemize}
+		\item \textbf{CPU}:
+		Großer Instruktionssatz, Out-of-Order, selten mehr als 8 CPU Kerne, ,,gewöhnliche'' Programmierung
+		
+		\item \textbf{GPU}:
+		Verbreitet, keine komplexen Befehle, massive Parallelität, \emph{SIMD}, \emph{CUDA} und \emph{OpenCL}.
+		
+		\item \textbf{FPGA}:
+		Beliebige Eigenschaften, Testen von Chips, ,,multifunktionelle'' Beschleunigungskarte, \emph{OpenCL} oder spezielle Bibliotheken
+		
+		\item \textbf{MIC}:
+		Gewöhnliche x86 Architektur, \emph{OpenMP} oder \emph{OpenCL}
+	\end{itemize}
 	\end{frame}
 
 	\subsection{Aufgabe 4}
