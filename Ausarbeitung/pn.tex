@@ -241,11 +241,11 @@ Anhand der Ausgabe von ompP kann leicht gesehen werden, dass wenige der Threads 
 
 
 \subsubsection{}	
-\begin{description}
-	\item[Race Condition] \hfill \\
+\begin{itemize}
+	\item \textbf{Race Condition} \\
 	Auch bekannt als Wettlaufsituation. Mehrere Fäden greifen lesend und schreibend auf die gleiche Variable zu. Durch den gleichzeitigen Zugriff auf die Variable durch die anderen Fäden hängt das Ergebnis von der konkreten Ausführungsreihenfolge ab. Das Ergebnis kann der Erwartung entsprechen, muss aber nicht. Die Lösung hierfür ist Synchronisation, beispielsweise mittels atomarer Variablenzugriffe oder Barriere. Damit kann sicher gestellt werden, dass kein anderer Faden die Variable manipuliert während ein Faden mit ihr arbeitet.
 	
-	\item[Dead lock] \hfill \\
+	\item \textbf{Dead lock} \\
 	Auch bekannt als Verklemmung. Erfordert mindestens zwei Fäden, die gegenseitig auf eine Resource warten, die gerade vom jeweils anderen Faden bereits allokiert wurde (formal: Zyklus im Allokationsgraphen). Damit tatsächlich alle Beteiligten Fäden nicht mehr weiter laufen können, müssen folgende Bedingungen erfüllt sein:
 	\begin{itemize}
 		\item Resourcen können nicht von außen freigegeben werden
@@ -254,17 +254,17 @@ Anhand der Ausgabe von ompP kann leicht gesehen werden, dass wenige der Threads 
 		\item Es besteht eine zyklische Abhängigkeit im Allokationsgraphen
 	\end{itemize}
 
-	\item[Bibliotheken] \hfill \\
+	\item \textbf{Bibliotheken} \\
 	Eine Fehlerquelle kann die Verwendung von Bibliotheken in einem parallelen Kontext darstellen, die nicht hierfür konstruiert wurden. Wenn eine Bibliothek beispielsweise von verschiedenen Fäden aus aufgerufen wird, aber intern keine Synchronisationsmechanismen bereithält, kann es auch hier zu Wettlaufsituationen kommen, die jedoch unter Umständen noch schwieriger zu lokalisieren sind.
 	Auch kann es passieren, dass eine geplante Parallelisierung sich aufgrund Synchronisationsmechanismen innerhalb einer Bibliothek nicht wie erwartet umsetzen lässt. In diesem Fall wird die Implementierung der Bibliothek zum Flaschenhals der Parallelisierung.
 	Um solche Fehler zu vermeiden, blockieren manche Bibliotheken Aufrufe, die nicht aus einem bestimmten Faden stammen. Verlassen sollte sich der Entwickler auf solche Mechanismen jedoch nicht. Viele Bibliotheken geben inzwischen in ihrer Dokumentation Hinweise auf den möglichen Einsatz im parallelen Kontext.
 	
-	\item[Messeffekt] \hfill \\
+	\item \textbf{Messeffekt} \\
 	Wenn man das Debuggen zum Softwareentwurf zählt, so wären als weitere Fehlerquelle auch \emph{Messeffekte} zu nennen. Verbreitete Methoden zum Debuggen, wie etwa die Ausgabe von Information auf der Konsole, können bereits selbst die Ausführung des parallelen Programms beeinflussen. So kann es passieren, dass die Mechanismen, die einen Fehler aufspüren sollen, dazu führen, dass dieser nicht weiter auftritt.
 	
-	\item[Cacheeffekte] \hfill \\
+	\item \textbf{Cacheeffekte} \\
 	Spielt ebenfalls weniger im Entwurf eine Rolle, als in der Implementierung. Die meisten Prozessoren haben einen eigenen Cache für jeden Rechenkern. Wenn nun verschiedene Fäden auf verschiedenen Kernen gleichzeitig auf der gleichen Variablen arbeiten, so kann es passieren, dass mangels Synchronisation zwischen den Caches der eine Faden die vom anderen Faden verursachte Änderung nicht \emph{sieht}. Lösung hierfür sind spezielle Mechanismen des Prozessors, um Caches bei Bedarf zu Synchronisieren. In C kann man hierfür eine Variable als \texttt{volatile} definieren.
-\end{description}
+\end{itemize}
 
 
 
@@ -272,20 +272,36 @@ Anhand der Ausgabe von ompP kann leicht gesehen werden, dass wenige der Threads 
 
 
 \subsubsection{}
-Die Vor- und Nachteile verschiedener paralleler Architekturen bezüglich zweier Aspekte sind in Tabelle \ref{parallelarch} aufgetragen.
+Im Folgenden werden einige parallele Architekturen genauer erläutert. Ein grober Vergleich zur CPU kann Tabelle \ref{parallelarch} entnommen werden.
+\begin{itemize}
+	\item \textbf{CPU} \\
+	Die CPU stellt einen großen Instruktionssatz zur Verfügung und kann komplexe Sprünge im Code abarbeiten. Durch Techniken wie Sprungvorhersagen lässt sich in diesen Fällen die Performance steigern und mit Out-of-Order Architekturen erhält man einen hohen Grad an Instruktionslevel-Parallelismus. Im Allgemeinen finden sich selten mehr als 8 CPU Kerne in einem herkömmlichen Rechner. Es bietet sich die ,,gewöhnliche'' Programmierung an.
+
+	\item \textbf{GPU} \\
+	Moderne Rechner haben fast alle eine GPU verbaut, welche anders als die CPU keine komplexen Befehle abarbeiten kann, sondern durch eine sehr hohe Anzahl an einfachen Rechnenkernen massive Parallelität bereitstellen kann. Dieser Beschleuniger arbeitet auf einem Befehlsstrom und führt diesen mehrfach aus (\emph{Single Instruction, Multiple Data} -- kurz \emph{SIMD}). Um GPUs für ein eigenes Progromm zu nutzen helfen Bibliotheken wie \emph{CUDA} (nVidia spezifisch), oder \emph{OpenCL}.
+
+	\item \textbf{FPGA} \\
+	Ein FPGA Board kann beliebige Hardware-Eigenschaften bereitstellen, sofern diese vorher auf das FPGA aufgespielt wurden. Im Allgemeinen werden FPGAs zum Testen von, Chips welche sich noch in der Entwicklung befinden, verwendet. Aber das FPGA kann auch als ,,multifunktionelle'' Beschleunigungskarte eingesetzt werden (lässt sich sehr gut an Anforderungen anpassen). Um ein FPGA zu programmieren bietet sich \emph{OpenCL} an, oder eine der Bibliotheken welche die implementierte Schaltung nutzt.
+
+	\item \textbf{MIC} (Intel \emph{Many Integrated Core}) \\
+	Die Grundidee von MICs ist, die gewöhnliche x86 CPU Architektur zur Verfügung zu stellen, aber dabei die Parallelität verglichen mit normalen CPUs zu erhöhen. Dies wird durch ein Zusammenschalten von mehreren CPUs auf einem Chip erreicht, welche dann über PCIe mit dem Hostsystem kommunizieren. Es wurde bewusst die x86 Architektur gewählt, damit bekannte Parallelisierungstools wie \emph{OpenMP} oder \emph{OpenCL} genutzt werden können. 
+\end{itemize}
+
 \begin{table}
 	\centering
 	\begin{tabular}{l | p{4cm} p{4cm}}
-		Architektur & Anwenderfreundlichkeit & Energieeffizienz \\
+		Beschleuniger & Parallelität & Anwenderfreundlichkeit \\
 		\hline
-		GPU & Gut & Mittel \\
-		CPU & Gut & Gering \\
-		FPGA & Gering & Sehr gut \\
-		MIC & Gut & Gut
+		CPU & Niedrig & Gut \\
+		GPU & Sehr hoch & Mittel \\
+		FPGA & Hoch & Abhängig von Bibliotheken \\
+		MIC & (Sehr) hoch & Gut
 	\end{tabular}
-	\caption{Verschiedene Beschleuniger im Vergleich}
+	\caption{Verschiedene Beschleuniger im Vergleich, die CPU wird als Referenz verwendet.}
 	\label{parallelarch}
 \end{table}
+
+\TODO{Quellen fehlen noch}
 
 
 
