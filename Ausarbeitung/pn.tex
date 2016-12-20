@@ -182,6 +182,7 @@ In den Tabellen \ref{2b_1000} und \ref{2b_2000} wird der Einfluss von Optimierun
 \subsubsection{}\label{p1a2c}
 Anhand der Ausgabe von \emph{OpenMP} kann leicht gesehen werden, dass wenige der Threads einen Großteil der Arbeit leisten, was bei der Verwendung von reduction zu erwarten ist. Durch die explizite Angabe des Scheduling und der Chunksize kann die Arbeit besser verteilt werden. In Tabelle \ref{2c_mandelbrot} kann der Einfluss der Optionen auf die Laufzeit abgelesen werden.
 \begin{table}
+	\centering
 \begin{tabular}{|c|c|c|c|c|c|}
 	\hline
 	        & auto & Chunks.=1 & Chunks.=10 & Chunks.=100 & Chunks.=1000 \\ \hline
@@ -420,7 +421,7 @@ In jedem Berechnungsschritt wird genaue eine Iterierte des Verfahrens berechnet.
 		8 & 255 & 65.025 & 115 & 81 & 1,42 & 45,3 & 2,54 & 25,33 & 4,54 \\
 		9 & 511 & 261.121 & 1340 & 943 & 1,42 & 504 & 2,67 & 177 & 7,57 \\
 	\end{tabular}
-	\caption{Laufzeiten unserer Parallelisierung gegenüber der sequentiellen Version. Getestet wurde auf dem Rechner \emph{i82pc31}. Um Ungenauigkeiten auszugleichen wurden die Zeiten jeweils über $100$ (für große Eingaben über $10$) Durchläufe gemittelt.}
+	\caption{Laufzeiten unserer Parallelisierung gegenüber der sequentiellen Version. Getestet wurde auf dem Rechner \emph{i82sn07}. Um Ungenauigkeiten auszugleichen wurden die Zeiten jeweils über $100$ (für große Eingaben über $10$) Durchläufe gemittelt.}
 	\label{gsv_runtime}
 \end{table}
 	
@@ -565,7 +566,7 @@ Unsere parallele Version des CG-Verfahrens konnte gegenüber dem Gauß-Seidel-Verf
 		8 & 255 & 65.025 & 17,9 & 16,5 & 8,27 & 16,8 & 1,05 & 4,05 & 0,127 \\
 		9 & 511 & 261.121 & 27,6 & 25,9 & 12,9 & 39,5 & 2,47 & 37,9 & 1,18
 	\end{tabular}
-	\caption{\emph{Speedup} und \emph{Efficiency} für das CG-Verfahren gegenüber dem Gauß-Seidel-Verfahren für das Problem aus Aufgabe \ref{p1a5}. Die zugrunde liegenden Laufzeiten wurden anhand des Rechners \emph{i82pc31} ermittelt.}
+	\caption{\emph{Speedup} und \emph{Efficiency} für das CG-Verfahren gegenüber dem Gauß-Seidel-Verfahren für das Problem aus Aufgabe \ref{p1a5}. Die zugrunde liegenden Laufzeiten wurden anhand des Rechners \emph{i82sn07} ermittelt.}
 	\label{a5a6speedupefficiency}
 \end{table}
 
