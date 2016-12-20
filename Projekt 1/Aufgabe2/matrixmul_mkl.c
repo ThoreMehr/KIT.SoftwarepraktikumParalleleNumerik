@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <sys/time.h>
 #include <stdlib.h>
-#include <mkl_cblas.h>
+//#include <mkl_cblas.h>
+#include "mkl.h"
 #ifndef N
 	#define N 500
 #endif
@@ -20,15 +21,16 @@
   		fclose (pFile);
   		float* m3=malloc(sizeof(float)*N*N);//output matrix
   		//float m3[N][N];
-  		int i,j,k=0;
-  		
+  		int i=0;
+		for(i=0;i<N*N;i++)
+			m3[i]=0.0;
 		struct timeval time1,time2;
 		struct timezone zone;	
 		gettimeofday(&time1,&zone);
   		cblas_sgemm(CblasRowMajor,CblasNoTrans,CblasNoTrans,N,N,N,1.0,m1,N,m2,N,0.0,m3,N);
     	gettimeofday(&time2,&zone);
     	
-		float t=((time2.tv_usec-time1.tv_usec)+(time2.tv_sec-time1.tv_sec)*1000000)/1000000.0;	
+		double t=((time2.tv_usec-time1.tv_usec)+(time2.tv_sec-time1.tv_sec)*1000000)/1000000.0;	
 		printf("time:%f s\n",t);
     
    		pFile = fopen (argv[3], "wb");
