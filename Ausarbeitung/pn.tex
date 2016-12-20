@@ -180,33 +180,27 @@ In den Tabellen \ref{2b_1000} und \ref{2b_2000} wird der Einfluss von Optimierun
 	\label{2b_2000}
 \end{table}
 \subsubsection{}\label{p1a2c}
-Anhand der Ausgabe von \emph{OpenMP} kann leicht gesehen werden, dass wenige der Threads einen Großteil der Arbeit leisten, was bei der Verwendung von reduction zu erwarten ist. Dies kann durch die explizite Angabe von Scheduling und Chuncksize verbessert werden.
+Anhand der Ausgabe von \emph{OpenMP} kann leicht gesehen werden, dass wenige der Threads einen Großteil der Arbeit leisten, was bei der Verwendung von reduction zu erwarten ist. Durch die explizite Angabe des Scheduling und der Chunksize kann die Arbeit besser verteilt werden. In Tabelle \ref{2c_mandelbrot} kann der Einfluss der Optionen auf die Laufzeit abgelesen werden.
 \begin{table}
-\begin{tabular}{|c|c|c|c|c|}
-	\hline 
-	& Chunks.=1 & Chunks.=10 & Chunks.=100 &Chunks.=1000   \\ 
-	\hline 
-	N=3000 &  &  &  &  \\  \hline
-	static & 0,25 & 0,21 & 0,61 & 3,59 \\ 
-	\hline 
-	dynamic & 0,21 & 0,20 & 0,60 & 3,59 \\ 
-	\hline 
-	guided & 0,35 & 0,34 & 0,61 & 3,58 \\ 
-	\hline 
-	auto & 0,22 & 0,21 & 0,60 & 3,59 \\ 
-	\hline 
-	N=5000 &  &  &  &  \\ 
-	\hline 
-	static & 0,48 & 0,49 & 1,08 & 7,71 \\ 
-	\hline 
-	dynamic & 0,44 & 0,41 & 1,07 & 7,69 \\ 
-	\hline 
-	quided & 0,91 & 0,98 & 1,07 & 7,71 \\ 
-	\hline 
-	auto & 0,48 & 0,46 & 1,07 & 7,71 \\ 
-	\hline 
+\begin{tabular}{|c|c|c|c|c|c|}
+	\hline
+	        & auto & Chunks.=1 & Chunks.=10 & Chunks.=100 & Chunks.=1000 \\ \hline
+	N=4000  & \multicolumn{4}{|l}{Maxiter=500}            &  \\ \hline
+	static  & 0,99 &   0,38    &    0,35    &    0,89     &     5,02     \\ \hline
+	dynamic & 0,37 &   0,31    &    0,30    &    0,84     &     5,02     \\ \hline
+	N=8000  & \multicolumn{4}{|l}{Maxiter=500}            &  \\ \hline
+	static  & 3,91 &   1,16    &    1,15    &    1,79     &    13,74     \\ \hline
+	dynamic & 1,20 &   1,08    &    1,08    &    1,76     &    13,74     \\ \hline
+	\hline
+	& auto & Chunks.=1 & Chunks.=10 & Chunks.=100 & Chunks.=1000 \\ \hline
+	N=4000  & \multicolumn{4}{|l}{Maxiter=1000}            &  \\ \hline
+	static  & 1,91 &   0,60    &    0,54    &    1,69    &     9,70     \\ \hline
+	dynamic & 0,54 &   0,51    &    0,52    &    1,64     &     9,70     \\ \hline
+	N=8000  & \multicolumn{4}{|l}{Maxiter=1000}            &  \\ \hline
+	static  & 1,97 &   1,95    &    2,07    &    3,44     &    26,84     \\ \hline
+	dynamic & 1,99 &   1,99    &    2,00    &    3,52     &    26,85     \\ \hline
 \end{tabular} 
-\caption{Einfluss von Scheduling und Chunksize auf die Laufzeit von Mandelbrot. Getestet wurde auf dem Rechner \emph{i82pc31}. Um Ungenauigkeiten auszugleichen wurden die Zeiten jeweils über $10$ Durchläufe gemittelt.}
+\caption{Einfluss von Scheduling und Chunksize auf die Laufzeit von Mandelbrot. Getestet wurde auf dem Rechner \emph{i82sn07} mit 32 Threads. Um Ungenauigkeiten auszugleichen wurden die Zeiten jeweils über $10$ Durchläufe gemittelt.}
 \label{2c_mandelbrot}
 \end{table}
 
