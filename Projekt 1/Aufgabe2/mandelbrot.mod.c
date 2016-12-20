@@ -15,13 +15,10 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/time.h>
-#ifndef N
-	#define N 5000                    
-#endif
-#ifndef maxiter
-	#define maxiter 500
-#endif
+
+#define N 2000                    
+#define maxiter 500
+
 
 typedef struct {
 	float re, im;
@@ -50,19 +47,16 @@ int main() {
 	int *T;
 	
 	T = (int*) malloc(sizeof(int)*N*N);
-	float tp;
-	printf("Starting calculation for N=%d... with %d threads\n", N,omp_get_max_threads());
-	struct timeval time1,time2;
-	struct timezone zone;	
-	gettimeofday(&time1,&zone);
-			
-POMP_Parallel_fork(&omp_rd_27);
-#line 52 "mandelbrot.c"
-	#pragma omp parallel     private(j,z,kappa,k) shared(T)                  
-{ POMP_Parallel_begin(&omp_rd_27);
-POMP_For_enter(&omp_rd_27);
-#line 52 "mandelbrot.c"
- #pragma omp          for                                schedule(runtime) nowait
+	
+	printf("Starting calculation for N=%d...\n", N);
+	
+POMP_Parallel_fork(&omp_rd_1);
+#line 46 "mandelbrot.c"
+	#pragma omp parallel     private(i,j,z,kappa,k)
+{ POMP_Parallel_begin(&omp_rd_1);
+POMP_For_enter(&omp_rd_1);
+#line 46 "mandelbrot.c"
+ #pragma omp          for                        nowait
 	for (i=0; i<N; i++) {
 		for (j=0; j<N; j++) {
 			z.re = kappa.re = (4.0*(i-N/2))/N;
@@ -77,16 +71,14 @@ POMP_For_enter(&omp_rd_27);
 			}
 		}
 	}
-POMP_Barrier_enter(&omp_rd_27);
+POMP_Barrier_enter(&omp_rd_1);
 #pragma omp barrier
-POMP_Barrier_exit(&omp_rd_27);
-POMP_For_exit(&omp_rd_27);
-POMP_Parallel_end(&omp_rd_27); }
-POMP_Parallel_join(&omp_rd_27);
-#line 67 "mandelbrot.c"
-	gettimeofday(&time2,&zone);
-	tp=((time2.tv_usec-time1.tv_usec)+(time2.tv_sec-time1.tv_sec)*1000000)/1000000.0;	
-	printf("time:%f s\n",tp);
+POMP_Barrier_exit(&omp_rd_1);
+POMP_For_exit(&omp_rd_1);
+POMP_Parallel_end(&omp_rd_1); }
+POMP_Parallel_join(&omp_rd_1);
+#line 61 "mandelbrot.c"
+	
 	#ifdef IMAGE_OUTPUT
 	printf("Writing simple image file...\n");
 	
