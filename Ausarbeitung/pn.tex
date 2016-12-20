@@ -180,7 +180,7 @@ In den Tabellen \ref{2b_1000} und \ref{2b_2000} wird der Einfluss von Optimierun
 	\label{2b_2000}
 \end{table}
 \subsubsection{}\label{p1a2c}
-Anhand der Ausgabe von \emph{OpenMP} kann leicht gesehen werden, dass wenige der Threads einen Groﬂteil der Arbeit leisten, was bei der Verwendung von reduction zu erwarten ist. Dies kann durch die explizite Angabe von Scheduling und Chuncksize verbessert werden.
+Anhand der Ausgabe von \emph{OpenMP} kann leicht gesehen werden, dass wenige der Threads einen Groﬂteil der Arbeit leisten, was bei der Verwendung von reduction zu erwarten ist. Durch die explizite Angabe des Scheduling und der Chunksize kann die Arbeit besser verteilt werden. In Tabelle \ref{2c_mandelbrot} kann der Einfluss der Optionen auf die Laufzeit abgelesen werden.
 \begin{table}
 \begin{tabular}{|c|c|c|c|c|c|}
 	\hline

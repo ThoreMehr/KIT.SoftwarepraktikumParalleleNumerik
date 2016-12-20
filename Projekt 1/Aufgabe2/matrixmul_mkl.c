@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <sys/time.h>
 #include <stdlib.h>
-#include <mkl.h>
+#include <mkl_cblas.h>
 #ifndef N
 	#define N 500
 #endif
