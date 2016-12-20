@@ -1,0 +1,46 @@
+__________________________________________________________________________________________
+|ID|Short Des|Seve|C|Context[|Description                            |1st Acces|2nd Acces|
+|  |cription |rity|o|Best]   |                                       |s[Best]  |s[Best]  |
+|  |         |Name|u|        |                                       |         |         |
+|  |         |    |n|        |                                       |         |         |
+|  |         |    |t|        |                                       |         |         |
+__________________________________________________________________________________________
+|1 |Write -> |Erro|1|"demo_wi|Memory read at "demo_with_bugs.c":27   |"demo_wit|"demo_wit|
+|  |Read     |r   | |th_bugs.|conflicts with a prior memory write at |h_bugs.c"|h_bugs.c"|
+|  |data-race|    | |c":24   |"demo_with_bugs.c":26 (flow dependence)|:26      |:27      |
+__________________________________________________________________________________________
+|2 |Write -> |Erro|1|"demo_wi|Memory read at "demo_with_bugs.c":50   |"demo_wit|"demo_wit|
+|  |Read     |r   | |th_bugs.|conflicts with a prior memory write at |h_bugs.c"|h_bugs.c"|
+|  |data-race|    | |c":41   |"demo_with_bugs.c":45 (flow dependence)|:45      |:50      |
+__________________________________________________________________________________________
+|3 |Write -> |Erro|9|"demo_wi|Memory write at "demo_with_bugs.c":66  |"demo_wit|"demo_wit|
+|  |Write    |r   |5|th_bugs.|conflicts with a prior memory write at |h_bugs.c"|h_bugs.c"|
+|  |data-race|    | |c":64   |"demo_with_bugs.c":66 (output          |:66      |:66      |
+|  |         |    | |        |dependence)                            |         |         |
+__________________________________________________________________________________________
+|4 |Read ->  |Erro|9|"demo_wi|Memory write at "demo_with_bugs.c":66  |"demo_wit|"demo_wit|
+|  |Write    |r   |5|th_bugs.|conflicts with a prior memory read at  |h_bugs.c"|h_bugs.c"|
+|  |data-race|    | |c":64   |"demo_with_bugs.c":67 (anti dependence)|:67      |:66      |
+__________________________________________________________________________________________
+|5 |Write -> |Erro|9|"demo_wi|Memory read at "demo_with_bugs.c":98   |"demo_wit|"demo_wit|
+|  |Read     |r   | |th_bugs.|conflicts with a prior memory write at |h_bugs.c"|h_bugs.c"|
+|  |data-race|    | |c":96   |"demo_with_bugs.c":98 (flow dependence)|:98      |:98      |
+__________________________________________________________________________________________
+|6 |Write -> |Erro|9|"demo_wi|Memory write at "demo_with_bugs.c":98  |"demo_wit|"demo_wit|
+|  |Write    |r   | |th_bugs.|conflicts with a prior memory write at |h_bugs.c"|h_bugs.c"|
+|  |data-race|    | |c":96   |"demo_with_bugs.c":98 (output          |:98      |:98      |
+|  |         |    | |        |dependence)                            |         |         |
+__________________________________________________________________________________________
+|7 |Thread te|Info|1|Whole   |Thread termination at                  |"demo_wit|"demo_wit|
+|  |rmination|rmat| |Program1|"demo_with_bugs.c":24 - includes stack |h_bugs.c"|h_bugs.c"|
+|  |         |ion | |        |allocation of 2,004 MB and use of 5,891|:24      |:24      |
+|  |         |    | |        |KB                                     |         |         |
+__________________________________________________________________________________________
+|8 |Thread te|Info|1|Whole   |Thread termination at                  |"demo_wit|"demo_wit|
+|  |rmination|rmat| |Program2|"demo_with_bugs.c":24 - includes stack |h_bugs.c"|h_bugs.c"|
+|  |         |ion | |        |allocation of 68 KB and use of 3,246 KB|:24      |:24      |
+__________________________________________________________________________________________
+|9 |Thread te|Info|1|Whole   |Thread termination at                  |"demo_wit|"demo_wit|
+|  |rmination|rmat| |Program3|"demo_with_bugs.c":16 - includes stack |h_bugs.c"|h_bugs.c"|
+|  |         |ion | |        |allocation of 8 MB and use of 7,141 KB |:16      |:16      |
+__________________________________________________________________________________________

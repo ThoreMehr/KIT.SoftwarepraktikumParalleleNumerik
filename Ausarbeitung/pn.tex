@@ -31,8 +31,8 @@
 \renewcommand{\thesubsection}{Aufgabe \arabic{section}.\arabic{subsection}}
 \renewcommand{\thesubsubsection}{\arabic{section}.\arabic{subsection}.\alph{subsubsection})}
 
-\newcommand{\TODO}[1]{\textbf{\Large\color{red}#1}}
-%\newcommand{\TODO}[1]{}
+%\newcommand{\TODO}[1]{\textbf{\Large\color{red}#1}}
+\newcommand{\TODO}[1]{}
 
 \setcounter{tocdepth}{3}
 \setcounter{secnumdepth}{3}
@@ -52,7 +52,7 @@
 \end{abstract}
 
 \section{}\label{p1}
-In diesem Projekt lag der Schwerpunkt auf dem Kennenlernen der Bibliothek \emph{OpenMP} sowie deren Handhabung. Weiter ging es um den \emph{IntelThreadChecker}, ein Programm zum Analysieren von Programmcode auf potentielle Fehler in der Parallelisierung. Zu guter letzt haben wir uns mit der FEM-Methode beschäftigt, dabei im Speziellen mit dem Gauß-Seidel-Verfahren zum Lösen linearer Gleichungen wie sie bei der Differenzenmethode vorkommen. Zu guter letzt betrachteten wir einige andere Verfahren zum Lösen solcher Probleme und haben das CG-Verfahren implementiert.
+In diesem Projekt lag der Schwerpunkt auf dem Kennenlernen der Bibliothek \emph{OpenMP} sowie deren Handhabung. Weiter ging es um den \emph{Intel Thread Checker}, ein Programm zum Analysieren von Programmcode auf potentielle Fehler in der Parallelisierung. Zu guter letzt haben wir uns mit der FEM-Methode beschäftigt, dabei im Speziellen mit dem Gauß-Seidel-Verfahren zum Lösen linearer Gleichungen wie sie bei der Differenzenmethode vorkommen. Zu guter letzt betrachteten wir einige andere Verfahren zum Lösen solcher Probleme und haben das CG-Verfahren implementiert.
 
 \subsection{OpemMP}\label{p1a1}
 
@@ -134,8 +134,6 @@ Wie an der Tabelle \ref{mandel_runtime} abgelesen werden kann, beträgt die Besch
 	\item {Memory read at \textbf{''demo\_with\_bugs.c'':98} conflicts with a prior memory write at \textbf{''demo\_with\_bugs.c'':98} (flow dependence)\\
 		Memory write at \textbf{''demo\_with\_bugs.c'':98} conflicts with a prior memory write at \textbf{''demo\_with\_bugs.c'':98} (OUTPUT dependence)\\
 		 Kann behoben werden in dem das Pragma auf \texttt{\#pragma omp parallel for reduction(+:sum)} geändert wird.}
-	
-	
 \end{enumerate}
 
 \subsubsection{}\label{p1a2b}
@@ -550,7 +548,13 @@ Das Lanczos-Verfahren wäre eine Alternative, vor allem da die Eigenwerte und som
 
 Unsere Parallelisierung arbeitet auf der Ebene der Vektoreinträge, da diese zu großen Teilen unabhängig von einander berechnet werden können (ganz im Gegensatz zum Gauß-Seidel-Verfahren aus \ref{p1a4}). Auch hier kann die dünne Struktur von $A$ dahingehend ausgenutzt werden, dass Berechnungen der Art $A\cdot x$ im Algorithmus für jeden Eintrag im Ergebnisvektor zu vier bedingten Additionen zerfallen. Auch hier muss $A$ daher nicht explizit gespeichert oder berechnet werden.
 
-\TODO{Implementierung soll mit Hilfe der \emph{kennengelernten Werkzeuge} analysiert werden.}
+Der \emph{Intel Thread Checker} gibt für unser Programm Folgendes aus:
+\begin{itemize}
+	\item Thread termination at \textbf{''cg\_parallel.c'':31} - includes stack allocation of 2,004 MB and use of 4,793 KB
+	\item Thread termination at \textbf{''cg\_parallel.c'':31} - includes stack allocation of 68 KB and use of 3,246 KB
+	\item Thread termination at \textbf{''cg\_parallel.c'':100} - includes stack allocation of 8 MB and use of 127,168 KB
+\end{itemize}
+
 
 \subsubsection{}\label{p1a6b}
 Unsere parallele Version des CG-Verfahrens konnte gegenüber dem Gauß-Seidel-Verfahren das Problem aus Aufgabe \ref{p1a5} bis zu $40$-mal so schnell lösen. Eine Übersicht über den \emph{Speedup} sowie die \emph{Efficiency} ist in Tabelle \ref{a5a6speedupefficiency} zu finden.

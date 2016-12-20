@@ -1,0 +1,6 @@
+Bibliotheken nicht für parallele programme gedacht
+
+
+
+Weitere Fehlerquellen wären unteranderem die Nutzung von externen Bibliotheken welche nicht den Anforderungen des Softwaresystems entsprechen. Im ersten Projekt: hohe Parallelität - es könnten Berechnungsfehler auftreten (auch als Race Condition), oder das zu parallelisierende Programm in eine quasi-sequentielle Ausführung zwingen, also würde dies einen Flaschenhals darstellen
+Falls nun noch das Debuggen zum Softwareentwurf zählt wären auch Messeffekte zu nennen. Sei es unter einer Ausgabe auf der Console oder über andere Methodiken, alles kann den Ablauf mehrerer Fäden verändern und so ist es möglich, dass beim Messen die Fehler nicht mehr auftreten, welche vorher noch ihre Auswirkung gezeigt haben.

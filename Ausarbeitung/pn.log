@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.4.21)  20 DEC 2016 14:22
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.4.21)  20 DEC 2016 15:46
 entering extended mode
 **./pn.tex
 (pn.tex
@@ -910,17 +910,17 @@ LaTeX Font Info:    Try loading font information for T1+cmtt on input line 124.
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 214--215
+Underfull \hbox (badness 10000) in paragraph at lines 212--213
 
  []
 
 [3] [4]
-Underfull \hbox (badness 10000) in paragraph at lines 216--218
+Underfull \hbox (badness 10000) in paragraph at lines 214--216
 
  []
 
 
-Overfull \hbox (1.93427pt too wide) in paragraph at lines 247--249
+Overfull \hbox (1.93427pt too wide) in paragraph at lines 245--247
 \T1/cmr/m/n/10 Auch be-kannt als Wett-lauf-si-tua-ti-on. Meh-re-re Fä-den grei-
 fen le-send und schrei-
  []
@@ -937,14 +937,14 @@ File: lstlang1.sty 2015/06/04 1.6 listings language file
 ty"
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 ) [8]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 341.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 339.
 
 
 ("C:\Users\Lobby\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 341.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 339.
 
 (gsv_node_dependence.pdf_tex
 <gsv_node_dependence.pdf, id=211, page=1, 85.82553pt x 85.82553pt>
@@ -957,59 +957,59 @@ Package pdftex.def Info: gsv_node_dependence.pdf, page1 used on input line 52.
 Underfull \vbox (badness 3354) has occurred while \output is active []
 
  [9 <./gsv_node_dependence.pdf>] [10] [11]
-Underfull \hbox (badness 10000) in paragraph at lines 436--437
+Underfull \hbox (badness 10000) in paragraph at lines 434--435
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 437--438
+Underfull \hbox (badness 10000) in paragraph at lines 435--436
 
  []
 
 [12] <a5l3.pdf, id=267, 614.295pt x 794.97pt>
 File: a5l3.pdf Graphic file (type pdf)
  <use a5l3.pdf>
-Package pdftex.def Info: a5l3.pdf used on input line 476.
+Package pdftex.def Info: a5l3.pdf used on input line 474.
 (pdftex.def)             Requested size: 110.56831pt x 143.08842pt.
 
 <a5l4.pdf, id=268, 614.295pt x 794.97pt>
 File: a5l4.pdf Graphic file (type pdf)
  <use a5l4.pdf>
-Package pdftex.def Info: a5l4.pdf used on input line 477.
+Package pdftex.def Info: a5l4.pdf used on input line 475.
 (pdftex.def)             Requested size: 110.56831pt x 143.08842pt.
 
 <a5l5.pdf, id=269, 614.295pt x 794.97pt>
 File: a5l5.pdf Graphic file (type pdf)
  <use a5l5.pdf>
-Package pdftex.def Info: a5l5.pdf used on input line 478.
+Package pdftex.def Info: a5l5.pdf used on input line 476.
 (pdftex.def)             Requested size: 110.56831pt x 143.08842pt.
  [13 <./a5l3.pdf> <./a5l4.pdf> <./a5l5.pdf>] [14]
-Overfull \hbox (10.20184pt too wide) in paragraph at lines 560--571
+Overfull \hbox (10.20184pt too wide) in paragraph at lines 564--575
  [][] 
  []
 
 [15]
-Underfull \hbox (badness 1377) in paragraph at lines 601--602
+Underfull \hbox (badness 1377) in paragraph at lines 605--606
 []|\T1/cmr/m/n/9 Sehr ho-he Par-al-le-li-tät (meh-re-re hun-dert-tau-send
  []
 
 
-Overfull \hbox (17.57198pt too wide) in paragraph at lines 587--610
+Overfull \hbox (17.57198pt too wide) in paragraph at lines 591--614
  [][] 
  []
 
 (pn.bbl [16])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 624.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 628.
  [17
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 624.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 628.
  (pn.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 624.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 624.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 628.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 628.
 Package rerunfilecheck Info: File `pn.out' has not changed.
 (rerunfilecheck)             Checksum: A58551A5F3006B3B9027A5371C7329FB;1845.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 624.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 628.
  ) 
 Here is how much of TeX's memory you used:
  19387 strings out of 493634
@@ -1053,7 +1053,7 @@ al/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/Lobby
 /AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:
 /Users/Lobby/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/symb
 ols/msbm10.pfb>
-Output written on pn.pdf (17 pages, 612716 bytes).
+Output written on pn.pdf (17 pages, 613024 bytes).
 PDF statistics:
  861 PDF objects out of 1000 (max. 8388607)
  106 named destinations out of 1000 (max. 500000)
