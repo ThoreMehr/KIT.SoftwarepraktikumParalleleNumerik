@@ -65,18 +65,46 @@
 	\subsection{Aufgabe 1}
 	\begin{frame}
 		\frametitle{Aufgabe 1 -- OpenMP}
-		
-		Test
+		PI\\
+		\begin{itemize}
+			\item Reihnfolge der Threads nicht determinitisch
+			\item Per Crital parallel langsamer als sequenziel
+			\item Mit großen N und reduction Speedup nahe Kernzahl
+		\end{itemize}
+		Mandelbrot\\
+		\begin{itemize}
+			\item Speedup kleiner
+			\item wegen Speicherverwaltung und Caches
+		\end{itemize}
 	\end{frame}
 
 	\subsection{Aufgabe 2}
 	\begin{frame}
-		\frametitle{Aufgabe 2 -- Tools}
+		\frametitle{Aufgabe 2a) -- Tools}
 		
 		\begin{itemize}
-			\item A
-			\item B
-			\item C
+			\item Meisten Fehler gefunden
+			\item Durch Pragmas zu beheben
+		\end{itemize}
+	\end{frame}
+	\begin{frame}
+		\frametitle{Aufgabe 2b) -- Tools}
+		\begin{itemize}
+			\item O0-O3 sequenziell Pervormace ICC~GCC
+			\item O0-O3 parallel ICC schneller
+			\item ICC fast viel schneller
+			\item ICC macht größeren Binary ~x2
+			\item ICC fast riesiege Binary (~30kb vs 1,4MB)
+			\item äußere Schleife parallel am schnellsten
+		\end{itemize}
+	\end{frame}
+	\begin{frame}
+		\frametitle{Aufgabe 2c) -- Tools}
+		\begin{itemize}
+			\item Mit expliziten Chunksize etwa dynamic und static gleich schnell
+			\item auto Chunksize mit static langsam
+			\item je weniger Arbeit, desto stärker ist der Effekt
+			\item zu große Chunksize sehr langsam
 		\end{itemize}
 	\end{frame}
 	
