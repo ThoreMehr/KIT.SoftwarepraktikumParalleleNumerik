@@ -30,7 +30,9 @@
 \renewcommand{\thesection}{Projekt \arabic{section}}
 \renewcommand{\thesubsection}{Aufgabe \arabic{section}.\arabic{subsection}}
 \renewcommand{\thesubsubsection}{\arabic{section}.\arabic{subsection}.\alph{subsubsection})}
+
 \newcommand{\TODO}[1]{\textbf{\Large\color{red}#1}}
+%\newcommand{\TODO}[1]{}
 
 \setcounter{tocdepth}{3}
 \setcounter{secnumdepth}{3}
@@ -180,7 +182,7 @@ In den Tabellen \ref{2b_1000} und \ref{2b_2000} wird der Einfluss von Optimierun
 	\label{2b_2000}
 \end{table}
 \subsubsection{}\label{p1a2c}
-Anhand der Ausgabe von \emph{OpenMP} kann leicht gesehen werden, dass wenige der Threads einen Groﬂteil der Arbeit leisten, was bei der Verwendung von reduction zu erwarten ist. Durch die explizite Angabe des Scheduling und der Chunksize kann die Arbeit besser verteilt werden. In Tabelle \ref{2c_mandelbrot} kann der Einfluss der Optionen auf die Laufzeit abgelesen werden.
+Anhand der Ausgabe von \emph{ompP} kann leicht gesehen werden, dass wenige der Threads einen Groﬂteil der Arbeit leisten, was bei der Verwendung von reduction zu erwarten ist. Durch die explizite Angabe des Scheduling und der Chunksize kann die Arbeit besser verteilt werden. In Tabelle \ref{2c_mandelbrot} kann der Einfluss der Optionen auf die Laufzeit abgelesen werden.
 \begin{table}
 	\centering
 \begin{tabular}{|c|c|c|c|c|c|}
