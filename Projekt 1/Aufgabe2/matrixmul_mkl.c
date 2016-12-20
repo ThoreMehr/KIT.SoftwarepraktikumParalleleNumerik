@@ -2,7 +2,7 @@
 #include <sys/time.h>
 #include <stdlib.h>
 //#include <mkl_cblas.h>
-#include "mkl.h"
+#include <mkl.h>
 #ifndef N
 	#define N 500
 #endif
