@@ -71,6 +71,7 @@ Hello World, this is Thread2
 \subsubsection{}\label{p1a1b}
 \begin{table}
 	\centering
+	\scriptsize
 	\begin{tabular}{r||r||r|r||r|r||r|r||r|r}
 		\multicolumn{1}{c||}{Problemgröße} & Seq. & \multicolumn{2}{c||}{2 Threads}  & \multicolumn{2}{c||}{16 Threads} & \multicolumn{2}{c||}{32 Threads} &
 		\multicolumn{2}{c}{64 Threads} \\
@@ -83,14 +84,14 @@ Hello World, this is Thread2
 		$10^7$ reduction & 0,29 & 0,15 & 1,99 & 0,044 & 6,59 & 0,041& 7,07 & 0,05& 5,8\\
 		\hline
 		$10^8$ reduction & 2,96 & 1,48 & 2 & 0,215 & 13,78 & 0,157& 18,85 & 0,185& 16\\
+		\hline
 		$10^9$ reduction & 28,76 & 14,77 & 1,95 & 1,86 & 15,46 &0,99 &29,05& 1,14 & 25,25\\
 	\end{tabular}
-	\caption{Laufzeiten unserer Parallelisierung gegenüber der sequentiellen Version. Getestet wurde auf dem Rechner \emph{i82sn07}. Um Ungenauigkeiten auszugleichen wurden die Zeiten jeweils über $10$ (für große Eingaben über $5$) Durchläufe gemittelt.}
+	\caption{Laufzeiten der Berechnung von Pi unserer Parallelisierung gegenüber der sequentiellen Version. Getestet wurde auf dem Rechner \emph{i82sn07}. Um Ungenauigkeiten auszugleichen wurden die Zeiten jeweils über $10$ (für große Eingaben über $5$) Durchläufe gemittelt.}
 	\label{pi_runtime}
 \end{table}
-Wie an der Tabelle \ref{pi_runtime} abgelesen werden kann, nähert sich der Speed up mit steigendem N der Speedup in der Variane mit reduction der Anzahl der Kerne an.\\
-Die manuelle Variante hat eine schlechtere Performance, als die Variante ohne parralelisierung. Dies 
-liegt wahrscheinlich an dem Aufwand der getrieben werden muss, um die Threads zu organisieren, daher anzuhalten und wieder zu starten bei jedem critical.
+Wie in Tabelle \ref{pi_runtime} zu sehen, nähert sich der \emph{Speedup} mit zunehmenden $N$ der Anzahl der Kerne an.\\
+Die manuelle Variante hat eine schlechtere Performance, als die Variante ohne Parallelisierung. Dies lässt sich damit begründen, dass \emph{OpenMP} bei der Variante mit \emph{Reduction} weitere Optimierungen umsetzen kann, beispielsweise kann jeder Thread erst einmal all seine eigenen Beiträge aufsummieren, bevor am Ende nach einer einzigen Synchronisation (anstatt bei jeder Schleifenausführung) die Ergebnisse aller Threads aufsummiert werden.
 \subsubsection{}\label{p1a1c}
 \begin{table}
 	\centering
@@ -109,47 +110,52 @@ liegt wahrscheinlich an dem Aufwand der getrieben werden muss, um die Threads zu
 		8000 & 394,05 & 278,34 & 1,44 & 94,60 & 4,16 & 47,85 & 8,24  \\
 		\hline
 	\end{tabular}
-	\caption{Laufzeiten unserer Parallelisierung gegenüber der sequentiellen Version. Getestet wurde auf dem Rechner \emph{i82sn07}. Um Ungenauigkeiten auszugleichen wurden die Zeiten jeweils über $10$ (für große Eingaben über $5$) Durchläufe gemittelt.}
+	\caption{Laufzeiten des Mandelbrot Programms unserer Parallelisierung gegenüber der sequentiellen Version. Getestet wurde auf dem Rechner \emph{i82sn07}. Um Ungenauigkeiten auszugleichen wurden die Zeiten jeweils über $10$ (für große Eingaben über $5$) Durchläufe gemittelt.}
 	\label{mandel_runtime}
 \end{table}
-Wie an der Tabbele \ref{mandel_runtime} abgelesen werden kann, beträgt die Beschleunigung für 2 Threads etwa 1,4, für 16 Threads etwa 4 und für 32 Threads etwa 8. Das die Beschleunigung schlächter ist, als bei der Berechnung von PI liegt meiner Meinung nach daran, das Speicherverwaltung und Caches einen wesentlichen Anteil der Laufzeit ausmachen.
+Wie an der Tabelle \ref{mandel_runtime} abgelesen werden kann, beträgt die Beschleunigung für 2 Threads etwa $1,4$, für 16 Threads etwa 4 und für 32 Threads etwa 8. Dass die Beschleunigung schlechter ist, als bei der Berechnung von PI, liegt meiner Meinung nach daran, dass Speicherverwaltung und Caches einen wesentlichen Anteil der Laufzeit ausmachen.
 
 \subsection{Testtools}\label{p1a2}
-
 \subsubsection{}\label{p1a2a}
 \begin{enumerate}
 	\item {Memory read at \textbf{''demo\_with\_bugs.c'':27} conflicts with a prior memory write at \textbf{''demo\_with\_bugs.c'':26} (flow dependence)\\
-		Kann behoben werden, indem die Schleife aufgeteilt wird in zwei Schleifen mit \#pragma omp prallel for simd.
+		Kann behoben werden, indem die Schleife aufgeteilt wird in zwei Schleifen mit \texttt{\#pragma omp prallel for simd}.
 		}
 	\item {Memory read at \textbf{''demo\_with\_bugs.c'':50} conflicts with a prior memory write at \textbf{''demo\_with\_bugs.c'':45} (flow dependence)\\
-		Kann behoben werden, indem das nowait statement weggelassen wird.
+		Kann behoben werden, indem das \texttt{nowait} statement weggelassen wird.
 		} 
 	\item {Memory read at \textbf{''demo\_with\_bugs.c'':66} conflicts with a prior memory write at \textbf{''demo\_with\_bugs.c'':66} (flow dependence)\\
 		Memory write at \textbf{''demo\_with\_bugs.c'':67} conflicts with a prior memory write at \textbf{''demo\_with\_bugs.c'':66} (anti dependence)\\
-		Kann behoben werden, indem das x private gesetzt wird, indem das pragma zu \#pragma omp parallel for private(x) geändert wird.
+		Kann behoben werden, indem man das \texttt{x} als privat markiert, etwa durch Ersetzen des Pragma durch \texttt{\#pragma omp parallel for private(x)}.
 		}
-	\item{ Vom Thread Checker nicht erkannt.\\ Kann behoben werden in dem das Pragma auf \#pragma omp parallel for lastprivate(x) geändert wird.}
+	\item{ Vom Thread Checker nicht erkannt.\\ Kann behoben werden in dem das Pragma auf \texttt{\#pragma omp parallel for lastprivate(x)} geändert wird.}
 	\item {Memory read at \textbf{''demo\_with\_bugs.c'':98} conflicts with a prior memory write at \textbf{''demo\_with\_bugs.c'':98} (flow dependence)\\
 		Memory write at \textbf{''demo\_with\_bugs.c'':98} conflicts with a prior memory write at \textbf{''demo\_with\_bugs.c'':98} (OUTPUT dependence)\\
-		 Kann behoben werden in dem das Pragma auf \#pragma omp parallel for reduction(+:sum) geändert wird.}
+		 Kann behoben werden in dem das Pragma auf \texttt{\#pragma omp parallel for reduction(+:sum)} geändert wird.}
 	
 	
 \end{enumerate}
 
 \subsubsection{}\label{p1a2b}
-Um die Ausnutzung des Caches zu gewährleisten, wird die eine Matrix als Zeilen-, die andere als Splatenmatrix verarbeitet und nach dem ikj-Algorithmus multipliziert. Es wurden eine lineare Version, sowie drei parralelierte Versionen untersucht. Die Paralelisierten sind erstens eine Version, in der die innerste Schleife mit reduction parralelesiert wurde, zweitens eine in der die mittlere und eine in der die äußere schleife parralelesiert wurden. In den Tabellen \ref{2b_1000} und \ref{2b_2000} wird der Einfluss von Optimierungsoptionen vom GCC und ICC untersucht. Die Messungen wurden auf i82pc31 ausgeführt, da dieser über einen Intel CPU verfügt. Wie aus den Tabellen leicht abgelesen werden kann, sind die unterschiede bei den Stuffen O0 bis O3 gering. GCC schein etwas schnelleren Linearen Code zu generieren, ICC schnelleren parallelen. Wenn hingegen Vektorisierung benutzt werden kann, beim ICC mit der Option fast, wird der Code viel schneller, allerdings auf kosten der Größe, das Binary hat ~1,4 MB statt ~30kB. Im algemeinen ist das Binary, das vom ICC erzeugt wird etwa doppelt so groß, wie das, dass vom GCC erzeugt wird.
+Um die Ausnutzung des Caches zu gewährleisten, wird die eine Matrix als Zeilen-, die andere als Spaltenmatrix verarbeitet und nach dem ikj-Algorithmus multipliziert. Es wurden eine sequentielle, sowie drei parallelisierte Versionen untersucht. Die parallelisierten Versionen unterscheiden sich wie folgt:
+\begin{enumerate}
+	\item Innerste Schleife mittels \emph{Reduction} parallelisiert
+	\item Mittlere Schleife parallelisiert
+	\item Äußere Schleife parallelisiert
+\end{enumerate}
+In den Tabellen \ref{2b_1000} und \ref{2b_2000} wird der Einfluss von Optimierungsoptionen vom GCC und ICC untersucht. Die Messungen wurden auf \emph{i82pc31} ausgeführt, da dieser über eine Intel CPU verfügt. Wie aus den Tabellen abgelesen werden kann, sind die Unterschiede bei den Optimierungsstufen O0 bis O3 gering. GCC scheint etwas schnelleren sequentiellen, ICC hingegen schnelleren parallelen Code zu generieren. Wenn Vektorisierung benutzt werden kann -- beim ICC mit der Option fast -- wird der Code viel schneller, allerdings auf Kosten der Größe, das Binary hat ~1,4 MB statt ~30 kB. Im Allgemeinen ist das Binary, das vom ICC erzeugt wird, etwa doppelt so groß, wie das, dass vom GCC erzeugt wird.
 \begin{table}
 	\centering
 	\begin{tabular}{|r||r|r|r|r|r||r|r|r|r|}
 		\hline
 		          &     \multicolumn{5}{c||}{ICC}     &  \multicolumn{4}{c|}{GCC}  \\ \hline
 		 Optionen &   O0 &   O1 &   O2 &    O3 & fast &   O0 &   O1 &   O2 &    O3 \\ \hline
-		   linear & 9,26 & 1,19 & 1,17 &  1,17 & 0,25 & 9,56 & 1,16 & 1,16 &  1,16 \\ \hline
+      sequentiell & 9,26 & 1,19 & 1,17 &  1,17 & 0,25 & 9,56 & 1,16 & 1,16 &  1,16 \\ \hline
 		reduction & 4,99 & 1,90 & 1,88 & 1,88 & 1,40 & 6,06 & 2,21 & 2,21 & 2,21 \\ \hline
 		 mittlere & 5,88 & 1,02 & 1,02 &  1,02 & 0,96 & 6,95 & 2,55 & 1,12 &  1,18 \\ \hline
 		   äußere & 5,67 & 0,59 & 0,59 &  0,59 & 0,014 & 6,02 & 1,81 & 0,82 &  0,82 \\ \hline
 	\end{tabular}
-	\caption{Laufzeiten in s mit N=1000. Getestet wurde auf dem Rechner \emph{i82pc31}. Um Ungenauigkeiten auszugleichen wurden die Zeiten jeweils über $10$ Durchläufe gemittelt.}
+	\caption{Laufzeiten in s mit N=1000. Getestet wurde auf dem Rechner \emph{i82pc31}. Um Ungenauigkeiten auszugleichen, wurden die Zeiten jeweils über $10$ Durchläufe gemittelt.}
 	\label{2b_1000}
 \end{table}
 
@@ -161,7 +167,7 @@ Um die Ausnutzung des Caches zu gewährleisten, wird die eine Matrix als Zeilen-,
 		\hline
 		Optionen& O0&O1&O2&O3&fast&O0&O1&O2&O3\\		
 		\hline
-		linear &74,58&9,9&9,88&9,86&2,27&76,75&9,76&9,75&9,73\\
+		sequentiell &74,58&9,9&9,88&9,86&2,27&76,75&9,76&9,75&9,73\\
 		\hline
 		reduction&36,67&10,99&10,98&10,95&8,54&43,20&13,76&12,54&12,48\\
 		\hline
@@ -170,11 +176,39 @@ Um die Ausnutzung des Caches zu gewährleisten, wird die eine Matrix als Zeilen-,
 		äußere&46,50&5,19&4,95&4,92&1,15&44,83&15,07&6,93&6,84\\
 		\hline
 	\end{tabular}
-	\caption{Laufzeiten in s mit N=2000. Getestet wurde auf dem Rechner \emph{i82pc31}. Um Ungenauigkeiten auszugleichen wurden die Zeiten jeweils über $10$ Durchläufe gemittelt.}
+	\caption{Laufzeiten in s mit N=2000. Getestet wurde auf dem Rechner \emph{i82pc31}. Um Ungenauigkeiten auszugleichen, wurden die Zeiten jeweils über $10$ Durchläufe gemittelt.}
 	\label{2b_2000}
 \end{table}
 \subsubsection{}\label{p1a2c}
-\TODO{Hier kommt der Text zum c-Teil}
+Anhand der Ausgabe von \emph{OpenMP} kann leicht gesehen werden, dass wenige der Threads einen Großteil der Arbeit leisten, was bei der Verwendung von reduction zu erwarten ist. Dies kann durch die explizite Angabe von Scheduling und Chuncksize verbessert werden.
+\begin{table}
+\begin{tabular}{|c|c|c|c|c|}
+	\hline 
+	& Chunks.=1 & Chunks.=10 & Chunks.=100 &Chunks.=1000   \\ 
+	\hline 
+	N=3000 &  &  &  &  \\  \hline
+	static & 0,25 & 0,21 & 0,61 & 3,59 \\ 
+	\hline 
+	dynamic & 0,21 & 0,20 & 0,60 & 3,59 \\ 
+	\hline 
+	guided & 0,35 & 0,34 & 0,61 & 3,58 \\ 
+	\hline 
+	auto & 0,22 & 0,21 & 0,60 & 3,59 \\ 
+	\hline 
+	N=5000 &  &  &  &  \\ 
+	\hline 
+	static & 0,48 & 0,49 & 1,08 & 7,71 \\ 
+	\hline 
+	dynamic & 0,44 & 0,41 & 1,07 & 7,69 \\ 
+	\hline 
+	quided & 0,91 & 0,98 & 1,07 & 7,71 \\ 
+	\hline 
+	auto & 0,48 & 0,46 & 1,07 & 7,71 \\ 
+	\hline 
+\end{tabular} 
+\caption{Einfluss von Scheduling und Chunksize auf die Laufzeit von Mandelbrot. Getestet wurde auf dem Rechner \emph{i82pc31}. Um Ungenauigkeiten auszugleichen wurden die Zeiten jeweils über $10$ Durchläufe gemittelt.}
+\label{2c_mandelbrot}
+\end{table}
 
 
 
@@ -183,8 +217,7 @@ Um die Ausnutzung des Caches zu gewährleisten, wird die eine Matrix als Zeilen-,
 	Im Folgenden einige bekannte Größen der Parallelisierung, wie sie etwa in der Vorlesung Rechnerstrukturen \cite{RechnerstrukturenVL} gelehrt wurden. \\
 	
 	Vorab sei $T(n)$ die Ausführungszeit auf n Prozessoren,
-	$P(n)$ die Anzahl der auszuführenden Einheitsoperationen und
-	$I(n)$ der Parallelindex. \\
+	$P(n)$ die Anzahl der auszuführenden Einheitsoperationen \\
 	
 	Der Speedup/die Beschleunigung $S(n)$:
 	\begin{equation}
@@ -201,6 +234,11 @@ Um die Ausnutzung des Caches zu gewährleisten, wird die eine Matrix als Zeilen-,
 		R(n) = \frac{P(n)}{P(1)}
 	\end{equation}
 	
+	Der Parallelindex $I(n)$:
+	\begin{equation}
+		I(n)=\frac{P(n)}{T(n)}
+	\end{equation}
+	
 	Die Auslastung $U(n)$:
 	\begin{equation}
 		U(n) = \frac{I(n)}{n} = R(n) \cdot E(n) = \frac{P(n)}{n \cdot T(n)}
@@ -208,11 +246,11 @@ Um die Ausnutzung des Caches zu gewährleisten, wird die eine Matrix als Zeilen-,
 
 
 \subsubsection{}	
-\begin{description}
-	\item[Race Condition] \hfill \\
+\begin{itemize}
+	\item \textbf{Race Condition} \\
 	Auch bekannt als Wettlaufsituation. Mehrere Fäden greifen lesend und schreibend auf die gleiche Variable zu. Durch den gleichzeitigen Zugriff auf die Variable durch die anderen Fäden hängt das Ergebnis von der konkreten Ausführungsreihenfolge ab. Das Ergebnis kann der Erwartung entsprechen, muss aber nicht. Die Lösung hierfür ist Synchronisation, beispielsweise mittels atomarer Variablenzugriffe oder Barriere. Damit kann sicher gestellt werden, dass kein anderer Faden die Variable manipuliert während ein Faden mit ihr arbeitet.
 	
-	\item[Dead lock] \hfill \\
+	\item \textbf{Dead lock} \\
 	Auch bekannt als Verklemmung. Erfordert mindestens zwei Fäden, die gegenseitig auf eine Resource warten, die gerade vom jeweils anderen Faden bereits allokiert wurde (formal: Zyklus im Allokationsgraphen). Damit tatsächlich alle Beteiligten Fäden nicht mehr weiter laufen können, müssen folgende Bedingungen erfüllt sein:
 	\begin{itemize}
 		\item Resourcen können nicht von außen freigegeben werden
@@ -221,17 +259,17 @@ Um die Ausnutzung des Caches zu gewährleisten, wird die eine Matrix als Zeilen-,
 		\item Es besteht eine zyklische Abhängigkeit im Allokationsgraphen
 	\end{itemize}
 
-	\item[Bibliotheken] \hfill \\
+	\item \textbf{Bibliotheken} \\
 	Eine Fehlerquelle kann die Verwendung von Bibliotheken in einem parallelen Kontext darstellen, die nicht hierfür konstruiert wurden. Wenn eine Bibliothek beispielsweise von verschiedenen Fäden aus aufgerufen wird, aber intern keine Synchronisationsmechanismen bereithält, kann es auch hier zu Wettlaufsituationen kommen, die jedoch unter Umständen noch schwieriger zu lokalisieren sind.
 	Auch kann es passieren, dass eine geplante Parallelisierung sich aufgrund Synchronisationsmechanismen innerhalb einer Bibliothek nicht wie erwartet umsetzen lässt. In diesem Fall wird die Implementierung der Bibliothek zum Flaschenhals der Parallelisierung.
 	Um solche Fehler zu vermeiden, blockieren manche Bibliotheken Aufrufe, die nicht aus einem bestimmten Faden stammen. Verlassen sollte sich der Entwickler auf solche Mechanismen jedoch nicht. Viele Bibliotheken geben inzwischen in ihrer Dokumentation Hinweise auf den möglichen Einsatz im parallelen Kontext.
 	
-	\item[Messeffekt] \hfill \\
+	\item \textbf{Messeffekt} \\
 	Wenn man das Debuggen zum Softwareentwurf zählt, so wären als weitere Fehlerquelle auch \emph{Messeffekte} zu nennen. Verbreitete Methoden zum Debuggen, wie etwa die Ausgabe von Information auf der Konsole, können bereits selbst die Ausführung des parallelen Programms beeinflussen. So kann es passieren, dass die Mechanismen, die einen Fehler aufspüren sollen, dazu führen, dass dieser nicht weiter auftritt.
 	
-	\item[Cacheeffekte] \hfill \\
+	\item \textbf{Cacheeffekte} \\
 	Spielt ebenfalls weniger im Entwurf eine Rolle, als in der Implementierung. Die meisten Prozessoren haben einen eigenen Cache für jeden Rechenkern. Wenn nun verschiedene Fäden auf verschiedenen Kernen gleichzeitig auf der gleichen Variablen arbeiten, so kann es passieren, dass mangels Synchronisation zwischen den Caches der eine Faden die vom anderen Faden verursachte Änderung nicht \emph{sieht}. Lösung hierfür sind spezielle Mechanismen des Prozessors, um Caches bei Bedarf zu Synchronisieren. In C kann man hierfür eine Variable als \texttt{volatile} definieren.
-\end{description}
+\end{itemize}
 
 
 
@@ -239,21 +277,36 @@ Um die Ausnutzung des Caches zu gewährleisten, wird die eine Matrix als Zeilen-,
 
 
 \subsubsection{}
-Die Vor- und Nachteile verschiedener paralleler Architekturen bezüglich zweier Aspekte sind in Tabelle \ref{parallelarch} aufgetragen.
+Im Folgenden werden einige parallele Architekturen genauer erläutert. Ein grober Vergleich zur CPU kann Tabelle \ref{parallelarch} entnommen werden.
+\begin{itemize}
+	\item \textbf{CPU} \\
+	Die CPU stellt einen großen Instruktionssatz zur Verfügung und kann komplexe Sprünge im Code abarbeiten. Durch Techniken wie Sprungvorhersagen lässt sich in diesen Fällen die Performance steigern und mit Out-of-Order Architekturen erhält man einen hohen Grad an Instruktionslevel-Parallelismus. Im Allgemeinen finden sich selten mehr als 8 CPU Kerne in einem herkömmlichen Rechner. Es bietet sich die ,,gewöhnliche'' Programmierung an.
+
+	\item \textbf{GPU} \\
+	Moderne Rechner haben fast alle eine GPU verbaut, welche anders als die CPU keine komplexen Befehle abarbeiten kann, sondern durch eine sehr hohe Anzahl an einfachen Rechnenkernen massive Parallelität bereitstellen kann. Dieser Beschleuniger arbeitet auf einem Befehlsstrom und führt diesen mehrfach aus (\emph{Single Instruction, Multiple Data} -- kurz \emph{SIMD}). Um GPUs für ein eigenes Progromm zu nutzen helfen Bibliotheken wie \emph{CUDA} (nVidia spezifisch), oder \emph{OpenCL}.
+
+	\item \textbf{FPGA} \\
+	Ein FPGA Board kann beliebige Hardware-Eigenschaften bereitstellen, sofern diese vorher auf das FPGA aufgespielt wurden. Im Allgemeinen werden FPGAs zum Testen von, Chips welche sich noch in der Entwicklung befinden, verwendet. Aber das FPGA kann auch als ,,multifunktionelle'' Beschleunigungskarte eingesetzt werden (lässt sich sehr gut an Anforderungen anpassen). Um ein FPGA zu programmieren bietet sich \emph{OpenCL} an, oder eine der Bibliotheken welche die implementierte Schaltung nutzt.
+
+	\item \textbf{MIC} (Intel \emph{Many Integrated Core}) \\
+	Die Grundidee von MICs ist, die gewöhnliche x86 CPU Architektur zur Verfügung zu stellen, aber dabei die Parallelität verglichen mit normalen CPUs zu erhöhen. Dies wird durch ein Zusammenschalten von mehreren CPUs auf einem Chip erreicht, welche dann über PCIe mit dem Hostsystem kommunizieren. Es wurde bewusst die x86 Architektur gewählt, damit bekannte Parallelisierungstools wie \emph{OpenMP} oder \emph{OpenCL} genutzt werden können. 
+\end{itemize}
+
 \begin{table}
-	\begin{center}
-		\begin{tabular}{l | p{4cm} p{4cm}}
-			Architektur & Anwenderfreundlichkeit & Energieeffizienz \\
-			\hline
-			GPU & Gut & Mittel \\
-			CPU & Gut & Gering \\
-			FPGA & Gering & Sehr gut \\
-			MIC & Gut & Gut
-		\end{tabular}
-	\end{center}
-	\caption{Verschiedene Beschleuniger im Vergleich}
+	\centering
+	\begin{tabular}{l | p{4cm} p{4cm}}
+		Beschleuniger & Parallelität & Anwenderfreundlichkeit \\
+		\hline
+		CPU & Niedrig & Gut \\
+		GPU & Sehr hoch & Mittel \\
+		FPGA & Hoch & Abhängig von Bibliotheken \\
+		MIC & (Sehr) hoch & Gut
+	\end{tabular}
+	\caption{Verschiedene Beschleuniger im Vergleich, die CPU wird als Referenz verwendet.}
 	\label{parallelarch}
 \end{table}
+
+\TODO{Quellen fehlen noch}
 
 
 
@@ -307,8 +360,8 @@ u[j] = sum / 4;
 	
 	Es wurde gezeigt, wie eine einzelne Iterierte $k$ von $u$ sich berechnen lässt. Würde man dies nun immer wiederholen, so würde sich die Lösung $u$ einem Optimum annähern. Nun haben wir aber eine begrenzte Rechenzeit und müssen daher die Berechnung irgendwann abbrechen, sobald uns das Ergebnis \emph{gut genug} ist. In der Regel kennen wir jedoch die analytische Lösung nicht und wissen daher nicht, wie gut unsere bisherige Lösung ist (sie kann ohnehin durch das Verfahren selbst stark davon abweichen, wie wir in Aufgabe \ref{p1a5} sehen werden).
 	Um das Problem zu lösen, brechen wir ab, sobald der \emph{Fortschritt} zwischen zwei Iterationen klein genug ist. Die Annahme hierbei ist, dass sich die Lösung auch durch weitere Iterationen nur noch wenig ändert.
-	Konkret betrachten wir die maximale Veränderung eines Eintrags zwischen den Iterierten $k$ und $k+1$ von $u$. Formal $maxError:=\|u^{k+1}-u^k\|_{max}$. Unsere Lösung nehmen wir als gut genug an, sobald $maxError<\epsilon_{Error}$ für eine Schranke $\epsilon_{Error}$.
-	Für unsere Implementierung verwenden wir $\epsilon_{Error}=\num{1e-6}$, da es einerseits ausreichend klein ist, um in unseren Tests gute Ergebnisse zu liefern, andererseits groß genug, um in absehbarer Zeit berechnet werden zu können.
+	Konkret betrachten wir die maximale Veränderung eines Eintrags zwischen den Iterierten $k$ und $k+1$ von $u$. Formal $maxError:=\|u^{k+1}-u^k\|_{max}$. Unsere Lösung nehmen wir als gut genug an, sobald $maxError<\varepsilon_{Error}$ für eine Schranke $\varepsilon_{Error}$.
+	Für unsere Implementierung verwenden wir $\varepsilon_{Error}=\num{1e-6}$, da es einerseits ausreichend klein ist, um in unseren Tests gute Ergebnisse zu liefern, andererseits groß genug, um in absehbarer Zeit berechnet werden zu können.
 
 \subsubsection{}\label{p1a4b}
 Eine naive Parallelisierung des in Aufgabe \ref{p1a4a} implementierten Gauß-Seidel-Verfahrens ist nicht möglich, da innerhalb der Berechnung von $u^{k+1}$ -- eine naive Parallelisierung würde versuchen genau diese Berechnung zu parallelisieren, also eine einzelne Iterierte -- Abhängigkeiten zwischen den Einträgen bestehen. Für die Berechnung von $u^{i+k}_{x,y}$ werden diese Abhängigkeiten in Abbildung \ref{gsv_depend} dargestellt. Um etwa $u^{i+k}_{x,y}$ zu berechnen, werden zu erst die Werte von $u^{i+k}_{x-1,y}$ und $u^{i+k}_{x,y-1}$ aus der gleichen Iteration benötigt. Diese wiederum benötigen in gleicher Weise aktuelle Werte von Nachbarknoten.
@@ -373,7 +426,7 @@ In jedem Berechnungsschritt wird genaue eine Iterierte des Verfahrens berechnet.
 		8 & 255 & 65.025 & 115 & 81 & 1,42 & 45,3 & 2,54 & 25,33 & 4,54 \\
 		9 & 511 & 261.121 & 1340 & 943 & 1,42 & 504 & 2,67 & 177 & 7,57 \\
 	\end{tabular}
-	\caption{Laufzeiten unserer Parallelisierung gegenüber der sequentiellen Version. Getestet wurde auf dem Rechner \emph{i82sn07}. Um Ungenauigkeiten auszugleichen wurden die Zeiten jeweils über $100$ (für große Eingaben über $10$) Durchläufe gemittelt.}
+	\caption{Laufzeiten unserer Parallelisierung gegenüber der sequentiellen Version. Getestet wurde auf dem Rechner \emph{i82pc31}. Um Ungenauigkeiten auszugleichen wurden die Zeiten jeweils über $100$ (für große Eingaben über $10$) Durchläufe gemittelt.}
 	\label{gsv_runtime}
 \end{table}
 	
@@ -381,10 +434,12 @@ In jedem Berechnungsschritt wird genaue eine Iterierte des Verfahrens berechnet.
 
 \subsection{Partielle Differentialgleichungen}\label{p1a5}
 \subsubsection{}
-Die Bedingungen lauten nach den Folien der FEM-Einführung: \\
-	$\Omega$ sei ein beschränktes Gebiet\\
-	$\Gamma$ sei hinreichend glatt\\
-	$f:\Omega\rightarrow \mathbb{R}$ gegebene Funktion, wie es hier der Fall ist.\\
+Die Bedingungen lauten nach den Folien der FEM-Einführung:
+\begin{itemize}
+	\item $\Omega$ sei ein beschränktes Gebiet\\
+	\item $\Gamma$ sei hinreichend glatt\\
+	\item $f:\Omega\rightarrow \mathbb{R}$ gegebene Funktion, wie es hier der Fall ist.
+\end{itemize}
 
 
 \subsubsection{}
@@ -416,14 +471,16 @@ u(x,y)=\sin(2\pi x)\sin(2\pi y)
 und wird verwendet um den maximalen Fehler der Näherung zu berechnen.
 
 Das $f$ auf Gleichung \ref{fdef} kann einfach in den Code der vorangegangenen Aufgabe eingesetzt werden. Wie auch \cite{FiniteElemente} entnommen werden kann, lässt sich das Problem mit dem in Aufgabe \ref{p1a4a} gelösten Problem lösen. Es ergeben sich die in Abbildung \ref{grapha5} gezeigten Näherungen. Mit zunehmendem $l$ bzw. abnehmender Gitterkonstante $h$ werden die Lösungen nicht nur feiner, sondern der maximale Fehler zur analytischen Lösung von $u$ auch kleiner wird. Ab $l=8$ wird der Fehler allerdings wieder größer, wie Tabelle \ref{tablea5} entnommen werden kann.
-An dieser Stelle scheint das für das Abbruchkriterium gewählte $\epsilon_{Error}$ aus Aufgabe \ref{p1a4a} zu grob gewählt zu sein, denn eine weitere Verfeinerung dessen reduzierte den Fehler der Näherung (nur) für große $l$ deutlich (was die Frage aufwirft, ob man $\epsilon_{Error}$ abhängig von $l$ wählen sollte).
+An dieser Stelle scheint das für das Abbruchkriterium gewählte $\varepsilon_{Error}$ aus Aufgabe \ref{p1a4a} zu grob gewählt zu sein, denn eine weitere Verfeinerung dessen reduzierte den Fehler der Näherung (nur) für große $l$ deutlich (was die Frage aufwirft, ob man $\varepsilon_{Error}$ abhängig von $l$ wählen sollte).
 
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.18]{a5l2}
+	\vspace{-3em}
 	\includegraphics[scale=0.18]{a5l3}
 	\includegraphics[scale=0.18]{a5l4}
-	\caption{Näherungsweise Lösung für $u$, berechnet mittels Gauß-Seidel-Verfahren. Von links nach rechts: $l=2, l=3, l=4$. Geplottet mittels GNU~Octave.}
+	\includegraphics[scale=0.18]{a5l5}
+	\vspace{-5em}
+	\caption{Näherungsweise Lösung für $u$, berechnet mittels Gauß-Seidel-Verfahren. Von links nach rechts: $l=3, l=4, l=5$ bzw. $h=\frac{1}{8}, h=\frac{1}{16}, h=\frac{1}{32}$. Geplottet mittels GNU~Octave.}
 	\label{grapha5}
 \end{figure}
 
@@ -494,6 +551,8 @@ Bei der Auswahl von diesen drei Verfahren für unser Problem, eignet sich das CG-
 Gegen GMRES spricht nur die möglicherweise langsamere Konvergenz und die hier nicht benötigte Flexibilität auch nicht-symmetrische Matrizen bearbeiten zu können.
 Das Lanczos-Verfahren wäre eine Alternative, vor allem da die Eigenwerte und somit die Konvergenz im Voraus bekannt sind.
 
+Unsere Parallelisierung arbeitet auf der Ebene der Vektoreinträge, da diese zu großen Teilen unabhängig von einander berechnet werden können (ganz im Gegensatz zum Gauß-Seidel-Verfahren aus \ref{p1a4}). Auch hier kann die dünne Struktur von $A$ dahingehend ausgenutzt werden, dass Berechnungen der Art $A\cdot x$ im Algorithmus für jeden Eintrag im Ergebnisvektor zu vier bedingten Additionen zerfallen. Auch hier muss $A$ daher nicht explizit gespeichert oder berechnet werden.
+
 \TODO{Implementierung soll mit Hilfe der \emph{kennengelernten Werkzeuge} analysiert werden.}
 
 \subsubsection{}\label{p1a6b}
@@ -512,11 +571,11 @@ Unsere parallele Version des CG-Verfahrens konnte gegenüber dem Gauß-Seidel-Verf
 		8 & 255 & 65.025 & 17,9 & 16,5 & 8,27 & 16,8 & 1,05 & 4,05 & 0,127 \\
 		9 & 511 & 261.121 & 27,6 & 25,9 & 12,9 & 39,5 & 2,47 & 37,9 & 1,18
 	\end{tabular}
-	\caption{\emph{Speedup} und \emph{Efficiency} für das CG-Verfahren gegenüber dem Gauß-Seidel-Verfahren für das Problem aus Aufgabe \ref{p1a5}. Die zugrunde liegenden Laufzeiten wurden anhand des Rechners \emph{i82sn07} ermittelt.}
+	\caption{\emph{Speedup} und \emph{Efficiency} für das CG-Verfahren gegenüber dem Gauß-Seidel-Verfahren für das Problem aus Aufgabe \ref{p1a5}. Die zugrunde liegenden Laufzeiten wurden anhand des Rechners \emph{i82pc31} ermittelt.}
 	\label{a5a6speedupefficiency}
 \end{table}
 
-Wie auch unsere Implementierung des Gauß-Seidel-Verfahrens aus Aufgabe \ref{p1a4}, nutzen wir hier für unsere Implementierung die dünne Struktur der Matrix $A$ aus. Eine Vorkonditionierung würde diese günstige Struktur beeinträchtigen, wodurch ein sehr viel höherer Rechenaufwand zu erwarten wäre. Gesetzt den Fall unsere Matrix $A$ wäre nicht dünn besetzt, so könnte eine Vorkonditionierung Sinn machen, um die Stabilität des Algorithmus ggf. zu erhöhen.
+Wie auch unsere Implementierung des Gauß-Seidel-Verfahrens aus Aufgabe \ref{p1a4}, nutzen wir hier für unsere Implementierung die dünne Struktur der Matrix $A$ aus. Eine Vorkonditionierung würde diese Struktur beeinträchtigen, wodurch ein sehr viel höherer Rechenaufwand zu erwarten wäre. Gesetzt den Fall unsere Matrix $A$ wäre nicht dünn besetzt, so könnte eine Vorkonditionierung Sinn machen, um die Stabilität des Algorithmus ggf. zu erhöhen.
 
 
 
@@ -524,14 +583,14 @@ Wie auch unsere Implementierung des Gauß-Seidel-Verfahrens aus Aufgabe \ref{p1a4
 In Tabelle \ref{MathBibs} haben wir drei Bibliotheken zur Anwendung der Finiten Elemente Methode aufgelistet und verglichen. Weitere Bibliotheken, die es nicht in die Tabelle geschafft haben, wären beispielsweise Feel++\cite{Feel++} und
 Libmesh\cite{Libmesh}.
 
-Im Rahmen dieses Praktikums würde sich, zumindest für Projekt 1, \emph{HiFlow3} am gut eignen, da hier eine ausgereifte OpenMP Funktionalität gegeben zu sein scheint, die den Portierungsaufwand stark verringert.
+Im Rahmen dieses Praktikums würde sich, zumindest für Projekt 1, \emph{HiFlow\textsuperscript{3}} gut eignen, da hier eine ausgereifte OpenMP Funktionalität gegeben zu sein scheint, die den Portierungsaufwand stark verringert.
 
 \begin{table}
 	\centering
 	\begin{tabular}{l|p{0.6\textwidth}|l}
 		Bibliothek & Unterschiede & Gemeinsamkeiten \\
 		\hline
-		HiFlow3\cite{HiFlow3} &
+		HiFlow\textsuperscript{3}\cite{HiFlow3} &
 		MPI und OpenMP basiert, \\
 		&Hohe Parallelität (von Laptop bis zu Cluster), \\
 		&Keine externen Bibliotheken benötigt (optional Libraries, unter anderem OpenMP)
@@ -542,7 +601,7 @@ Im Rahmen dieses Praktikums würde sich, zumindest für Projekt 1, \emph{HiFlow3} 
 		\cline{1-2}
 		MFEM\cite{MFEM} &
 		MPI basiert (und experimenteller OpenMP Support), \\
-		&Sehr hohe Parallelität (mehrere Hundert Tausend Kerne), \\
+		&Sehr hohe Parallelität (mehrere hunderttausend Kerne), \\
 		&Keine externen Bibliotheken benötigt \\
 		
 		\cline{1-2}
