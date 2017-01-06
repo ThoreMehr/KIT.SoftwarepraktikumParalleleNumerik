@@ -1,0 +1,91 @@
+\documentclass[german,notes,18pt]{beamer}
+\mode<presentation>
+%\usepackage[ngerman, english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{listings}
+\usepackage{eurosym}
+\usepackage{multirow}
+\usepackage{color}
+\usepackage{pdfpages}
+\usepackage{graphicx}
+\usepackage{wasysym}
+
+\usepackage{tabularx}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{graphicx,import}
+\usepackage{siunitx}
+\usepackage[numbers]{natbib}
+\usepackage{multirow}
+\graphicspath{{Bilder/}}
+%\beamertemplatenavigationsymbolsempty
+
+\usetheme{kit}
+
+\title{Projekt 2}
+\subtitle{Arbeiten mit CUDA}
+\author{Thore Mehr, Fabian Miltenberger, Sébastien Thill}
+\date{04.02.2017}
+\institute{Lehrstuhl für Rechnerarchitektur und Parallelverarbeitung (ITEC)}
+
+\definecolor{kit}{HTML}{009682}
+\definecolor{darkgreen}{RGB}{0, 180, 0}
+\definecolor{darkred}{RGB}{180, 0, 0}
+\newcommand{\pro}{$\oplus$}
+\newcommand{\contra}{$\ominus$}
+
+\definecolor{shinygray}{RGB}{245,245,245}
+\lstset{language=Java,
+		keywordstyle=\color{blue}\bfseries,
+		numberstyle=\color{blue},
+		numbers=left,
+		tabsize=4,
+		xleftmargin=3.5em,
+		xrightmargin=2em}
+
+\begin{document}
+	\selectlanguage{ngerman}
+	
+	\frame{\titlepage}
+	
+	\section{Gliederung}
+	\begin{frame}
+		\frametitle{Gliederung}
+		
+		\begin{enumerate}
+			\item Aufgabe 1
+			\item usw.
+		\end{enumerate}
+	\end{frame}
+
+	\section{OpenMP und Tools}
+	\subsection{Aufgabe 1}
+	\begin{frame}
+		\frametitle{Aufgabe 1 -- OpenMP}
+		PI\\
+		\begin{itemize}
+			\item Reihnfolge der Threads nicht determinitisch
+			\item Per Crital parallel langsamer als sequenziel
+			\item Mit großen N und reduction Speedup nahe Kernzahl
+		\end{itemize}
+		Mandelbrot\\
+		\begin{itemize}
+			\item Speedup kleiner
+			\item wegen Speicherverwaltung und Caches
+		\end{itemize}
+	\end{frame}
+
+	
+	\section{Fazit}
+	\subsection{Fazit}
+	\begin{frame}
+		\frametitle{Fazit}
+		
+		\LARGE
+		\centering
+		Mit \emph{CUDA} lässt es sich parallelisieren.
+	\end{frame}
+
+\end{document}
