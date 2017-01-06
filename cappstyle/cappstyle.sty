@@ -1,0 +1,315 @@
+% cappstyle.sty
+% *****************************************************************************
+%
+%                LaTeX style for diploma thesis at ITEC-CA
+%
+%  Original author: Christian Lippolt
+%  Additions and extensions by: Fabian Nowak, Oliver Mattes
+% *****************************************************************************
+
+\def\fileversion{1.8}
+\def\filedate{2014/08/08}
+\ProvidesPackage{cappstyle}[2014/08/08 Version 1.8]
+\typeout{Package: cappstyle\space\filedate\space v\fileversion}
+\typeout{... Latex Environment Definitions for Thesis at ITEC-CAPP}
+\newcounter{cappstyle@language}
+\DeclareOption{german}{%
+  \typeout{Processing for German layout.}%
+  \setcounter{cappstyle@language}{1}%
+}
+\DeclareOption{english}{%
+  \typeout{Processing for English layout.}%
+  \setcounter{cappstyle@language}{0}%
+}
+\ProcessOptions
+
+\NeedsTeXFormat{LaTeX2e}
+\RequirePackage{eso-pic}
+\RequirePackage{ifthen}
+
+\usepackage{type1cm}
+\usepackage{helvet}
+\usepackage{times}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{url}
+% Print URLs not in Typewriter Font
+\def\UrlFont{\rm}
+% \def\UrlFont{\sf}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\usepackage{graphicx}
+\usepackage{color}
+
+\usepackage{threeparttable}
+\usepackage{tabularx}
+
+\ifthenelse{\equal {\value{cappstyle@language}} {0} }%
+{
+  \usepackage[english]{KIT-Logo}
+}
+{
+  \usepackage[german]{KIT-Logo}
+}
+
+\usepackage{tikz}
+
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily,
+  captionpos=b
+}
+% \renewcommand{\lstlistingname}{Listing}
+% \renewcommand{\lstlistlistingname}{Listings}
+
+\usepackage[automark]{scrpage2}
+\automark[section]{chapter} % do default stuff automatically
+%\rohead{\rightmark} % right odd header
+%\lohead{\headmark} % left odd header
+%\lehead{Test der Kopfzeile} % left even header
+%-------------------------
+%\cfoot[\pagemark]{} % center footer
+%\ofoot[]{} 
+%\cfoot[\pagemark]{\pagemark}
+%-------------------------
+%\setheadsepline{1pt}
+%\rohead{\upshape \headmark}
+%\lohead{\upshape \rightmark}
+%\ohead{\upshape \headmark} % outer header 
+%\chead[]{} % center header
+%\ihead[]{} % inner header
+%%%---
+%\ofoot[\pagemark]{\pagemark}
+%\cfoot[]{}
+%\ihead[]{}
+%\addtolength{\footskip}{1.5pt} 
+%\setfootsepline{0.5pt}
+%\setfootbotline{.5pt}[\vspace*{3pt}]
+\renewcommand*{\chapterpagestyle}{scrheadings}
+
+% \newpagestyle{abstractstyle}%
+%                 {{fluup}{\upshape \hfill Zusammenfassung2}{uziozuio}(\textwidth,0.5pt)}%
+%                 {{hjkghj}{dumdum}{\upshape \hfill \pagemark}(\textwidth,0.5pt)}
+
+% \newpagestyle{text}%
+%                 {(\textwidth,0.5pt){fluup}{\upshape \hfill Zusammenfassung}{yxcxyc}(\textwidth,0.5pt)}%
+%                 {(\textwidth,0.5pt){dfgh}{dumdum}{\upshape \hfill \pagemark}(\textwidth,0.5pt)}
+
+% with this we ensure that the chapter and section
+% headings are in lowercase, bold.
+%\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+%\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+
+
+% reset parskip to more useful settings than 1.5ex as in cappstyle.sty
+% \setlength{\topmargin}{-1.5cm}
+% \addtolength{\textheight}{2.5cm}
+
+% dafür gibts die option halfparskip
+% \setlength{\parskip}{1.45ex plus 0.5ex minus 0.2ex}
+
+% Set line spacing to 1.3
+\linespread{1.3}
+
+% set indent at beginning of paragraph to 0
+% \setlength{\parindent}{0em}
+
+%\setkomafont{sectioning}{\sffamily\bfseries}
+%\setkomafont{captionlabel}{\sffamily\bfseries}
+%\setkomafont{pagehead}{\sffamily\itshape}
+%\setkomafont{pagehead}{\rmfamily\bfseries}
+\setkomafont{pagehead}{\rmfamily}
+%\setkomafont{pagenumber}{\sffamily\itshape}
+%\setkomafont{descriptionlabel}{\sffamily\bfseries}
+
+\newcommand{\mb}[1]{\mbox{\boldmath$#1$}}
+
+% *****  title page for diploma thesis at CAPP  *****
+%
+%\capptitle{Diplom/Studienarbeit}
+%         {work number}
+%         {title of thesis}
+%         {author name}
+%         {supervisor name}
+%         {start date}
+%         {location}
+%    {professor}
+%         {end date}
+\newcommand{\capptitle}[8]{
+
+	\begin{titlepage}
+		\thispagestyle{empty}
+		\null % whatever this does, it seems mandatory for achieving a tikz title page
+
+		\setlength{\hoffset}{-2cm}
+		%\setlength{\voffset}{-1in}
+
+		\newlength{\KIT@voffset}
+		\setlength{\KIT@voffset}{-32mm}
+		
+		\newlength{\KIT@rand}
+		\setlength{\KIT@rand}{8mm}
+
+		\newlength{\KIT@cornerradius}
+		\setlength{\KIT@cornerradius}{5mm}
+
+		\newlength{\KIT@frameright}
+		\setlength{\KIT@frameright}{\paperwidth}
+		\addtolength{\KIT@frameright}{-2\KIT@rand}
+
+		\newlength{\KIT@frametop}
+		\setlength{\KIT@frametop}{\paperheight}
+		\addtolength{\KIT@frametop}{-2\KIT@rand}
+		\addtolength{\KIT@frametop}{\KIT@voffset}
+		\addtolength{\KIT@frametop}{-6mm} % static decrease to give 5mm of additional spacing at the bottom
+
+		\newlength{\KIT@logotop}
+		\setlength{\KIT@logotop}{\KIT@frametop}
+		\addtolength{\KIT@logotop}{-\KIT@rand}
+
+		\newlength{\KIT@framewidth}
+		\setlength{\KIT@framewidth}{\paperwidth}
+		\addtolength{\KIT@framewidth}{-2\KIT@rand}
+
+		\newlength{\KIT@frameheight}
+		\setlength{\KIT@frameheight}{\paperheight}
+		\addtolength{\KIT@frameheight}{-2\KIT@rand}
+		\addtolength{\KIT@frameheight}{-6mm} % static decrease to give 5mm of additional spacing at the bottom
+
+		\newlength{\KIT@framebottom}
+		\setlength{\KIT@framebottom}{\KIT@voffset} %{-.5\paperheight}
+
+		\newlength{\KIT@borderbottom}
+		\setlength{\KIT@borderbottom}{\KIT@framebottom} %{-.5\paperheight}
+		\addtolength{\KIT@borderbottom}{\KIT@rand}
+		\addtolength{\KIT@borderbottom}{-1mm} % static moving down as the template is not set properly with equidistant values at all and we try to ressemble that one
+
+
+		\definecolor{KIT@green}{rgb}{0.0,0.58,0.49}     % use structure theme to change
+		\definecolor{KIT@gray}{rgb}{0.84,0.84,0.85}     % use structure theme to change
+		\definecolor{KIT@darkgray}{rgb}{0.49,0.49,0.50} % use structure theme to change
+
+		\vfill
+
+		\begin{tikzpicture} [overlay]
+		
+			\pgfsetcolor{black}
+
+			% top logos
+			\pgftext[top, left, at=\pgfpoint{2\KIT@rand}{\KIT@logotop}]{\KITLogo[1.85cm] }
+			\pgftext[top, right, at=\pgfpoint{\KIT@frameright}{\KIT@logotop}]{
+				\parbox{10cm}{
+					\textsf{%
+					\small Institut f\"ur Technische Informatik \\[5pt]
+					Lehrstuhl für Rechnerarchitektur und Parallelverarbeitung\\[5pt]
+					Prof. Dr. rer. nat. Wolfgang Karl
+					}
+				}
+			}
+
+			% nice KIT border
+			\pgfsetcolor{black}
+
+			\pgfpathmoveto{\pgfpointadd{ \pgfpoint{\KIT@rand}{\KIT@borderbottom} }
+												{ \pgfpoint{0pt}{\KIT@cornerradius} }
+								}
+			\pgfpatharc{180}{270}{\KIT@cornerradius}
+			\pgfpathlineto{\pgfpoint{\KIT@frameright}{\KIT@borderbottom} }
+			\pgfpathlineto{\pgfpointadd{ \pgfpoint{\KIT@frameright}{\KIT@frametop}}
+												{ \pgfpoint{0pt}{-\KIT@cornerradius} }
+								}
+			\pgfpatharc{0}{90}{\KIT@cornerradius}
+			\pgfpathlineto{\pgfpoint{\KIT@rand}{\KIT@frametop}}
+			\pgfpathclose
+			\pgfusepath{draw}
+
+			% thesis information
+			% diploma/student work/bachelor/master
+			% FIXME: want to use \subject, \title, \author, \date, actually.
+			\pgftext[bottom, center, at=\pgfpointadd {\pgfpoint{.5\KIT@rand}{\KIT@frametop}}
+																{\pgfpoint{.5\KIT@framewidth}{-8.5cm}}]{\parbox{12cm}{\centering \huge \textsf{\textbf{#2}}}}
+																
+			\pgftext[bottom, center, at=\pgfpointadd {\pgfpoint{.5\KIT@rand}{\KIT@frametop}}
+																{\pgfpoint{.5\KIT@framewidth}{-11cm}}]{\parbox{8cm}{\centering \large #1\\von}}
+																
+			\pgftext[bottom, center, at=\pgfpointadd {\pgfpoint{.5\KIT@rand}{\KIT@frametop}}
+																{\pgfpoint{.5\KIT@framewidth}{-12.5cm}}]{\Large #3}
+
+			\pgftext[bottom, center, at=\pgfpointadd {\pgfpoint{.5\KIT@rand}{\KIT@frametop}}
+																{\pgfpoint{.5\KIT@framewidth}{-13.8cm}}]{\large an der Fakultät für Informatik}
+
+			\pgftext[bottom, center, at=\pgfpointadd {\pgfpoint{.5\KIT@rand}{\KIT@frametop}}
+																{\pgfpoint{.5\KIT@framewidth}{-17.3cm}}]
+						{\centering \large \begin{tabular}{ll} Tag der Anmeldung: & #6\\Tag der Fertigstellung: & #7\end{tabular}}
+
+			\pgftext[bottom, center, at=\pgfpointadd {\pgfpoint{.5\KIT@rand}{\KIT@frametop}}
+																{\pgfpoint{.5\KIT@framewidth}{-23cm}}]
+						{\parbox{12cm}{\centering \large Aufgabensteller:\\ \Large #4\\[1cm] \large Betreuer:\\ \Large #5}}
+
+			% bottom text
+			\pgftext[bottom, left, at=\pgfpointadd {\pgfpoint{\KIT@rand}{\KIT@framebottom}}{\pgfpoint{\KIT@rand}{0}}]
+						{\tiny KIT -- Universität des Landes Baden-Württemberg und nationales Forschungszentrum in der Helmholtz-Gemeinschaft}
+
+			\pgftext[bottom, right, at=\pgfpointadd {\pgfpoint{\KIT@frameright}{\KIT@framebottom}}{\pgfpoint{-45mm}{0}}]
+						{\large \textbf{www.kit.edu}}
+
+		\end{tikzpicture}
+
+	\end{titlepage}
+	%\maketitle
+	\cleardoublepage
+}
+
+%
+% *******************************************************
+% Legal clause.
+%
+% \cappclause{location, date}
+%          {author name}
+% \newcommand{\cappclause}[3]{
+%     \thispagestyle{empty}
+%     \ 
+%     \vfill
+%     
+%     Ich versichere hiermit wahrheitsgemäß, die Arbeit bis auf die dem 
+%     Aufgabensteller bereits bekannte Hilfe selbständig angefertigt, alle
+%     benutzten Hilfsmittel vollständig und genau angegeben und alles kenntlich
+%     gemacht zu haben, was aus Arbeiten anderer unverändert oder mit
+%     Abänderung entnommen wurde.\\
+%     
+%     \begin{center}
+%         \raggedright #2, den #3\\
+%         \vspace*{-2ex}
+%         \dotfill\\
+%         Ort, Datum \hfill #1\\
+%     \end{center}
+% }
+
+\newcommand{\cappclause}[3]{
+	\thispagestyle{empty}
+	\ 
+	\vfill
+	% {\bf Eidesstattliche Erklärung}
+
+	Ich versichere hiermit wahrheitsgemäß, die Arbeit bis auf die dem 
+	Aufgabensteller bereits bekannte Hilfe selbständig angefertigt, alle
+	benutzten Hilfsmittel vollständig und genau angegeben und alles kenntlich
+	gemacht zu haben, was aus Arbeiten anderer unverändert oder mit
+	Abänderung entnommen wurde.\\
+
+	% Hiermit versichere ich an Eides statt, dass ich die vorliegende Diplomarbeit ohne Hilfe Dritter und nur mit den angegeben Quellen und Hilfsmitteln angefertigt habe. Ich habe alle Stellen, die ich aus den Quellen wörtlich oder inhaltlich entnommen habe, als solche kenntlich gemacht. Diese Arbeit hat in gleicher oder ähnlicher Form noch keiner Prüfungsbehörde vorgelegen.
+
+	\begin{flushright}
+		#2, den #3
+	\end{flushright}
+
+	\begin{flushleft}
+		\rule{7cm}{0.3mm} \\ 
+		#1
+	\end{flushleft}
+}
+
+\renewcommand{\baselinestretch}{1.0}

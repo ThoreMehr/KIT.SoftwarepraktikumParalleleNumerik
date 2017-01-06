@@ -1,0 +1,33 @@
+2014-08-08
+**************
+*** Aufbau ***
+**************
+
+Die Vorlage setzt sich aus einer Stildatei, einem Hauptdokument sowie zwei Beispielen zusammen. 
+
+Im Hauptdokument Dokument.tex wird der Stil cappstyle.sty inkludiert, anschließend zwei Befehle \capptitle und \cappclause ausgeführt, die den Inhalt der Titelseiten mit den Titeln der Arbeit und Angaben zum Autor füllen, bevor dann mit Abstract.tex die Zusammenfassung und danach das erste Kapitel eingebaut werden. 
+
+Es muss beachtet werden, dass nach einem solchen Befehl stets eine Leerzeile zu stehen hat, da sonst LaTeX durcheinanderkommt. 
+
+Es empfiehlt sich, auch die weiteren Kapitel jeweils in eigenen Dateien zu schreiben und lediglich im Hauptdokument Verweise auf die einzelnen Kapitel zu haben. 
+Diese Kapitel werden mit \include{...} und nicht mit \input{...} eingebunden. Der Vorteil davon ist, dass mit Hilfe von \includeonly{...} im Header nur einzelne dieser per \include eingebundener Dateien zum übersetzen des Dokumentes ausgewählt werden können. Das spart gerade bei langen Dokumenten sehr viel Zeit. Gleichzeitig bleiben die Seitenzahlen, Inhaltsangaben etc erhalten.
+
+
+***********************************
+*** Gestaltung der Ausarbeitung ***
+***********************************
+
+Studien- und Diplomarbeiten sind grundsätzlich gleich aufgebaut: 
+
+Es gilt zunächst, das Problem zu motivieren, d.h. was wird gemacht und warum. Im Falle der Diplomarbeit schließt sich noch eine Studie vergleichbarer Arbeiten an, die zur Abgrenzung der eigenen Arbeit dient. 
+
+Hierauf folgt die detaillierte Problemstellung samt Lösungsalternativen; der gewählte Lösungsansatz wird motiviert und seine Implementation detailliert vorgestellt. Es schließt sich eine Evaluierung der Implementierung durch geeignete Test- und Meßszenarien an (bei DA: vergleichend mit existierenden, vergleichbaren Arbeiten). 
+
+Das abschließende Kapitel beinhaltet eine Zusammenfassung und den sogenannten Ausblick, d.h. wie diese Arbeit sinnvoll weiterzuentwickeln bzw. wie sie durch weitere, nicht Teil der eigenen Arbeit gewesenen Arbeitspunkte, zu komplettieren ist. 
+
+Der Anhang beinhaltet: 
+Technische sowie Benutzerdokumentation, so daß die erstellte Soft- oder Hardware problemlos durch uns oder nachfolgende Studenten einsetz- und weiterverwendbar sind. Hier bitte keine allgemeinen Erklärungen zu Linux oder co oder Doku zu Drittprogrammen, sondern nur das wirklich wichtige.
+Außerdem wird der wichtigste Sourcecode inklusive Makefiles bzw. Projektdateien integriert. Die Arbeit muß "out of the box" übersetzen; sollten zusätzliche Programmpakete (Libraries) oder Patches notwendig sein, so ist dies entsprechend zu erwähnen. An die Arbeit wird außerdem eine CD/DVD mit dem ganzen Quelltext angehängt (ohne temporäre Dateien).
+Zusätzlich gehören auch weitergehende Informationen, z.B. Workarounds für gefundene Bugs bei Entwurfswerkzeuge, die von allgemeinem Interesse sind, jedoch nicht Bestandteil der eigentlichen Arbeit hier hin.
+
+Die Liste der Referenzen (zitierte Arbeiten/Schriften) ist ein eigener Punkt am Ende der Arbeit und sollte mit Hilfe von BibTeX erstellt werden.

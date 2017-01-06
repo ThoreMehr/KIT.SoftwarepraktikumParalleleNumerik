@@ -1,0 +1,113 @@
+% $Id: KIT-Logo.sty 56 2008-04-29 11:01:03Z tdussa $
+% $Revision: 56 $
+% $Author: tdussa $
+% $Date: 2008-04-29 13:01:03 +0200 (Tue, 29 Apr 2008) $
+% $URL: svn+sdhs://sdhs.homedns.org/home/svn/talks/beamer-KIT/KIT-Logo.sty $
+
+% To scale the logo, specify the desired logo height as an optional
+% command line parameter.  The default height is 10mm.
+
+\ProvidesPackage{KIT-Logo}
+
+%% Schrift unter KIT-Logo in deutsch oder englisch
+\newcounter{KIT@language}
+%% standard ist jetzt deutsch
+\setcounter{KIT@language}{1}
+\DeclareOption{german}{%
+  \typeout{KIT-Logo: Switching to German logo.}%
+  \setcounter{KIT@language}{1}%
+}
+\DeclareOption{english}{%
+  \typeout{KIT-Logo: Switching to english language in logo.}%
+  \setcounter{KIT@language}{0}%
+}
+\ProcessOptions
+
+\RequirePackage{pgf}
+\RequirePackage{helvet}
+%% ifthen wird für Abfrage für Schriftzug unter KIT-Logo benötigt
+\RequirePackage{ifthen}
+
+\makeatletter
+\newlength{\KITLogoUnit}
+\makeatother
+
+\definecolor{KITLogoGreen}{rgb}{0.0,0.58,0.49}
+
+\newcommand{\KITLogo}[1][10mm]{%
+\setlength{\KITLogoUnit}{#1}%
+\divide\KITLogoUnit by 130%
+\begin{pgfpicture}
+  % Faecher (im Uhrzeigersinn, beginnend im Westen)
+  % Erste drei Elemente: gruen
+  \pgfsetcolor{KITLogoGreen}
+
+  % 1. Element: 180-165°
+  \pgfpathmoveto{\pgfpoint{100\KITLogoUnit}{030\KITLogoUnit}}
+  \pgfpathlineto{\pgfpointadd{\pgfpoint{100\KITLogoUnit}{030\KITLogoUnit}}{\pgfpointpolar{180}{100\KITLogoUnit}}}
+  \pgfpatharc{180}{165}{100\KITLogoUnit}
+  \pgfpathclose
+  \pgfusepath{fill}
+
+  % 2. Element: 154-140°
+  \pgfpathmoveto{\pgfpoint{100\KITLogoUnit}{030\KITLogoUnit}}
+  \pgfpathlineto{\pgfpointadd{\pgfpoint{100\KITLogoUnit}{030\KITLogoUnit}}{\pgfpointpolar{154}{100\KITLogoUnit}}}
+  \pgfpatharc{154}{140}{100\KITLogoUnit}
+  \pgfpathclose
+  \pgfusepath{fill}
+
+  % 3. Element: 129-115°
+  \pgfpathmoveto{\pgfpoint{100\KITLogoUnit}{030\KITLogoUnit}}
+  \pgfpathlineto{\pgfpointadd{\pgfpoint{100\KITLogoUnit}{030\KITLogoUnit}}{\pgfpointpolar{129}{100\KITLogoUnit}}}
+  \pgfpatharc{129}{115}{100\KITLogoUnit}
+  \pgfpathclose
+  \pgfusepath{fill}
+
+  % Ab hier: alles schwarz
+  \pgfsetcolor{black}
+  % 4. Element: 104-090°, schwarz
+  \pgfpathmoveto{\pgfpoint{100\KITLogoUnit}{030\KITLogoUnit}}
+  \pgfpathlineto{\pgfpointadd{\pgfpoint{100\KITLogoUnit}{030\KITLogoUnit}}{\pgfpointpolar{104}{100\KITLogoUnit}}}
+  \pgfpatharc{104}{90}{100\KITLogoUnit}
+  \pgfpathclose
+  \pgfusepath{fill}
+
+  % Schriftzug
+  % K
+  \pgfpathmoveto{\pgfpoint{106\KITLogoUnit}{069\KITLogoUnit}}
+  \pgfpathlineto{\pgfpoint{106\KITLogoUnit}{091\KITLogoUnit}}
+  \pgfpathlineto{\pgfpoint{141\KITLogoUnit}{130\KITLogoUnit}}
+  \pgfpathlineto{\pgfpoint{174\KITLogoUnit}{130\KITLogoUnit}}
+  \pgfpathlineto{\pgfpoint{132\KITLogoUnit}{080\KITLogoUnit}}
+  \pgfpathlineto{\pgfpoint{174\KITLogoUnit}{030\KITLogoUnit}}
+  \pgfpathlineto{\pgfpoint{141\KITLogoUnit}{030\KITLogoUnit}}
+  \pgfpathclose
+  \pgfusepath{fill,stroke}
+  % I
+  \pgfpathmoveto{\pgfpoint{178\KITLogoUnit}{030\KITLogoUnit}}
+  \pgfpathlineto{\pgfpoint{178\KITLogoUnit}{130\KITLogoUnit}}
+  \pgfpathlineto{\pgfpoint{206\KITLogoUnit}{130\KITLogoUnit}}
+  \pgfpathlineto{\pgfpoint{206\KITLogoUnit}{030\KITLogoUnit}}
+  \pgfpathclose
+  \pgfusepath{fill}
+  % T
+  \pgfpathmoveto{\pgfpoint{231\KITLogoUnit}{030\KITLogoUnit}}
+  \pgfpathlineto{\pgfpoint{231\KITLogoUnit}{107\KITLogoUnit}}
+  \pgfpathlineto{\pgfpoint{212\KITLogoUnit}{107\KITLogoUnit}}
+  \pgfpathlineto{\pgfpoint{212\KITLogoUnit}{130\KITLogoUnit}}
+  \pgfpathlineto{\pgfpoint{278\KITLogoUnit}{130\KITLogoUnit}}
+  \pgfpathlineto{\pgfpoint{278\KITLogoUnit}{107\KITLogoUnit}}
+  \pgfpathlineto{\pgfpoint{259\KITLogoUnit}{107\KITLogoUnit}}
+  \pgfpathlineto{\pgfpoint{259\KITLogoUnit}{030\KITLogoUnit}}
+  \pgfpathclose
+  \pgfusepath{fill}
+
+  \ifthenelse{\equal {\value{KIT@language}} {0} }%
+   {%
+	  \pgftext[bottom, left, at={\pgfpoint{000\KITLogoUnit}{000\KITLogoUnit}}]{\textsf{\fontsize{19.25\KITLogoUnit}{19.25\KITLogoUnit}\selectfont\textcolor{black}{Karlsruhe Institute of Technology}}};
+	}%
+	{%
+	  \pgftext[bottom, left, at={\pgfpoint{000\KITLogoUnit}{000\KITLogoUnit}}]{\textsf{\fontsize{18.8\KITLogoUnit}{19.25\KITLogoUnit}\selectfont\textcolor{black}{Karlsruher Institut f\"ur Technologie}}};
+	}%
+\end{pgfpicture}}
+

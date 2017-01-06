@@ -1,0 +1,147 @@
+% \documentclass[a4paper,titlepage,12pt,twoside,openright,abstracton,headsepline,halfparskip,final,BCOR1.0cm]{scrreprt}
+\documentclass[a4paper,titlepage,12pt,twoside,openright,abstracton,headsepline,halfparskip,final,BCOR1.0cm]{scrreprt}
+% chapterprefix - erzeugt einen anderen Kopf am Anfang eines Kapitels
+% draft - statt final erzeugt leere boxen statt den eingebundenen grafiken
+% cleardoublestandard cleardoubleplain cleardoubleempty
+% parindent
+% footsepline
+% halfparskip, halfparskip-, halfparskip* und halfparskip+
+% appendixprefix
+% liststotoc idxtotoc bibtotoc bibtotocnumbered liststotocnumbered
+
+% Include style for title page, legal clause, and required classes.
+% Also sets the page style, header and footer,
+% includes severl packages,
+% the parameter determines the language of the title logo
+\usepackage[german]{cappstyle} % [english]
+
+%% Sprache festlegen
+%% Bei einglischer Sprache empfielt sich die Option halfparskip aus der Dokumentenklasse herauszunehmen
+\usepackage{ngerman}
+\usepackage[ngerman]{babel}
+% \usepackage[english]{babel}
+
+% Additional packages that anyone can use to her satisfaction
+% \usepackage[T1]{fontenc}
+% \usepackage{ae,aecompl}
+% \usepackage{multirow}
+% \usepackage{color}
+% \usepackage{floatflt}
+% \usepackage{rotating}
+% \usepackage{longtable}
+% \usepackage{lscape}
+
+%% Change me: Studienarbeit oder Diplomarbeit, Name, Titel
+\usepackage[
+	bookmarksnumbered=true,
+	colorlinks=false,
+	pdftitle={Sache},
+	pdfsubject={Entwicklung einer Sache},
+	pdfauthor={Mein Name},
+	pdfcreator={Kile},
+	pdfproducer={LaTeX with hyperref package and pdfTeX},
+	pdfkeywords={Self-aware Memory, Speicherverwaltung, Speicher, Self-Awareness, Multiprocessor, Management, Memory, intelligent},
+	pdfstartpage=1,
+	pdfdisplaydoctitle=true,
+]{hyperref}
+%% Alternatively, use package hyperref with simple settings
+% \usepackage[bookmarksnumbered=true,colorlinks=false,pdfdisplaydoctitle=true]{hyperref}
+
+%% Nice cite commands with authors abbreviated into "Karl et al."
+% \usepackage[numbers]{natbib}
+
+% Enter your hyphenation list, i.e. hy-phe-na-tion, in order to have these
+% words hyphenated correctly at the end of a line. Use spaces to separate 
+% words.
+\hyphenation{Bin-dung Netz-wer-ma-na-ge-ment}
+
+% Diese Befehle bewirken, dass Absätze  bei Seitenumbrüchen sauberer getrennt
+% werden (sog. Schusterjungen und Hurenkinder vermeiden)
+\clubpenalty = 10000
+\widowpenalty = 10000
+
+%%-------------------------------------------------------------------
+%% Weil das Übersetzen mitunter sehr lange dauern kann, lässt sich zum schnelleren
+%% Übersetzen mittels \includeonly die Anzahl inkludierter Kapitel reduzieren, 
+%% während Dinge wie Seitenzahlen, Inhaltsverzeichnis, Index,etc. erhalten bleiben.
+%\includeonly{
+% 	Abstract,
+% 	Motivation,
+% 	Zusammenfassung
+%}
+%%-------------------------------------------------------------------
+
+\begin{document}
+
+	% make empty pages clear without any header, without any footer
+	\pagestyle{empty}
+
+	\capptitle{Studienarbeit}
+			{Anleitung zum Schreiben einer Ausarbeitung}  % title of thesis
+			{Muster Student}                % author name (if desired: cand.-inform.~Name)
+			{Prof.~Dr.~rer.~nat.~Wolfgang~Karl}
+			{Dipl.-Inform.~Anderer~Name} % supervisor
+			{1. November 2006}                               % Anmeldedatum
+			{30. April 2007}                                 % Abgabedatum
+
+	\cappclause{Vorname Nachname}          % author name
+			{Karlsruhe}    % location
+			{01.01.2006}    % date (for legal clause)
+
+	\cleardoublepage
+	
+%%-------------------------------------------------------------------
+	%% Abstract
+% 	\input{Abstract}
+	\include{Abstract}
+	\cleardoublepage
+%%-------------------------------------------------------------------
+
+	\pagestyle{scrheadings}
+	\pagenumbering{Roman}
+
+	\pdfbookmark[0]{\contentsname}{Contents} 
+	\tableofcontents
+	\listoftables
+	\listoffigures
+% 	\lstlistoflistings
+	\cleardoublepage
+
+	\pagestyle{scrheadings}
+	\pagenumbering{arabic}
+     
+%%-------------------------------------------------------------------
+	%% Weil das Übersetzen mitunter sehr lange dauern kann, lässt sich mittels
+	%% \includeonly oben die Anzahl inkludierter Kapitel reduzieren zum schnelleren
+	%% Übersetzen, während Seitenzahlen erhalten bleiben.
+	\include{Struktur}
+
+	% \include{...}
+
+%%-------------------------------------------------------------------
+% 	\appendix
+% 	\include{...}
+
+%%-------------------------------------------------------------------
+	% if all bibtex entries shall be included even without any reference
+	%\nocite*{}
+
+	% Suggested style without natbib
+	\bibliographystyle{unsrtdin}
+
+	%% Allow nice cite commands from package natbib
+%  \bibliographystyle{apalike}
+	%% Overview of comamnds available at
+	%% http://merkel.zoneo.net/Latex/natbib.php
+
+	% More user styles
+	%\bibliographystyle{plain}
+	%\bibliographystyle{geralpha}
+	%\bibliographystyle{gerplain}
+	%\bibliographystyle{itmalpha}
+	%\bibliographystyle{itmabbrv}
+
+	\bibliography{Bibliografie}
+%%-------------------------------------------------------------------
+
+\end{document}
