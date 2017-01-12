@@ -51,7 +51,7 @@
 \begin{abstract}Im Rahmen dieses Praktikums haben wir viel gelernt.
 \end{abstract}
 
-\section{}\label{p1}
+\section{OpenMP}\label{p1}
 In diesem Projekt lag der Schwerpunkt auf dem Kennenlernen der Bibliothek \emph{OpenMP} sowie deren Handhabung. Weiter ging es um den \emph{Intel Thread Checker}, ein Programm zum Analysieren von Programmcode auf potentielle Fehler in der Parallelisierung. Zu guter letzt haben wir uns mit der FEM-Methode beschäftigt, dabei im Speziellen mit dem Gauß-Seidel-Verfahren zum Lösen linearer Gleichungen wie sie bei der Differenzenmethode vorkommen. Zu guter letzt betrachteten wir einige andere Verfahren zum Lösen solcher Probleme und haben das CG-Verfahren implementiert.
 
 \subsection{OpemMP}\label{p1a1}
@@ -616,7 +616,52 @@ Im Rahmen dieses Praktikums würde sich, zumindest für Projekt 1, \emph{HiFlow\te
 \end{table}
 
 
-\section{}
+\section{CUDA}
+
+\subsection{Getting started}
+\begin{lstlisting}[frame=single, captionpos=b, caption={Ausgabe unseres Programms für die zwei CUDA-fähigen Grafikkarten in \emph{i82sn02}.}, label ={lst:cudastarted}, basicstyle=\footnotesize]
+Found 2 CUDA devices
+=========================================
+Information for GeForce GTX 960 (device 0):
+Total global  memory: 2092957696
+Total const memory: 65536
+Shared memory per block: 49152
+Warp size: 32
+Max threads per block: 1024
+Max threads dimension: [ 1024, 1024, 64 ]
+Max grid size: [ 2147483647, 65535, 65535 ]
+-----------------------------------------
+Information for GeForce GTX 560 Ti (device 1):
+Total global  memory: 2080768000
+Total const memory: 65536
+Shared memory per block: 49152
+Warp size: 32
+Max threads per block: 1024
+Max threads dimension: [ 1024, 1024, 64 ]
+Max grid size: [ 65535, 65535, 65535 ]
+\end{lstlisting}
+In \ref{lst:cudastarted} ist die Ausgabe unseres Programms zu sehen. In den folgenden Aufgaben werden wir \emph{device 0} (\emph{GeForce GTX 960}) verwenden.
+
+\subsection{Datentransferrate}
+
+\subsection{Gauß-Seidel-Verfahren}
+\subsubsection{Implementierung in CUDA}
+Die Portierung des parallelisierten Gauß-Seidel-Verfahrens aus Aufgabe \ref{p1a4} verlief sehr geradlinig. Die zuvor parallelisierten inneren Schleifen -- die Berechnung über alle schwarzen/weißen Felder -- werden nun mittels entsprechender Kernel auf der GPU ausgeführt.
+
+Da die GPU deutlich weniger Recheneinheiten für \emph{double precision} Fließkommazahlen hat als für \emph{single precision}, haben wir uns dazu entschieden, für die GPU Variante den Datentyp \emph{float} anstatt -- wie bei der CPU -- \emph{double} zu verwenden.
+Die Ergebnisse sind unserer Auffassung nach dennoch vergleichbar, da  Tests mit \emph{float} anstatt \emph{double} auf der CPU keinen nennenswerten Geschwindigkeitsvorteil ergaben.
+
+\TODO{Tabelle mit Laufzeiten}
+
+\subsubsection{Asynchrone Parallelisierungmethoden}
+
+\subsubsection{Eignung für andere Architekturen}
+
+
+
+\subsection{LU-Zerlegung}
+
+\subsection{Vorkonditionierung}
 
 % Normaler LNCS Zitierstil
 %\bibliographystyle{splncs}
