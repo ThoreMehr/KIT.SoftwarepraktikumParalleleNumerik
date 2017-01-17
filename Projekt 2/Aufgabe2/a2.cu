@@ -11,11 +11,12 @@ int main() {
 	size_t size=N*sizeof(int);
 	int* c_a=(int*)malloc(size);
 	for(int i=0;i<N;i++){
-		c_a[i]=rand()
+		c_a[i]=rand();
 	}
 	int* c_b=(int*)malloc(size);
 	struct timeval time1,time2;
 	struct timezone zone;
+	float t;
 
 	gettimeofday(&time1,&zone);
 	for(int i=0;i<N;i++){
