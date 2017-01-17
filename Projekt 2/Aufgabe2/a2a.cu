@@ -2,9 +2,6 @@
 #include <stdio.h>
 #include <sys/time.h>
 #include <stdlib.h>
-#ifndef N
-	#define N 1000000000
-#endif
 int main() {
 	cudaSetDevice(0);
 	srand(time(NULL));
