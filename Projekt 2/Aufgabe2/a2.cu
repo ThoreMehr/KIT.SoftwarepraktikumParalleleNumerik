@@ -16,7 +16,7 @@ int main() {
 	int* c_b=(int*)malloc(size);
 	struct timeval time1,time2;
 	struct timezone zone;
-	float t;
+	float t=0.0;
 
 	gettimeofday(&time1,&zone);
 	for(int i=0;i<N;i++){
