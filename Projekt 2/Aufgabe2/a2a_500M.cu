@@ -6,7 +6,7 @@
 	#define N 500000000
 #endif
 int main() {
-	cudaSetDevice(0);
+	cudaSetDevice(1);
 	srand(time(NULL));
 	size_t size=N*sizeof(int);
 	int* c_a=(int*)malloc(size);
