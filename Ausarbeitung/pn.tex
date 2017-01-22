@@ -646,17 +646,27 @@ In \ref{lst:cudastarted} ist die Ausgabe unseres Programms zu sehen. In den folg
 
 \subsection{Gauß-Seidel-Verfahren}
 \subsubsection{Implementierung in CUDA}
-Die Portierung des parallelisierten Gauß-Seidel-Verfahrens aus Aufgabe \ref{p1a4} verlief sehr geradlinig. Die zuvor parallelisierten inneren Schleifen -- die Berechnung über alle schwarzen/weißen Felder -- werden nun mittels entsprechender Kernel auf der GPU ausgeführt.
+Die Portierung des parallelisierten Gauß-Seidel-Verfahrens aus Aufgabe \ref{p1a4} verlief sehr geradlinig. Die zuvor parallelisierten inneren Schleifen -- die Berechnung über alle schwarzen/weißen Felder -- werden nun mittels entsprechender Kernel auf der GPU ausgeführt. Die Synchronisation ist damit nun implizit durch die Kernelaufrufe -- die nacheinander ausgeführt werden -- gegeben.
 
-Da die GPU deutlich weniger Recheneinheiten für \emph{double precision} Fließkommazahlen hat als für \emph{single precision}, haben wir uns dazu entschieden, für die GPU Variante den Datentyp \emph{float} anstatt -- wie bei der CPU -- \emph{double} zu verwenden.
-Die Ergebnisse sind unserer Auffassung nach dennoch vergleichbar, da  Tests mit \emph{float} anstatt \emph{double} auf der CPU keinen nennenswerten Geschwindigkeitsvorteil ergaben.
+Das eigentlich zweidimensional gegebene Problem haben wir als eindimensionales Problem an die GPU weitergegeben. Das heißt wir haben als Größe des Problems den Vektor $(n,1,1)^T$ verwendet (mit $n$ wie aus Aufgabe \ref{p1a4}).
+Da wir bei der Berechnung die zweidimensionale Struktur nicht explizit benötigen, lässt sich so der Verschnitt bei der Aufteilung auf die \emph{Warps} der GPU verkleinern.
+
+Wie auch die CPU Variante haben wir zur Berechnung den Datentyp \texttt{double} verwendet. Damit der Compiler diesen auch tatsächlich verwendet, muss beim Kompilieren das Flag \texttt{-arch sm\_13} mit angegeben werden (anderenfalls wird stattdessen mit \texttt{float} gearbeitet).
 
 \TODO{Tabelle mit Laufzeiten}
 
 \subsubsection{Asynchrone Parallelisierungmethoden}
+Bei \emph{relaxierten Methoden} nimmt man Rechenungenauigkeiten für bessere Performanz in Kauf.
+
+Die Verwendung des Compilerflags \texttt{-use-fast-math} -- welches im Kontext von Relaxierung ebenfalls zu Gunsten der Berechnungszeit weniger Rechengenauigkeit garantiert -- brachte in der Laufzeit keinen Unterschied. Wir führen das darauf zurück, dass wir keine aufwändigeren Mathematikoperationen wie Kosinus oder Sinus berechnen lassen.
+
+Da die GPU deutlich weniger Recheneinheiten für \emph{double precision} Fließkommazahlen hat als für \emph{single precision}, haben wir uns dazu entschieden, für die GPU Variante den Datentyp \emph{float} anstatt -- wie bei der CPU -- \emph{double} zu verwenden.
+Die Ergebnisse sind unserer Auffassung nach dennoch vergleichbar, da  Tests mit \emph{float} anstatt \emph{double} auf der CPU keinen nennenswerten Geschwindigkeitsvorteil ergaben.
+
+Der Blogeintrag \cite{CUDAMixedPrecision} geht noch weiter und zeigt auf, wie sich mittels 16-Bit Fließkommazahlen (\texttt{half}) die Geschwindigkeit weiter steigern lässt. Es wird eine doppelt so große Geschwindigkeit gegenüber 32-Bit Fließkommazahlen angegeben. Für unsere Anwendung ist die damit verbundene Ungenauigkeit möglicherweise zu groß. Ferner wird \texttt{half} erst ab CUDA 7.5 unterstützt, wohingegen wir mit CUDA 5.5 arbeiten.
 
 \subsubsection{Eignung für andere Architekturen}
-
+Zu Testzwecken haben wir die Implementierung aus Aufgabe \ref{p1a4c} für den Datentyp \texttt{float} umgeschrieben. Die damit gemessenen Laufzeiten unterscheiden sich unwesentlich von denen bei Verwendung mit \texttt{double}. Für die CPU scheint diese Art der Relaxierung daher wenig gewinnbringend. Wir führen das darauf zurück, dass CPUs heutzutage darauf optimiert sind, mit \texttt{double} genau so schnell zu rechnen wie \texttt{float}.
 
 
 \subsection{LU-Zerlegung}
