@@ -645,7 +645,7 @@ In \ref{lst:cudastarted} ist die Ausgabe unseres Programms zu sehen. In den folg
 \subsection{Datentransferrate}
 
 \subsection{Gauß-Seidel-Verfahren}
-\subsubsection{Implementierung in CUDA}
+\subsubsection{Implementierung in CUDA\\}
 Die Portierung des parallelisierten Gauß-Seidel-Verfahrens aus Aufgabe \ref{p1a4} verlief sehr geradlinig. Die zuvor parallelisierten inneren Schleifen -- die Berechnung über alle schwarzen/weißen Felder -- werden nun mittels entsprechender Kernel auf der GPU ausgeführt. Die Synchronisation ist damit nun implizit durch die Kernelaufrufe -- die nacheinander ausgeführt werden -- gegeben.
 
 Das eigentlich zweidimensional gegebene Problem haben wir als eindimensionales Problem an die GPU weitergegeben. Das heißt wir haben als Größe des Problems den Vektor $(n,1,1)^T$ verwendet (mit $n$ wie aus Aufgabe \ref{p1a4}).
@@ -655,7 +655,12 @@ Wie auch die CPU Variante haben wir zur Berechnung den Datentyp \texttt{double} 
 
 \TODO{Tabelle mit Laufzeiten}
 
-\subsubsection{Asynchrone Parallelisierungmethoden}
+\subsubsection{Asynchrone Parallelisierungmethoden\\}
+Links: \\
+\url{http://scicomp.stackexchange.com/questions/16448/efficient-successive-over-relaxation-using-cuda} \\
+\url{http://www.netlib.org/lapack/lawnspdf/lawn258.pdf} \\
+\url{http://docs.nvidia.com/cuda/kepler-tuning-guide/#axzz4WWJfCg4J}
+
 Bei \emph{relaxierten Methoden} nimmt man Rechenungenauigkeiten für bessere Performanz in Kauf.
 
 Die Verwendung des Compilerflags \texttt{-use-fast-math} -- welches im Kontext von Relaxierung ebenfalls zu Gunsten der Berechnungszeit weniger Rechengenauigkeit garantiert -- brachte in der Laufzeit keinen Unterschied. Wir führen das darauf zurück, dass wir keine aufwändigeren Mathematikoperationen wie Kosinus oder Sinus berechnen lassen.
@@ -665,7 +670,7 @@ Die Ergebnisse sind unserer Auffassung nach dennoch vergleichbar, da  Tests mit 
 
 Der Blogeintrag \cite{CUDAMixedPrecision} geht noch weiter und zeigt auf, wie sich mittels 16-Bit Fließkommazahlen (\texttt{half}) die Geschwindigkeit weiter steigern lässt. Es wird eine doppelt so große Geschwindigkeit gegenüber 32-Bit Fließkommazahlen angegeben. Für unsere Anwendung ist die damit verbundene Ungenauigkeit möglicherweise zu groß. Ferner wird \texttt{half} erst ab CUDA 7.5 unterstützt, wohingegen wir mit CUDA 5.5 arbeiten.
 
-\subsubsection{Eignung für andere Architekturen}
+\subsubsection{Eignung für andere Architekturen\\}
 Zu Testzwecken haben wir die Implementierung aus Aufgabe \ref{p1a4c} für den Datentyp \texttt{float} umgeschrieben. Die damit gemessenen Laufzeiten unterscheiden sich unwesentlich von denen bei Verwendung mit \texttt{double}. Für die CPU scheint diese Art der Relaxierung daher wenig gewinnbringend. Wir führen das darauf zurück, dass CPUs heutzutage darauf optimiert sind, mit \texttt{double} genau so schnell zu rechnen wie \texttt{float}.
 
 
