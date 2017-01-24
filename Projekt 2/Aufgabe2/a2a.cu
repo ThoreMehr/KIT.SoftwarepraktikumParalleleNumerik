@@ -5,9 +5,9 @@
 int main() {
 	cudaSetDevice(0);
 	srand(time(NULL));
-	size_t size=N*sizeof(int);
+	size_t size=__N__*sizeof(int);
 	int* c_a=(int*)malloc(size);
-	for(int i=0;i<N;i++){
+	for(int i=0;i<__N__;i++){
 		c_a[i]=rand();
 	}
 	int* c_b=(int*)malloc(size);
@@ -16,7 +16,7 @@ int main() {
 	float t=0.0,r=0.0;
 
 	gettimeofday(&time1,&zone);
-	for(int i=0;i<N;i++){
+	for(int i=0;i<__N__;i++){
 		c_b[i]=c_a[i];
 	}
 
