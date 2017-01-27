@@ -31,8 +31,8 @@
 \renewcommand{\thesubsection}{Aufgabe \arabic{section}.\arabic{subsection}}
 \renewcommand{\thesubsubsection}{\arabic{section}.\arabic{subsection}.\alph{subsubsection})}
 
-%\newcommand{\TODO}[1]{\textbf{\Large\color{red}#1}}
-\newcommand{\TODO}[1]{}
+\newcommand{\TODO}[1]{\textbf{\Large\color{red}#1}}
+%\newcommand{\TODO}[1]{}
 
 \setcounter{tocdepth}{3}
 \setcounter{secnumdepth}{3}
@@ -576,7 +576,9 @@ Unsere parallele Version des CG-Verfahrens konnte gegenüber dem Gauß-Seidel-Verf
 	\label{a5a6speedupefficiency}
 \end{table}
 
-Wie auch unsere Implementierung des Gauß-Seidel-Verfahrens aus Aufgabe \ref{p1a4}, nutzen wir hier für unsere Implementierung die dünne Struktur der Matrix $A$ aus. Eine Vorkonditionierung würde diese Struktur beeinträchtigen, wodurch ein sehr viel höherer Rechenaufwand zu erwarten wäre. Gesetzt den Fall unsere Matrix $A$ wäre nicht dünn besetzt, so könnte eine Vorkonditionierung Sinn machen, um die Stabilität des Algorithmus ggf. zu erhöhen.
+Wie auch unsere Implementierung des Gauß-Seidel-Verfahrens aus Aufgabe \ref{p1a4}, nutzen wir hier für unsere Implementierung die dünne Struktur der Matrix $A$ aus.
+Eine Vorkonditionierung würde diese Struktur beeinträchtigen, im Rahmen des Praktikums haben wir jedoch gelernt, dass es möglich ist, die Vorkonditionierung so zu wählen, dass dies kein Problem für den Rechenaufwand des eigentlichen Verfahrens darstellt.
+Das Problem wäre jedoch, dass die Vorkonditionierung selbst rechenaufwändig wäre. Wenn sie wie hier nicht wieder verwendet wird, ist zu erwarten, dass sich ihre aufwändige Berechnung nicht lohnt.
 
 
 
@@ -618,7 +620,7 @@ Im Rahmen dieses Praktikums würde sich, zumindest für Projekt 1, \emph{HiFlow\te
 
 \section{CUDA}
 
-\subsection{Getting started}
+\subsection{Getting started}\label{p2a1}
 \begin{lstlisting}[frame=single, captionpos=b, caption={Ausgabe unseres Programms für die zwei CUDA-fähigen Grafikkarten in \emph{i82sn02}.}, label ={lst:cudastarted}, basicstyle=\footnotesize]
 Found 2 CUDA devices
 =========================================
@@ -642,9 +644,16 @@ Max grid size: [ 65535, 65535, 65535 ]
 \end{lstlisting}
 In \ref{lst:cudastarted} ist die Ausgabe unseres Programms zu sehen. In den folgenden Aufgaben werden wir \emph{device 0} (\emph{GeForce GTX 960}) verwenden.
 
-\subsection{Datentransferrate}
 
-\subsection{Gauß-Seidel-Verfahren}
+
+
+\subsection{Datentransferrate}\label{p2a2}
+\TODO{Datentransferraten}
+
+
+
+
+\subsection{Gauß-Seidel-Verfahren}\label{p2a3}
 \subsubsection{Implementierung in CUDA\\}
 Die Portierung des parallelisierten Gauß-Seidel-Verfahrens aus Aufgabe \ref{p1a4} verlief sehr geradlinig. Die zuvor parallelisierten inneren Schleifen -- die Berechnung über alle schwarzen/weißen Felder -- werden nun mittels entsprechender Kernel auf der GPU ausgeführt. Die Synchronisation ist damit nun implizit durch die Kernelaufrufe -- die nacheinander ausgeführt werden -- gegeben.
 
@@ -674,9 +683,80 @@ Der Blogeintrag \cite{CUDAMixedPrecision} geht noch weiter und zeigt auf, wie si
 Zu Testzwecken haben wir die Implementierung aus Aufgabe \ref{p1a4c} für den Datentyp \texttt{float} umgeschrieben. Die damit gemessenen Laufzeiten unterscheiden sich unwesentlich von denen bei Verwendung mit \texttt{double}. Für die CPU scheint diese Art der Relaxierung daher wenig gewinnbringend. Wir führen das darauf zurück, dass CPUs heutzutage darauf optimiert sind, mit \texttt{double} genau so schnell zu rechnen wie \texttt{float}.
 
 
-\subsection{LU-Zerlegung}
+\subsection{LU-Zerlegung}\label{p2a4}
+\subsubsection{}
+\TODO{Eignung}
 
-\subsection{Vorkonditionierung}
+\subsubsection{}
+\TODO{Implementierung}
+
+\subsubsection{}
+\TODO{OpemMP Eignung}
+
+
+
+
+
+\subsection{Vorkonditionierung}\label{p2a5}
+\subsubsection{}
+%Im ersten Projekt -- genauer Aufgabe \ref{p1a5} -- haben wir festgestellt, dass mit zunehmendem $l$ der lokale Fehler geschrumpft ist. Wir haben daher für diese Aufgabe $l=9$ verwendet, größere $l$ waren uns aus Speicher-technischen Gründen nicht möglich ($l=9\Rightarrow d=511\Rightarrow n=261.121\Rightarrow$ Speicherverbrauch von mehr als $\frac{1}{2}n^2\cdot 8$ Bytes $>>2$GB).
+
+%Um den maximal zulässigen lokalen Fehler von $\epsilon_i\leq10^-{-5}$ einzuhalten, mussten wir auf unsere mit dem Datentyp \texttt{double} implementierte Variante aus Aufgabe \ref{p2a3} zurückgreifen. Mit \texttt{float}-Genauigkeit war es uns unabhängig vom gewählten $\varepsilon_{Error}$ nicht möglich, die Bedingung einzuhalten.
+%Für \texttt{double} konnten wir mit $\varepsilon_{Error}\leq10^{-32}$ die Bedingung mit $\epsilon_i\leq1,257\times10^{-5}$ erfüllen, wobei kleinere Werte hier keinerlei Verbesserung der Genauigkeit des Ergebnisses mehr ergaben. Wir führen dies auf sowohl auf Rechenungenauigkeiten, als auch die gewählte Gitterauflösung zurück.
+
+\TODO{Vorkonditionierter Löser}
+
+\subsubsection{}
+\TODO{Genauigkeit}
+
+\subsubsection{}
+\TODO{Aufteilung}
+
+
+
+
+
+
+\subsection{Lattice-Boltzmann-Methode (LBM)}\label{p2a6}
+\subsubsection{}
+Nach unseren Ergebnissen aus Aufgabe \ref{p2a1} steht uns auf der \emph{GeForce GTX 960} ein globaler Speicher von $2.092.957.696$ Bytes $=1.996$MB zur Verfügung. Die Daten für unseren Würfel dürfen demnach nicht mehr als diesen Speicherplatz benötigen.
+
+Im Grafikspeicher müssen die Arrays \texttt{rawdata1}, \texttt{rawdata2} sowie \texttt{u\_0} gehalten werden. Bei den Arrays \texttt{gridI} und \texttt{gridO} handelt es sich lediglich um eine Indexierung der Knoten des Gitters, die nicht explizit gespeichert werden müssen.
+
+Bei \texttt{rawdata1} und \texttt{rawdata2} handelt es sich um Arrays der Größe $max_x\cdot max_y \cdot max_z\cdot 19$ mit Datentyp \texttt{double}. Für diese werden somit je
+\begin{equation*}
+	M(\mathtt{rawdata1})=M(\mathtt{rawdata2})=max_x\cdot max_y\cdot max_z\cdot 19\cdot8
+\end{equation*}
+Bytes benötigt.
+Im Gegensatz hierzu ist \texttt{u\_0} im Wesentlichen ein zweidimensionales Array der Größe $max_x \cdot max_y$, ebenfalls vom Typ \texttt{double}. Für dieses ergibt sich somit ein Speicherbedarf von
+\begin{equation*}
+	M(\mathtt{u\_0})=max_x\cdot max_y\cdot 8
+\end{equation*}
+Bytes.
+
+Insgesamt ergibt sich somit ein Speicherbedarf auf der GPU von
+\begin{equation*}
+	\begin{split}
+		M&=M(\mathtt{rawdata1})+M(\mathtt{rawdata2})+M(\mathtt{u\_0})\\
+		&=2\cdot max_x\cdot max_y\cdot max_z\cdot 19\cdot8 + max_x\cdot max_y\cdot 8\\
+		&=8\cdot max_x\cdot max_y\cdot(38\cdot max_z + 1)
+	\end{split}
+\end{equation*}
+Bytes, wobei $M$ nicht größer als der verfügbare globale Speicher sein darf, also $M\leq 2.092.957.696$.
+Bei Würfeln sind alle Kanten gleich lang, somit gilt $max_x=max_y=max_z$ und der Speicherbedarf vereinfacht sich zu
+\begin{equation*}
+	M=8\cdot max_x^2\cdot(38\cdot max_x+1)
+\end{equation*}
+Bytes.
+Die maximale Seitenlänge die diese Bedingung erfüllt ist $max_x=max_y=max_z=190$ mit einem Speicherbedarf von $M=2.085.424.800$ Bytes (ermittelt mittels dem Programm \emph{GeoGebra}).
+
+\subsubsection{}
+Bei Würfeln die größer sind als $max_x=max_y=max_z=190$ passen die Daten nicht alle gleichzeitig in den Grafikspeicher, sie müssten demnach während der Berechnung zwischen Haupt- und Grafikspeicher ausgetauscht werden. Da diese Kopieoperationen vergleichsweise langsam sind, ist mit einer sehr starken Verschlechterung der Performanz zu rechnen.
+
+
+\subsubsection{}
+\TODO{Speedup}
+
 
 % Normaler LNCS Zitierstil
 %\bibliographystyle{splncs}
