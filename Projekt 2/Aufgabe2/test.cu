@@ -18,8 +18,9 @@ int main(){
 	size_t N=100*Mega;
 	size_t size=N*sizeof(int);
 
-	struct timeval t1,t2;
-	struct timezone z;
+	cudaEvent_t start, stop;
+	cudaEventCreate(&start);
+	cudaEventCreate(&stop);
 	float t,r;
 	
 	int* c_a=(int*)malloc(size);
@@ -29,13 +30,15 @@ int main(){
 	int* d_a;
 	cudaMalloc(&d_a,size);
 
-	gettimeofday(&t1,&z);
+	cudaEventRecord(start);
 
 	//copy c_a to Device
 	cudaMemcpy(d_a,c_a,size,cudaMemcpyHostToDevice);
 
-	gettimeofday(&t2,&z);
-	t=((t2.tv_usec-t1.tv_usec)+(t2.tv_sec-t1.tv_sec)*1000000)/1000000.0;
+	cudaEventRecord(stop);
+	cudaEventSynchronize(stop);
+	cudaEventElapsedTime(&t, start, stop);
+	t/=1000.0;
 	r=(size/(1000.0*Mega))/t;
 	printf("copy to device time: %f,rate: %f GB/s\n",t,r);
 
@@ -46,25 +49,29 @@ int main(){
 	int* d_b;
 	cudaMalloc(&d_b,size);
 
-	gettimeofday(&t1,&z);
+	cudaEventRecord(start);
 	//copy d_a in d_b
 	cudaMemcpy(d_b,d_a,size,cudaMemcpyDeviceToDevice);
 
 	//Memcpy<<<1,N>>>(d_b,d_a);
 
-	gettimeofday(&t2,&z);
-	t=((t2.tv_usec-t1.tv_usec)+(t2.tv_sec-t1.tv_sec)*1000000)/1000000.0;
+	cudaEventRecord(stop);
+	cudaEventSynchronize(stop);
+	cudaEventElapsedTime(&t, start, stop);
+	t/=1000.0;
 	r=(size/(1000.0*Mega))/t;
 	printf("copy on device time: %f,rate: %f GB/s\n",t,r);
 
    	int* c_c=(int*)malloc(size);
 
-	gettimeofday(&t1,&z);
+	cudaEventRecord(start);
 	//copy d_b from device to c_c
    	cudaMemcpy(c_c,d_b,size,cudaMemcpyDeviceToHost);
 
-	gettimeofday(&t2,&z);
-	t=((t2.tv_usec-t1.tv_usec)+(t2.tv_sec-t1.tv_sec)*1000000)/1000000.0;
+	cudaEventRecord(stop);
+	cudaEventSynchronize(stop);
+	cudaEventElapsedTime(&t, start, stop);
+	t/=1000.0;
 	r=(size/(1000.0*Mega))/t;
 	printf("copy from device time: %f,rate: %f GB/s\n",t,r);
 //checking correctness
