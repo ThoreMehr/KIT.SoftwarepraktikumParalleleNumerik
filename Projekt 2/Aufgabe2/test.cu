@@ -36,7 +36,7 @@ int main(){
 
 	gettimeofday(&t2,&z);
 	t=((t2.tv_usec-t1.tv_usec)+(t2.tv_sec-t1.tv_sec)*1000000)/1000000.0;
-	r=(size/1000000000.0)/t;
+	r=(size/(1000.0*Mega))/t;
 	printf("copy to device time: %f,rate: %f GB/s\n",t,r);
 
 	//c_b for testing	
@@ -54,7 +54,7 @@ int main(){
 
 	gettimeofday(&t2,&z);
 	t=((t2.tv_usec-t1.tv_usec)+(t2.tv_sec-t1.tv_sec)*1000000)/1000000.0;
-	r=(size/1000000000.0)/t;
+	r=(size/(1000.0*Mega))/t;
 	printf("copy on device time: %f,rate: %f GB/s\n",t,r);
 
    	int* c_c=(int*)malloc(size);
@@ -65,7 +65,7 @@ int main(){
 
 	gettimeofday(&t2,&z);
 	t=((t2.tv_usec-t1.tv_usec)+(t2.tv_sec-t1.tv_sec)*1000000)/1000000.0;
-	r=(size/1000000000.0)/t;
+	r=(size/(1000.0*Mega))/t;
 	printf("copy from device time: %f,rate: %f GB/s\n",t,r);
 //checking correctness
    	for(int i=0;i<N;i++){
