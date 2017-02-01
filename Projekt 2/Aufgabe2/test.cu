@@ -2,41 +2,63 @@
 #include <stdio.h>
 #include <sys/time.h>
 #include <stdlib.h>
+#include <omp.h>
 
-__global__ void Memcpy(int* target,int* source){
-	int i=threadIdx.x;
-	target[i]=source[i];
+__global__ void Memcpy(int N,int* target,int* source){
+	int i=blockDim.x*blockIdx.x+threadIdx.x;
+	if (i<N) target[i]=source[i];
 }
-__global__ void Memcpyadd(int* target,int*source,int add){
-	int i=threadIdx.x;
-	target[i]=source[i]+add;
+__global__ void Memcpyadd(int N,int* target,int*source,int add){
+	int i=blockDim.x*blockIdx.x+threadIdx.x;
+	if (i<N) target[i]=source[i]+add;
 }
 #define Mega 1000000
 #define Kilo 1000
+#define add 10
 int main(){
-	srand(time(NULL));
-	size_t N=100*Mega;
+	size_t N=10*Mega;
 	size_t size=N*sizeof(int);
 
-	struct timeval t1,t2;
-	struct timezone z;
+	cudaEvent_t start, stop;
+	cudaEventCreate(&start);
+	cudaEventCreate(&stop);
 	float t,r;
 	
 	int* c_a=(int*)malloc(size);
-	for(int i=0;i<N;i++){
-		c_a[i]=rand()%10000;
+	#pragma omp parallel
+	{
+		srand(int(time(NULL)^omp_get_thread_num()));
+		#pragma omp for
+		for(int i=0;i<N;i++){
+			c_a[i]=rand();
+		}
 	}	
 	int* d_a;
 	cudaMalloc(&d_a,size);
+	int *c_d=(int*)malloc(size);
+	cudaEventRecord(start);
 
-	gettimeofday(&t1,&z);
+	#pragma omp parallel for
+	for(int i=0;i<N;i++){
+		c_d[i]=c_a[i]+add;
+	}
+
+	cudaEventRecord(stop);
+	cudaEventSynchronize(stop);
+	cudaEventElapsedTime(&t, start, stop);
+	t/=1000.0;
+	r=(size/(1000.0*Mega))/t;
+	printf("copy in Ram time: %f,rate: %f GB/s\n",t,r);
+	cudaEventRecord(start);
 
 	//copy c_a to Device
 	cudaMemcpy(d_a,c_a,size,cudaMemcpyHostToDevice);
 
-	gettimeofday(&t2,&z);
-	t=((t2.tv_usec-t1.tv_usec)+(t2.tv_sec-t1.tv_sec)*1000000)/1000000.0;
-	r=(size/1000000000.0)/t;
+	cudaEventRecord(stop);
+	cudaEventSynchronize(stop);
+	cudaEventElapsedTime(&t, start, stop);
+	t/=1000.0;
+	r=(size/(1000.0*Mega))/t;
 	printf("copy to device time: %f,rate: %f GB/s\n",t,r);
 
 	//c_b for testing	
@@ -46,26 +68,29 @@ int main(){
 	int* d_b;
 	cudaMalloc(&d_b,size);
 
-	gettimeofday(&t1,&z);
+	cudaEventRecord(start);
 	//copy d_a in d_b
-	cudaMemcpy(d_b,d_a,size,cudaMemcpyDeviceToDevice);
-
-	//Memcpy<<<1,N>>>(d_b,d_a);
-
-	gettimeofday(&t2,&z);
-	t=((t2.tv_usec-t1.tv_usec)+(t2.tv_sec-t1.tv_sec)*1000000)/1000000.0;
-	r=(size/1000000000.0)/t;
+	//cudaMemcpy(d_b,d_a,size,cudaMemcpyDeviceToDevice);
+	Memcpyadd<<<N/1000,1000>>>(N,d_b,d_a,add);
+	cudaDeviceSynchronize();
+	cudaEventRecord(stop);
+	cudaEventSynchronize(stop);
+	cudaEventElapsedTime(&t, start, stop);
+	t/=1000.0;
+	r=(size/(1000.0*Mega))/t;
 	printf("copy on device time: %f,rate: %f GB/s\n",t,r);
 
    	int* c_c=(int*)malloc(size);
 
-	gettimeofday(&t1,&z);
+	cudaEventRecord(start);
 	//copy d_b from device to c_c
    	cudaMemcpy(c_c,d_b,size,cudaMemcpyDeviceToHost);
 
-	gettimeofday(&t2,&z);
-	t=((t2.tv_usec-t1.tv_usec)+(t2.tv_sec-t1.tv_sec)*1000000)/1000000.0;
-	r=(size/1000000000.0)/t;
+	cudaEventRecord(stop);
+	cudaEventSynchronize(stop);
+	cudaEventElapsedTime(&t, start, stop);
+	t/=1000.0;
+	r=(size/(1000.0*Mega))/t;
 	printf("copy from device time: %f,rate: %f GB/s\n",t,r);
 //checking correctness
    	for(int i=0;i<N;i++){
@@ -75,7 +100,7 @@ int main(){
 		}
    	}
    	for(int i=0;i<N;i++){
-   		if(c_c[i]!=c_a[i]){
+   		if(c_c[i]!=c_d[i]){
 		printf("error in c_c at %d\n",i);
 		break;
 		}
