@@ -390,7 +390,7 @@ Hello World, this is Thread2
 \end{lstlisting}
 
 \subsubsection{}\label{p1a1b}
-\begin{table}
+\begin{table*}
 	\centering
 	\scriptsize
 	\begin{tabular}{r||r||r|r||r|r||r|r||r|r}
@@ -410,11 +410,11 @@ Hello World, this is Thread2
 	\end{tabular}
 	\caption{Laufzeiten der Berechnung von Pi unserer Parallelisierung gegenüber der sequentiellen Version. Getestet wurde auf dem Rechner \emph{i82sn07}. Um Ungenauigkeiten auszugleichen wurden die Zeiten jeweils über $10$ (für große Eingaben über $5$) Durchläufe gemittelt.}
 	\label{pi_runtime}
-\end{table}
+\end{table*}
 Wie in Tabelle \ref{pi_runtime} zu sehen, nähert sich der \emph{Speedup} mit zunehmenden $N$ der Anzahl der Kerne an.\\
 Die manuelle Variante hat eine schlechtere Performance, als die Variante ohne Parallelisierung. Dies lässt sich damit begründen, dass \emph{OpenMP} bei der Variante mit \emph{Reduction} weitere Optimierungen umsetzen kann, beispielsweise kann jeder Thread erst einmal all seine eigenen Beiträge aufsummieren, bevor am Ende nach einer einzigen Synchronisation (anstatt bei jeder Schleifenausführung) die Ergebnisse aller Threads aufsummiert werden.
 \subsubsection{}\label{p1a1c}
-\begin{table}
+\begin{table*}
 	\centering
 	\begin{tabular}{r||r||r|r||r|r||r|r}
 		\multicolumn{1}{c||}{Problemgröße} & Seq. & \multicolumn{2}{c||}{2 Threads}  & \multicolumn{2}{c||}{16 Threads} & \multicolumn{2}{c}{32 Threads} \\
@@ -433,7 +433,7 @@ Die manuelle Variante hat eine schlechtere Performance, als die Variante ohne Pa
 	\end{tabular}
 	\caption{Laufzeiten des Mandelbrot Programms unserer Parallelisierung gegenüber der sequentiellen Version. Getestet wurde auf dem Rechner \emph{i82sn07}. Um Ungenauigkeiten auszugleichen wurden die Zeiten jeweils über $10$ (für große Eingaben über $5$) Durchläufe gemittelt.}
 	\label{mandel_runtime}
-\end{table}
+\end{table*}
 Wie an der Tabelle \ref{mandel_runtime} abgelesen werden kann, beträgt die Beschleunigung für 2 Threads etwa $1,4$, für 16 Threads etwa 4 und für 32 Threads etwa 8. Dass die Beschleunigung schlechter ist, als bei der Berechnung von PI, liegt meiner Meinung nach daran, dass Speicherverwaltung und Caches einen wesentlichen Anteil der Laufzeit ausmachen.
 
 \subsection{Testtools}\label{p1a2}
@@ -463,7 +463,7 @@ Um die Ausnutzung des Caches zu gewährleisten, wird die eine Matrix als Zeilen-,
 	\item Äußere Schleife parallelisiert
 \end{enumerate}
 In den Tabellen \ref{2b_1000} und \ref{2b_2000} wird der Einfluss von Optimierungsoptionen vom GCC und ICC untersucht. Die Messungen wurden auf \emph{i82pc31} ausgeführt, da dieser über eine Intel CPU verfügt. Wie aus den Tabellen abgelesen werden kann, sind die Unterschiede bei den Optimierungsstufen O0 bis O3 gering. GCC scheint etwas schnelleren sequentiellen, ICC hingegen schnelleren parallelen Code zu generieren. Wenn Vektorisierung benutzt werden kann -- beim ICC mit der Option fast -- wird der Code viel schneller, allerdings auf Kosten der Größe, das Binary hat ~1,4 MB statt ~30 kB. Im Allgemeinen ist das Binary, das vom ICC erzeugt wird, etwa doppelt so groß, wie das, dass vom GCC erzeugt wird.
-\begin{table}
+\begin{table*}
 	\centering
 	\begin{tabular}{|r||r|r|r|r|r||r|r|r|r|}
 		\hline
@@ -476,9 +476,9 @@ In den Tabellen \ref{2b_1000} und \ref{2b_2000} wird der Einfluss von Optimierun
 	\end{tabular}
 	\caption{Laufzeiten in s mit N=1000. Getestet wurde auf dem Rechner \emph{i82pc31}. Um Ungenauigkeiten auszugleichen, wurden die Zeiten jeweils über $10$ Durchläufe gemittelt.}
 	\label{2b_1000}
-\end{table}
+\end{table*}
 
-\begin{table}
+\begin{table*}
 	\centering
 	\begin{tabular}{|r||r|r|r|r|r||r|r|r|r|}
 		\hline
@@ -497,10 +497,10 @@ In den Tabellen \ref{2b_1000} und \ref{2b_2000} wird der Einfluss von Optimierun
 	\end{tabular}
 	\caption{Laufzeiten in s mit N=2000. Getestet wurde auf dem Rechner \emph{i82pc31}. Um Ungenauigkeiten auszugleichen, wurden die Zeiten jeweils über $10$ Durchläufe gemittelt.}
 	\label{2b_2000}
-\end{table}
+\end{table*}
 \subsubsection{}\label{p1a2c}
 Anhand der Ausgabe von \emph{ompP} kann leicht gesehen werden, dass wenige der Threads einen Großteil der Arbeit leisten, was bei der Verwendung von reduction zu erwarten ist. Durch die explizite Angabe des Scheduling und der Chunksize kann die Arbeit besser verteilt werden. In Tabelle \ref{2c_mandelbrot} kann der Einfluss der Optionen auf die Laufzeit abgelesen werden.
-\begin{table}
+\begin{table*}
 	\centering
 	\begin{tabular}{|c|c|c|c|c|c|}
 		\hline
@@ -522,7 +522,7 @@ Anhand der Ausgabe von \emph{ompP} kann leicht gesehen werden, dass wenige der T
 	\end{tabular} 
 	\caption{Einfluss von Scheduling und Chunksize auf die Laufzeit von Mandelbrot. Getestet wurde auf dem Rechner \emph{i82sn07} mit 32 Threads. Um Ungenauigkeiten auszugleichen wurden die Zeiten jeweils über $10$ Durchläufe gemittelt.}
 	\label{2c_mandelbrot}
-\end{table}
+\end{table*}
 
 
 
@@ -736,7 +736,7 @@ Es sei nicht zu verschweigen, dass hier im Gegensatz zur seriellen Variante sehr
 
 In jedem Berechnungsschritt wird genaue eine Iterierte des Verfahrens berechnet. Allerdings gilt dies erst, sobald $d-1$ Schritte ausgeführt wurden, denn erst dann ist schließlich der Eintrag rechts unten $u^{k+2-d}_{d,d}=u^{1}_{d,d}$ berechnet (die \emph{Historie} muss erst gefüllt werden). So kommt es, dass die parallele Version bei gleichen Eingaben exakt die gleichen Ergebnisse wie die serielle Version ausgibt, jedoch dabei genau $d-1$ Iterationen mehr benötigt. Wie der Tabelle \ref{gsv_runtime} zu entnehmen, ist die parallele Version mit 32 Kernen bei großer Problemgröße ($l=9$) mit einem \emph{Speedup} von $7,57$ aber immerhin noch deutlich schneller. Die eher geringe Effizienz schreiben wir dem Synchronisationsaufwand sowie den eher Cache-unfreundlichen Speicherzugriffen zu.
 
-\begin{table}
+\begin{table*}
 	\centering
 	\begin{tabular}{r|r|r||r||r|r||r|r|@{ \dots}|r|r}
 		\multicolumn{3}{c||}{Problemgröße} & Seq. & \multicolumn{2}{c||}{2 Threads}  & \multicolumn{2}{c|@{ \dots}|}{4 Threads} & \multicolumn{2}{c}{32 Threads} \\
@@ -751,7 +751,7 @@ In jedem Berechnungsschritt wird genaue eine Iterierte des Verfahrens berechnet.
 	\end{tabular}
 	\caption{Laufzeiten unserer Parallelisierung gegenüber der sequentiellen Version. Getestet wurde auf dem Rechner \emph{i82sn07}. Um Ungenauigkeiten auszugleichen wurden die Zeiten jeweils über $100$ (für große Eingaben über $10$) Durchläufe gemittelt.}
 	\label{gsv_runtime}
-\end{table}
+\end{table*}
 
 
 
@@ -773,11 +773,13 @@ u(x,y)=\sin(2M\pi x)\sin(2N\pi y)
 Dies kann durch einfache Anwendung des \emph{Laplace-Operators $\Delta$} berechnet werden:
 \begin{equation}\label{fgleichung}
 \begin{split}
-f(x,y)&=-\Delta u(x,y) \\
-&= -\frac{\partial u}{\partial x^2}-\frac{\partial u}{\partial y^2} \\
-&= -\frac{\partial}{\partial x}(2M\pi\cos(2M\pi x)\sin(2N\pi y)) -\frac{\partial}{\partial y}(2N\pi\sin(2M\pi x)\cos(2N\pi y)) \\
-&= 4M^2\pi^2\sin(2M\pi x)\sin(2N\pi y) + 4N^2\pi^2\sin(2M\pi x)\sin(2N\pi y) \\
-&= (M^2+N^2)4\pi^2\sin(2M\pi x)\sin(2N\pi y)
+f(x,y)=&-\Delta u(x,y) \\
+=& -\frac{\partial u}{\partial x^2}-\frac{\partial u}{\partial y^2} \\
+=& -\frac{\partial}{\partial x}(2M\pi\cos(2M\pi x)\sin(2N\pi y)) \\
+&-\frac{\partial}{\partial y}(2N\pi\sin(2M\pi x)\cos(2N\pi y)) \\
+=& \hspace{1.25em}4M^2\pi^2\sin(2M\pi x)\sin(2N\pi y) \\
+& + 4N^2\pi^2\sin(2M\pi x)\sin(2N\pi y) \\
+=& (M^2+N^2)4\pi^2\sin(2M\pi x)\sin(2N\pi y)
 \end{split}
 \end{equation}
 
@@ -889,7 +891,7 @@ Der \emph{Intel Thread Checker} gibt für unser Programm Folgendes aus:
 \subsubsection{}\label{p1a6b}
 Unsere parallele Version des CG-Verfahrens konnte gegenüber dem Gauß-Seidel-Verfahren das Problem aus Aufgabe \ref{p1a5} bis zu $40$-mal so schnell lösen. Eine Übersicht über den \emph{Speedup} sowie die \emph{Efficiency} ist in Tabelle \ref{a5a6speedupefficiency} zu finden.
 
-\begin{table}
+\begin{table*}
 	\centering
 	\begin{tabular}{r|r|r||r||r|r|@{ \dots}|r|r||r|r}
 		\multicolumn{3}{c||}{Problemgröße} & Seq. & \multicolumn{2}{c|@{ \dots}|}{2 Threads} & \multicolumn{2}{c||}{16 Threads}  & \multicolumn{2}{c}{32 Threads} \\
@@ -904,7 +906,7 @@ Unsere parallele Version des CG-Verfahrens konnte gegenüber dem Gauß-Seidel-Verf
 	\end{tabular}
 	\caption{\emph{Speedup} und \emph{Efficiency} für das CG-Verfahren gegenüber dem Gauß-Seidel-Verfahren für das Problem aus Aufgabe \ref{p1a5}. Die zugrunde liegenden Laufzeiten wurden anhand des Rechners \emph{i82sn07} ermittelt.}
 	\label{a5a6speedupefficiency}
-\end{table}
+\end{table*}
 
 Wie auch unsere Implementierung des Gauß-Seidel-Verfahrens aus Aufgabe \ref{p1a4}, nutzen wir hier für unsere Implementierung die dünne Struktur der Matrix $A$ aus.
 Eine Vorkonditionierung würde diese Struktur beeinträchtigen, im Rahmen des Praktikums haben wir jedoch gelernt, dass es möglich ist, die Vorkonditionierung so zu wählen, dass dies kein Problem für den Rechenaufwand des eigentlichen Verfahrens darstellt.
@@ -918,7 +920,7 @@ Libmesh\cite{Libmesh}.
 
 Im Rahmen dieses Praktikums würde sich, zumindest für Projekt 1, \emph{HiFlow\textsuperscript{3}} gut eignen, da hier eine ausgereifte OpenMP Funktionalität gegeben zu sein scheint, die den Portierungsaufwand stark verringert.
 
-\begin{table}
+\begin{table*}
 	\centering
 	\begin{tabular}{l|p{0.6\textwidth}|l}
 		Bibliothek & Unterschiede & Gemeinsamkeiten \\
@@ -945,7 +947,7 @@ Im Rahmen dieses Praktikums würde sich, zumindest für Projekt 1, \emph{HiFlow\te
 	\end{tabular}
 	\caption{Ausgewählte Bibliotheken zur Anwendung der Finiten Elemente Methode im Vergleich.}
 	\label{MathBibs}
-\end{table}
+\end{table*}
 
 
 \section{CUDA}
@@ -1014,14 +1016,61 @@ Zu Testzwecken haben wir die Implementierung aus Aufgabe \ref{p1a4c} für den Dat
 
 
 \subsection{LU-Zerlegung}\label{p2a4}
-\subsubsection{}
-\TODO{Eignung}
+Mit Hilfe der LU-Zerlegung zerlegen wir $A$ in zwei Matrizen $L$ und $U$, sodass $L\cdot U=A$ mit $L$ ist untere, und $U$ ist obere Dreiecksmatrix. Um auch weiterhin mit dünn besetzten Matrizen arbeiten zu können, verwenden wir eine unvollständige Zerlegung (ILU), d.h. $L\cdot U\approx A$ mit dünn besetzten $L$ und $U$.
 
 \subsubsection{}
-\TODO{Implementierung}
+\TODO{Eignung aus Mathematischer Sicht}
+
+Algorithmus 1 lässt sich sehr gut parallelisieren, da innerhalb einer Iterierten $m$ alle Einträge unabhängig von einander berechnet werden können. Zwischen den Iterierten ist jedoch eine Synchronisation nötig, da jede Iterierte die Ergebnisse der vorherigen Iterierten benötigt. Für den Datenaustausch zwischen zwei iterierten werden lediglich zwei Puffer benötigt, einer hält stets die aktuellen Werte und wird beschrieben, während der andere die Ergebnisse der letzten Iterierten bereithält. Die Puffer können dann während der Ausführung nach jeder Iteration ausgetauscht werden.
+
+Die Parallelisierbarkeit von Algorithmus 2 hingegen schätzen wir als schlecht ein. Ähnlich dem Gauß-Seidel-Verfahren aus Projekt 1 beinhaltet er Abhängigkeiten zwischen den einzelnen Einträgen, die während einer Iteration $j$ berechnet werden. Je Iteration müssen jedoch maximal 3 Werte berechnet werden, hierfür lohnt sich eine Parallelisierung unserer Einschätzung nach nicht.
+
+
+\TODO{Bestes Ergebnis für schlechteren Algorithmus}
+
+Die Matrizen $L$ und $U$ sind dünn besetzt, daher erscheint es sinnvoll, die Daten komprimiert zu speichern. Aufgrund der Struktur von $A$ -- und damit auch der von $L$ und $U$, wie wir in der nächsten Teilaufgabe aufzeigen werden -- gibt es nur insgesamt 5 Diagonalen, die Einträge $\neq0$ enthalten können. Wir verwenden daher der Einfachheit halber Arrays der Größe $5\cdot N$, da diese auf jeden Fall genügend Platz zum Speichern bereitstellen. Für jede Zeile einer Matrix verwenden wir demnach $5$ Einträge im Array. Im Falle von $l=2, d=3, n=9$ sieht die Belegung der Matrizen $A$, $L$ und $U$ exemplarisch so aus:
+\begin{equation}
+	\begin{pmatrix}
+		* & * & 0 & * & 0 & 0 & 0 & 0 & 0 \\
+		* & * & * & 0 & * & 0 & 0 & 0 & 0 \\
+		0 & * & * & \color{red}0 & 0 & * & 0 & 0 & 0 \\
+		* & 0 & \color{red}0 & * & * & 0 & * & 0 & 0 \\
+		0 & * & 0 & * & * & * & 0 & * & 0 \\
+		0 & 0 & * & 0 & * & * & \color{red}0 & 0 & * \\
+		0 & 0 & 0 & * & 0 & \color{red}0 & * & * & 0 \\
+		0 & 0 & 0 & 0 & * & 0 & * & * & * \\
+		0 & 0 & 0 & 0 & 0 & * & 0 & * & *
+	\end{pmatrix}
+\end{equation}
+Wobei Einträge mit $*$ bedeuten, dass nur an diesen Stellen Einträge $\neq0$ sein können. Rot eingefärbte $\color{red}0$en verweisen auf Einträge, die immer $0$ sind, aber in der von uns gewählten Speichermethodik dennoch Platz einnehmen. Insgesamt gibt es davon $4\cdot d$ Stück (im Beispiel liegen 8 davon außerhalb der Matrix und sind daher nicht sichtbar). Wegen $n=d\cdot d$ ist der Verschnitt für große $n$ zunehmend vernachlässigbar, sodass eine Platz sparendere Speicherung den zusätzlichen Programmieraufwand unserer Meinung nach nicht rechtfertigen würde.
+
+Bei Ausführung der Algorithmen ist uns aufgefallen, dass $L\cdot U$ tatsächlich eine gute Approximation für $A$ ist, allerdings nur für Einträge in denen $A$ selbst nicht $0$ ist. Bei $l=2,n=9$ erhielten wir beispielsweise
+\begin{equation*}
+\tiny
+	L\cdot U\approx \begin{pmatrix}
+	4 & -1 &  0 & -1 &  0 & 0 &  0  & 0  & 0 \\
+	-1  & 4 & -1 &  \color{red}0.25 & -1 &  0 &  0 &  0 &  0 \\
+	0 & -1  & 4 &  0 &  \color{red}0.27 & -1  & 0  & 0  & 0 \\
+	-1 &  \color{red}0.25 &  0 &  4 & -1 &  0 & -1 &  0 &  0 \\
+	0 & -1 &  \color{red}0.27 & -1 &  4 & -1  & \color{red}0.27 & -1 &  0 \\
+	0 &  0 & -1 &  0 & -1 &  4 &  0 & \color{red}0.29 & -1 \\
+	0 &  0 &  0 & -1 &  \color{red}0.27 &  0 &  4 & -1 &  0 \\
+	0 &  0 &  0 &  0 & -1 &  \color{red}0.29 & -1 &  4 & -1 \\
+	0 &  0 &  0 &  0 &  0 & -1 &  0 & -1 &  4
+	\end{pmatrix}
+\end{equation*}
+als Ergebnis, wobei wir Abweichungen von $A$ (also 0) mit {\color{red}rot} markiert haben. Die Frage die sich uns hier gestellt hat, war, inwiefern $L\cdot U$ dennoch als Approximation von $B$ aus der nächsten Aufgabe geeignet sind.
+
 
 \subsubsection{}
-\TODO{OpemMP Eignung}
+Bei der Implementierung von \textbf{Algorithmus 2} ist uns aufgefallen, dass Einträge, die in $A$ 0 sind, auch in $L$ auf 0 gesetzt werden. Ferner gilt $U=L^T$ und $A$ ist symmetrisch. Daraus ergibt sich für die Einträge von $A$, $L$ und $U$: $a_{i,j}=0 \Rightarrow l_{i,j}=l_{j,i}=u_{i,j}=u_{j,i}=0$. Somit eignet sich die Speichermethodik aus der vorherigen Teilaufgabe auch für die Matrizen $L$ und $U$ aus Algorithmus 2. Beim Implementieren ist uns aufgefallen, dass $L$ und $U$ nicht mit 0 initialisiert sein sollten, da ansonsten Werte $NaN$ in den Ergebnismatrizen auftauchen. Mit der Einheitsmatrix als Startwerte von $L$ und $U$ leistet der Algorithmus das Gewünschte.
+
+Für \textbf{Algorithmus 1} wählen wir nun als Indexmenge $S_U$ genau die Einträge, die nach Algorithmus 2 in $U$ ungleich $0$ sein können. Damit ist auch die Validität unserer gewählten Speichermethodik für diesen Algorithmus garantiert, da auch hier $L=U^T$ gilt und $\forall (i,j)\notin S_U:u_{i,j}=l_{j,i}=0$.
+
+\TODO{Vergleich mit Erwartung aus vorheriger Teilaufgabe}
+
+\subsubsection{}
+Für Algorithmus 1: Für kleine $n$ würde eine Parallelisierung in OpenMP -- also auf der CPU -- möglicherweise Sinn machen, aufgrund des Mehraufwandes der für die GPU-Ausführung erforderlich ist. Für große $n$ hingegen erwarten wir, dass die CUDA-Implementierung einen Performance-Vorteil gegenüber der CPU-Implementierung hat. Dies schließen wir vor allem daraus, dass sich der Algorithmus sehr gut für die Grafikkarte parallelisieren lässt, da innerhalb einer Iteration Einträge unabhängig von einander sind.
 
 
 
@@ -1033,6 +1082,8 @@ Zu Testzwecken haben wir die Implementierung aus Aufgabe \ref{p1a4c} für den Dat
 
 %Um den maximal zulässigen lokalen Fehler von $\epsilon_i\leq10^-{-5}$ einzuhalten, mussten wir auf unsere mit dem Datentyp \texttt{double} implementierte Variante aus Aufgabe \ref{p2a3} zurückgreifen. Mit \texttt{float}-Genauigkeit war es uns unabhängig vom gewählten $\varepsilon_{Error}$ nicht möglich, die Bedingung einzuhalten.
 %Für \texttt{double} konnten wir mit $\varepsilon_{Error}\leq10^{-32}$ die Bedingung mit $\epsilon_i\leq1,257\times10^{-5}$ erfüllen, wobei kleinere Werte hier keinerlei Verbesserung der Genauigkeit des Ergebnisses mehr ergaben. Wir führen dies auf sowohl auf Rechenungenauigkeiten, als auch die gewählte Gitterauflösung zurück.
+
+
 
 \TODO{Vorkonditionierter Löser}
 
