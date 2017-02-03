@@ -1011,6 +1011,8 @@ Wie auch die CPU Variante haben wir zur Berechnung den Datentyp \texttt{double} 
 
 	\item \textbf{Relaxierte Parallelisierung} \\
 	Zu dieser Methode konnten wir wenig finden, das in unseren Kontext passt. Wir nehmen an, es soll die verschiedenen zeitlichen Schritte auf verfügbare Threads aufteilen. Die Idee ist, dass diese Schritte unabhängig voneinander berechnet werden können durch die zuvor durchgeführte Relaxierung. Dies erlaubt schnellere Ausführung der Aufgaben, da keine Abhängigkeiten zu vorherigen Resultaten existieren. Somit entfallen die Wartezeiten zu Gunsten der Genauigkeit des Endresultats (nach \cite{HighOrder}).
+	
+	\TODO{Unverständlich}
 \end{itemize}
 
 Nach \cite{CudaToolkit} sollte die Blockgröße -- zumindest für die uns zur Verfügung stehende Architektur mit Warpgröße 32 -- nach Möglichkeit immer als 32 gewählt werden. Dies erlaubt alle Recheneinheiten mit Threads zu belegen und somit eine optimale Auslastung. Weniger ist einer Verschwendung von Hardware gleichzustellen, da einzelne Recheneinheiten keinen Thread zugewiesen bekämen. Eine höhere Zahl bedeutet, dass sich die verfügbaren Recheneinheiten mehr Threads aufteilen müssen, was dazu führt, dass einige Threads erst nach Abarbeitung der vorherigen zur Ausführung kommen. Dies kann zu einer Zeitverschwendung führen, wenn diese Threads keine sinnvoll Arbeit verrichten, und sollte daher vermieden werden.
