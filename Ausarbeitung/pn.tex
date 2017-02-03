@@ -51,7 +51,7 @@
 
 
 
-\documentclass[conference,compsoc]{IEEEtran}
+\documentclass[twoside,twocolums,a4paper,compsoc,conference]{IEEEtran}
 % Some/most Computer Society conferences require the compsoc mode option,
 % but others may want the standard conference format.
 %
@@ -116,73 +116,6 @@
 
 
 
-
-
-
-
-
-% *** GRAPHICS RELATED PACKAGES ***
-%
-\ifCLASSINFOpdf
-  % \usepackage[pdftex]{graphicx}
-  % declare the path(s) where your graphic files are
-  % \graphicspath{{../pdf/}{../jpeg/}}
-  % and their extensions so you won't have to specify these with
-  % every instance of \includegraphics
-  % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
-\else
-  % or other class option (dvipsone, dvipdf, if not using dvips). graphicx
-  % will default to the driver specified in the system graphics.cfg if no
-  % driver is specified.
-  % \usepackage[dvips]{graphicx}
-  % declare the path(s) where your graphic files are
-  % \graphicspath{{../eps/}}
-  % and their extensions so you won't have to specify these with
-  % every instance of \includegraphics
-  % \DeclareGraphicsExtensions{.eps}
-\fi
-% graphicx was written by David Carlisle and Sebastian Rahtz. It is
-% required if you want graphics, photos, etc. graphicx.sty is already
-% installed on most LaTeX systems. The latest version and documentation
-% can be obtained at: 
-% http://www.ctan.org/pkg/graphicx
-% Another good source of documentation is "Using Imported Graphics in
-% LaTeX2e" by Keith Reckdahl which can be found at:
-% http://www.ctan.org/pkg/epslatex
-%
-% latex, and pdflatex in dvi mode, support graphics in encapsulated
-% postscript (.eps) format. pdflatex in pdf mode supports graphics
-% in .pdf, .jpeg, .png and .mps (metapost) formats. Users should ensure
-% that all non-photo figures use a vector format (.eps, .pdf, .mps) and
-% not a bitmapped formats (.jpeg, .png). The IEEE frowns on bitmapped formats
-% which can result in "jaggedy"/blurry rendering of lines and letters as
-% well as large increases in file sizes.
-%
-% You can find documentation about the pdfTeX application at:
-% http://www.tug.org/applications/pdftex
-
-
-
-
-
-% *** MATH PACKAGES ***
-%
-%\usepackage{amsmath}
-% A popular package from the American Mathematical Society that provides
-% many useful and powerful commands for dealing with mathematics.
-%
-% Note that the amsmath package sets \interdisplaylinepenalty to 10000
-% thus preventing page breaks from occurring within multiline equations. Use:
-%\interdisplaylinepenalty=2500
-% after loading amsmath to restore such page breaks as IEEEtran.cls normally
-% does. amsmath.sty is already installed on most LaTeX systems. The latest
-% version and documentation can be obtained at:
-% http://www.ctan.org/pkg/amsmath
-
-
-
-
-
 % *** SPECIALIZED LIST PACKAGES ***
 %
 %\usepackage{algorithmic}
@@ -216,10 +149,6 @@
 % latest version and documentation can be obtained at:
 % http://www.ctan.org/pkg/array
 
-
-% IEEEtran contains the IEEEeqnarray family of commands that can be used to
-% generate multiline equations as well as matrices, tables, etc., of high
-% quality.
 
 
 
@@ -297,32 +226,17 @@
 
 
 
-% *** PDF, URL AND HYPERLINK PACKAGES ***
-%
-%\usepackage{url}
-% url.sty was written by Donald Arseneau. It provides better support for
-% handling and breaking URLs. url.sty is already installed on most LaTeX
-% systems. The latest version and documentation can be obtained at:
-% http://www.ctan.org/pkg/url
-% Basically, \url{my_url_here}.
-
-
-
-
-% *** Do not adjust lengths that control margins, column widths, etc. ***
-% *** Do not use packages that alter fonts (such as pslatex).         ***
-% There should be no need to do such things with IEEEtran.cls V1.6 and later.
-% (Unless specifically asked to do so by the journal or conference you plan
-% to submit to, of course. )
 
 
 % correct bad hyphenation here
 \hyphenation{op-tical net-works semi-conduc-tor}
 
 
-\renewcommand{\thesection}{Projekt \arabic{section}}
-\renewcommand{\thesubsection}{Aufgabe \arabic{section}.\arabic{subsection}}
-\renewcommand{\thesubsubsection}{\arabic{section}.\arabic{subsection}.\alph{subsubsection})}
+\renewcommand{\thesectiondis}{Projekt \arabic{section}}
+\renewcommand{\thesubsectiondis}{Aufgabe \arabic{section}.\arabic{subsection}}
+\renewcommand{\thesubsubsectiondis}{\arabic{section}.\arabic{subsection}.\alph{subsubsection})}
+
+
 
 \newcommand{\TODO}[1]{\textbf{\Large\color{red}#1}}
 %\newcommand{\TODO}[1]{}
@@ -378,7 +292,7 @@ In diesem Projekt lag der Schwerpunkt auf dem Kennenlernen der Bibliothek \emph{
 
 \subsection{OpemMP}\label{p1a1}
 
-\subsubsection{}\label{p1a1a}
+\subsubsection{Hello World}\label{p1a1a}
 Wie in der Ausgabe \ref{helloworldoutput} zu sehen, folgt die Reihenfolge der ausgeführten Fäden keinem bestimmten Muster. Auch die Reihenfolge zwischen verschiedenen Ausführungen ist in der Regel verschieden.
 
 \begin{lstlisting}[frame=single, captionpos=b, caption={Beispielhafte Ausgabe des Programms bei Ausführung mit 8 Fäden.}, label ={helloworldoutput}, basicstyle=\footnotesize]
@@ -392,7 +306,7 @@ Hello World, this is Thread6
 Hello World, this is Thread2
 \end{lstlisting}
 
-\subsubsection{}\label{p1a1b}
+\subsubsection{Berechnung von $\mathbf{\pi}$}\label{p1a1b}
 \begin{table*}
 	\centering
 	\scriptsize
@@ -416,7 +330,7 @@ Hello World, this is Thread2
 \end{table*}
 Wie in Tabelle \ref{pi_runtime} zu sehen, nähert sich der \emph{Speedup} mit zunehmenden $N$ der Anzahl der Kerne an.\\
 Die manuelle Variante hat eine schlechtere Performance, als die Variante ohne Parallelisierung. Dies lässt sich damit begründen, dass \emph{OpenMP} bei der Variante mit \emph{Reduction} weitere Optimierungen umsetzen kann, beispielsweise kann jeder Thread erst einmal all seine eigenen Beiträge aufsummieren, bevor am Ende nach einer einzigen Synchronisation (anstatt bei jeder Schleifenausführung) die Ergebnisse aller Threads aufsummiert werden.
-\subsubsection{}\label{p1a1c}
+\subsubsection{Mandelbrot-Menge}\label{p1a1c}
 \begin{table*}
 	\centering
 	\begin{tabular}{r||r||r|r||r|r||r|r}
@@ -440,7 +354,7 @@ Die manuelle Variante hat eine schlechtere Performance, als die Variante ohne Pa
 Wie an der Tabelle \ref{mandel_runtime} abgelesen werden kann, beträgt die Beschleunigung für 2 Threads etwa $1,4$, für 16 Threads etwa 4 und für 32 Threads etwa 8. Dass die Beschleunigung schlechter ist, als bei der Berechnung von PI, liegt meiner Meinung nach daran, dass Speicherverwaltung und Caches einen wesentlichen Anteil der Laufzeit ausmachen.
 
 \subsection{Testtools}\label{p1a2}
-\subsubsection{}\label{p1a2a}
+\subsubsection{Intel Thread Checker}\label{p1a2a}
 \begin{enumerate}
 	\item {Memory read at \textbf{''demo\_with\_bugs.c'':27} conflicts with a prior memory write at \textbf{''demo\_with\_bugs.c'':26} (flow dependence)\\
 		Kann behoben werden, indem die Schleife aufgeteilt wird in zwei Schleifen mit \texttt{\#pragma omp prallel for simd}.
@@ -458,7 +372,7 @@ Wie an der Tabelle \ref{mandel_runtime} abgelesen werden kann, beträgt die Besch
 		Kann behoben werden in dem das Pragma auf \texttt{\#pragma omp parallel for reduction(+:sum)} geändert wird.}
 \end{enumerate}
 
-\subsubsection{}\label{p1a2b}
+\subsubsection{Matrixmultiplikation}\label{p1a2b}
 Um die Ausnutzung des Caches zu gewährleisten, wird die eine Matrix als Zeilen-, die andere als Spaltenmatrix verarbeitet und nach dem ikj-Algorithmus multipliziert. Es wurden eine sequentielle, sowie drei parallelisierte Versionen untersucht. Die parallelisierten Versionen unterscheiden sich wie folgt:
 \begin{enumerate}
 	\item Innerste Schleife mittels \emph{Reduction} parallelisiert
@@ -501,7 +415,7 @@ In den Tabellen \ref{2b_1000} und \ref{2b_2000} wird der Einfluss von Optimierun
 	\caption{Laufzeiten in s mit N=2000. Getestet wurde auf dem Rechner \emph{i82pc31}. Um Ungenauigkeiten auszugleichen, wurden die Zeiten jeweils über $10$ Durchläufe gemittelt.}
 	\label{2b_2000}
 \end{table*}
-\subsubsection{}\label{p1a2c}
+\subsubsection{OpenMP-Profiler ommp}\label{p1a2c}
 Anhand der Ausgabe von \emph{ompP} kann leicht gesehen werden, dass wenige der Threads einen Großteil der Arbeit leisten, was bei der Verwendung von reduction zu erwarten ist. Durch die explizite Angabe des Scheduling und der Chunksize kann die Arbeit besser verteilt werden. In Tabelle \ref{2c_mandelbrot} kann der Einfluss der Optionen auf die Laufzeit abgelesen werden.
 \begin{table*}
 	\centering
@@ -530,7 +444,7 @@ Anhand der Ausgabe von \emph{ompP} kann leicht gesehen werden, dass wenige der T
 
 
 \subsection{Parallelisierung}\label{p1a3}
-\subsubsection{}
+\subsubsection{Begriffe}
 Im Folgenden einige bekannte Größen der Parallelisierung, wie sie etwa in der Vorlesung Rechnerstrukturen \cite{RechnerstrukturenVL} gelehrt wurden. \\
 
 Vorab sei $T(n)$ die Ausführungszeit auf n Prozessoren,
@@ -562,7 +476,7 @@ U(n) = \frac{I(n)}{n} = R(n) \cdot E(n) = \frac{P(n)}{n \cdot T(n)}
 \end{equation}
 
 
-\subsubsection{}	
+\subsubsection{Probleme bei der Parallelisierung}	
 \begin{itemize}
 	\item \textbf{Race Condition} \\
 	Auch bekannt als Wettlaufsituation. Mehrere Fäden greifen lesend und schreibend auf die gleiche Variable zu. Durch den gleichzeitigen Zugriff auf die Variable durch die anderen Fäden hängt das Ergebnis von der konkreten Ausführungsreihenfolge ab. Das Ergebnis kann der Erwartung entsprechen, muss aber nicht. Die Lösung hierfür ist Synchronisation, beispielsweise mittels atomarer Variablenzugriffe oder Barriere. Damit kann sicher gestellt werden, dass kein anderer Faden die Variable manipuliert während ein Faden mit ihr arbeitet.
@@ -593,7 +507,7 @@ U(n) = \frac{I(n)}{n} = R(n) \cdot E(n) = \frac{P(n)}{n \cdot T(n)}
 
 
 
-\subsubsection{}
+\subsubsection{Beschleuniger im Vergleich}
 Im Folgenden werden einige parallele Architekturen genauer erläutert. Ein grober Vergleich zur CPU kann Tabelle \ref{parallelarch} entnommen werden.
 \begin{itemize}
 	\item \textbf{CPU} \\
@@ -628,8 +542,8 @@ Im Folgenden werden einige parallele Architekturen genauer erläutert. Ein grober
 
 
 
-\subsection{Parallelisierung}\label{p1a4}
-\subsubsection{}\label{p1a4a}
+\subsection{Parallelisierung Gauß-Seidel-Verfahren}\label{p1a4}
+\subsubsection{Seriell}\label{p1a4a}
 Zu aller erst nehmen wir eine Differenzierung der in der Aufgabenstellung genannten Variablen vor. Unser $n$ bezeichne dasjenige, welches in der Beschreibung des Gauß-Seidel-Verfahrens auftritt. Das in dem gegebenen Problem genannte $n$ benennen wir zu $d$ um. Die restlichen Variablen behalten ihren Namen bei. Sei ein $l$ für das Verfahren vorgegeben, dann ergeben sich einige andere Größen wie folgt:
 \begin{equation}
 \begin{split}
@@ -676,7 +590,7 @@ u[j] = sum / 4;
 \end{lstlisting}
 
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\def\svgwidth{\linewidth}
 	\input{gsv_node_dependence.pdf_tex}
@@ -689,12 +603,12 @@ Um das Problem zu lösen, brechen wir ab, sobald der \emph{Fortschritt} zwischen 
 Konkret betrachten wir die maximale Veränderung eines Eintrags zwischen den Iterierten $k$ und $k+1$ von $u$. Formal $maxError:=\|u^{k+1}-u^k\|_{max}$. Unsere Lösung nehmen wir als gut genug an, sobald $maxError<\varepsilon_{Error}$ für eine Schranke $\varepsilon_{Error}$.
 Für unsere Implementierung verwenden wir $\varepsilon_{Error}=\num{1e-6}$, da es einerseits ausreichend klein ist, um in unseren Tests gute Ergebnisse zu liefern, andererseits groß genug, um in absehbarer Zeit berechnet werden zu können.
 
-\subsubsection{}\label{p1a4b}
+\subsubsection{Na\"{\i}v parallel}\label{p1a4b}
 Eine naive Parallelisierung des in Aufgabe \ref{p1a4a} implementierten Gauß-Seidel-Verfahrens ist nicht möglich, da innerhalb der Berechnung von $u^{k+1}$ -- eine naive Parallelisierung würde versuchen genau diese Berechnung zu parallelisieren, also eine einzelne Iterierte -- Abhängigkeiten zwischen den Einträgen bestehen. Für die Berechnung von $u^{i+k}_{x,y}$ werden diese Abhängigkeiten in Abbildung \ref{gsv_depend} dargestellt. Um etwa $u^{i+k}_{x,y}$ zu berechnen, werden zu erst die Werte von $u^{i+k}_{x-1,y}$ und $u^{i+k}_{x,y-1}$ aus der gleichen Iteration benötigt. Diese wiederum benötigen in gleicher Weise aktuelle Werte von Nachbarknoten.
 
 Eine Mögliche, nicht mehr ganz so naive Lösung, bestünde darin, nun über die Diagonalen zu parallelisieren. Innerhalb der Diagonalen (in $(1,-1)-Richtung$) bestehen keine Abhängigkeiten zwischen den Knoten. Dennoch hat sich auch diese Herangehensweise nicht als Vorteilhaft erwiesen. Für jede Iterierte müssten $d$ Thread-Pools mit maximal $2d-1$ Fäden gestartet und synchronisiert werden. Der Synchronisierungsaufwand hierbei scheint um Größenordnungen größer, als die eigentliche Berechnung (in der Vorlesung \emph{Software Engineering für modernene parallele Plattformen} \cite{SoftwareEngineeringPP} wird diese Herangehensweise auch als \emph{Wavefront} bezeichnet).
 
-\subsubsection{}\label{p1a4c}
+\subsubsection{Parallel}\label{p1a4c}
 In Aufgabe \ref{p1a4b} haben wir erläutert, dass eine naive Herangehensweise für die Parallelisierung nicht zielführend ist. Insbesondere haben wir hierfür die zahlreichen Abhängigkeiten innerhalb der Berechnung einer Iterierten verantwortlich gemacht. Um also das Gauß-Seidel-Verfahren nun doch effizient zu parallelisieren, ist eine übergeordnete Betrachtung des Problems von Nöten.
 
 Die Idee hinter unserer Lösung besteht darin, in einem parallelisierbaren Schritt Einträge von $u$ für verschiedene Iterierte $k$ der sequentiellen Variante zu berechnen. Wie in Abbildung \ref{gsv_depend} zu sehen, hängt die Berechnung eines Knotens von den \emph{aktuellen} Werten des linken und des oberen Nachbarn ab. Diese müssen also schon vorher berechnet worden sein. Hieraus ergibt sich eine Reihenfolge, in der die Knoten berechnet werden müssen, nämlich von links oben nach rechts unten (in unserer Lösung zu \ref{p1a4b} haben wir die dabei auftretenden, parallelisierbaren Diagonalen bereits erwähnt). Diese Reihenfolge können wir beibehalten, wenn wir für jede Diagonale eine andere Iterierte berechnen.
@@ -759,7 +673,7 @@ In jedem Berechnungsschritt wird genaue eine Iterierte des Verfahrens berechnet.
 
 
 \subsection{Partielle Differentialgleichungen}\label{p1a5}
-\subsubsection{}
+\subsubsection{Bedingungen}
 Die Bedingungen lauten nach den Folien der FEM-Einführung:
 \begin{itemize}
 	\item $\Omega$ sei ein beschränktes Gebiet\\
@@ -768,7 +682,7 @@ Die Bedingungen lauten nach den Folien der FEM-Einführung:
 \end{itemize}
 
 
-\subsubsection{}
+\subsubsection{Laplace-Operator anwenden}
 Gesucht ist $f$ mit
 \begin{equation}\label{udef}
 u(x,y)=\sin(2M\pi x)\sin(2N\pi y)
@@ -787,7 +701,7 @@ f(x,y)=&-\Delta u(x,y) \\
 \end{equation}
 
 
-\subsubsection{}
+\subsubsection{Lösung mittels GSV}
 Da in Gleichung \ref{fgleichung} $M,N \in\mathbb{N}$ beliebig, wählen wir der Einfachheit halber $M=N=1$ zur Lösung dieser Teilaufgabe. Damit ergibt sich
 \begin{equation}\label{fdef}
 f(x,y)=8\pi^2\sin(2\pi x)\sin(2\pi y)
@@ -837,7 +751,7 @@ Das verwendete Vorgehen wird als \emph{h-FEM} bezeichnet, da wir lediglich die G
 
 
 \subsection{Partielle Differentialgleichungen}\label{p1a6}
-\subsubsection{}\label{p1a6a}
+\subsubsection{Verfahren}\label{p1a6a}
 Alphabetische Liste gängiger Krylow-Unterraum-Verfahren (nach \cite{KrylowUnterraumWiki}):
 \begin{itemize}
 	\item Arnoldi-Verfahren, zur Eigenwertapproximation
@@ -891,7 +805,7 @@ Der \emph{Intel Thread Checker} gibt für unser Programm Folgendes aus:
 \end{itemize}
 
 
-\subsubsection{}\label{p1a6b}
+\subsubsection{CG-Verfahren}\label{p1a6b}
 Unsere parallele Version des CG-Verfahrens konnte gegenüber dem Gauß-Seidel-Verfahren das Problem aus Aufgabe \ref{p1a5} bis zu $40$-mal so schnell lösen. Eine Übersicht über den \emph{Speedup} sowie die \emph{Efficiency} ist in Tabelle \ref{a5a6speedupefficiency} zu finden.
 
 \begin{table*}
@@ -917,7 +831,7 @@ Das Problem wäre jedoch, dass die Vorkonditionierung selbst rechenaufwändig wäre
 
 
 
-\subsubsection{}\label{p1a6c}
+\subsubsection{Bibliotheken}\label{p1a6c}
 In Tabelle \ref{MathBibs} haben wir drei Bibliotheken zur Anwendung der Finiten Elemente Methode aufgelistet und verglichen. Weitere Bibliotheken, die es nicht in die Tabelle geschafft haben, wären beispielsweise Feel++\cite{Feel++} und
 Libmesh\cite{Libmesh}.
 
@@ -988,6 +902,8 @@ In \ref{lst:cudastarted} ist die Ausgabe unseres Programms zu sehen. In den folg
 
 
 
+
+
 \subsection{Gauß-Seidel-Verfahren}\label{p2a3}
 \subsubsection{Implementierung in CUDA\\}
 Die Portierung des parallelisierten Gauß-Seidel-Verfahrens aus Aufgabe \ref{p1a4} verlief sehr geradlinig. Die zuvor parallelisierten inneren Schleifen -- die Berechnung über alle schwarzen/weißen Felder -- werden nun mittels entsprechender Kernel auf der GPU ausgeführt. Die Synchronisation ist damit nun implizit durch die Kernelaufrufe -- die nacheinander ausgeführt werden -- gegeben.
@@ -999,7 +915,7 @@ Wie auch die CPU Variante haben wir zur Berechnung den Datentyp \texttt{double} 
 
 \TODO{Tabelle mit Laufzeiten}
 
-\subsubsection{Asynchrone Parallelisierungmethoden\\}
+\subsubsection{Asynchrone Parallelisierungmethoden}
 \begin{itemize}
 	\item \textbf{Approximate Computing} \\
 	Unter Approximate Computing versteht man nach \cite{ApproxComp} und \cite{SurveyApproxComp} eine Vorgehensweise, bei welcher auf eine hohe Genauigkeit verzichtet wird, um im Gegenzug an Geschwindigkeit und/oder Energieersparnisse in den Berechnungen zu gewinnen. Dies wird erreicht, indem beispielsweise Datentypen niedriger Genauigkeit genutzt werden. (Konkret etwa: anstatt \texttt{double} \texttt{float}, oder anstatt \texttt{float} nur \texttt{half float} verwenden.)
@@ -1042,7 +958,7 @@ Ein Unterschied wäre möglicherweise bei sehr großen Datenmengen feststellbar. Da
 \subsection{LU-Zerlegung}\label{p2a4}
 Mit Hilfe der LU-Zerlegung zerlegen wir $A$ in zwei Matrizen $L$ und $U$, sodass $L\cdot U=A$ mit $L$ ist untere, und $U$ ist obere Dreiecksmatrix. Um auch weiterhin mit dünn besetzten Matrizen arbeiten zu können, verwenden wir eine unvollständige Zerlegung (ILU), d.h. $L\cdot U\approx A$ mit dünn besetzten $L$ und $U$.
 
-\subsubsection{}
+\subsubsection{Eignung}
 \TODO{Eignung aus Mathematischer Sicht}
 
 Algorithmus 1 lässt sich sehr gut parallelisieren, da innerhalb einer Iterierten $m$ alle Einträge unabhängig von einander berechnet werden können. Zwischen den Iterierten ist jedoch eine Synchronisation nötig, da jede Iterierte die Ergebnisse der vorherigen Iterierten benötigt. Für den Datenaustausch zwischen zwei iterierten werden lediglich zwei Puffer benötigt, einer hält stets die aktuellen Werte und wird beschrieben, während der andere die Ergebnisse der letzten Iterierten bereithält. Die Puffer können dann während der Ausführung nach jeder Iteration ausgetauscht werden.
@@ -1086,7 +1002,7 @@ Bei Ausführung der Algorithmen ist uns aufgefallen, dass $L\cdot U$ tatsächlich 
 als Ergebnis, wobei wir Abweichungen von $A$ (also 0) mit {\color{red}rot} markiert haben. Die Frage die sich uns hier gestellt hat, war, inwiefern $L\cdot U$ dennoch als Approximation von $B$ aus der nächsten Aufgabe geeignet sind.
 
 
-\subsubsection{}
+\subsubsection{Implementierung}
 Bei der Implementierung von \textbf{Algorithmus 2} ist uns aufgefallen, dass Einträge, die in $A$ 0 sind, auch in $L$ auf 0 gesetzt werden. Ferner gilt $U=L^T$ und $A$ ist symmetrisch. Daraus ergibt sich für die Einträge von $A$, $L$ und $U$:
 \begin{equation}
 	\forall i,j: a_{i,j}=0 \Rightarrow l_{i,j}=l_{j,i}=u_{i,j}=u_{j,i}=0
@@ -1100,7 +1016,7 @@ Für \textbf{Algorithmus 1} wählen wir nun als Indexmenge $S_U$ genau die Einträg
 
 \TODO{Vergleich mit Erwartung aus vorheriger Teilaufgabe}
 
-\subsubsection{}
+\subsubsection{Eignung von OpenMP}
 Für Algorithmus 1: Für kleine $n$ würde eine Parallelisierung in OpenMP -- also auf der CPU -- möglicherweise Sinn machen, aufgrund des Mehraufwandes der für die GPU-Ausführung erforderlich ist. Für große $n$ hingegen erwarten wir, dass die CUDA-Implementierung einen Performance-Vorteil gegenüber der CPU-Implementierung hat. Dies schließen wir vor allem daraus, dass sich der Algorithmus sehr gut für die Grafikkarte parallelisieren lässt, da innerhalb einer Iteration Einträge unabhängig von einander sind.
 
 
@@ -1108,7 +1024,7 @@ Für Algorithmus 1: Für kleine $n$ würde eine Parallelisierung in OpenMP -- also 
 
 
 \subsection{Vorkonditionierung}\label{p2a5}
-\subsubsection{}
+\subsubsection{Kombination}
 %Im ersten Projekt -- genauer Aufgabe \ref{p1a5} -- haben wir festgestellt, dass mit zunehmendem $l$ der lokale Fehler geschrumpft ist. Wir haben daher für diese Aufgabe $l=9$ verwendet, größere $l$ waren uns aus Speicher-technischen Gründen nicht möglich ($l=9\Rightarrow d=511\Rightarrow n=261.121\Rightarrow$ Speicherverbrauch von mehr als $\frac{1}{2}n^2\cdot 8$ Bytes $>>2$GB).
 
 %Um den maximal zulässigen lokalen Fehler von $\epsilon_i\leq10^-{-5}$ einzuhalten, mussten wir auf unsere mit dem Datentyp \texttt{double} implementierte Variante aus Aufgabe \ref{p2a3} zurückgreifen. Mit \texttt{float}-Genauigkeit war es uns unabhängig vom gewählten $\varepsilon_{Error}$ nicht möglich, die Bedingung einzuhalten.
@@ -1118,10 +1034,10 @@ Für Algorithmus 1: Für kleine $n$ würde eine Parallelisierung in OpenMP -- also 
 
 \TODO{Vorkonditionierter Löser}
 
-\subsubsection{}
+\subsubsection{Genauigkeit}
 \TODO{Genauigkeit}
 
-\subsubsection{}
+\subsubsection{Verfahrenskomponenten}
 Durch die Kombination des CG-Verfahrens aus Projekt \ref{p1} (OpenMP) mit dem Löser für $Br$ aus diesem Projekt (CUDA) ergibt sich eine Aufteilung der Berechnungsschritte sowohl auf die CPU als auch die GPU. Wir halten dieses Vorgehen für höchst fragwürdig, da
 \begin{enumerate}
 	\item Es dazu führt, dass Daten ständig zwischen Hauptspeicher und Grafikspeicher ausgetauscht werden müssen
@@ -1140,7 +1056,7 @@ Für die Berechnung der Skalarprodukte $p_m^T(Ap_m)$ und $r_m^T(Br_m)$ (genauer: 
 
 
 \subsection{Lattice-Boltzmann-Methode (LBM)}\label{p2a6}
-\subsubsection{}
+\subsubsection{Würfelgröße}
 Nach unseren Ergebnissen aus Aufgabe \ref{p2a1} steht uns auf der \emph{GeForce GTX 960} ein globaler Speicher von $2.092.957.696$ Bytes $=1.996$MB zur Verfügung. Die Daten für unseren Würfel dürfen demnach nicht mehr als diesen Speicherplatz benötigen.
 
 Im Grafikspeicher müssen die Arrays \texttt{rawdata1}, \texttt{rawdata2} sowie \texttt{u\_0} gehalten werden. Bei den Arrays \texttt{gridI} und \texttt{gridO} handelt es sich lediglich um eine Indexierung der Knoten des Gitters, die nicht explizit gespeichert werden müssen.
@@ -1179,11 +1095,11 @@ M=8\cdot max_x^2\cdot(38\cdot max_x+1)
 in Bytes.
 Die maximale Seitenlänge, die diese Bedingung erfüllt ist $max_x=max_y=max_z=190$ mit einem Speicherbedarf von $M=2.085.424.800$ Bytes (ermittelt mittels dem Programm \emph{GeoGebra}).
 
-\subsubsection{}
+\subsubsection{Große Würfel}
 Bei Würfeln die größer sind als $max_x=max_y=max_z=190$ passen die Daten nicht alle gleichzeitig in den Grafikspeicher, sie müssten demnach während der Berechnung zwischen Haupt- und Grafikspeicher ausgetauscht werden. Da diese Kopieoperationen vergleichsweise langsam sind, ist mit einer sehr starken Verschlechterung der Performanz zu rechnen.
 
 
-\subsubsection{}
+\subsubsection{Implementierung}
 \TODO{Speedup}
 
 
