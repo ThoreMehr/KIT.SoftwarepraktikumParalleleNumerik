@@ -364,7 +364,10 @@ E-Mail: fabian.miltenberer@student.kit.edu}
 % As a general rule, do not put math, special symbols or citations
 % in the abstract
 \begin{abstract}
-Im Rahmen dieses Praktikums haben wir viel gelernt.
+Es gibt verschiedene Möglichkeiten, Algorithmen zu parallelisieren. Es gilt, sowohl Hardware als auch Parallelisierungsmethodik sinnvoll auszuwählen.
+Im Rahmen des Praktikums haben wir den Umgang mit \emph{OpenMP} zur parallel-Programmierung der CPU kennengelernt.
+Für die Programmierung auf der Grafikkarte kam \emph{CUDA} zum Einsatz.
+Bei den parallelisierten Algorithmen handelt es sich um Komponenten zum Lösen der \emph{Finite-Elemente-Methode}.
 \end{abstract}
 
 % no keywords
@@ -1007,7 +1010,7 @@ Wie auch die CPU Variante haben wir zur Berechnung den Datentyp \texttt{double} 
 	Um den Vorteil asynchroner Parallelisierung zu verdeutlichen, gehen wir zuvor näher auf die synchrone Variante ein. Als Beispiel soll ein evolutionärer Algorithmus dienen. Hier würde pro Thread jeweils eine Evolutionsstufe berechnet werden um anschließend auf allen anderen Threads dieser Iteration zu warten. Dies bedeutet für Threads, die ihre Aufgabe als erstes abschließen, dass eine Wartezeit entsteht, bis dann auch der letzte Thread zu einem Ergebnis gekommen ist. Asynchrone Parallelisierung eliminiert diese Wartezeiten, indem ein Thread einfach alle seine Iterationen durchlaufen kann ohne auf die Ergebnisse der anderen Threads zu warten (nach \cite{CompAsyncSync}). Dies bedeutet im Allgemeinen, dass die Threads die Aufgaben schneller abarbeiten können. Allerdings wird in diesem Kontext das Konstrukt von Generationen fallen gelassen. Dabei entstehende Ungenauigkeiten müssen in Kauf genommen werden. Weiter ist die Korrektheit des Ergebnisses nicht unbedingt trivial.
 
 	\item \textbf{Relaxierte Parallelisierung} \\
-	Zu dieser Methode konnten wir leider nicht viel finden, das in unseren Kontext passt. Wir nehmen an, es soll die verschiedenen zeitlichen Schritte auf verfügbare Threads aufteilen. Die Idee ist, dass diese Schritte unabhängig voneinander berechnet werden können durch die zuvor durchgeführte Relaxierung. Dies erlaubt schnellere Ausführung der Aufgaben, da keine Abhängigkeiten zu vorherigen Resultaten existieren. Somit entfallen die Wartezeiten zu Gunsten der Genauigkeit des Endresultats (nach \cite{HighOrder}).
+	Zu dieser Methode konnten wir wenig finden, das in unseren Kontext passt. Wir nehmen an, es soll die verschiedenen zeitlichen Schritte auf verfügbare Threads aufteilen. Die Idee ist, dass diese Schritte unabhängig voneinander berechnet werden können durch die zuvor durchgeführte Relaxierung. Dies erlaubt schnellere Ausführung der Aufgaben, da keine Abhängigkeiten zu vorherigen Resultaten existieren. Somit entfallen die Wartezeiten zu Gunsten der Genauigkeit des Endresultats (nach \cite{HighOrder}).
 \end{itemize}
 
 Nach \cite{CudaToolkit} sollte die Blockgröße -- zumindest für die uns zur Verfügung stehende Architektur mit Warpgröße 32 -- nach Möglichkeit immer als 32 gewählt werden. Dies erlaubt alle Recheneinheiten mit Threads zu belegen und somit eine optimale Auslastung. Weniger ist einer Verschwendung von Hardware gleichzustellen, da einzelne Recheneinheiten keinen Thread zugewiesen bekämen. Eine höhere Zahl bedeutet, dass sich die verfügbaren Recheneinheiten mehr Threads aufteilen müssen, was dazu führt, dass einige Threads erst nach Abarbeitung der vorherigen zur Ausführung kommen. Dies kann zu einer Zeitverschwendung führen, wenn diese Threads keine sinnvoll Arbeit verrichten, und sollte daher vermieden werden.
@@ -1082,9 +1085,16 @@ als Ergebnis, wobei wir Abweichungen von $A$ (also 0) mit {\color{red}rot} marki
 
 
 \subsubsection{}
-Bei der Implementierung von \textbf{Algorithmus 2} ist uns aufgefallen, dass Einträge, die in $A$ 0 sind, auch in $L$ auf 0 gesetzt werden. Ferner gilt $U=L^T$ und $A$ ist symmetrisch. Daraus ergibt sich für die Einträge von $A$, $L$ und $U$: $a_{i,j}=0 \Rightarrow l_{i,j}=l_{j,i}=u_{i,j}=u_{j,i}=0$. Somit eignet sich die Speichermethodik aus der vorherigen Teilaufgabe auch für die Matrizen $L$ und $U$ aus Algorithmus 2. Beim Implementieren ist uns aufgefallen, dass $L$ und $U$ nicht mit 0 initialisiert sein sollten, da ansonsten Werte $NaN$ in den Ergebnismatrizen auftauchen. Mit der Einheitsmatrix als Startwerte von $L$ und $U$ leistet der Algorithmus das Gewünschte.
+Bei der Implementierung von \textbf{Algorithmus 2} ist uns aufgefallen, dass Einträge, die in $A$ 0 sind, auch in $L$ auf 0 gesetzt werden. Ferner gilt $U=L^T$ und $A$ ist symmetrisch. Daraus ergibt sich für die Einträge von $A$, $L$ und $U$:
+\begin{equation}
+	\forall i,j: a_{i,j}=0 \Rightarrow l_{i,j}=l_{j,i}=u_{i,j}=u_{j,i}=0
+\end{equation}
+Somit eignet sich die Speichermethodik aus der vorherigen Teilaufgabe auch für die Matrizen $L$ und $U$ aus Algorithmus 2. Beim Implementieren ist uns aufgefallen, dass $L$ und $U$ nicht mit 0 initialisiert sein sollten, da ansonsten Werte $NaN$ in den Ergebnismatrizen auftauchen. Mit der Einheitsmatrix als Startwerte von $L$ und $U$ leistet der Algorithmus das Gewünschte.
 
-Für \textbf{Algorithmus 1} wählen wir nun als Indexmenge $S_U$ genau die Einträge, die nach Algorithmus 2 in $U$ ungleich $0$ sein können. Damit ist auch die Validität unserer gewählten Speichermethodik für diesen Algorithmus garantiert, da auch hier $L=U^T$ gilt und $\forall (i,j)\notin S_U:u_{i,j}=l_{j,i}=0$.
+Für \textbf{Algorithmus 1} wählen wir nun als Indexmenge $S_U$ genau die Einträge, die nach Algorithmus 2 in $U$ ungleich $0$ sein können. Damit ist auch die Validität unserer gewählten Speichermethodik für diesen Algorithmus garantiert, da auch hier $L=U^T$ gilt und
+\begin{equation}
+	\forall (i,j)\notin S_U:u_{i,j}=l_{j,i}=0
+\end{equation}
 
 \TODO{Vergleich mit Erwartung aus vorheriger Teilaufgabe}
 
@@ -1152,13 +1162,20 @@ M&=M(\mathtt{rawdata1})+M(\mathtt{rawdata2})+M(\mathtt{u\_0})\\
 &=8\cdot max_x\cdot max_y\cdot(38\cdot max_z + 1)
 \end{split}
 \end{equation*}
-Bytes, wobei $M$ nicht größer als der verfügbare globale Speicher sein darf, also $M\leq 2.092.957.696$.
-Bei Würfeln sind alle Kanten gleich lang, somit gilt $max_x=max_y=max_z$ und der Speicherbedarf vereinfacht sich zu
+Bytes, wobei $M$ nicht größer als der verfügbare globale Speicher sein darf, also
+\begin{equation*}
+	M\leq 2.092.957.696
+\end{equation*}
+Bei Würfeln sind alle Kanten gleich lang, somit gilt
+\begin{equation*}
+	max_x=max_y=max_z
+\end{equation*}
+und der Speicherbedarf vereinfacht sich zu
 \begin{equation*}
 M=8\cdot max_x^2\cdot(38\cdot max_x+1)
 \end{equation*}
-Bytes.
-Die maximale Seitenlänge die diese Bedingung erfüllt ist $max_x=max_y=max_z=190$ mit einem Speicherbedarf von $M=2.085.424.800$ Bytes (ermittelt mittels dem Programm \emph{GeoGebra}).
+in Bytes.
+Die maximale Seitenlänge, die diese Bedingung erfüllt ist $max_x=max_y=max_z=190$ mit einem Speicherbedarf von $M=2.085.424.800$ Bytes (ermittelt mittels dem Programm \emph{GeoGebra}).
 
 \subsubsection{}
 Bei Würfeln die größer sind als $max_x=max_y=max_z=190$ passen die Daten nicht alle gleichzeitig in den Grafikspeicher, sie müssten demnach während der Berechnung zwischen Haupt- und Grafikspeicher ausgetauscht werden. Da diese Kopieoperationen vergleichsweise langsam sind, ist mit einer sehr starken Verschlechterung der Performanz zu rechnen.
