@@ -1,0 +1,21 @@
+asynchrone Parallelisierungsmethoden
+
+Approximate Computing: Unter Approximate Computing wird im Allgemeinen der Vorgang beschrieben welcher auf hohe Genauigkeit verzichtet, um im Gegenzug an Geschwindigkeit und/oder Energieersparnisse in den Berechnungen zu gewinnen. Dies wird erreicht indem Datentypen niedriger Genauigkeit genutzt werden. (Beispiel: statt double float, oder statt float half float verwenden.)
+Dies ist unteranderm Sinnvoll wenn die Eingangsdaten bereits gewisse Ungenauigkeiten aufweisen, oder nur Schätzungen darstellen. Im aktuellen Kontext des Praktikums, in welchem wir numerische Approximationen nutzen, ist stellt diese Technik einen Geschwindigkeitsgewinn dar, mit vernachlässigbarer Ungenauigkeit, da die Natur von Approximationen bereits Ungenauigkeiten beinhaltet. [1][2]
+
+Asynchronous Parallelization: Um den Voteil asynchroner Parallelisierung zu verdeutlichen ist es Sinnvoll als erstes kurz die synchrone Variante zu beschreiben. Als Beispiel soll ein evolutionärer Algorithmus dienen. Hier würde pro Thread jeweils eine Evolutionsstufe berechnet werden um anschließend auf alle anderen Threads dieser Iteration zu warten. Dies bedeutet für Threads die ihre Aufgabe als erstes abschließen dass eine Wartezeit entsteht bis dann auch der letzte Thread zu einem Ergebniss kommt. Asynchrone Parallelisierung elemiiniert diese Wartezeiten indem ein Thread einfach alle seine Iterationen durchlaufen kann ohne auf die Ergebnisse der anderen Threads zu warten. Dies bedeutet im Allgemeinen dass die Threads die Aufgaben schneller abarbeiten können, allerdings wird in diesem Kontext das Konstrukt von Generationen fallen gelassen und die somit entstehenden Ungenauigkeiten in Kauf genommen. [3]
+
+Relaxierte Parallelisierung: Zu dieser Methode findet sich leider nicht viel welches in unseren Kontext passen würde. Ich nehme an es soll die verschiedenen zeitliche Schritte auf verfügbare Threads aufteilen. Die Idee ist dass diese Schritte unabhängig voneinander berechnet werden können durch die davor durchgeführte Relaxierung. Dies erlaubt schnellere Ausführung der Aufgaben, da keine Abhängigkeiten zu verherigen Resultate exisiteren. Somit entfallen die Wartezeiten zu Gunsten der Genauigkeit des Endresultats. [4]
+
+
+Die Warpgröße sollte, für die uns zur Verfügung stehende Architektur, nach Möglichkeit immer als 32 gewählt werden. Dies erlaubt alle Recheneinheiten mit Threads ze belegen und somit eine optimale Auslastung. Weniger ist einer Verschwendung von Hardware gleichzustellen, da einzele Recheneinheiten keinen Thread zugewiesen bekommen. Eine höhere Zahl bedeutet dass sich die verfügbaren Recheneinheiten mehr Threads aufteilen müssen, was dazu führt dass einige Threads erst nach den vorherigen zur Ausführung kommen. Dies ist eine Zeitverschwendung und unerwünscht. [5]
+
+
+
+
+[1]: Approximate Computing: Application Analysis and Hardware Design. (Gennady Pekhimenko, Danai Koutra, and Kun Qian)
+[2]: A Survey of Techniques for Approximate Computing (SPARSH MITTAL)
+[3]: Comparing Asynchronous and Synchronous Parallelization of the SMS-EMOA (Simon Wessing, Günter Rudolph, and Dino A. Menges)
+[4]: High-Order Methods for Convection-Dominated Nonlinear Problems Using Multilevel Techniques (Dissertation von Francesca Iacono)
+[5]: CUDA Toolkit Documentation (NVIDIA)
+

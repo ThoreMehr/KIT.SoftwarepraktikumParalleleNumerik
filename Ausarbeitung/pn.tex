@@ -920,9 +920,9 @@ Libmesh\cite{Libmesh}.
 
 Im Rahmen dieses Praktikums würde sich, zumindest für Projekt 1, \emph{HiFlow\textsuperscript{3}} gut eignen, da hier eine ausgereifte OpenMP Funktionalität gegeben zu sein scheint, die den Portierungsaufwand stark verringert.
 
-\begin{table*}
+\begin{table*}[h]
 	\centering
-	\begin{tabular}{l|p{0.6\textwidth}|l}
+	\begin{tabular}{l|p{0.5\textwidth}|l}
 		Bibliothek & Unterschiede & Gemeinsamkeiten \\
 		\hline
 		HiFlow\textsuperscript{3}\cite{HiFlow3} &
@@ -997,22 +997,41 @@ Wie auch die CPU Variante haben wir zur Berechnung den Datentyp \texttt{double} 
 \TODO{Tabelle mit Laufzeiten}
 
 \subsubsection{Asynchrone Parallelisierungmethoden\\}
-Links: \\
-\url{http://scicomp.stackexchange.com/questions/16448/efficient-successive-over-relaxation-using-cuda} \\
-\url{http://www.netlib.org/lapack/lawnspdf/lawn258.pdf} \\
-\url{http://docs.nvidia.com/cuda/kepler-tuning-guide/#axzz4WWJfCg4J}
+\begin{itemize}
+	\item \textbf{Approximate Computing} \\
+	Unter Approximate Computing versteht man nach \cite{ApproxComp} und \cite{SurveyApproxComp} eine Vorgehensweise, bei welcher auf eine hohe Genauigkeit verzichtet wird, um im Gegenzug an Geschwindigkeit und/oder Energieersparnisse in den Berechnungen zu gewinnen. Dies wird erreicht, indem beispielsweise Datentypen niedriger Genauigkeit genutzt werden. (Konkret etwa: anstatt \texttt{double} \texttt{float}, oder anstatt \texttt{float} nur \texttt{half float} verwenden.)
+	
+	Dies ist unter Anderem dann sinnvoll, wenn die Eingangsdaten bereits gewisse Ungenauigkeiten aufweisen oder nur Schätzungen darstellen. Im Kontext des Praktikums, in welchem wir numerische Approximationen nutzen, stellt diese Technik einen Geschwindigkeitsgewinn mit vernachlässigbarer Ungenauigkeit dar, da die Natur von Approximationen bereits Ungenauigkeiten beinhaltet. Mehr dazu gegen Ende dieses Abschnitts.
 
-Bei \emph{relaxierten Methoden} nimmt man Rechenungenauigkeiten für bessere Performanz in Kauf.
+	\item \textbf{Asynchronous Parallelization} \\
+	Um den Vorteil asynchroner Parallelisierung zu verdeutlichen, gehen wir zuvor näher auf die synchrone Variante ein. Als Beispiel soll ein evolutionärer Algorithmus dienen. Hier würde pro Thread jeweils eine Evolutionsstufe berechnet werden um anschließend auf allen anderen Threads dieser Iteration zu warten. Dies bedeutet für Threads, die ihre Aufgabe als erstes abschließen, dass eine Wartezeit entsteht, bis dann auch der letzte Thread zu einem Ergebnis gekommen ist. Asynchrone Parallelisierung eliminiert diese Wartezeiten, indem ein Thread einfach alle seine Iterationen durchlaufen kann ohne auf die Ergebnisse der anderen Threads zu warten (nach \cite{CompAsyncSync}). Dies bedeutet im Allgemeinen, dass die Threads die Aufgaben schneller abarbeiten können. Allerdings wird in diesem Kontext das Konstrukt von Generationen fallen gelassen. Dabei entstehende Ungenauigkeiten müssen in Kauf genommen werden. Weiter ist die Korrektheit des Ergebnisses nicht unbedingt trivial.
 
-Die Verwendung des Compilerflags \texttt{-use-fast-math} -- welches im Kontext von Relaxierung ebenfalls zu Gunsten der Berechnungszeit weniger Rechengenauigkeit garantiert -- brachte in der Laufzeit keinen Unterschied. Wir führen das darauf zurück, dass wir keine aufwändigeren Mathematikoperationen wie Kosinus oder Sinus berechnen lassen.
+	\item \textbf{Relaxierte Parallelisierung} \\
+	Zu dieser Methode konnten wir leider nicht viel finden, das in unseren Kontext passt. Wir nehmen an, es soll die verschiedenen zeitlichen Schritte auf verfügbare Threads aufteilen. Die Idee ist, dass diese Schritte unabhängig voneinander berechnet werden können durch die zuvor durchgeführte Relaxierung. Dies erlaubt schnellere Ausführung der Aufgaben, da keine Abhängigkeiten zu vorherigen Resultaten existieren. Somit entfallen die Wartezeiten zu Gunsten der Genauigkeit des Endresultats (nach \cite{HighOrder}).
+\end{itemize}
 
-Da die GPU deutlich weniger Recheneinheiten für \emph{double precision} Fließkommazahlen hat als für \emph{single precision}, haben wir uns dazu entschieden, für die GPU Variante den Datentyp \emph{float} anstatt -- wie bei der CPU -- \emph{double} zu verwenden.
-Die Ergebnisse sind unserer Auffassung nach dennoch vergleichbar, da  Tests mit \emph{float} anstatt \emph{double} auf der CPU keinen nennenswerten Geschwindigkeitsvorteil ergaben.
+Nach \cite{CudaToolkit} sollte die Blockgröße -- zumindest für die uns zur Verfügung stehende Architektur mit Warpgröße 32 -- nach Möglichkeit immer als 32 gewählt werden. Dies erlaubt alle Recheneinheiten mit Threads zu belegen und somit eine optimale Auslastung. Weniger ist einer Verschwendung von Hardware gleichzustellen, da einzelne Recheneinheiten keinen Thread zugewiesen bekämen. Eine höhere Zahl bedeutet, dass sich die verfügbaren Recheneinheiten mehr Threads aufteilen müssen, was dazu führt, dass einige Threads erst nach Abarbeitung der vorherigen zur Ausführung kommen. Dies kann zu einer Zeitverschwendung führen, wenn diese Threads keine sinnvoll Arbeit verrichten, und sollte daher vermieden werden.
 
-Der Blogeintrag \cite{CUDAMixedPrecision} geht noch weiter und zeigt auf, wie sich mittels 16-Bit Fließkommazahlen (\texttt{half}) die Geschwindigkeit weiter steigern lässt. Es wird eine doppelt so große Geschwindigkeit gegenüber 32-Bit Fließkommazahlen angegeben. Für unsere Anwendung ist die damit verbundene Ungenauigkeit möglicherweise zu groß. Ferner wird \texttt{half} erst ab CUDA 7.5 unterstützt, wohingegen wir mit CUDA 5.5 arbeiten.
+Wir haben uns dazu entschieden, die approximative Methode anzuwenden.
+Begonnen mit dem Compilerflag \texttt{-use-fast-math} -- welches im Kontext von Relaxierung ebenfalls zu Gunsten der Berechnungszeit weniger Rechengenauigkeit garantiert -- welches uns jedoch in der Laufzeit keinen Unterschied bescherte. Wir führen dies darauf zurück, dass wir keine aufwändigeren Mathematikoperationen wie Kosinus oder Sinus berechnen lassen.
+
+Die andere, bereits genannte mögliche Umsetzung, besteht aus der Verwendung von weniger genauen Datentypen. Für uns konkret wäre das hier \texttt{float} (32 Bit) anstatt \texttt{double} (64 Bit).
+Bei vergleichbarer Anzahl an Iterationen konnte wir hiermit tatsächlich ungefährt die Hälfte der Zeit einsparen.
+Wir führen das darauf zurück, dass GPUs eher zur Berechnung von Fließkommazahlen mit geringer Genauigkeit optimiert sind (da für Grafik oft ausreichend) und daher hierfür auch mehr Recheneinheiten zur Verfügung stehen.
+
+Der nächste Schritt wäre, mittels \texttt{half float} noch mehr an Genauigkeit -- zugunsten der Geschwindigkeit -- aufzugeben. Dass dies funktionieren könnte, wir auch vom Blogeintrag \cite{CUDAMixedPrecision} bestätigt. Demnach ist auch hier nochmals eine Verdopplung zu erwarten. Getestet haben wir es nicht, da wir denken, dass für unsere Anwendung die damit verbundene Ungenauigkeit möglicherweise zu groß wird. Ferner ist der Datentyp \texttt{half float} erst ab CUDA 7.5 verfügbar, wohingegen wir mit CUDA 5.5 arbeiten.
+
+
+
+
 
 \subsubsection{Eignung für andere Architekturen\\}
-Zu Testzwecken haben wir die Implementierung aus Aufgabe \ref{p1a4c} für den Datentyp \texttt{float} umgeschrieben. Die damit gemessenen Laufzeiten unterscheiden sich unwesentlich von denen bei Verwendung mit \texttt{double}. Für die CPU scheint diese Art der Relaxierung daher wenig gewinnbringend. Wir führen das darauf zurück, dass CPUs heutzutage darauf optimiert sind, mit \texttt{double} genau so schnell zu rechnen wie \texttt{float}.
+Wir haben \emph{Approximate Computing} eingesetzt, um Rechenzeit auf Kosten der Genauigkeit einzusparen.
+Diese Technik sollte in modernen CPUs die Geschwindigkeit kaum beeinflussen. Nach unserem Kenntnisstand haben CPUs keine speziellen \emph{Floating Point Units} (FPU), um beispielsweise \texttt{float} und \texttt{double} getrennt zu verarbeiten. Stattdessen wird mit der gleichen Hardware in höherer Genauigkeit (etwa 80 Bit, Hardware abhängig) gerechnet.
+Diese These konnten wir mit unserem Gauß-Seidel-Verfahren aus \ref{p1a4} bestätigen, da dieses mit dem Datentyp \texttt{float} (anstatt \texttt{double}) keine bessere Laufzeit aufwies.
+ 
+Ein Unterschied wäre möglicherweise bei sehr großen Datenmengen feststellbar. Da bei \texttt{double} das doppelte an Information in den Speicher und Caches geladen werden muss, wäre hier ein Leistungseinbruch denkbar. Dies wäre eher im Bereich von Single Multi-Core CPUs angesiedelt, da Many-Core- und MIC-Architekturen durch mehrere Speicheranbindungen und größeren Cache nicht so schnell neue Daten anfordern müssten.
+
 
 
 \subsection{LU-Zerlegung}\label{p2a4}
@@ -1091,7 +1110,17 @@ Für Algorithmus 1: Für kleine $n$ würde eine Parallelisierung in OpenMP -- also 
 \TODO{Genauigkeit}
 
 \subsubsection{}
-\TODO{Aufteilung}
+Durch die Kombination des CG-Verfahrens aus Projekt \ref{p1} (OpenMP) mit dem Löser für $Br$ aus diesem Projekt (CUDA) ergibt sich eine Aufteilung der Berechnungsschritte sowohl auf die CPU als auch die GPU. Wir halten dieses Vorgehen für höchst fragwürdig, da
+\begin{enumerate}
+	\item Es dazu führt, dass Daten ständig zwischen Hauptspeicher und Grafikspeicher ausgetauscht werden müssen
+	\item Aufgrund der Abhängigkeit der Berechnungsschritte die CPU und GPU nicht gleichzeitig sinnvolle Arbeit verrichten
+	\item Wir in Aufgabe \ref{p2a3} bereits gesehen haben, dass die GPU manche Aufgaben sehr viel schneller ausführen kann, als die CPU. Dies erwarten wir auch hier, da es sich vorwiegend um Vektoroperationen handelt, die sich gut für die GPU parallelisieren lassen.
+\end{enumerate}
+Aus diesen Gründen haben wir uns dafür entschieden, das CG-Verfahren vollständig auf der GPU zu berechnen. Das heißt, die Daten werden die ganze Zeit über im Grafikspeicher gehalten und dort nur von Kerneln manipuliert, die vom Host-Code aufgerufen werden.
+
+Für die Berechnung der Skalarprodukte $p_m^T(Ap_m)$ und $r_m^T(Br_m)$ (genauer: das Aufsummieren über die Element-weisen Produkte) haben wir uns der in \cite{CUDAOptParallelReduction} vorgestellten parallelen Reduktion bedient. Wir erwarten damit eine bessere Geschwindigkeit als bei der Verwendung von \emph{Atomics}, da letztere zu einer teuren Synchronisation zwischen Threads führen.
+
+\TODO{Vergleich mit a}
 
 
 
