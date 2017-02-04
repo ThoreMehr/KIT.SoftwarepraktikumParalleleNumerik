@@ -261,7 +261,7 @@
 \author{\IEEEauthorblockN{Fabian Miltenberger}
 \IEEEauthorblockA{
 Karlsruher Institut für Technologie\\
-E-Mail: fabian.miltenberer@student.kit.edu}
+E-Mail: fabian.miltenberger@student.kit.edu}
 \and
 \IEEEauthorblockN{Sébastien Thill}
 \IEEEauthorblockA{Karlsruher Institut für Technologie}
@@ -926,9 +926,7 @@ Wie auch die CPU Variante haben wir zur Berechnung den Datentyp \texttt{double} 
 	Um den Vorteil asynchroner Parallelisierung zu verdeutlichen, gehen wir zuvor näher auf die synchrone Variante ein. Als Beispiel soll ein evolutionärer Algorithmus dienen. Hier würde pro Thread jeweils eine Evolutionsstufe berechnet werden um anschließend auf allen anderen Threads dieser Iteration zu warten. Dies bedeutet für Threads, die ihre Aufgabe als erstes abschließen, dass eine Wartezeit entsteht, bis dann auch der letzte Thread zu einem Ergebnis gekommen ist. Asynchrone Parallelisierung eliminiert diese Wartezeiten, indem ein Thread einfach alle seine Iterationen durchlaufen kann ohne auf die Ergebnisse der anderen Threads zu warten (nach \cite{CompAsyncSync}). Dies bedeutet im Allgemeinen, dass die Threads die Aufgaben schneller abarbeiten können. Allerdings wird in diesem Kontext das Konstrukt von Generationen fallen gelassen. Dabei entstehende Ungenauigkeiten müssen in Kauf genommen werden. Weiter ist die Korrektheit des Ergebnisses nicht unbedingt trivial.
 
 	\item \textbf{Relaxierte Parallelisierung} \\
-	Zu dieser Methode konnten wir wenig finden, das in unseren Kontext passt. Wir nehmen an, es soll die verschiedenen zeitlichen Schritte auf verfügbare Threads aufteilen. Die Idee ist, dass diese Schritte unabhängig voneinander berechnet werden können durch die zuvor durchgeführte Relaxierung. Dies erlaubt schnellere Ausführung der Aufgaben, da keine Abhängigkeiten zu vorherigen Resultaten existieren. Somit entfallen die Wartezeiten zu Gunsten der Genauigkeit des Endresultats (nach \cite{HighOrder}).
-	
-	\TODO{Unverständlich}
+	Zu dieser Methode konnten wir nur wenig finden, das in unseren Kontext passt. Wir nehmen an, sie soll es nach der Raum- und Zeitdiskretisierung des stationären Problems erlauben, unabhängig zwischen den entstandenen zeitlichen Unterteilungen Berechnungen durchführen zu können. Damit diese Unabhängigkeit zustande kommt, bedarf es vorher einer Relaxierung des Problems. Insgesamt erlaubt dies eine schnellere Ausführung der Aufgaben, da keine Abhängigkeiten zu vorherigen Resultaten existieren. Somit entfallen Wartezeiten auf Kosten der Genauigkeit des Endresultats (nach \cite{HighOrder}).
 \end{itemize}
 
 Nach \cite{CudaToolkit} sollte die Blockgröße -- zumindest für die uns zur Verfügung stehende Architektur mit Warpgröße 32 -- nach Möglichkeit immer als 32 gewählt werden. Dies erlaubt alle Recheneinheiten mit Threads zu belegen und somit eine optimale Auslastung. Weniger ist einer Verschwendung von Hardware gleichzustellen, da einzelne Recheneinheiten keinen Thread zugewiesen bekämen. Eine höhere Zahl bedeutet, dass sich die verfügbaren Recheneinheiten mehr Threads aufteilen müssen, was dazu führt, dass einige Threads erst nach Abarbeitung der vorherigen zur Ausführung kommen. Dies kann zu einer Zeitverschwendung führen, wenn diese Threads keine sinnvoll Arbeit verrichten, und sollte daher vermieden werden.
@@ -959,7 +957,7 @@ Ein Unterschied wäre möglicherweise bei sehr großen Datenmengen feststellbar. Da
 Mit Hilfe der LU-Zerlegung zerlegen wir $A$ in zwei Matrizen $L$ und $U$, sodass $L\cdot U=A$ mit $L$ ist untere, und $U$ ist obere Dreiecksmatrix. Um auch weiterhin mit dünn besetzten Matrizen arbeiten zu können, verwenden wir eine unvollständige Zerlegung (ILU), d.h. $L\cdot U\approx A$ mit dünn besetzten $L$ und $U$.
 
 \subsubsection{Eignung}
-\TODO{Eignung aus Mathematischer Sicht}
+Algorithmus 1 scheint die bessere Wahl hinsichtlich der Stabilität zu sein, da eine ILU-Zerlegung nach Gauss (Algorithmus 2) ohne geeignete Pivotwahl nach \cite{Benzi2002} schnell unter Stabilitätsproblemen leiden kann. Da in Algorithmus 2 keine spezielle Pivotwahl getroffen wird, stellt dies ein Problem für entsprechende Elemente der Diagonale dar. Die schlechte Stabilität entsteht dadurch, dass nachdem wir $l_{jj}$ berechnet haben, wir genau diesen Wert im Nenner eines Bruchs nutzen. Ist dieser Wert hinreichend nah an 0, ohne 0 zu sein, entstehen hier ungewollt große Zahlen.
 
 Algorithmus 1 lässt sich sehr gut parallelisieren, da innerhalb einer Iterierten $m$ alle Einträge unabhängig von einander berechnet werden können. Zwischen den Iterierten ist jedoch eine Synchronisation nötig, da jede Iterierte die Ergebnisse der vorherigen Iterierten benötigt. Für den Datenaustausch zwischen zwei iterierten werden lediglich zwei Puffer benötigt, einer hält stets die aktuellen Werte und wird beschrieben, während der andere die Ergebnisse der letzten Iterierten bereithält. Die Puffer können dann während der Ausführung nach jeder Iteration ausgetauscht werden.
 
@@ -1030,6 +1028,8 @@ Für Algorithmus 1: Für kleine $n$ würde eine Parallelisierung in OpenMP -- also 
 %Um den maximal zulässigen lokalen Fehler von $\epsilon_i\leq10^-{-5}$ einzuhalten, mussten wir auf unsere mit dem Datentyp \texttt{double} implementierte Variante aus Aufgabe \ref{p2a3} zurückgreifen. Mit \texttt{float}-Genauigkeit war es uns unabhängig vom gewählten $\varepsilon_{Error}$ nicht möglich, die Bedingung einzuhalten.
 %Für \texttt{double} konnten wir mit $\varepsilon_{Error}\leq10^{-32}$ die Bedingung mit $\epsilon_i\leq1,257\times10^{-5}$ erfüllen, wobei kleinere Werte hier keinerlei Verbesserung der Genauigkeit des Ergebnisses mehr ergaben. Wir führen dies auf sowohl auf Rechenungenauigkeiten, als auch die gewählte Gitterauflösung zurück.
 
+Nach unserer Implementierung haben wir extrem schlechte Laufzeiten festgestellt. Nach einiger Suche hat sich schließlich herausgestellt, dass 
+
 
 
 \TODO{Vorkonditionierter Löser}
@@ -1037,16 +1037,31 @@ Für Algorithmus 1: Für kleine $n$ würde eine Parallelisierung in OpenMP -- also 
 \subsubsection{Genauigkeit}
 \TODO{Genauigkeit}
 
+\begin{table}
+	\begin{tabular}{r|r|r|r|r}
+		$\varepsilon$ & $\varepsilon$ & $\varepsilon$
+	\end{tabular}
+\end{table}
+
 \subsubsection{Verfahrenskomponenten}
 Durch die Kombination des CG-Verfahrens aus Projekt \ref{p1} (OpenMP) mit dem Löser für $Br$ aus diesem Projekt (CUDA) ergibt sich eine Aufteilung der Berechnungsschritte sowohl auf die CPU als auch die GPU. Wir halten dieses Vorgehen für höchst fragwürdig, da
 \begin{enumerate}
 	\item Es dazu führt, dass Daten ständig zwischen Hauptspeicher und Grafikspeicher ausgetauscht werden müssen
-	\item Aufgrund der Abhängigkeit der Berechnungsschritte die CPU und GPU nicht gleichzeitig sinnvolle Arbeit verrichten
-	\item Wir in Aufgabe \ref{p2a3} bereits gesehen haben, dass die GPU manche Aufgaben sehr viel schneller ausführen kann, als die CPU. Dies erwarten wir auch hier, da es sich vorwiegend um Vektoroperationen handelt, die sich gut für die GPU parallelisieren lassen.
+	\item Aufgrund der Abhängigkeit der Berechnungsschritte die CPU und GPU nicht gleichzeitig sinnvolle Arbeit verrichten können
+	\item Wir in Aufgabe \ref{p2a3} bereits gesehen haben, dass die GPU manche Aufgaben sehr viel schneller ausführen kann, als die CPU. Dies erwarten wir auch hier, da es sich bei den noch auf der CPU ausgeführten Teilen vorwiegend um Vektoroperationen handelt, die sich sehr gut für die GPU parallelisieren lassen.
 \end{enumerate}
 Aus diesen Gründen haben wir uns dafür entschieden, das CG-Verfahren vollständig auf der GPU zu berechnen. Das heißt, die Daten werden die ganze Zeit über im Grafikspeicher gehalten und dort nur von Kerneln manipuliert, die vom Host-Code aufgerufen werden.
 
 Für die Berechnung der Skalarprodukte $p_m^T(Ap_m)$ und $r_m^T(Br_m)$ (genauer: das Aufsummieren über die Element-weisen Produkte) haben wir uns der in \cite{CUDAOptParallelReduction} vorgestellten parallelen Reduktion bedient. Wir erwarten damit eine bessere Geschwindigkeit als bei der Verwendung von \emph{Atomics}, da letztere zu einer teuren Synchronisation zwischen Threads führen.
+
+\begin{table}
+	\begin{tabular}{r|r|r||r|r|r}
+		l & d & n & Gemischt & Nur GPU & Beschleunigung \\
+		\hline
+		8 & 255 & 65025 & 1206 & 1178 & 1,024 \\
+		
+	\end{tabular}
+\end{table}
 
 \TODO{Vergleich mit a}
 
@@ -1063,7 +1078,10 @@ Im Grafikspeicher müssen die Arrays \texttt{rawdata1}, \texttt{rawdata2} sowie \
 
 Bei \texttt{rawdata1} und \texttt{rawdata2} handelt es sich um Arrays der Größe $max_x\cdot max_y \cdot max_z\cdot 19$ mit Datentyp \texttt{double}. Für diese werden somit je
 \begin{equation*}
-M(\mathtt{rawdata1})=M(\mathtt{rawdata2})=max_x\cdot max_y\cdot max_z\cdot 19\cdot8
+	\begin{split}
+		M(\mathtt{rawdata1})&=M(\mathtt{rawdata2})\\
+		&=max_x\cdot max_y\cdot max_z\cdot 19\cdot8
+	\end{split}
 \end{equation*}
 Bytes benötigt.
 Im Gegensatz hierzu ist \texttt{u\_0} im Wesentlichen ein zweidimensionales Array der Größe $max_x \cdot max_y$, ebenfalls vom Typ \texttt{double}. Für dieses ergibt sich somit ein Speicherbedarf von
@@ -1132,7 +1150,6 @@ Bei Würfeln die größer sind als $max_x=max_y=max_z=190$ passen die Daten nicht a
 %\bibliographystyle{splncs}
 %\bibliographystyle{itmalpha}
 \bibliographystyle{natdin}
-% TODO: Ändern der folgenden Zeile, damit die .bib-Datei gefunden wird
 \bibliography{literatur}
 
 

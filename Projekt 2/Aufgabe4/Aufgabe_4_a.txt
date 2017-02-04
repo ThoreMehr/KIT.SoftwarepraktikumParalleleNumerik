@@ -1,0 +1,12 @@
+Welcher der beiden Algorithmen eignet sich aus Sicht der Mathematik besser
+zur Bestimmung der ILU-Zerlegung? 
+
+
+
+
+Algorithmus 1 scheint die bessere Wahl hinsichtlich der Stabilität zu sein, da eine ILU-Zerlegung nach Gauss (Algorithmus 2) ohne geeignete Pivotwahl schnell unter Stabilitätsproblemen leiden kann. Da im Algorithmus 2 keine spezielle Pivotwahl getroffen wird stellt dies ein Problem für entsprechende Elemente der Diagonale dar. Die schlechte Stabilität entsteht daher, dass nachdem wir $l_{jj}$ berechnet haben, wir genau diesen Wert im Nenner eines Bruchs nutzen. Ist dieser Wert hinreichend nah an 0, ohne 0 zu sein, entstehen hier ungewollt große Zahlen.
+
+
+
+Quelle: 
+Michele Benzi, Preconditioning Techniques for Large Linear Systems: A Survey
