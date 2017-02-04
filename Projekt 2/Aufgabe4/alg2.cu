@@ -15,21 +15,6 @@
 
 
 
-__device__
-float func(float x, float y) {
-	return 32 * (x * (1 - x) + y * (1 - y));
-}
-
-__global__
-void initBase(float *base, float h) {
-	int i = blockIdx.x * blockDim.x + threadIdx.x;
-	if (i < N) {
-		int x = i % D;
-		int y = i / D;
-		float f = func(h * x + h, h * y + h);
-		base[i] = h * h * f;
-	}
-}
 
 __global__
 void calculate(float *uHistory, float *base, char *smallError, int sourceTime, int time, int lastTime, int offset, int k) {
@@ -53,17 +38,6 @@ void calculate(float *uHistory, float *base, char *smallError, int sourceTime, i
 			
 			uHistory[i + time] = sum;
 		}
-	}
-}
-
-__global__
-void fetchU(float *uHistory, float *u, int k) {
-	int i = blockIdx.x * blockDim.x + threadIdx.x;
-	if (i < N) {
-		int x = i % D;
-		int y = i / D;
-		int diagIdx = (x + y) / 2;
-		u[i] = uHistory[i + ((k + 1 + diagIdx) % D) * N];
 	}
 }
 
@@ -104,7 +78,7 @@ void solve(float h, float *u, int *iterations, int blockSize) {
 		
 		(*iterations)++;
 		
-		char smallError;
+		int smallError;
 		cudaMemcpy(&smallError, smallError_d + ((k + 1) % D), 1, cudaMemcpyDeviceToHost);
 		if (smallError) break;
 	}

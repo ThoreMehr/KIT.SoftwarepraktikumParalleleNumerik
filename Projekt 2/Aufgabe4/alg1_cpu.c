@@ -25,9 +25,10 @@ void decompose(double* mat_L, double* mat_U, int* iterations) {
 	double* mat_altL = (double*) malloc(5 * N * sizeof(double));
 	double* mat_altU = (double*) malloc(5 * N * sizeof(double));
 	
-	// Initialize arrays with zero
+	// Initialize arrays
 	for (int i = 0; i < 5 * N; i++) {
-		mat_altL[i] = mat_altU[i] = mat_L[i] = mat_U[i] = i % 5 == 0;
+		int offset = i % 5;
+		mat_altL[i] = mat_altU[i] = mat_L[i] = mat_U[i] = offset == 0;
 	}
 	
 	for (int m = 0;; m++) {
@@ -105,11 +106,13 @@ int main() {
 	printf("Used %d iterations\n\n", iterations);
 	
 	if (SHOW_RESULTS) {
-		printf("Matrix L:\n");
+		printf("L=[\n");
 		printSparseMatrix(mat_L);
+		printf("];\n");
 		
-		printf("\nMatrix U:\n");
+		printf("U=[\n");
 		printSparseMatrix(mat_U);
+		printf("];\n");
 	}
 	
 	free(mat_L);

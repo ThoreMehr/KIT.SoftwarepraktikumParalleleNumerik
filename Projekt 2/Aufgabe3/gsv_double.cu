@@ -104,7 +104,7 @@ void solve(double h, double *u, int *iterations, int blockSize) {
 		
 		(*iterations)++;
 		
-		int smallError;
+		char smallError;
 		cudaMemcpy(&smallError, smallError_d + ((k + 1) % D), 1, cudaMemcpyDeviceToHost);
 		if (smallError) break;
 	}
