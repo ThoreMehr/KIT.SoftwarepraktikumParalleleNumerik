@@ -51,7 +51,7 @@
 
 
 
-\documentclass[twoside,twocolums,a4paper,compsoc,conference]{IEEEtran}
+\documentclass[twocolums,a4paper,compsoc,conference]{IEEEtran}
 % Some/most Computer Society conferences require the compsoc mode option,
 % but others may want the standard conference format.
 %
@@ -113,6 +113,9 @@
 \usepackage{siunitx}
 \usepackage[numbers]{natbib}
 \usepackage{multirow}
+
+\usepackage{float}
+\restylefloat{table}
 
 
 
@@ -808,7 +811,7 @@ Der \emph{Intel Thread Checker} gibt für unser Programm Folgendes aus:
 \subsubsection{CG-Verfahren}\label{p1a6b}
 Unsere parallele Version des CG-Verfahrens konnte gegenüber dem Gauß-Seidel-Verfahren das Problem aus Aufgabe \ref{p1a5} bis zu $40$-mal so schnell lösen. Eine Übersicht über den \emph{Speedup} sowie die \emph{Efficiency} ist in Tabelle \ref{a5a6speedupefficiency} zu finden.
 
-\begin{table*}
+\begin{table*}[H]
 	\centering
 	\begin{tabular}{r|r|r||r||r|r|@{ \dots}|r|r||r|r}
 		\multicolumn{3}{c||}{Problemgröße} & Seq. & \multicolumn{2}{c|@{ \dots}|}{2 Threads} & \multicolumn{2}{c||}{16 Threads}  & \multicolumn{2}{c}{32 Threads} \\
@@ -832,11 +835,6 @@ Das Problem wäre jedoch, dass die Vorkonditionierung selbst rechenaufwändig wäre
 
 
 \subsubsection{Bibliotheken}\label{p1a6c}
-In Tabelle \ref{MathBibs} haben wir drei Bibliotheken zur Anwendung der Finiten Elemente Methode aufgelistet und verglichen. Weitere Bibliotheken, die es nicht in die Tabelle geschafft haben, wären beispielsweise Feel++\cite{Feel++} und
-Libmesh\cite{Libmesh}.
-
-Im Rahmen dieses Praktikums würde sich, zumindest für Projekt 1, \emph{HiFlow\textsuperscript{3}} gut eignen, da hier eine ausgereifte OpenMP Funktionalität gegeben zu sein scheint, die den Portierungsaufwand stark verringert.
-
 \begin{table*}[h]
 	\centering
 	\begin{tabular}{l|p{0.5\textwidth}|l}
@@ -866,8 +864,16 @@ Im Rahmen dieses Praktikums würde sich, zumindest für Projekt 1, \emph{HiFlow\te
 	\label{MathBibs}
 \end{table*}
 
+In Tabelle \ref{MathBibs} haben wir drei Bibliotheken zur Anwendung der Finiten Elemente Methode aufgelistet und verglichen. Weitere Bibliotheken, die es nicht in die Tabelle geschafft haben, wären beispielsweise Feel++\cite{Feel++} und
+Libmesh\cite{Libmesh}.
 
+Im Rahmen dieses Praktikums würde sich, zumindest für Projekt 1, \emph{HiFlow\textsuperscript{3}} gut eignen, da hier eine ausgereifte OpenMP Funktionalität gegeben zu sein scheint, die den Portierungsaufwand stark verringert.
+
+
+
+\newpage
 \section{CUDA}
+In diesem Projekt lag das Hauptaugenmerk auf der Programmierung auf der Grafikkarte mittels der Schnittstelle CUDA. Konkret kam CUDA 5.5 zum Einsatz.
 
 \subsection{Getting started}\label{p2a1}
 \begin{lstlisting}[frame=single, captionpos=b, caption={Ausgabe unseres Programms für die zwei CUDA-fähigen Grafikkarten in \emph{i82sn02}.}, label ={lst:cudastarted}, basicstyle=\footnotesize]
@@ -908,12 +914,38 @@ In \ref{lst:cudastarted} ist die Ausgabe unseres Programms zu sehen. In den folg
 \subsubsection{Implementierung in CUDA\\}
 Die Portierung des parallelisierten Gauß-Seidel-Verfahrens aus Aufgabe \ref{p1a4} verlief sehr geradlinig. Die zuvor parallelisierten inneren Schleifen -- die Berechnung über alle schwarzen/weißen Felder -- werden nun mittels entsprechender Kernel auf der GPU ausgeführt. Die Synchronisation ist damit nun implizit durch die Kernelaufrufe -- die nacheinander ausgeführt werden -- gegeben.
 
-Das eigentlich zweidimensional gegebene Problem haben wir als eindimensionales Problem an die GPU weitergegeben. Das heißt wir haben als Größe des Problems den Vektor $(n,1,1)^T$ verwendet (mit $n$ wie aus Aufgabe \ref{p1a4}).
-Da wir bei der Berechnung die zweidimensionale Struktur nicht explizit benötigen, lässt sich so der Verschnitt bei der Aufteilung auf die \emph{Warps} der GPU verkleinern.
+Das eigentlich zweidimensional gegebene Problem haben wir als eindimensionales Problem an die GPU weitergegeben. Das heißt, wir haben als Größe des Problems den Vektor $(n,1,1)^T$ verwendet (mit $n$ wie aus Aufgabe \ref{p1a4}).
+Da wir bei der Berechnung die zweidimensionale Struktur nicht explizit benötigen, lässt sich so ein potentieller Verschnitt bei der Aufteilung auf die \emph{Warps} der GPU verkleinern.
 
 Wie auch die CPU Variante haben wir zur Berechnung den Datentyp \texttt{double} verwendet. Damit der Compiler diesen auch tatsächlich verwendet, muss beim Kompilieren das Flag \texttt{-arch sm\_13} mit angegeben werden (anderenfalls wird stattdessen mit \texttt{float} gearbeitet).
 
-\TODO{Tabelle mit Laufzeiten}
+In Tabelle \ref{tab:gsvcomp} haben wir die GPU-Implementierung mit der aus Projekt \ref{p1} verglichen. Für große Eingaben erreichen wir eine Beschleunigung von fast 9. Für kleine Eingaben ist die Laufzeit der GPU-Variante hingegen recht konstant. Wir führen das auf den Overhead zurück, der zur Ansteuerung der GPU nötig ist. Dieser amortisiert sich erst bei größeren Problemgrößen.
+
+\begin{table}
+	\centering
+	\begin{tabular}{r|r|r|r}
+		$l$ & $T_{CPU}[s]$ & $T_{GPU}[s]$ & Beschleunigung $S[s]$ \\
+		\hline
+		2 & 0,123 & 1,15 & \color{red}0,107 \\
+		3 & 0,348 & 1,16 & \color{red}0,3  \\
+		4 & 1,42 & 1,17 & 1,21 \\
+		\hline
+		7 & 7,14 & 1,54 & 4,64 \\
+		8 & 25,3 & 3,27 & 7,74 \\
+		9 & 177 & 20,6 & 8,59 \\
+	\end{tabular}
+	\caption{Laufzeit unserer GSV-Implementierung aus Aufgabe \ref{p1a4} mit 32 Kernen auf Rechner \emph{i82sn07} verglichen mit unserer GPU-Implementierung auf dem Rechner \emph{i82sn02}. Die Beschleunigung bezieht sich auf die GPU-Variante gegenüber der CPU-Variante ($S=\frac{T_{CPU}}{T_{GPU}}$). Für kleine Eingaben ist die GPU-Variante deutlich langsamer als die CPU-Variante. Für große $l$ hingegen erreicht sie eine Beschleunigung von bis zu $\approx9$.}
+	\label{tab:gsvcomp}
+\end{table}
+
+
+Ein schwer zu findender Bug verbirgt sich im Codeauszug \ref{lst:bug}, welcher im Gauß-Seidel-Verfahren zum erkennen der Abbruchbedingung verwendet wird. Da im Aufruf von \texttt{cudaMemCopy} angegeben wird, dass nur genau 1 Byte kopiert werden soll, wird auch in der nicht initialisieren Variable \texttt{smallError} nur genau ein Bytes hineingeschrieben. Die restlichen Bytes sind unspezifiziert und können zu einem verfrühten Abbruch führen. Die Lösung ist eine Initialisierung mit 0 oder die Verwendung des Datentyps \texttt{char} anstatt \texttt{int} für die Variable \texttt{smallError}.
+\begin{lstlisting}[frame=single, captionpos=b, caption={Ein schwer zu findender Bug im Gauß-Seidel-Verfahren, der sich nur manchmal bemerkbar machte.}, label ={lst:bug}, basicstyle=\footnotesize]
+int smallError; // Datentyp muss char sein
+cudaMemcpy(&smallError, smallError_d, 1,
+           cudaMemcpyDeviceToHost);
+if (smallError) break;
+\end{lstlisting}
 
 \subsubsection{Asynchrone Parallelisierungmethoden}
 \begin{itemize}
@@ -935,8 +967,24 @@ Wir haben uns dazu entschieden, die approximative Methode anzuwenden.
 Begonnen mit dem Compilerflag \texttt{-use-fast-math} -- welches im Kontext von Relaxierung ebenfalls zu Gunsten der Berechnungszeit weniger Rechengenauigkeit garantiert -- welches uns jedoch in der Laufzeit keinen Unterschied bescherte. Wir führen dies darauf zurück, dass wir keine aufwändigeren Mathematikoperationen wie Kosinus oder Sinus berechnen lassen.
 
 Die andere, bereits genannte mögliche Umsetzung, besteht aus der Verwendung von weniger genauen Datentypen. Für uns konkret wäre das hier \texttt{float} (32 Bit) anstatt \texttt{double} (64 Bit).
-Bei vergleichbarer Anzahl an Iterationen konnte wir hiermit tatsächlich ungefährt die Hälfte der Zeit einsparen.
+Bei vergleichbarer Anzahl an Iterationen konnten wir, wie Tabelle \ref{tab:gsvapprox} zu entnehmen ist,  für große Eingaben tatsächlich fast die Hälfte an Zeit einsparen.
 Wir führen das darauf zurück, dass GPUs eher zur Berechnung von Fließkommazahlen mit geringer Genauigkeit optimiert sind (da für Grafik oft ausreichend) und daher hierfür auch mehr Recheneinheiten zur Verfügung stehen.
+
+\begin{table}
+	\centering
+	\begin{tabular}{r|r|r|r}
+		$l$ & $T_\mathtt{double}[s]$ & $T_\mathtt{float}[s]$ & Beschleunigung $S[s]$ \\
+		\hline
+		2 & 1,15 & 1,15 & 1,00 \\
+		3 & 1,16 & 1,15 & 1,01 \\
+		4 & 1,17 & 1,15 & 1,02 \\
+		7 & 1,54 & 1,49 & 1,03 \\
+		8 & 3,27 & 2,59 & 1,26 \\
+		9 & 20,6 & 12,1 & 1,70
+	\end{tabular}
+	\caption{Laufzeiten unserer GSV-Implementierung, einmal mit Datentyp \texttt{double}, einmal mit \texttt{float}. Die Beschleunigung bei Verwendung von \texttt{float} gegenüber \texttt{double} wird für zunehmende $l$ größer. Die Erwartung ist, dass für größere $l$ schließlich eine Beschleunigung von 2 erreicht wird.}
+	\label{tab:gsvapprox}
+\end{table}
 
 Der nächste Schritt wäre, mittels \texttt{half float} noch mehr an Genauigkeit -- zugunsten der Geschwindigkeit -- aufzugeben. Dass dies funktionieren könnte, wir auch vom Blogeintrag \cite{CUDAMixedPrecision} bestätigt. Demnach ist auch hier nochmals eine Verdopplung zu erwarten. Getestet haben wir es nicht, da wir denken, dass für unsere Anwendung die damit verbundene Ungenauigkeit möglicherweise zu groß wird. Ferner ist der Datentyp \texttt{half float} erst ab CUDA 7.5 verfügbar, wohingegen wir mit CUDA 5.5 arbeiten.
 
@@ -961,14 +1009,13 @@ Algorithmus 1 scheint die bessere Wahl hinsichtlich der Stabilität zu sein, da e
 
 Algorithmus 1 lässt sich sehr gut parallelisieren, da innerhalb einer Iterierten $m$ alle Einträge unabhängig von einander berechnet werden können. Zwischen den Iterierten ist jedoch eine Synchronisation nötig, da jede Iterierte die Ergebnisse der vorherigen Iterierten benötigt. Für den Datenaustausch zwischen zwei iterierten werden lediglich zwei Puffer benötigt, einer hält stets die aktuellen Werte und wird beschrieben, während der andere die Ergebnisse der letzten Iterierten bereithält. Die Puffer können dann während der Ausführung nach jeder Iteration ausgetauscht werden.
 
-Die Parallelisierbarkeit von Algorithmus 2 hingegen schätzen wir als schlecht ein. Ähnlich dem Gauß-Seidel-Verfahren aus Projekt 1 beinhaltet er Abhängigkeiten zwischen den einzelnen Einträgen, die während einer Iteration $j$ berechnet werden. Je Iteration müssen jedoch maximal 3 Werte berechnet werden, hierfür lohnt sich eine Parallelisierung unserer Einschätzung nach nicht.
+Die Parallelisierbarkeit von Algorithmus 2 hingegen schätzen wir als schlecht ein. Ähnlich dem Gauß-Seidel-Verfahren aus Projekt 1 beinhaltet er Abhängigkeiten zwischen den einzelnen Einträgen, die während einer Iteration $j$ berechnet werden. Je Iteration können jedoch aufgrund der Abhängigkeiten maximal 3 Werte parallel berechnet werden, hierfür lohnt sich eine Parallelisierung unserer Einschätzung nach nicht.
 
+\TODO{Welche Methode führt beim schlechter parallelisierbaren Algorithmus wohl zum besten Ergebnis?}
 
-\TODO{Bestes Ergebnis für schlechteren Algorithmus}
-
-Die Matrizen $L$ und $U$ sind dünn besetzt, daher erscheint es sinnvoll, die Daten komprimiert zu speichern. Aufgrund der Struktur von $A$ -- und damit auch der von $L$ und $U$, wie wir in der nächsten Teilaufgabe aufzeigen werden -- gibt es nur insgesamt 5 Diagonalen, die Einträge $\neq0$ enthalten können. Wir verwenden daher der Einfachheit halber Arrays der Größe $5\cdot N$, da diese auf jeden Fall genügend Platz zum Speichern bereitstellen. Für jede Zeile einer Matrix verwenden wir demnach $5$ Einträge im Array. Im Falle von $l=2, d=3, n=9$ sieht die Belegung der Matrizen $A$, $L$ und $U$ exemplarisch so aus:
+Die Matrizen $L$ und $U$ sind dünn besetzt, daher erscheint es sinnvoll, die Daten komprimiert zu speichern. Aufgrund der Struktur von $A$ -- und damit auch der von $L$ und $U$, wie wir in der nächsten Teilaufgabe aufzeigen werden -- gibt es nur insgesamt 5 Diagonalen, die Einträge $\neq0$ enthalten können. Wir verwenden daher der Einfachheit halber Arrays der Größe $5\cdot N$, da diese auf jeden Fall genügend Platz zum Speichern bereitstellen. Für jede Zeile einer Matrix verwenden wir demnach $5$ Einträge im Array. Im Falle von $l=2, d=3, n=9$ sieht die Belegung $\mathcal{B}$ der Matrizen $A$, $L$ und $U$ exemplarisch so aus:
 \begin{equation}
-	\begin{pmatrix}
+	\mathcal{B}=\begin{pmatrix}
 		* & * & 0 & * & 0 & 0 & 0 & 0 & 0 \\
 		* & * & * & 0 & * & 0 & 0 & 0 & 0 \\
 		0 & * & * & \color{red}0 & 0 & * & 0 & 0 & 0 \\
@@ -1005,12 +1052,14 @@ Bei der Implementierung von \textbf{Algorithmus 2} ist uns aufgefallen, dass Ein
 \begin{equation}
 	\forall i,j: a_{i,j}=0 \Rightarrow l_{i,j}=l_{j,i}=u_{i,j}=u_{j,i}=0
 \end{equation}
-Somit eignet sich die Speichermethodik aus der vorherigen Teilaufgabe auch für die Matrizen $L$ und $U$ aus Algorithmus 2. Beim Implementieren ist uns aufgefallen, dass $L$ und $U$ nicht mit 0 initialisiert sein sollten, da ansonsten Werte $NaN$ in den Ergebnismatrizen auftauchen. Mit der Einheitsmatrix als Startwerte von $L$ und $U$ leistet der Algorithmus das Gewünschte.
+Somit eignet sich die Speichermethodik aus der vorherigen Teilaufgabe auch für die Matrizen $L$ und $U$ aus Algorithmus 2. Beim Implementieren ist uns ferner aufgefallen, dass $L$ und $U$ nicht mit 0 initialisiert sein sollten, da ansonsten Werte $NaN$ in den Ergebnismatrizen auftauchen. Mit der Einheitsmatrix als Startwert von $L$ und $U$ leistet der Algorithmus das Gewünschte.
 
 Für \textbf{Algorithmus 1} wählen wir nun als Indexmenge $S_U$ genau die Einträge, die nach Algorithmus 2 in $U$ ungleich $0$ sein können. Damit ist auch die Validität unserer gewählten Speichermethodik für diesen Algorithmus garantiert, da auch hier $L=U^T$ gilt und
 \begin{equation}
 	\forall (i,j)\notin S_U:u_{i,j}=l_{j,i}=0
 \end{equation}
+
+Geschwindigkeitstechnisch profitiert Algorithmus 2 nur unwesentlich von der parallelen Architektur, da aufgrund der Abhängigkeiten maximal drei Elemente gleichzeitig berechnet werden können. Algorithmus 1 hingegen profitiert sehr von der parallelen Architektur der GPU, da innerhalb einer Iteration allte Einträge komplett unabhängig von einander berechnet werden können. Zudem ist die tatsächliche Anzahl benötigter Schritte in der Regel weit unter $n$. Für ein Abbruchkriterium mit $\varepsilon_{ILU}=10^{-10}$ und Problemgröße $n=261.121$ wurden gerade einmal 19 Iterationen benötigt.
 
 \TODO{Vergleich mit Erwartung aus vorheriger Teilaufgabe}
 
@@ -1023,24 +1072,71 @@ Für Algorithmus 1: Für kleine $n$ würde eine Parallelisierung in OpenMP -- also 
 
 \subsection{Vorkonditionierung}\label{p2a5}
 \subsubsection{Kombination}
-%Im ersten Projekt -- genauer Aufgabe \ref{p1a5} -- haben wir festgestellt, dass mit zunehmendem $l$ der lokale Fehler geschrumpft ist. Wir haben daher für diese Aufgabe $l=9$ verwendet, größere $l$ waren uns aus Speicher-technischen Gründen nicht möglich ($l=9\Rightarrow d=511\Rightarrow n=261.121\Rightarrow$ Speicherverbrauch von mehr als $\frac{1}{2}n^2\cdot 8$ Bytes $>>2$GB).
+Selbst mit $l=9$ war es uns mit unseren bisherigen Komponenten nicht möglich, die gewünschte Genauigkeit von $\epsilon_i\leq10^{-5}$ zu erreichen. Unabhängig von der gewählten Größe der $\varepsilon$ für die Abbruchkriterien lag unser bestes Ergebnis bei einem lokalen Fehler von $\epsilon_i=1,257\times10^{-5}>10^{-5}$. Wie wir in Projekt \ref{p1} gesehen haben, hängt der Fehler bei diesem Problem stark von der Gitterauflösung ab. Es ist daher naheliegend, es einmal mit $l=10$ zu versuchen. Bisher war uns dies aufgrund unserer Implementierung des Gauß-Seidel-Verfahrens nicht möglich, da wir hier eine Historie der Größe $d$ für alle Einträge von $u$ verwendeten. Damit ergab sich für $l=10$ ein Speicherbedarf von $(2^{10}-1)^3\cdot8\textsf{ Bytes}\approx8\textsf{ GB}$ allein für die Historie von $u$. Wie in Aufgabe \ref{p2a1} zu sehen, haben wir jedoch nur $\approx2\textsf{ GB}$ Grafikspeicher zur Verfügung.
 
-%Um den maximal zulässigen lokalen Fehler von $\epsilon_i\leq10^-{-5}$ einzuhalten, mussten wir auf unsere mit dem Datentyp \texttt{double} implementierte Variante aus Aufgabe \ref{p2a3} zurückgreifen. Mit \texttt{float}-Genauigkeit war es uns unabhängig vom gewählten $\varepsilon_{Error}$ nicht möglich, die Bedingung einzuhalten.
-%Für \texttt{double} konnten wir mit $\varepsilon_{Error}\leq10^{-32}$ die Bedingung mit $\epsilon_i\leq1,257\times10^{-5}$ erfüllen, wobei kleinere Werte hier keinerlei Verbesserung der Genauigkeit des Ergebnisses mehr ergaben. Wir führen dies auf sowohl auf Rechenungenauigkeiten, als auch die gewählte Gitterauflösung zurück.
+Um das Problem zu lösen wollen wir die Historie von $u$ vermeiden. Benutzt haben wir sie, um in der Ausgabe des GSV garantieren zu können, dass alle Einträge des ausgegebenen $u$ aus der gleichen Iterierten stammen. Wenn wir nun zulassen, dass Einträge aus $u$ aus neueren Iterierten stammen, als die Iterierte, in der die Abbruchbedingung zum ersten mal erfüllt wurde, können wir mit einem $u$ der Größe $(2^{10}-1)^2\cdot8\textsf{ Bytes}\approx8\textsf{ MB}$ auskommen.
+Diese Herangehensweise scheint uns zulässig, da das Gauß-Seidel-Verfahren monoton gegen die perfekte Lösung zu konvergieren scheint, neuere Einträge von $u$ also höchstens eine bessere Genauigkeit ausweisen, jedoch keine schlechtere. Aus diesem Grund könnte diese Vereinfachung gar zu einem genaueren Gesamtergebnis führen. Wir würden sie daher nicht zu den Verfahren des \emph{Approximate Computing} aus Aufgabe \ref{p2a3} zählen.
+Gleichwohl erwarten wir durch diese Lösung auch einen Geschwindigkeitszuwachs, dadurch begründet, dass der zugegriffene Speicher kleiner ist, und somit eher in vorhandene Caches passen sollte.
 
-Nach unserer Implementierung haben wir extrem schlechte Laufzeiten festgestellt. Nach einiger Suche hat sich schließlich herausgestellt, dass 
+Mit $l=10$ war es uns schließlich möglich, eine Lösung mit einem maximalen lokalen Fehler von $\epsilon_i=3,25\times10^{-6}<10^{-5}$ (mit $\varepsilon_{cg}=\varepsilon_{ILU}=\varepsilon_{GSV}=10^{-6}$ für die Abbruchkriterien) zu berechnen. Es ist anzumerken, dass wir hierfür die Blockgröße von 32 (der Warpgröße) auf $8\cdot32$ erhöhen mussten, um überhaupt sinnvolle Ausgaben zu erhalten. Den Grund hierfür konnten wir leider nicht ausmachen, denn theoretisch sollte eine Grid-Größe von maximal
+\begin{equation*}
+	\begin{split}
+		g_n&=\lfloor\frac{n+blocksize-1}{blocksize}\rfloor\\
+		&=\lfloor\frac{4.092.529 + 32 - 1}{32}\rfloor\\
+		&=127.892
+	\end{split}
+\end{equation*}
+(eindimensional) von der \emph{GeForce GTX 960} unterstützt werden (vgl. Listing \ref{lst:cudastarted} aus Aufgabe \ref{p1a1}, $g_{max}=2.147.483.647$).
 
+Da wir unserer Implementierung aus Projekt \ref{p1} nicht mit $l=10$ testen können (Grund ist die genannte Historie), vergleichen wir im folgenden die Ergebnisse für maximal $l=9$. Für die Abbruchkriterien wählen wir $\varepsilon_{cg}=\varepsilon_{ILU}=\varepsilon_{GSV}=10^{-6}$ Die Ergebnisse zeigen wir in Tabelle \ref{tab:cgcomp}.
+
+
+\begin{table}
+	\centering
+	\small
+	\begin{tabular}{r|r|r|r|r|r}
+		$l$ & Impl. & It. & $T[s]$ & $T_{iteration}[s]$ & Fehler $\epsilon_i$ \\
+		\hline
+		& CPU & $243$ & $1,7$ & $7\times10^{-3}$ & $2,01\times10^{-4}$ \\
+		7 & GPU a) & $91$ & $1,83$ & $2,01\times10^{-2}$ & $2,01\times10^{-4}$ \\
+		& GPU c) & $91$ & $1,72$ & $1,89\times10^{-2}$ & $2,01\times10^{-4}$ \\
+		\hline
+		& CPU & $483$ & $2$ & $4,14\times10^{-3}$ & $5,02\times10^{-5}$ \\
+		8 & GPU a) & $153$ & $6,9$ & $4,51\times10^{-2}$ & $5,21\times10^{-5}$ \\
+		& GPU c) & $153$ & $6,02$ & $3,93\times10^{-2}$ & $5,21\times10^{-5}$ \\
+		\hline
+		& CPU & $961$ & $2,5$ & $2,6\times10^{-3}$ & $1,26\times10^{-5}$ \\
+		9 & GPU a) & $285$ & $78,5$ & $2,75\times10^{-1}$ & $1,31\times10^{-5}$ \\
+		& GPU c) & $285$ & $71,5$ & $2,51\times10^{-1}$ & $1,31\times10^{-5}$ \\
+	\end{tabular}
+	\caption{Die verschiedenen Implementierungen des CG-Verfahrens im Vergleich: die parallelisierte CPU Variante aus Aufgabe \ref{p1a6}, die aus Aufgabe \ref{p2a5} a) mit Berechnung sowohl auf der GPU, als auch der CPU, sowie die Variante aus Aufgabenteil c), die nur auf der GPU arbeitet. Mit Iterationen ist die Anzahl der Iterationen des CG-Verfahrens gemeint. Es ist festzuhalten, dass die CPU-Variante etwa 60mal schneller ist, als die GPU Implementierungen. Getestet wurde auf \emph{i82sn07} für die CPU, und auf \emph{i82sn02} für die GPU. Jeweils $l=9$ mit Abbruchkriterien $\varepsilon=10^{-6}$.}
+	\label{tab:cgcomp}
+\end{table}
 
 
 \TODO{Vorkonditionierter Löser}
 
 \subsubsection{Genauigkeit}
-\TODO{Genauigkeit}
+Insgesamt haben wir für die zu berechnende Genauigkeit drei Parameter: die in den jeweiligen Abbruchkriterien verwendeten $\varepsilon_{cg}, \varepsilon_{ILU}, \varepsilon_{GSV}$. In Tabelle \ref{tab:precision} haben wir den lokalen Fehler in Abhängigkeit von verschiedenen $\varepsilon$ abgetragen.
+
+Wir schließen aus den Messwerten, dass $\varepsilon_{cg}$ für den Fehler des Ergebnisses am wichtigsten ist. Das macht Sinn in dem Zusammenhang, als dass die ILU-Zerlegung, und damit auch die GSV-Berechnung, hier nur Näherungen sind und daher nicht genau berechnet zu werden brauchen. Gleichzeitig lässt sich aber auch feststellen, dass das gesamte Verfahren mit insgesamt weniger Iterationen auskommt, wenn auch für die LU- und die GSV-Berechnung eine höhere Genauigkeit angestrebt wird. Insbesondere, da die Berechnung der LU-Zerlegung  -- verglichen mit den restlichen Berechnungen -- sehr schnell ist (muss nur einmal zu Beginn durchgeführt werden), macht es Sinn, $\varepsilon_{ILU}$ grundsätzlich klein zu wählen.
+
+Für ein genaueres Abwägen zwischen Berechnungszeit, Genauigkeit und Abbruchkriterien müssten sehr viel mehr Daten gesammelt werden. Während eine ungenauere GSV-Berechnung für sich schneller durchzuführen ist, scheint sie dazu zu führen, dass mehr Iterationen, und damit mehr GSV-Berechnungen insgesamt, durchzuführen sind. Optimale Werte für $\varepsilon$ könnten iterativ bestimmt werden.
 
 \begin{table}
+	\centering
+	\small
 	\begin{tabular}{r|r|r|r|r}
-		$\varepsilon$ & $\varepsilon$ & $\varepsilon$
+		$\varepsilon_{cg}$ & $\varepsilon_{ILU}$ & $\varepsilon_{GSV}$ & Fehler $\epsilon_i$ & $\Delta\epsilon_i$ \\
+		\hline
+		$10^{-3}$ & $10^{-3}$ & $10^{-3}$ & $2,20\times10^{-4}$ & 0 \\
+		$10^{-6}$ & $10^{-3}$ & $10^{-3}$ & $5,14\times10^{-5}$ & $-1,69\times10^{-4}$ \\
+		$10^{-3}$ & $10^{-6}$ & $10^{-3}$ & $1,97\times10^{-4}$ & $-2,30\times10^{-5}$ \\
+		$10^{-3}$ & $10^{-3}$ & $10^{-6}$ & $2,14\times10^{-4}$ & $-6,02\times10^{-7}$ \\
+		$10^{-12}$ & $10^{-3}$ & $10^{-3}$ & $5,02\times10^{-5}$ & $-1,70\times10^{-4}$ \\
+		$10^{-12}$ & $10^{-12}$ & $10^{-12}$ &  $5,02\times10^{-5}$ & $-1,70\times10^{-4}$
 	\end{tabular}
+	\caption{Der maximale lokale Fehler für verschiedene Belegungen von $\varepsilon_{cg}, \varepsilon_{ILU}, \varepsilon_{GSV}$. Getestet mit $l=8$ auf Rechner \emph{i82sn02}. Es ist anzumerken, dass zur Berechnung der letzten Zeile nur etwa die Hälfte an CG-Iterationen benötigt wurde (278), als in der Zeile zuvor (551).}\label{tab:precision}
 \end{table}
 
 \subsubsection{Verfahrenskomponenten}
@@ -1054,16 +1150,8 @@ Aus diesen Gründen haben wir uns dafür entschieden, das CG-Verfahren vollständig
 
 Für die Berechnung der Skalarprodukte $p_m^T(Ap_m)$ und $r_m^T(Br_m)$ (genauer: das Aufsummieren über die Element-weisen Produkte) haben wir uns der in \cite{CUDAOptParallelReduction} vorgestellten parallelen Reduktion bedient. Wir erwarten damit eine bessere Geschwindigkeit als bei der Verwendung von \emph{Atomics}, da letztere zu einer teuren Synchronisation zwischen Threads führen.
 
-\begin{table}
-	\begin{tabular}{r|r|r||r|r|r}
-		l & d & n & Gemischt & Nur GPU & Beschleunigung \\
-		\hline
-		8 & 255 & 65025 & 1206 & 1178 & 1,024 \\
-		
-	\end{tabular}
-\end{table}
-
-\TODO{Vergleich mit a}
+Aus Tabelle \ref{tab:cgcomp} ergeben sich Beschleunigungen von $1,06, 1,146, 1,097$ für $l=7,l=8,l=9$ von der reinen GPU Variante gegenüber deren, die sowohl auf der GPU als auch auf der CPU rechnet.
+Diese Geschwindigkeitsunterschied sind geringer, als wir erwartet hätten. Wir führen das darauf zurück, dass das Lösen von $Br$ mittels zwei Aufrufen des Gauß-Seidel-Verfahrens vergleichsweise rechenaufwändig ist, und daher die Speichertransfers weniger ins Gewicht fallen. Pro Iteration müssen zwei Speicher-Kopieoperationen, sowie zwei GSV-Berechnungen durchgeführt werden.
 
 
 
