@@ -1090,7 +1090,6 @@ Mit $l=10$ war es uns schließlich möglich, eine Lösung mit einem maximalen lokal
 
 Da wir unserer Implementierung aus Projekt \ref{p1} nicht mit $l=10$ testen können (Grund ist die genannte Historie), vergleichen wir im folgenden die Ergebnisse für maximal $l=9$. Für die Abbruchkriterien wählen wir $\varepsilon_{cg}=\varepsilon_{ILU}=\varepsilon_{GSV}=10^{-6}$ Die Ergebnisse zeigen wir in Tabelle \ref{tab:cgcomp}.
 
-
 \begin{table}
 	\centering
 	\small
@@ -1102,19 +1101,34 @@ Da wir unserer Implementierung aus Projekt \ref{p1} nicht mit $l=10$ testen könn
 		& GPU c) & $91$ & $1,72$ & $1,89\times10^{-2}$ & $2,01\times10^{-4}$ \\
 		\hline
 		& CPU & $483$ & $2$ & $4,14\times10^{-3}$ & $5,02\times10^{-5}$ \\
-		8 & GPU a) & $153$ & $6,9$ & $4,51\times10^{-2}$ & $5,21\times10^{-5}$ \\
-		& GPU c) & $153$ & $6,02$ & $3,93\times10^{-2}$ & $5,21\times10^{-5}$ \\
+		8 & GPU a) & $153$ & $7,04$ & $4,60\times10^{-2}$ & $5,21\times10^{-5}$ \\
+		& GPU c) & $153$ & $6,17$ & $4,03\times10^{-2}$ & $5,21\times10^{-5}$ \\
 		\hline
 		& CPU & $961$ & $2,5$ & $2,6\times10^{-3}$ & $1,26\times10^{-5}$ \\
-		9 & GPU a) & $285$ & $78,5$ & $2,75\times10^{-1}$ & $1,31\times10^{-5}$ \\
-		& GPU c) & $285$ & $71,5$ & $2,51\times10^{-1}$ & $1,31\times10^{-5}$ \\
+		9 & GPU a) & $285$ & $71,0$ & $2,49\times10^{-1}$ & $1,31\times10^{-5}$ \\
+		& GPU c) & $285$ & $64,0$ & $2,24\times10^{-1}$ & $1,31\times10^{-5}$ \\
 	\end{tabular}
 	\caption{Die verschiedenen Implementierungen des CG-Verfahrens im Vergleich: die parallelisierte CPU Variante aus Aufgabe \ref{p1a6}, die aus Aufgabe \ref{p2a5} a) mit Berechnung sowohl auf der GPU, als auch der CPU, sowie die Variante aus Aufgabenteil c), die nur auf der GPU arbeitet. Mit Iterationen ist die Anzahl der Iterationen des CG-Verfahrens gemeint. Es ist festzuhalten, dass die CPU-Variante etwa 60mal schneller ist, als die GPU Implementierungen. Getestet wurde auf \emph{i82sn07} für die CPU, und auf \emph{i82sn02} für die GPU. Jeweils $l=9$ mit Abbruchkriterien $\varepsilon=10^{-6}$.}
 	\label{tab:cgcomp}
 \end{table}
 
+Die Laufzeiten sowie die Beschleunigung gegenüber unserer Lösung aus Aufgabe \ref{p1a6} können Tabelle \ref{tab:cgspeedup} entnommen werden. Sie zeigt, dass das vorkonditionierte-Verfahren, entgegen unserer Erwartungen, langsamer ist, als die ursprüngliche, auf der CPU implementierte Variante.
+Wir führen das auf die relativ teure Berechnung von $Br$ zurück, bei der zweimal eine Berechnung mittels Gauß-Seidel-Verfahren angestoßen wird.
 
-\TODO{Vorkonditionierter Löser}
+\begin{table}
+	\centering
+	\begin{tabular}{r|r|r}
+		$l$ & $S_{CPU\rightarrow GPU_a}[s]$ & $S_{GPU_a\rightarrow GPU_c}[s]$ \\
+		\hline
+		7 & 0,929 & 1,06 \\
+		8 & 0,284 & 1,14 \\
+		9 & 0,0352 & 1,11
+	\end{tabular}
+	\caption{Beschleunigung $S_{CPU\rightarrow GPU_a}$ der GPU-Variante aus a) gegenüber der CPU Variante aus Projekt \ref{p1}, sowie Beschleunigung $S_{GPU_a\rightarrow GPU_c}$ der GPU Variante aus b) gegenüber der aus a). Basierend auf den Messungen in Tabelle \ref{tab:cgcomp}.}
+	\label{tab:cgspeedup}
+\end{table}
+
+Für eine Visualisierung des berechneten Ergebnisses verweisen wir auf Abbildung \ref{grapha5} aus Aufgabe \ref{p1a5}. Für größere $l$ approximiert die berechnete Lösung die analytische noch besser, einen weiteren Unterschied gibt es nicht. 
 
 \subsubsection{Genauigkeit}
 Insgesamt haben wir für die zu berechnende Genauigkeit drei Parameter: die in den jeweiligen Abbruchkriterien verwendeten $\varepsilon_{cg}, \varepsilon_{ILU}, \varepsilon_{GSV}$. In Tabelle \ref{tab:precision} haben wir den lokalen Fehler in Abhängigkeit von verschiedenen $\varepsilon$ abgetragen.
@@ -1134,7 +1148,7 @@ Für ein genaueres Abwägen zwischen Berechnungszeit, Genauigkeit und Abbruchkrite
 		$10^{-3}$ & $10^{-6}$ & $10^{-3}$ & $1,97\times10^{-4}$ & $-2,30\times10^{-5}$ \\
 		$10^{-3}$ & $10^{-3}$ & $10^{-6}$ & $2,14\times10^{-4}$ & $-6,02\times10^{-7}$ \\
 		$10^{-12}$ & $10^{-3}$ & $10^{-3}$ & $5,02\times10^{-5}$ & $-1,70\times10^{-4}$ \\
-		$10^{-12}$ & $10^{-12}$ & $10^{-12}$ &  $5,02\times10^{-5}$ & $-1,70\times10^{-4}$
+		$10^{-12}$ & $10^{-12}$ & $10^{-12}$ & $5,02\times10^{-5}$ & $-1,70\times10^{-4}$
 	\end{tabular}
 	\caption{Der maximale lokale Fehler für verschiedene Belegungen von $\varepsilon_{cg}, \varepsilon_{ILU}, \varepsilon_{GSV}$. Getestet mit $l=8$ auf Rechner \emph{i82sn02}. Es ist anzumerken, dass zur Berechnung der letzten Zeile nur etwa die Hälfte an CG-Iterationen benötigt wurde (278), als in der Zeile zuvor (551).}\label{tab:precision}
 \end{table}
@@ -1150,8 +1164,8 @@ Aus diesen Gründen haben wir uns dafür entschieden, das CG-Verfahren vollständig
 
 Für die Berechnung der Skalarprodukte $p_m^T(Ap_m)$ und $r_m^T(Br_m)$ (genauer: das Aufsummieren über die Element-weisen Produkte) haben wir uns der in \cite{CUDAOptParallelReduction} vorgestellten parallelen Reduktion bedient. Wir erwarten damit eine bessere Geschwindigkeit als bei der Verwendung von \emph{Atomics}, da letztere zu einer teuren Synchronisation zwischen Threads führen.
 
-Aus Tabelle \ref{tab:cgcomp} ergeben sich Beschleunigungen von $1,06, 1,146, 1,097$ für $l=7,l=8,l=9$ von der reinen GPU Variante gegenüber deren, die sowohl auf der GPU als auch auf der CPU rechnet.
-Diese Geschwindigkeitsunterschied sind geringer, als wir erwartet hätten. Wir führen das darauf zurück, dass das Lösen von $Br$ mittels zwei Aufrufen des Gauß-Seidel-Verfahrens vergleichsweise rechenaufwändig ist, und daher die Speichertransfers weniger ins Gewicht fallen. Pro Iteration müssen zwei Speicher-Kopieoperationen, sowie zwei GSV-Berechnungen durchgeführt werden.
+Aus Tabelle \ref{tab:cgspeedup} ergeben sich Beschleunigungen von bis zu $1,14$ für $l=8$ von der reinen GPU-Variante, gegenüber deren, die sowohl auf der GPU als auch auf der CPU rechnet.
+Der Geschwindigkeitsunterschied ist geringer, als wir erwartet hätten. Wir führen das darauf zurück, dass das Lösen von $Br$ mittels zwei Aufrufen des Gauß-Seidel-Verfahrens vergleichsweise rechenaufwändig ist, und daher die Speichertransfers weniger ins Gewicht fallen. Pro Iteration müssen zwei Speicher-Kopieoperationen, sowie zwei GSV-Berechnungen durchgeführt werden.
 
 
 
