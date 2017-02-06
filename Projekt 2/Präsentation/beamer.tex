@@ -26,7 +26,7 @@
 
 \title{Projekt 2}
 \subtitle{Arbeiten mit CUDA}
-\author{Thore Mehr, Fabian Miltenberger, Sébastien Thill}
+\author{Fabian Miltenberger, Sébastien Thill, Thore Mehr}
 \date{07.02.2017}
 \institute{Lehrstuhl für Rechnerarchitektur und Parallelverarbeitung (ITEC)}
 
@@ -193,7 +193,7 @@
 		\end{itemize}
 	\end{frame}
 	\begin{frame}
-		\frametitle{Aufgabe 4 -- Implementierung}
+		\frametitle{Aufgabe 4 -- Speichermethodik}
 		Nach Algorithmus 2: $a_{ij}=0\Rightarrow l_{ij}=0$ und $U=L^T$ ($S_U$ entsprechend) \\
 		Belegung von $L,U$ und $A$:
 		\begin{equation*}
@@ -211,9 +211,7 @@
 			\end{pmatrix}
 		\end{equation*}
 		$\rightarrow$Speicherung möglich als Array der Größe $5n$ \\
-		{\color{lightred}Speicherverschnitt} in $\mathcal{O}(\sqrt{n})$ \\
-		\vspace{1em}
-		Summen der Algorithmen lassen sich als Summe konstant vieler Elemente auffassen
+		{\color{lightred}Speicherverschnitt} in $\mathcal{O}(\sqrt{n})$
 	\end{frame}
 	\begin{frame}
 		\frametitle{Aufgabe 4 -- Ergebnis}
@@ -234,9 +232,7 @@
 		\stackrel{!}{\approx}A
 		\end{equation*}
 		\vspace{2em}
-		Für unsere folgende Vorkonditionierung \emph{hoffentlich} vernachlässigbar \\
-		\vspace{2em}
-		Algorithmus 1 sehr effizient, Ergebnis für $l=9$ bereits nach 19 Iterationen ($1$ Sekunde)
+		Für unsere folgende Vorkonditionierung \emph{hoffentlich} vernachlässigbar
 	\end{frame}
 	\begin{frame}
 		\frametitle{Aufgabe 4 -- OpenMP}
@@ -303,10 +299,10 @@
 		\vspace{2em}
 		Auswirkung auf den Fehler:
 		\begin{center}
-			\begin{tabular}{r|r|r|r|r|r}
-				$\varepsilon_{cg}$ & $\varepsilon_{ILU}$ & $\varepsilon_{GSV}$ & Fehler $\epsilon_{max}$ & $\Delta\epsilon_{max}$ & Iterationen \\
+			\begin{tabular}{r|r|r|r|r}
+				$\varepsilon_{cg}$ & $\varepsilon_{ILU}$ & $\varepsilon_{GSV}$ & Fehler $\epsilon_{max}$ & $\Delta\epsilon_{max}$ \\
 				\hline
-				$10^{-3}$ & $10^{-3}$ & $10^{-3}$ & $2,20\times10^{-4}$ & 0 & 118 \\
+				$10^{-3}$ & $10^{-3}$ & $10^{-3}$ & $2,20\times10^{-4}$ & 0 \\
 				$10^{-6}$ & $10^{-3}$ & $10^{-3}$ & $5,14\times10^{-5}$ & $-1,69\times10^{-4}$ \\
 				$10^{-3}$ & $10^{-6}$ & $10^{-3}$ & $1,97\times10^{-4}$ & $-2,30\times10^{-5}$ \\
 				$10^{-3}$ & $10^{-3}$ & $10^{-6}$ & $2,14\times10^{-4}$ & $-6,02\times10^{-7}$ \\

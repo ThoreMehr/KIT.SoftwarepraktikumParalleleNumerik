@@ -178,7 +178,7 @@ void solve(float h, float *u, int *iterations, int blockSize, int blockSizeX, in
 		
 		(*iterations)++;
 		
-		int smallError;
+		char smallError;
 		cudaMemcpy(&smallError, smallError_d + ((k + 1) % D), 1, cudaMemcpyDeviceToHost);
 		if (smallError) break;
 	}
@@ -216,7 +216,7 @@ int main() {
 	struct cudaDeviceProp prop;
 	cudaGetDeviceProperties(& prop, device);
 	int blockSize = prop.warpSize;
-	int blockSizeX = 4;
+	int blockSizeX = 8;
 	int blockSizeY = 8;
 	
 	printf("Run on %s (device %d) with blocksize %d and %dx%d\n",

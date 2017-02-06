@@ -243,7 +243,7 @@
 
 
 \newcommand{\TODO}[1]{\textbf{\Large\color{red}#1}}
-%\newcommand{\TODO}[1]{}
+\renewcommand{\TODO}[1]{}
 
 \setcounter{tocdepth}{3}
 \setcounter{secnumdepth}{3}
@@ -265,10 +265,12 @@
 \author{\IEEEauthorblockN{Fabian Miltenberger}
 \IEEEauthorblockA{
 Karlsruher Institut für Technologie\\
-E-Mail: fabian.miltenberger@student.kit.edu}
+E-Mail: \small\url{fabian.miltenberger@student.kit.edu}}
 \and
 \IEEEauthorblockN{Sébastien Thill}
-\IEEEauthorblockA{Karlsruher Institut für Technologie}
+\IEEEauthorblockA{
+Karlsruher Institut für Technologie \\
+E-Mail: \small\url{sebastien.thill@student.kit.edu}}
 \and
 \IEEEauthorblockN{Thore Mehr}
 \IEEEauthorblockA{Karlsruher Institut für Technologie}}
@@ -515,21 +517,22 @@ U(n) = \frac{I(n)}{n} = R(n) \cdot E(n) = \frac{P(n)}{n \cdot T(n)}
 Im Folgenden werden einige parallele Architekturen genauer erläutert. Ein grober Vergleich zur CPU kann Tabelle \ref{parallelarch} entnommen werden.
 \begin{itemize}
 	\item \textbf{CPU} \\
-	Die CPU stellt einen großen Instruktionssatz zur Verfügung und kann komplexe Sprünge im Code abarbeiten. Durch Techniken wie Sprungvorhersagen lässt sich in diesen Fällen die Performance steigern und mit Out-of-Order Architekturen erhält man einen hohen Grad an Instruktionslevel-Parallelismus. Im Allgemeinen finden sich selten mehr als 8 CPU Kerne in einem herkömmlichen Rechner. Es bietet sich die ,,gewöhnliche'' Programmierung an.
+	Die CPU stellt einen großen Instruktionssatz zur Verfügung und kann komplexe Sprünge im Code abarbeiten. Durch Techniken wie Sprungvorhersagen lässt sich in diesen Fällen die Performance steigern und mit Out-of-Order Architekturen erhält man einen hohen Grad an Instruktionslevel-Parallelismus (siehe Vorlesung \cite{RechnerstrukturenVL}). Im Allgemeinen finden sich selten mehr als 8 CPU Kerne in einem herkömmlichen Rechner. Es bietet sich die ,,gewöhnliche'' Programmierung an.
 	
 	\item \textbf{GPU} \\
-	Moderne Rechner haben fast alle eine GPU verbaut, welche anders als die CPU keine komplexen Befehle abarbeiten kann, sondern durch eine sehr hohe Anzahl an einfachen Rechnenkernen massive Parallelität bereitstellen kann. Dieser Beschleuniger arbeitet auf einem Befehlsstrom und führt diesen mehrfach aus (\emph{Single Instruction, Multiple Data} -- kurz \emph{SIMD}). Um GPUs für ein eigenes Programm zu nutzen helfen Bibliotheken wie \emph{CUDA} (nVidia spezifisch), oder \emph{OpenCL}.
+	Nach \cite{SoftwareEngineeringPP} haben Moderne Rechner fast alle eine GPU verbaut, welche anders als die CPU keine komplexen Befehle abarbeiten kann, sondern durch eine sehr hohe Anzahl an einfachen Rechnenkernen massive Parallelität bereitstellen kann. Dieser Beschleuniger arbeitet auf einem Befehlsstrom und führt diesen mehrfach aus (\emph{Single Instruction, Multiple Data} -- kurz \emph{SIMD}). Um GPUs für ein eigenes Programm zu nutzen helfen Bibliotheken wie \emph{CUDA} (nVidia spezifisch), oder \emph{OpenCL}.
 	
 	\item \textbf{FPGA} \\
-	Ein FPGA Board kann beliebige Hardware-Eigenschaften bereitstellen, sofern diese vorher auf das FPGA aufgespielt wurden. Im Allgemeinen werden FPGAs zum Testen von Chips, welche sich noch in der Entwicklung befinden, verwendet. Aber das FPGA kann auch als ,,multifunktionelle'' Beschleunigungskarte eingesetzt werden (lässt sich sehr gut an Anforderungen anpassen). Um ein FPGA zu programmieren bietet sich \emph{OpenCL} an, oder eine der Bibliotheken welche die implementierte Schaltung nutzt.
+	Nach \cite{EingebetteteSystemeVL1} kann ein FPGA Board beliebige Hardware-Eigenschaften bereitstellen, sofern diese vorher auf das FPGA aufgespielt wurden. Im Allgemeinen werden FPGAs zum Testen von Chips, welche sich noch in der Entwicklung befinden, verwendet. Aber das FPGA kann auch als ,,multifunktionelle'' Beschleunigungskarte eingesetzt werden (lässt sich sehr gut an Anforderungen anpassen). Um ein FPGA zu programmieren bietet sich \emph{OpenCL} an, oder eine der Bibliotheken welche die implementierte Schaltung nutzt.
 	
 	\item \textbf{MIC} (Intel \emph{Many Integrated Core}) \\
-	Die Grundidee von MICs ist, die gewöhnliche x86 CPU Architektur zur Verfügung zu stellen, aber dabei die Parallelität verglichen mit normalen CPUs zu erhöhen. Dies wird durch ein Zusammenschalten von mehreren CPUs auf einem Chip erreicht, welche dann über PCIe mit dem Hostsystem kommunizieren. Es wurde bewusst die x86 Architektur gewählt, damit bekannte Parallelisierungstools wie \emph{OpenMP} oder \emph{OpenCL} genutzt werden können. 
+	Die Grundidee von MICs ist nach \cite{IntelXeonPhi}, die gewöhnliche x86 CPU Architektur zur Verfügung zu stellen, aber dabei die Parallelität verglichen mit normalen CPUs zu erhöhen. Dies wird durch ein Zusammenschalten von mehreren CPUs auf einem Chip erreicht, welche dann über PCIe mit dem Hostsystem kommunizieren. Es wurde bewusst die x86 Architektur gewählt, damit bekannte Parallelisierungstools wie \emph{OpenMP} oder \emph{OpenCL} genutzt werden können. 
 \end{itemize}
 
 \begin{table}[h]
 	\centering
-	\begin{tabular}{l | p{2.5cm} p{2.5cm}}
+	\footnotesize
+	\begin{tabular}{l | p{1.8cm} p{2.5cm}}
 		Beschleuniger & Parallelität & Anwenderfreundlichkeit \\
 		\hline
 		CPU & Niedrig & Gut \\
@@ -540,9 +543,6 @@ Im Folgenden werden einige parallele Architekturen genauer erläutert. Ein grober
 	\caption{Verschiedene Beschleuniger im Vergleich, die CPU wird als Referenz verwendet.}
 	\label{parallelarch}
 \end{table}
-
-\TODO{Quellen fehlen noch}
-
 
 
 

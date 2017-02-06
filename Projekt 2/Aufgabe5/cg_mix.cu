@@ -360,7 +360,7 @@ void solve(double *x, int *iterations, int blockSize) {
 
 
 
-float analyticU(double x, double y) {
+double analyticU(double x, double y) {
 	return sin(2 * M_PI * x) * sin(2 * M_PI * y);
 }
 

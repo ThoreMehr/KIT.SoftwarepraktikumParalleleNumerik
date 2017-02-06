@@ -101,7 +101,7 @@ void initBase(double *base, double h) {
 }
 
 __global__
-void calculateGSV(double* A, double *uHistory, double *base, char *smallError, int sourceTime, int time, int lastTime, int offset, int k) {
+void calculateGSV(double* A, double *u, double *base, char *smallError, int sourceTime, int time, int lastTime, int offset, int k) {
 	int i = 2 * (blockIdx.x * blockDim.x + threadIdx.x) + offset;
 	if (i < N) {
 		int x = i % D;
@@ -110,17 +110,17 @@ void calculateGSV(double* A, double *uHistory, double *base, char *smallError, i
 		
 		if (diagIdx < k) {
 			double sum = base[i];
-			if (y > 0) sum -= A[5 * i + 3] * uHistory[i - D + sourceTime];
-			if (y < D - 1) sum -= A[5 * i + 4] * uHistory[i + D + sourceTime];
-			if (x > 0) sum -= A[5 * i + 1] * uHistory[i - 1 + sourceTime];
-			if (x < D - 1) sum -= A[5 * i + 2] * uHistory[i + 1 + sourceTime];
+			if (y > 0) sum -= A[5 * i + 3] * u[i - D];
+			if (y < D - 1) sum -= A[5 * i + 4] * u[i + D];
+			if (x > 0) sum -= A[5 * i + 1] * u[i - 1];
+			if (x < D - 1) sum -= A[5 * i + 2] * u[i + 1];
 			sum /= A[5 * i];
 			
-			if (fabsf(sum - uHistory[i + lastTime]) >= EPSILON_GSV) {
+			if (fabsf(sum - u[i]) >= EPSILON_GSV) {
 				smallError[(k - diagIdx + D) % D] = 0;
 			}
 			
-			uHistory[i + time] = sum;
+			u[i] = sum;
 		}
 	}
 }
@@ -219,10 +219,9 @@ void decompose(double* d_U_, double* d_L, char* d_smallError, int* iterations, i
 	cudaFree(d_U[1]);
 }
 
-void solveGSV(double* d_A, double* d_u, double* d_b, double* d_uHistory, char* d_smallError, int *iterations, int blockSize) {
+void solveGSV(double* d_A, double* d_u, double* d_b, char* d_smallError, int *iterations, int blockSize) {
 	*iterations = 0;
 	int halfN = (N + 1) / 2;
-	int gridSizeN = (N + blockSize - 1) / blockSize;
 	int gridSizeHalfN = (halfN + blockSize - 1) / blockSize;
 	
 	cudaMemset(d_smallError, 0, D);
@@ -235,10 +234,10 @@ void solveGSV(double* d_A, double* d_u, double* d_b, double* d_uHistory, char* d
 		cudaMemset(d_smallError + (k % D), 1, 1);
 		
 		// Black fields
-		calculateGSV<<<gridSizeHalfN, blockSize>>>(d_A, d_uHistory, d_b, d_smallError, lastTime, time, lastTime, 0, k);
+		calculateGSV<<<gridSizeHalfN, blockSize>>>(d_A, d_u, d_b, d_smallError, lastTime, time, lastTime, 0, k);
 		
 		// White fields
-		calculateGSV<<<gridSizeHalfN, blockSize>>>(d_A, d_uHistory, d_b, d_smallError, time, time, lastTime, 1, k);
+		calculateGSV<<<gridSizeHalfN, blockSize>>>(d_A, d_u, d_b, d_smallError, time, time, lastTime, 1, k);
 		
 		(*iterations)++;
 		
@@ -250,15 +249,16 @@ void solveGSV(double* d_A, double* d_u, double* d_b, double* d_uHistory, char* d
 	}
 	
 	// Fetch result
-	fetchU<<<gridSizeN, blockSize>>>(d_uHistory, d_u, *iterations);
+	//fetchU<<<gridSizeN, blockSize>>>(d_uHistory, d_u, *iterations);
+	
 }
 
-void solveBr(double* d_L, double* d_U, double* d_r, double* d_p, double* d_tmp, double* d_uHistory, char* d_smallError, int blockSize) {
+void solveBr(double* d_L, double* d_U, double* d_r, double* d_p, double* d_tmp, char* d_smallError, int blockSize) {
 	int it;
 	
-	solveGSV(d_L, d_tmp, d_r, d_uHistory, d_smallError, &it, blockSize);
+	solveGSV(d_L, d_tmp, d_r, d_smallError, &it, blockSize);
 	//printf("%d Ly=r iterations\n", it);
-	solveGSV(d_U, d_p, d_tmp, d_uHistory, d_smallError, &it, blockSize);
+	solveGSV(d_U, d_p, d_tmp, d_smallError, &it, blockSize);
 	//printf("%d Up=y iterations\n", it);
 }
 
@@ -304,10 +304,6 @@ void solve(double *u, int *iterations, int blockSize) {
 	cudaMalloc((void**) &d_base, N * sizeof(double));
 	initBase<<<gridSizeN, blockSize>>>(d_base, H);
 	
-	double *d_uHistory;
-	cudaMalloc((void**) &d_uHistory, D * N * sizeof(double));
-	cudaMemset(d_uHistory, 0, D * N * sizeof(double));
-	
 	char *d_smallError;
 	cudaMalloc((void**) &d_smallError, D);
 	cudaMemset(d_smallError, 0, D);
@@ -344,7 +340,7 @@ void solve(double *u, int *iterations, int blockSize) {
 	
 	initR0<<<gridSizeN,blockSize>>>(d_r, d_base, d_x);
 	
-	solveBr(d_L, d_U, d_r, d_p, d_tmp0, d_uHistory, d_smallError, blockSize);
+	solveBr(d_L, d_U, d_r, d_p, d_tmp0, d_smallError, blockSize);
 	
 	//cudaMemset(d_delta, 0, 2 * sizeof(double));
 	//scalarProduct<<<gridSizeN,blockSize>>>(d_r, d_p, d_delta);
@@ -364,7 +360,7 @@ void solve(double *u, int *iterations, int blockSize) {
 		addfv<<<gridSizeN,blockSize>>>(d_x, d_x, deltaHat, d_p);
 		addfv<<<gridSizeN,blockSize>>>(d_r, d_r, -deltaHat, d_tmp0);
 		
-		solveBr(d_L, d_U, d_r, d_tmp1, d_tmp0, d_uHistory, d_smallError, blockSize);
+		solveBr(d_L, d_U, d_r, d_tmp1, d_tmp0, d_smallError, blockSize);
 		
 		newDelta = reductionScalarProduct(d_r, d_tmp1, d_tmp0, blockSize);
 		//scalarProduct<<<gridSizeN,blockSize>>>(d_r, d_tmp1, d_delta);
@@ -380,7 +376,6 @@ void solve(double *u, int *iterations, int blockSize) {
 	
 	// Release memory
 	cudaFree(d_base);
-	cudaFree(d_uHistory);
 	cudaFree(d_smallError);
 	cudaFree(d_U);
 	cudaFree(d_L);
@@ -401,14 +396,14 @@ double analyticU(double x, double y) {
 int main(void) {
 	int i, j;
 	
-	double u[N];
+	double* u = (double*) malloc(N * sizeof(double));;
 	
 	cudaSetDevice(CUDA_DEVICE);
 	int device;
 	cudaGetDevice(&device);
 	struct cudaDeviceProp prop;
 	cudaGetDeviceProperties(& prop, device);
-	int blockSize = prop.warpSize;
+	int blockSize = 8 * prop.warpSize;
 	
 	printf("Run on %s (device %d) with blocksize %d\n",
 			prop.name, device, blockSize);
@@ -446,6 +441,8 @@ int main(void) {
 	}
 	printf("Max error: %4.8f\n", maxError);
 	printf("Iterations: %d\n", it);
+	
+	free(u);
 	
 	return 0;
 }
