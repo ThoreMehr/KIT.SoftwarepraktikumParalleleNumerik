@@ -153,7 +153,7 @@
 		\vspace{1em}
 		\texttt{... \\
 			{\color<2>{lightred} int} smallErr; \\
-			cudaMemcpy(\&smallErr, smallError\_d, {\color<2>{lightred} 1}, DeviceToHost); \\
+			cudaMemcpy(\&smallErr, smallErr\_d, {\color<2>{lightred} 1}, DeviceToHost); \\
 			if (smallError) break; \\
 			...} \\
 		\vspace{2em}
@@ -269,7 +269,8 @@
 		Lösung: Auf Historie verzichten \\
 		Speicherbedarf für $u$: $(2^{10}-1)^2\cdot8\textsf{ Bytes}\approx${\color{lightgreen}$8\textsf{ MB}$} \\
 		Problem: Auswirkung unklar, aber funktioniert (Approximate Computing?) \\
-		Fehler jetzt: $\epsilon_{max}=${\color{lightgreen}$3,25\times10^{-6}$}
+		Fehler jetzt: $\epsilon_{max}=${\color{lightgreen}$3,25\times10^{-6}$} \\
+		Größere \emph{blocksize} nötig?
 	\end{frame}
 	\begin{frame}
 		\frametitle{Aufgabe 5 -- Vergleich}
@@ -302,10 +303,10 @@
 		\vspace{2em}
 		Auswirkung auf den Fehler:
 		\begin{center}
-			\begin{tabular}{r|r|r|r|r}
-				$\varepsilon_{cg}$ & $\varepsilon_{ILU}$ & $\varepsilon_{GSV}$ & Fehler $\epsilon_i$ & $\Delta\epsilon_i$ \\
+			\begin{tabular}{r|r|r|r|r|r}
+				$\varepsilon_{cg}$ & $\varepsilon_{ILU}$ & $\varepsilon_{GSV}$ & Fehler $\epsilon_{max}$ & $\Delta\epsilon_{max}$ & Iterationen \\
 				\hline
-				$10^{-3}$ & $10^{-3}$ & $10^{-3}$ & $2,20\times10^{-4}$ & 0 \\
+				$10^{-3}$ & $10^{-3}$ & $10^{-3}$ & $2,20\times10^{-4}$ & 0 & 118 \\
 				$10^{-6}$ & $10^{-3}$ & $10^{-3}$ & $5,14\times10^{-5}$ & $-1,69\times10^{-4}$ \\
 				$10^{-3}$ & $10^{-6}$ & $10^{-3}$ & $1,97\times10^{-4}$ & $-2,30\times10^{-5}$ \\
 				$10^{-3}$ & $10^{-3}$ & $10^{-6}$ & $2,14\times10^{-4}$ & $-6,02\times10^{-7}$ \\
@@ -318,7 +319,7 @@
 	\end{frame}
 	\begin{frame}
 		\frametitle{Aufgabe 5 -- Beschleuniger}
-		Bisher: Alles, außer Berechnung von $Br$ (2$\times$GSV), auf CPU per OpenMP \\
+		Bisher: Alles (außer Berechnung von $Br$ (2$\times$GSV)) auf CPU per OpenMP \\
 		\vspace{2em}
 		Wenig sinnvoll, da:
 		\begin{enumerate}

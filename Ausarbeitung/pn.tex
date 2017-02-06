@@ -113,6 +113,7 @@
 \usepackage{siunitx}
 \usepackage[numbers]{natbib}
 \usepackage{multirow}
+\usepackage{placeins}
 
 \usepackage{float}
 \restylefloat{table}
@@ -293,7 +294,7 @@ Bei den parallelisierten Algorithmen handelt es sich um Komponenten zum Lösen de
 \section{OpenMP}\label{p1}
 In diesem Projekt lag der Schwerpunkt auf dem Kennenlernen der Bibliothek \emph{OpenMP} sowie deren Handhabung. Weiter ging es um den \emph{Intel Thread Checker}, ein Programm zum Analysieren von Programmcode auf potentielle Fehler in der Parallelisierung. Zu guter letzt haben wir uns mit der FEM-Methode beschäftigt, dabei im Speziellen mit dem Gauß-Seidel-Verfahren zum Lösen linearer Gleichungen wie sie bei der Differenzenmethode vorkommen. Zu guter letzt betrachteten wir einige andere Verfahren zum Lösen solcher Probleme und haben das CG-Verfahren implementiert.
 
-\subsection{OpemMP}\label{p1a1}
+\subsection{OpenMP}\label{p1a1}
 
 \subsubsection{Hello World}\label{p1a1a}
 Wie in der Ausgabe \ref{helloworldoutput} zu sehen, folgt die Reihenfolge der ausgeführten Fäden keinem bestimmten Muster. Auch die Reihenfolge zwischen verschiedenen Ausführungen ist in der Regel verschieden.
@@ -354,7 +355,7 @@ Die manuelle Variante hat eine schlechtere Performance, als die Variante ohne Pa
 	\caption{Laufzeiten des Mandelbrot Programms unserer Parallelisierung gegenüber der sequentiellen Version. Getestet wurde auf dem Rechner \emph{i82sn07}. Um Ungenauigkeiten auszugleichen wurden die Zeiten jeweils über $10$ (für große Eingaben über $5$) Durchläufe gemittelt.}
 	\label{mandel_runtime}
 \end{table*}
-Wie an der Tabelle \ref{mandel_runtime} abgelesen werden kann, beträgt die Beschleunigung für 2 Threads etwa $1,4$, für 16 Threads etwa 4 und für 32 Threads etwa 8. Dass die Beschleunigung schlechter ist, als bei der Berechnung von PI, liegt meiner Meinung nach daran, dass Speicherverwaltung und Caches einen wesentlichen Anteil der Laufzeit ausmachen.
+Wie an der Tabelle \ref{mandel_runtime} abgelesen werden kann, beträgt die Beschleunigung für 2 Threads etwa $1,4$, für 16 Threads etwa 4 und für 32 Threads etwa 8. Dass die Beschleunigung schlechter ist, als bei der Berechnung von PI, liegt unserer Meinung nach daran, dass Speicherverwaltung und Caches einen wesentlichen Anteil der Laufzeit ausmachen.
 
 \subsection{Testtools}\label{p1a2}
 \subsubsection{Intel Thread Checker}\label{p1a2a}
@@ -418,7 +419,7 @@ In den Tabellen \ref{2b_1000} und \ref{2b_2000} wird der Einfluss von Optimierun
 	\caption{Laufzeiten in s mit N=2000. Getestet wurde auf dem Rechner \emph{i82pc31}. Um Ungenauigkeiten auszugleichen, wurden die Zeiten jeweils über $10$ Durchläufe gemittelt.}
 	\label{2b_2000}
 \end{table*}
-\subsubsection{OpenMP-Profiler ommp}\label{p1a2c}
+\subsubsection{OpenMP-Profiler ompP}\label{p1a2c}
 Anhand der Ausgabe von \emph{ompP} kann leicht gesehen werden, dass wenige der Threads einen Großteil der Arbeit leisten, was bei der Verwendung von reduction zu erwarten ist. Durch die explizite Angabe des Scheduling und der Chunksize kann die Arbeit besser verteilt werden. In Tabelle \ref{2c_mandelbrot} kann der Einfluss der Optionen auf die Laufzeit abgelesen werden.
 \begin{table*}
 	\centering
@@ -499,7 +500,7 @@ U(n) = \frac{I(n)}{n} = R(n) \cdot E(n) = \frac{P(n)}{n \cdot T(n)}
 	Um solche Fehler zu vermeiden, blockieren manche Bibliotheken Aufrufe, die nicht aus einem bestimmten Faden stammen. Verlassen sollte sich der Entwickler auf solche Mechanismen jedoch nicht. Viele Bibliotheken geben inzwischen in ihrer Dokumentation Hinweise auf den möglichen Einsatz im parallelen Kontext.
 	
 	\item \textbf{Messeffekt} \\
-	Wenn man das Debuggen zum Softwareentwurf zählt, so wären als weitere Fehlerquelle auch \emph{Messeffekte} zu nennen. Verbreitete Methoden zum Debuggen, wie etwa die Ausgabe von Information auf der Konsole, können bereits selbst die Ausführung des parallelen Programms beeinflussen. So kann es passieren, dass die Mechanismen, die einen Fehler aufspüren sollen, dazu führen, dass dieser nicht weiter auftritt.
+	Wenn man das Debuggen zum Softwareentwurf zählt, so wären als weitere Fehlerquelle auch \emph{Messeffekte} zu nennen. Verbreitete Methoden zum Debuggen, wie etwa die Ausgabe von Information auf der Konsole, können bereits selbst die Ausführung des parallelen Programms beeinflussen, dahingehend, dass die Ausführungsreihenfolge der Fäden, von der das Problem abhängt, beeinflusst wird. So kann es passieren, dass die Mechanismen, die einen Fehler aufspüren sollen, dazu führen, dass dieser nicht weiter auftritt.
 	
 	\item \textbf{Cacheeffekte} \\
 	Spielt ebenfalls weniger im Entwurf eine Rolle, als in der Implementierung. Die meisten Prozessoren haben einen eigenen Cache für jeden Rechenkern. Wenn nun verschiedene Fäden auf verschiedenen Kernen gleichzeitig auf der gleichen Variablen arbeiten, so kann es passieren, dass mangels Synchronisation zwischen den Caches der eine Faden die vom anderen Faden verursachte Änderung nicht \emph{sieht}. Lösung hierfür sind spezielle Mechanismen des Prozessors, um Caches bei Bedarf zu Synchronisieren. In C kann man hierfür eine Variable als \texttt{volatile} definieren.
@@ -673,6 +674,7 @@ In jedem Berechnungsschritt wird genaue eine Iterierte des Verfahrens berechnet.
 	\label{gsv_runtime}
 \end{table*}
 
+Aufgrund des benötigten Speichers der Historie von $u$ (etwa 8 GB) konnten wir für $l$ größer als 9 keine Tests durchführen.
 
 
 \subsection{Partielle Differentialgleichungen}\label{p1a5}
@@ -811,7 +813,7 @@ Der \emph{Intel Thread Checker} gibt für unser Programm Folgendes aus:
 \subsubsection{CG-Verfahren}\label{p1a6b}
 Unsere parallele Version des CG-Verfahrens konnte gegenüber dem Gauß-Seidel-Verfahren das Problem aus Aufgabe \ref{p1a5} bis zu $40$-mal so schnell lösen. Eine Übersicht über den \emph{Speedup} sowie die \emph{Efficiency} ist in Tabelle \ref{a5a6speedupefficiency} zu finden.
 
-\begin{table*}[H]
+\begin{table*}[h]
 	\centering
 	\begin{tabular}{r|r|r||r||r|r|@{ \dots}|r|r||r|r}
 		\multicolumn{3}{c||}{Problemgröße} & Seq. & \multicolumn{2}{c|@{ \dots}|}{2 Threads} & \multicolumn{2}{c||}{16 Threads}  & \multicolumn{2}{c}{32 Threads} \\
@@ -870,7 +872,6 @@ Libmesh\cite{Libmesh}.
 Im Rahmen dieses Praktikums würde sich, zumindest für Projekt 1, \emph{HiFlow\textsuperscript{3}} gut eignen, da hier eine ausgereifte OpenMP Funktionalität gegeben zu sein scheint, die den Portierungsaufwand stark verringert.
 
 
-
 \newpage
 \section{CUDA}
 In diesem Projekt lag das Hauptaugenmerk auf der Programmierung auf der Grafikkarte mittels der Schnittstelle CUDA. Konkret kam CUDA 5.5 zum Einsatz.
@@ -911,7 +912,7 @@ In \ref{lst:cudastarted} ist die Ausgabe unseres Programms zu sehen. In den folg
 
 
 \subsection{Gauß-Seidel-Verfahren}\label{p2a3}
-\subsubsection{Implementierung in CUDA\\}
+\subsubsection{Implementierung in CUDA}
 Die Portierung des parallelisierten Gauß-Seidel-Verfahrens aus Aufgabe \ref{p1a4} verlief sehr geradlinig. Die zuvor parallelisierten inneren Schleifen -- die Berechnung über alle schwarzen/weißen Felder -- werden nun mittels entsprechender Kernel auf der GPU ausgeführt. Die Synchronisation ist damit nun implizit durch die Kernelaufrufe -- die nacheinander ausgeführt werden -- gegeben.
 
 Das eigentlich zweidimensional gegebene Problem haben wir als eindimensionales Problem an die GPU weitergegeben. Das heißt, wir haben als Größe des Problems den Vektor $(n,1,1)^T$ verwendet (mit $n$ wie aus Aufgabe \ref{p1a4}).
@@ -992,7 +993,7 @@ Der nächste Schritt wäre, mittels \texttt{half float} noch mehr an Genauigkeit -
 
 
 
-\subsubsection{Eignung für andere Architekturen\\}
+\subsubsection{Eignung für andere Architekturen}
 Wir haben \emph{Approximate Computing} eingesetzt, um Rechenzeit auf Kosten der Genauigkeit einzusparen.
 Diese Technik sollte in modernen CPUs die Geschwindigkeit kaum beeinflussen. Nach unserem Kenntnisstand haben CPUs keine speziellen \emph{Floating Point Units} (FPU), um beispielsweise \texttt{float} und \texttt{double} getrennt zu verarbeiten. Stattdessen wird mit der gleichen Hardware in höherer Genauigkeit (etwa 80 Bit, Hardware abhängig) gerechnet.
 Diese These konnten wir mit unserem Gauß-Seidel-Verfahren aus \ref{p1a4} bestätigen, da dieses mit dem Datentyp \texttt{float} (anstatt \texttt{double}) keine bessere Laufzeit aufwies.
@@ -1005,7 +1006,7 @@ Ein Unterschied wäre möglicherweise bei sehr großen Datenmengen feststellbar. Da
 Mit Hilfe der LU-Zerlegung zerlegen wir $A$ in zwei Matrizen $L$ und $U$, sodass $L\cdot U=A$ mit $L$ ist untere, und $U$ ist obere Dreiecksmatrix. Um auch weiterhin mit dünn besetzten Matrizen arbeiten zu können, verwenden wir eine unvollständige Zerlegung (ILU), d.h. $L\cdot U\approx A$ mit dünn besetzten $L$ und $U$.
 
 \subsubsection{Eignung}
-Algorithmus 1 scheint die bessere Wahl hinsichtlich der Stabilität zu sein, da eine ILU-Zerlegung nach Gauss (Algorithmus 2) ohne geeignete Pivotwahl nach \cite{Benzi2002} schnell unter Stabilitätsproblemen leiden kann. Da in Algorithmus 2 keine spezielle Pivotwahl getroffen wird, stellt dies ein Problem für entsprechende Elemente der Diagonale dar. Die schlechte Stabilität entsteht dadurch, dass nachdem wir $l_{jj}$ berechnet haben, wir genau diesen Wert im Nenner eines Bruchs nutzen. Ist dieser Wert hinreichend nah an 0, ohne 0 zu sein, entstehen hier ungewollt große Zahlen.
+Algorithmus 1 scheint die bessere Wahl hinsichtlich der Stabilität zu sein, da eine ILU-Zerlegung nach Gauss (Algorithmus 2) ohne geeignete Pivotwahl nach \cite{Benzi2002} schnell unter Stabilitätsproblemen leiden kann. Da in Algorithmus 2 keine spezielle Pivotwahl getroffen wird, stellt dies ein Problem für entsprechende Elemente der Diagonale dar. Die schlechte Stabilität entsteht dadurch, dass nachdem wir $l_{jj}$ berechnet haben, wir genau diesen Wert im Nenner eines Bruchs nutzen. Ist dieser Wert hinreichend nah an 0, ohne 0 zu sein, entstehen in der Berechnung von $l_{ij}$ ungewollt große Zahlen.
 
 Algorithmus 1 lässt sich sehr gut parallelisieren, da innerhalb einer Iterierten $m$ alle Einträge unabhängig von einander berechnet werden können. Zwischen den Iterierten ist jedoch eine Synchronisation nötig, da jede Iterierte die Ergebnisse der vorherigen Iterierten benötigt. Für den Datenaustausch zwischen zwei iterierten werden lediglich zwei Puffer benötigt, einer hält stets die aktuellen Werte und wird beschrieben, während der andere die Ergebnisse der letzten Iterierten bereithält. Die Puffer können dann während der Ausführung nach jeder Iteration ausgetauscht werden.
 
@@ -1089,7 +1090,7 @@ Mit $l=10$ war es uns schließlich möglich, eine Lösung mit einem maximalen lokal
 
 Da wir unserer Implementierung aus Projekt \ref{p1} nicht mit $l=10$ testen können (Grund ist die genannte Historie), vergleichen wir im folgenden die Ergebnisse für maximal $l=9$. Für die Abbruchkriterien wählen wir $\varepsilon_{cg}=\varepsilon_{ILU}=\varepsilon_{GSV}=10^{-6}$ Die Ergebnisse zeigen wir in Tabelle \ref{tab:cgcomp}.
 
-\begin{table}
+\begin{table}[h]
 	\centering
 	\small
 	\begin{tabular}{r|r|r|r|r|r}
@@ -1114,7 +1115,7 @@ Da wir unserer Implementierung aus Projekt \ref{p1} nicht mit $l=10$ testen könn
 Die Laufzeiten sowie die Beschleunigung gegenüber unserer Lösung aus Aufgabe \ref{p1a6} können Tabelle \ref{tab:cgspeedup} entnommen werden. Sie zeigt, dass das vorkonditionierte-Verfahren, entgegen unserer Erwartungen, langsamer ist, als die ursprüngliche, auf der CPU implementierte Variante.
 Wir führen das auf die relativ teure Berechnung von $Br$ zurück, bei der zweimal eine Berechnung mittels Gauß-Seidel-Verfahren angestoßen wird.
 
-\begin{table}
+\begin{table}[h]
 	\centering
 	\begin{tabular}{r|r|r}
 		$l$ & $S_{CPU\rightarrow GPU_a}[s]$ & $S_{GPU_a\rightarrow GPU_c}[s]$ \\
@@ -1136,7 +1137,7 @@ Wir schließen aus den Messwerten, dass $\varepsilon_{cg}$ für den Fehler des Erg
 
 Für ein genaueres Abwägen zwischen Berechnungszeit, Genauigkeit und Abbruchkriterien müssten sehr viel mehr Daten gesammelt werden. Während eine ungenauere GSV-Berechnung für sich schneller durchzuführen ist, scheint sie dazu zu führen, dass mehr Iterationen, und damit mehr GSV-Berechnungen insgesamt, durchzuführen sind. Optimale Werte für $\varepsilon$ könnten iterativ bestimmt werden.
 
-\begin{table}
+\begin{table}[h]
 	\centering
 	\small
 	\begin{tabular}{r|r|r|r|r}
