@@ -64,9 +64,10 @@
 			\item Aufgabe 5 -- CG-Verfahren
 			\item Aufgabe 6 -- Lattice-Blotzmann-Methode
 		\end{enumerate}
+		Struktur nach Aufgaben, aber mit grobem Einblick in unsere Vorgehensweise
 	\end{frame}
 
-	\section{Cuda}
+	\section{Aufgabe 1}
 	\subsection{Aufgabe 1}
 	\begin{frame}
 		\frametitle{Aufgabe 1 -- Getting started}
@@ -83,12 +84,14 @@
 		$\rightarrow$ Damit haben wir gearbeitet
 	\end{frame}
 
+	\section{Aufgabe 2}
 	\subsection{Aufgabe 2}
 	\begin{frame}
 		\frametitle{Aufgabe 2 -- Datentransferraten}
 		
 	\end{frame}
 
+	\section{Aufgabe 3}
 	\subsection{Aufgabe 3}
 	\begin{frame}
 		\frametitle{Aufgabe 3 -- Gauß-Seidel-Verfahren}
@@ -159,13 +162,14 @@
 	\end{frame}
 	\begin{frame}
 		\frametitle{Aufgabe 3 -- Weitere Architekturen}
-		Wir haben \emph{Approximate Computing} eingesetzt, um Rechenzeit auf Kosten der Genauigkeit einzusparen.
-		Diese Technik sollte in modernen CPUs die Geschwindigkeit kaum beeinflussen. Nach unserem Kenntnisstand haben CPUs keine speziellen \emph{Floating Point Units} (FPU), um beispielsweise \texttt{float} und \texttt{double} getrennt zu verarbeiten. Stattdessen wird mit der gleichen Hardware in höherer Genauigkeit (etwa 80 Bit, Hardware abhängig) gerechnet.
+		Wir haben \textbf{Approximate Computing} eingesetzt, um Rechenzeit auf Kosten der Genauigkeit einzusparen.
+		Diese Technik sollte in modernen CPUs die Geschwindigkeit kaum beeinflussen. Nach unserem Kenntnisstand haben CPUs keine speziellen \textbf{Floating Point Units} (FPU), um beispielsweise \texttt{float} und \texttt{double} getrennt zu verarbeiten. Stattdessen wird mit der gleichen Hardware in höherer Genauigkeit (etwa 80 Bit, Hardware abhängig) gerechnet.
 		Diese These konnten wir mit unserem Gauß-Seidel-Verfahren aus \ref{p1a4} bestätigen, da dieses mit dem Datentyp \texttt{float} (anstatt \texttt{double}) keine bessere Laufzeit aufwies.
 		
 		Ein Unterschied wäre möglicherweise bei sehr großen Datenmengen feststellbar. Da bei \texttt{double} das doppelte an Information in den Speicher und Caches geladen werden muss, wäre hier ein Leistungseinbruch denkbar. Dies wäre eher im Bereich von Single Multi-Core CPUs angesiedelt, da Many-Core- und MIC-Architekturen durch mehrere Speicheranbindungen und größeren Cache nicht so schnell neue Daten anfordern müssten.
 	\end{frame}
 
+	\section{Aufgabe 4}
 	\subsection{Aufgabe 4}
 	\begin{frame}
 		\frametitle{Aufgabe 4 -- ILU-Zerlegung}
@@ -240,6 +244,7 @@
 	\end{frame}
 
 
+	\section{Aufgabe 5}
 	\subsection{Aufgabe 5}
 	\begin{frame}
 		\frametitle{Aufgabe 5 -- CG-Verfahren}
@@ -346,6 +351,7 @@
 		\end{center}
 	\end{frame}
 
+	\section{Aufgabe 6}
 	\subsection{Aufgabe 6}
 	\begin{frame}
 		\frametitle{Aufgabe 6 -- Lattice-Blotzmann-Methode}

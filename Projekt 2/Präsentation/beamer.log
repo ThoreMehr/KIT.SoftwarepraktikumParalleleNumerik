@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6100 64-bit) (preloaded format=pdflatex 2017.1.5)  6 FEB 2017 18:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6100 64-bit) (preloaded format=pdflatex 2017.1.5)  6 FEB 2017 19:05
 entering extended mode
 **./beamer.tex
 (beamer.tex
@@ -1791,7 +1791,7 @@ File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `T1/phv/m/sc' will be
 (Font)              scaled to size 5.51999pt on input line 53.
 
-<logos/kitlogo_de_rgb.pdf, id=78, 196.93575pt x 90.69885pt>
+<logos/kitlogo_de_rgb.pdf, id=103, 196.93575pt x 90.69885pt>
 File: logos/kitlogo_de_rgb.pdf Graphic file (type pdf)
 
 <use logos/kitlogo_de_rgb.pdf>
@@ -1810,7 +1810,7 @@ LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <8> not available
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 (Font)              scaled to size 7.35999pt on input line 53.
 
-<logos/bauplan.jpg, id=80, 1284.8pt x 407.5225pt>
+<logos/bauplan.jpg, id=105, 1284.8pt x 407.5225pt>
 File: logos/bauplan.jpg Graphic file (type jpg)
  <use logos/bauplan.jpg>
 Package pdftex.def Info: logos/bauplan.jpg used on input line 53.
@@ -1822,7 +1822,7 @@ Package pdftex.def Info: logos/bauplan.jpg used on input line 53.
 f> <./logos/bauplan.jpg>]
 File: logos/kitlogo_de_rgb.pdf Graphic file (type pdf)
  <use logos/kitlogo_de_rgb.pdf>
-Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 67.
+Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 68.
 (pdftex.def)             Requested size: 39.83385pt x 18.34427pt.
  [2
 
@@ -1830,14 +1830,14 @@ Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 67.
 File: logos/kitlogo_de_rgb.pdf Graphic file (type pdf)
 
 <use logos/kitlogo_de_rgb.pdf>
-Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 84.
+Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 85.
 (pdftex.def)             Requested size: 39.83385pt x 18.34427pt.
  [3
 
 ]
 File: logos/kitlogo_de_rgb.pdf Graphic file (type pdf)
  <use logos/kitlogo_de_rgb.pdf>
-Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 90.
+Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 92.
 (pdftex.def)             Requested size: 39.83385pt x 18.34427pt.
  [4
 
@@ -1845,30 +1845,30 @@ Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 90.
 File: logos/kitlogo_de_rgb.pdf Graphic file (type pdf)
 
 <use logos/kitlogo_de_rgb.pdf>
-Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 111.
+Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 114.
 (pdftex.def)             Requested size: 39.83385pt x 18.34427pt.
  [5
 
 ]
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 126.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 129.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 10.07397pt on input line 126.
+(Font)              scaled to size 10.07397pt on input line 129.
 
 
 Package natbib Warning: Citation `CompAsyncSync' on page 6 undefined on input l
-ine 126.
+ine 129.
 
 
 Package natbib Warning: Citation `HighOrder' on page 6 undefined on input line 
-126.
+129.
 
 File: logos/kitlogo_de_rgb.pdf Graphic file (type pdf)
 <use logos/kitlogo_de_rgb.pdf>
-Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 126.
+Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 129.
 (pdftex.def)             Requested size: 39.83385pt x 18.34427pt.
 
-Overfull \vbox (323.82803pt too high) detected at line 126
+Overfull \vbox (323.82803pt too high) detected at line 129
  []
 
 [6
@@ -1876,14 +1876,14 @@ Overfull \vbox (323.82803pt too high) detected at line 126
 ]
 File: logos/kitlogo_de_rgb.pdf Graphic file (type pdf)
  <use logos/kitlogo_de_rgb.pdf>
-Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 146.
+Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 149.
 (pdftex.def)             Requested size: 39.83385pt x 18.34427pt.
  [7
 
 ]
 File: logos/kitlogo_de_rgb.pdf Graphic file (type pdf)
  <use logos/kitlogo_de_rgb.pdf>
-Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 159.
+Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 162.
 (pdftex.def)             Requested size: 39.83385pt x 18.34427pt.
  [8
 
@@ -1891,20 +1891,20 @@ Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 159.
 File: logos/kitlogo_de_rgb.pdf Graphic file (type pdf)
 
 <use logos/kitlogo_de_rgb.pdf>
-Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 159.
+Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 162.
 (pdftex.def)             Requested size: 39.83385pt x 18.34427pt.
  [9
 
 ]
 
-LaTeX Warning: Reference `p1a4' on page 10 undefined on input line 167.
+LaTeX Warning: Reference `p1a4' on page 10 undefined on input line 170.
 
 File: logos/kitlogo_de_rgb.pdf Graphic file (type pdf)
 <use logos/kitlogo_de_rgb.pdf>
-Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 167.
+Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 170.
 (pdftex.def)             Requested size: 39.83385pt x 18.34427pt.
 
-Overfull \vbox (3.90224pt too high) detected at line 167
+Overfull \vbox (3.90224pt too high) detected at line 170
  []
 
 [10
@@ -1912,47 +1912,47 @@ Overfull \vbox (3.90224pt too high) detected at line 167
 ]
 File: logos/kitlogo_de_rgb.pdf Graphic file (type pdf)
  <use logos/kitlogo_de_rgb.pdf>
-Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 190.
+Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 194.
 (pdftex.def)             Requested size: 39.83385pt x 18.34427pt.
  [11
 
 ]
 
 LaTeX Font Warning: Command \footnotesize invalid in math mode on input line 21
-3.
+7.
 
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 8.27998pt on input line 213.
+(Font)              scaled to size 8.27998pt on input line 217.
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 4.59999pt on input line 213.
+(Font)              scaled to size 4.59999pt on input line 217.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <9> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 213.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 217.
 LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 8.27998pt on input line 213.
+(Font)              scaled to size 8.27998pt on input line 217.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <5> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 213.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 217.
 LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 4.59999pt on input line 213.
+(Font)              scaled to size 4.59999pt on input line 217.
 File: logos/kitlogo_de_rgb.pdf Graphic file (type pdf)
 <use logos/kitlogo_de_rgb.pdf>
-Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 213.
+Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 217.
 (pdftex.def)             Requested size: 39.83385pt x 18.34427pt.
  [12
 
 ]
 
-LaTeX Font Warning: Command \tiny invalid in math mode on input line 236.
+LaTeX Font Warning: Command \tiny invalid in math mode on input line 240.
 
 File: logos/kitlogo_de_rgb.pdf Graphic file (type pdf)
 <use logos/kitlogo_de_rgb.pdf>
-Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 236.
+Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 240.
 (pdftex.def)             Requested size: 39.83385pt x 18.34427pt.
  [13
 
 ]
 File: logos/kitlogo_de_rgb.pdf Graphic file (type pdf)
  <use logos/kitlogo_de_rgb.pdf>
-Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 240.
+Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 244.
 (pdftex.def)             Requested size: 39.83385pt x 18.34427pt.
  [14
 
@@ -1960,14 +1960,14 @@ Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 240.
 File: logos/kitlogo_de_rgb.pdf Graphic file (type pdf)
 
 <use logos/kitlogo_de_rgb.pdf>
-Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 252.
+Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 257.
 (pdftex.def)             Requested size: 39.83385pt x 18.34427pt.
  [15
 
 ]
 File: logos/kitlogo_de_rgb.pdf Graphic file (type pdf)
  <use logos/kitlogo_de_rgb.pdf>
-Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 268.
+Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 273.
 (pdftex.def)             Requested size: 39.83385pt x 18.34427pt.
  [16
 
@@ -1975,14 +1975,14 @@ Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 268.
 File: logos/kitlogo_de_rgb.pdf Graphic file (type pdf)
 
 <use logos/kitlogo_de_rgb.pdf>
-Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 268.
+Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 273.
 (pdftex.def)             Requested size: 39.83385pt x 18.34427pt.
  [17
 
 ]
 File: logos/kitlogo_de_rgb.pdf Graphic file (type pdf)
  <use logos/kitlogo_de_rgb.pdf>
-Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 268.
+Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 273.
 (pdftex.def)             Requested size: 39.83385pt x 18.34427pt.
  [18
 
@@ -1990,22 +1990,22 @@ Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 268.
 File: logos/kitlogo_de_rgb.pdf Graphic file (type pdf)
 
 <use logos/kitlogo_de_rgb.pdf>
-Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 286.
+Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 291.
 (pdftex.def)             Requested size: 39.83385pt x 18.34427pt.
  [19
 
-] <a5l5.pdf, id=1060, 614.295pt x 794.97pt>
+] <a5l5.pdf, id=1175, 614.295pt x 794.97pt>
 File: a5l5.pdf Graphic file (type pdf)
 
 <use a5l5.pdf>
-Package pdftex.def Info: a5l5.pdf used on input line 293.
+Package pdftex.def Info: a5l5.pdf used on input line 298.
 (pdftex.def)             Requested size: 311.3835pt x 402.95898pt.
 File: logos/kitlogo_de_rgb.pdf Graphic file (type pdf)
  <use logos/kitlogo_de_rgb.pdf>
-Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 293.
+Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 298.
 (pdftex.def)             Requested size: 39.83385pt x 18.34427pt.
 
-Overfull \vbox (101.40561pt too high) detected at line 293
+Overfull \vbox (101.40561pt too high) detected at line 298
  []
 
 [20
@@ -2013,7 +2013,7 @@ Overfull \vbox (101.40561pt too high) detected at line 293
  <./a5l5.pdf>]
 File: logos/kitlogo_de_rgb.pdf Graphic file (type pdf)
  <use logos/kitlogo_de_rgb.pdf>
-Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 313.
+Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 318.
 (pdftex.def)             Requested size: 39.83385pt x 18.34427pt.
  [21
 
@@ -2021,27 +2021,27 @@ Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 313.
 File: logos/kitlogo_de_rgb.pdf Graphic file (type pdf)
 
 <use logos/kitlogo_de_rgb.pdf>
-Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 324.
+Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 329.
 (pdftex.def)             Requested size: 39.83385pt x 18.34427pt.
  [22
 
 ]
 File: logos/kitlogo_de_rgb.pdf Graphic file (type pdf)
  <use logos/kitlogo_de_rgb.pdf>
-Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 338.
+Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 343.
 (pdftex.def)             Requested size: 39.83385pt x 18.34427pt.
  [23
 
 ]
-<reduction.png, id=1264, 462.97969pt x 289.08pt>
+<reduction.png, id=1399, 462.97969pt x 289.08pt>
 File: reduction.png Graphic file (type png)
  <use reduction.png>
-Package pdftex.def Info: reduction.png used on input line 347.
+Package pdftex.def Info: reduction.png used on input line 352.
 (pdftex.def)             Requested size: 225.873pt x 141.03564pt.
 File: logos/kitlogo_de_rgb.pdf Graphic file (type pdf)
 
 <use logos/kitlogo_de_rgb.pdf>
-Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 347.
+Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 352.
 (pdftex.def)             Requested size: 39.83385pt x 18.34427pt.
  [24
 
@@ -2049,14 +2049,14 @@ Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 347.
 File: logos/kitlogo_de_rgb.pdf Graphic file (type pdf)
 
 <use logos/kitlogo_de_rgb.pdf>
-Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 368.
+Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 374.
 (pdftex.def)             Requested size: 39.83385pt x 18.34427pt.
  [25
 
 ]
 File: logos/kitlogo_de_rgb.pdf Graphic file (type pdf)
  <use logos/kitlogo_de_rgb.pdf>
-Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 368.
+Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 374.
 (pdftex.def)             Requested size: 39.83385pt x 18.34427pt.
  [26
 
@@ -2064,28 +2064,28 @@ Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 368.
 File: logos/kitlogo_de_rgb.pdf Graphic file (type pdf)
 
 <use logos/kitlogo_de_rgb.pdf>
-Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 368.
+Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 374.
 (pdftex.def)             Requested size: 39.83385pt x 18.34427pt.
  [27
 
 ]
 File: logos/kitlogo_de_rgb.pdf Graphic file (type pdf)
  <use logos/kitlogo_de_rgb.pdf>
-Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 372.
+Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 378.
 (pdftex.def)             Requested size: 39.83385pt x 18.34427pt.
  [28
 
 ]
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 15.89755pt on input line 383.
+(Font)              scaled to size 15.89755pt on input line 389.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <17.28> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 383.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 389.
 LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 15.89755pt on input line 383.
+(Font)              scaled to size 15.89755pt on input line 389.
 File: logos/kitlogo_de_rgb.pdf Graphic file (type pdf)
 
 <use logos/kitlogo_de_rgb.pdf>
-Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 383.
+Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 389.
 (pdftex.def)             Requested size: 39.83385pt x 18.34427pt.
  [29
 
@@ -2103,23 +2103,23 @@ Package pdftex.def Info: logos/kitlogo_de_rgb.pdf used on input line 383.
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 385.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 385.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 391.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 391.
 (beamer.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 385.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 385.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 391.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 391.
 Package rerunfilecheck Info: File `beamer.out' has not changed.
-(rerunfilecheck)             Checksum: BCCCB169C4996ADF453D506CF19C89C3;541.
+(rerunfilecheck)             Checksum: E0F6EFC631E820170AFB6F6C95F06DF1;776.
 
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 30999 strings out of 493333
- 601780 string characters out of 3139195
+ 31024 strings out of 493333
+ 602010 string characters out of 3139195
  655645 words of memory out of 3000000
- 33831 multiletter control sequences out of 15000+200000
+ 33851 multiletter control sequences out of 15000+200000
  64330 words of font info for 86 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  56i,20n,55p,10387b,767s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -2140,9 +2140,9 @@ msy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy9.pfb>
 <C:/Program Files/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvb8a.pfb><C:/Program Fi
 les/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Program Files/MiKTeX 2.9
 /fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on beamer.pdf (29 pages, 1067434 bytes).
+Output written on beamer.pdf (29 pages, 1098643 bytes).
 PDF statistics:
- 1699 PDF objects out of 1728 (max. 8388607)
- 70 named destinations out of 1000 (max. 500000)
- 143 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1866 PDF objects out of 2073 (max. 8388607)
+ 75 named destinations out of 1000 (max. 500000)
+ 183 words of extra memory for PDF output out of 10000 (max. 10000000)
 
