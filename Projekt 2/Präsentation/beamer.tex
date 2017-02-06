@@ -333,22 +333,42 @@
 			9 & 0,0352 & 1,11
 		\end{tabular}
 		\end{center}
+		Vorteil geringer als gedacht...\\
+		$Br$ teuerster Berechnungsschritt
 	\end{frame}
 	\begin{frame}
 		\frametitle{Aufgabe 5 -- Skalarprodukt auf der GPU}
 		Möglich mittels \texttt{atomic}-Operationen, aber nicht optimal \\
 		\vspace{2em}
-		Bessere Lösung mittels \emph{Reduction}
+		Bessere Lösung: \emph{Reduction} (wie auch in OpenMP)
+		\begin{center}
+			\includegraphics[height=14em]{reduction}
+		\end{center}
 	\end{frame}
 
 	\subsection{Aufgabe 6}
 	\begin{frame}
 		\frametitle{Aufgabe 6 -- Lattice-Blotzmann-Methode}
-		
+		Maximale Größe des Gitters? \\
+		Verfügbarer Speicherplatz auf der GPU $\approx2$ GB \\
+		\vspace{2em}
+		\pause
+		Speicherbedarf für \texttt{rawdata1}, \texttt{rawdata2} und \texttt{u\_0}:
+		\begin{equation*}
+		\begin{split}
+		M(\mathtt{rawdata1})&=M(\mathtt{rawdata2})\\
+		&=max_x\cdot max_y\cdot max_z\cdot 19\cdot8\textsf{ Bytes} \\
+		M(\mathtt{u\_0})&=max_x\cdot max_y\cdot 8\textsf{ Bytes}
+		\end{split}
+		\end{equation*}\\
+		\vspace{2em}
+		\pause
+		Bedingung: $M(\mathtt{rawdata1})+M(\mathtt{rawdata2})+M(\mathtt{u\_0})\leq2.092.957.696$ \\
+		Lösung: $max_x=max_y=max_z=190$
 	\end{frame}
 	\begin{frame}
-		\frametitle{Aufgabe 6}
-		
+		\frametitle{Aufgabe 6 -- Große Würfel}
+		Würfel noch größer $\rightarrow$ passt nicht mehr in VRAM
 	\end{frame}
 
 	

@@ -8,5 +8,5 @@
 \beamer@subsectionintoc {2}{4}{Aufgabe 4}{11}{0}{2}
 \beamer@subsectionintoc {2}{5}{Aufgabe 5}{15}{0}{2}
 \beamer@subsectionintoc {2}{6}{Aufgabe 6}{25}{0}{2}
-\beamer@sectionintoc {3}{Fazit}{27}{0}{3}
-\beamer@subsectionintoc {3}{1}{Fazit}{27}{0}{3}
+\beamer@sectionintoc {3}{Fazit}{29}{0}{3}
+\beamer@subsectionintoc {3}{1}{Fazit}{29}{0}{3}
