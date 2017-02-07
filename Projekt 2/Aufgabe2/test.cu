@@ -9,7 +9,7 @@ __global__ void Memcpy(int N,int* target,int* source){
 	if (i<N) target[i]=source[i];
 }
 __global__ void Memcpyadd(int N,int* target,int*source,int add){
-	int i=blockDim.x*blockIdx.x+threadIdx.x;
+	int blockId   = blockIdx.y * gridDim.x + blockIdx.x;				int i = blockId * blockDim.x + threadIdx.x; 
 	if (i<N) target[i]=source[i]+add;
 }
 #define Mega 1000000
@@ -68,9 +68,17 @@ int main(){
 
 	int* d_b;
 	cudaMalloc(&d_b,size);
-	dim3 BlockDim=dim3(1024,1,1);
-	dim3 GridDim=dim3(N/1024+(((N %1024) == 0) ? 0 : 1),1,1);
-
+	dim3 BlockDim=dim3(__G__,1,1);
+	int grids=(N/__G__+(((N%__G__)==0) ? 0 :1));
+	printf("grids: %d\n",grids);
+	dim3 GridDim=dim3(grids,1,1);
+	if (grids>65535){
+		int i =grids/65535+(((grids%65535)==0? 0 :1));
+		grids=65535;
+		printf("splited to %d,%d\n",grids,i);
+		GridDim=dim3(grids,i,1);
+	
+	}
 	cudaEventRecord(start);
 	//copy d_a in d_a
 //	cudaMemcpy(d_b,d_a,size,cudaMemcpyDeviceToDevice);
