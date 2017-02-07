@@ -904,8 +904,8 @@ In \ref{lst:cudastarted} ist die Ausgabe unseres Programms zu sehen. In den folg
 
 
 \subsection{Datentransferrate}\label{p2a2}
-Wie an Tabelle \ref{t2a} gesehen werden kann, Steigt die Transferrate vom Ram in den GRAM auf etwa 2,5 GB/s, während in der gegenrichtung etwa 1,5GB/s zu erreichen sind. Im GRAM sind etwa 40 GB/s erreichbar. Das Kopieren im RAM erreicht nicht mal 2 GB/s, allerdings mit starken Schwankungen.\\
-\begin{table}
+Wie Tabelle \ref{t2a} entnommen werden kann, Steigt die Transferrate vom Ram in den VRAM auf etwa 2,5 GB/s, während sich in der Gegenrichtung etwa 1,5GB/s erreichen lassen. Im VRAM konnten wir etwa 40 GB/s erreichen. Das Kopieren im RAM ist mit weniger als 2 GB/s deutlich langsamer und unterliegt starken Schwankungen.\\
+\begin{table}[h]
 \footnotesize
 \begin{tabular}{c|c|c|c|c}
 N & Ram$\rightarrow$Ram & Ram$\rightarrow$GPU & GPU$\rightarrow$GPU & GPU$\rightarrow$Ram \\ 
@@ -918,8 +918,11 @@ $10^7$ & 2,4 & 2,4 & 38,2 & 1,4
 \caption{Transferraten in GB/s nach Aufgabe 2a.}
 \label{t2a}
 \end{table}
-Wie zu erwarten war, bleiben die Transferraten RAM$\rightarrow$GPU und GPU$\rightarrow$RAM unverändert. Da diese Daten der Tabelle \ref{t2a} entnommen werden können, sind sie in den Tabellen \ref{t2b_Mega} und \ref{t2b_10Mega} nicht aufgeführt. Da noch Addiert wird, sinkt die Transferrate im RAM. Mit steigender Blockgröße steigt die Leistungs GPU$\rightarrow$GPU anfangs fast linear, bis die Kurve bei Blockgröße 24 abflacht. Die allgemein höhere Leistung mit größerer Problemgröße ist durch einen geringeren Anteil an Overhead zu erklären. Die SIMD-Register spielen eine wichtige Rolle. Durch diese wird ein Befehl gleichzeitig an viele der Rechenkerne gleichzeitig geschickt. Dabei arbeiten diese den gleichen Befehl mit unterschiedlichen Daten ab. Bei der GTX 960 erfolgt dies mit 32 Befehlen parallel. Allerdings steht ein Teil der Einheiten still, wenn nicht genug parallele Befehle zur Verfügung stehen, da ein Warp immer nur von einem Block belegt werden kann. Daher sollte die Blockgröße immer in vielfachen von 32 gewählt werden.
-Abschließend ist zu diesen Übertragungsratentests zu sagen, dass die Aufgabe wesentlich Aufwändiger sein muss, als zu inkrementieren, um die Übertragung an die GPU zu rechtfertigen, da in diesem Beispiel Hin- und Rückübertragung auf bzw. von der GPU länger dauert, als die Arbeit nur mit der CPU zu machen.
+Wie wir auch erwartet haben, bleiben die Transferraten RAM$\rightarrow$GPU und GPU$\rightarrow$RAM unverändert. Da diese Daten Tabelle \ref{t2a} entnommen werden können, sind sie in den Tabellen \ref{t2b_Mega} und \ref{t2b_10Mega} nicht weiter aufgeführt. Da noch addiert wird, sinkt die Transferrate im RAM. Mit steigender Blockgröße steigt die Leistung GPU$\rightarrow$GPU anfangs fast linear, bis die Kurve bei Blockgröße 24 abflacht.
+
+Die allgemein höhere Leistung mit größerer Problemgröße ist durch einen geringeren Anteil an Overhead zu erklären. Die SIMD-Register spielen eine wichtige Rolle. Durch diese wird ein Befehl gleichzeitig an viele der Rechenkerne geschickt. Dabei arbeiten diese den gleichen Befehl mit unterschiedlichen Daten ab. Bei der GTX 960 erfolgt dies mit 32 Befehlen parallel. Allerdings steht ein Teil der Einheiten still, wenn nicht genug parallele Befehle zur Verfügung stehen, da ein Warp immer nur von einem Block belegt werden kann. Daher sollte die Blockgröße immer in vielfachen von 32 gewählt werden.
+
+Abschließend ist zu diesen Übertragungsratentests zu sagen, dass die Aufgabe wesentlich Aufwändiger sein muss, als zu inkrementieren, um die Übertragung an die GPU zu rechtfertigen, da in diesem Beispiel Hin- und Rückübertragung auf bzw. von der GPU länger dauert, als die Arbeit nur mit der CPU durchzuführen.
 
 \begin{table}[h]
 \centering
@@ -950,6 +953,9 @@ B.g. & Ram$\rightarrow$Ram  & GPU$\rightarrow$GPU \\
 \caption{Transferraten in GB/s nach Aufgabe 2b $N=10^7$und verschiedenen Blockgrößen.}
 \label{t2b_10Mega}
 \end{table}
+
+
+
 
 \subsection{Gauß-Seidel-Verfahren}\label{p2a3}
 \subsubsection{Implementierung in CUDA}
