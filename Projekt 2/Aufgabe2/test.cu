@@ -16,7 +16,7 @@ __global__ void Memcpyadd(int N,int* target,int*source,int add){
 #define Kilo 1000
 #define add 10
 int main(){
-	size_t N=10*Mega;
+	size_t N=__N__;
 	size_t size=N*sizeof(int);
 
 	cudaEvent_t start, stop;
@@ -41,6 +41,7 @@ int main(){
 	#pragma omp parallel for
 	for(int i=0;i<N;i++){
 		c_d[i]=c_a[i]+add;
+		//c_d[i]=c_a[i];
 	}
 
 	cudaEventRecord(stop);
@@ -67,11 +68,13 @@ int main(){
 
 	int* d_b;
 	cudaMalloc(&d_b,size);
+	dim3 BlockDim=dim3(1024,1,1);
+	dim3 GridDim=dim3(N/1024+(((N %1024) == 0) ? 0 : 1),1,1);
 
 	cudaEventRecord(start);
-	//copy d_a in d_b
-	//cudaMemcpy(d_b,d_a,size,cudaMemcpyDeviceToDevice);
-	Memcpyadd<<<N/1000,1000>>>(N,d_b,d_a,add);
+	//copy d_a in d_a
+//	cudaMemcpy(d_b,d_a,size,cudaMemcpyDeviceToDevice);
+	Memcpyadd<<<GridDim,BlockDim>>>(N,d_b,d_a,add);
 	cudaDeviceSynchronize();
 	cudaEventRecord(stop);
 	cudaEventSynchronize(stop);
