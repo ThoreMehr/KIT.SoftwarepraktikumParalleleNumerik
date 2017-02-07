@@ -906,66 +906,51 @@ In \ref{lst:cudastarted} ist die Ausgabe unseres Programms zu sehen. In den folg
 \subsection{Datentransferrate}\label{p2a2}
 Wie an Tabelle \ref{t2a} gesehen werden kann, Steigt die Transferrate vom Ram in den GRAM auf etwa 2,5 GB/s, während in der gegenrichtung etwa 1,5GB/s zu erreichen sind. Im GRAM sind etwa 40 GB/s erreichbar. Das Kopieren im RAM erreicht nicht mal 2 GB/s, allerdings mit starken Schwankungen.\\
 \begin{table}
+\footnotesize
+\begin{tabular}{c|c|c|c|c}
+N & Ram$\rightarrow$Ram & Ram$\rightarrow$GPU & GPU$\rightarrow$GPU & GPU$\rightarrow$Ram \\ 
+\hline 
+$10^4$ & 0,03 & 0,6 & 0,74 & 0,6 \\
+$10^5$ & 0,3 & 1,7 & 9,1 & 0,7 \\
+$10^6$ & 1,5 & 2,2 & 28,2 & 1,1 \\
+$10^7$ & 2,4 & 2,4 & 38,2 & 1,4
+\end{tabular}
+\caption{Transferraten in GB/s nach Aufgabe 2a.}
 \label{t2a}
-\begin{tabular}{|c|c|c|c|c|}
-\hline 
-N & Ram->Ram & Ram->GPU & GPU->GPU & GPU->Ram \\ 
-\hline 
-$10^4$ & 0,03 & 0,6 & 0,74 & 0,6 \\ 
-\hline 
-$10^5$ & 0,3 & 1,7 & 9,1 & 0,7 \\ 
-\hline 
-$10^6$ & 1,5 & 2,2 & 28,2 & 1,1 \\ 
-\hline 
-$10^7$ & 2,4 & 2,4 & 38,2 & 1,4 \\ 
-\hline 
-\end{tabular}
-\caption{Transferraten in GB/s nach Aufgabe 2a}
 \end{table}
-Wie zu erwarten war, bleiben die Transferraten RAM->GPU und GPU->RAM unverändert. Da diese Daten der Tabelle \ref{t2a} entnommen werden können, sind sie in den Tabellen \ref{t2b_Mega} und \ref{t2b_10Mega} nicht aufgeführt. Da noch Addiert wird, sinkt die Transferrate im RAM. Mit steigender Blockgröße steigt die Leistungs GPU->GPU anfangs fast linear, bis die Kurve bei Blockgröße 24 abflacht. Die allgemein höhere Leistung mit größerer Problemgröße ist durch einen geringeren Anteil an Overhead zu erklären. Die SIMD-Register spielen eine wichtige Rolle. Durch diese wird ein Befehl gleichzeitig an viele der Rechenkerne gleichzeitig geschickt. Dabei arbeiten diese den gleichen Befehl mit unterschiedlichen Daten ab. Bei der GTX 960 erfolgt dies mit 32 Befehlen parallel. Allerdings steht ein Teil der Einheiten still, wenn nicht genug parallele Befehle zur Verfügung stehen, da ein Warp immer nur von einem Block belegt werden kann. Daher sollte die Blockgröße immer in vielfachen von 32 gewählt werden.
+Wie zu erwarten war, bleiben die Transferraten RAM$\rightarrow$GPU und GPU$\rightarrow$RAM unverändert. Da diese Daten der Tabelle \ref{t2a} entnommen werden können, sind sie in den Tabellen \ref{t2b_Mega} und \ref{t2b_10Mega} nicht aufgeführt. Da noch Addiert wird, sinkt die Transferrate im RAM. Mit steigender Blockgröße steigt die Leistungs GPU$\rightarrow$GPU anfangs fast linear, bis die Kurve bei Blockgröße 24 abflacht. Die allgemein höhere Leistung mit größerer Problemgröße ist durch einen geringeren Anteil an Overhead zu erklären. Die SIMD-Register spielen eine wichtige Rolle. Durch diese wird ein Befehl gleichzeitig an viele der Rechenkerne gleichzeitig geschickt. Dabei arbeiten diese den gleichen Befehl mit unterschiedlichen Daten ab. Bei der GTX 960 erfolgt dies mit 32 Befehlen parallel. Allerdings steht ein Teil der Einheiten still, wenn nicht genug parallele Befehle zur Verfügung stehen, da ein Warp immer nur von einem Block belegt werden kann. Daher sollte die Blockgröße immer in vielfachen von 32 gewählt werden.
 Abschließend ist zu diesen Übertragungsratentests zu sagen, dass die Aufgabe wesentlich Aufwändiger sein muss, als zu inkrementieren, um die Übertragung an die GPU zu rechtfertigen, da in diesem Beispiel Hin- und Rückübertragung auf bzw. von der GPU länger dauert, als die Arbeit nur mit der CPU zu machen.
-\begin{small}
-\begin{table}
 
+\begin{table}[h]
+\centering
+\begin{tabular}{c|c|c}
+B.g. & Ram$\rightarrow$Ram &  GPU$\rightarrow$GPU  \\ 
+\hline 
+4 & 1,2  & 4,0 \\
+8 & 1,2  & 7,5 \\
+16 & 1,2 & 14, \\
+24 & 1,2  & 19 \\
+32 & 1,2  & 22
+\end{tabular}
+\caption{Transferraten in GB/s nach Aufgabe 2b $N=10^6$ und verschiedenen Blockgrößen.}
 \label{t2b_Mega}
-\begin{tabular}{|c|c|c|c|c|}
-\hline 
-B.g. & Ram$\rightarrow$  Ram &  GPU$\rightarrow$  GPU  \\ 
-\hline 
-4 & 1,2  & 4,0  \\ 
-\hline 
-8 & 1,2  & 7,5  \\ 
-\hline 
-16 & 1,2 & 14,1 \\ 
-\hline 
-24 & 1,2  & 19  \\ 
-\hline 
-32 & 1,2  & 22  \\
-\hline 
-\end{tabular}
-\caption{Transferraten in GB/s nach Aufgabe 2b $N=10^6$ und verschiedenen Blockgrößen}
-\end{table}
-\begin{table}
-\label{t2b_10Mega}
-\begin{tabular}{|c|c|c|c|c|}
-\hline 
-B.g. & Ram$\rightarrow$ Ram  & GPU $\rightarrow$ GPU  \\ 
-\hline 
-4 & 2,0 & 4,3  \\ 
-\hline 
-8 & 2,0 & 8,3  \\ 
-\hline 
-16 & 2,0 & 16,2 \\ 
-\hline 
-24 & 2,0 & 22,3  \\ 
-\hline 
-32 & 2,0 &  30,1 \\
-\hline 
-\end{tabular}
-\caption{Transferraten in GB/s nach Aufgabe 2b $N=10^7$und verschiedenen Blockgrößen}
 \end{table}
 
-\end{small}
+\begin{table}[h]
+\centering
+\begin{tabular}{c|c|c}
+B.g. & Ram$\rightarrow$Ram  & GPU$\rightarrow$GPU \\ 
+\hline 
+4 & 2,0 & 4,3 \\
+8 & 2,0 & 8,3 \\
+16 & 2,0 & 16,2\\
+24 & 2,0 & 22,3 \\
+32 & 2,0 &  30,1
+\end{tabular}
+\caption{Transferraten in GB/s nach Aufgabe 2b $N=10^7$und verschiedenen Blockgrößen.}
+\label{t2b_10Mega}
+\end{table}
+
 \subsection{Gauß-Seidel-Verfahren}\label{p2a3}
 \subsubsection{Implementierung in CUDA}
 Die Portierung des parallelisierten Gauß-Seidel-Verfahrens aus Aufgabe \ref{p1a4} verlief sehr geradlinig. Die zuvor parallelisierten inneren Schleifen -- die Berechnung über alle schwarzen/weißen Felder -- werden nun mittels entsprechender Kernel auf der GPU ausgeführt. Die Synchronisation ist damit nun implizit durch die Kernelaufrufe -- die nacheinander ausgeführt werden -- gegeben.
@@ -977,7 +962,7 @@ Wie auch die CPU Variante haben wir zur Berechnung den Datentyp \texttt{double} 
 
 In Tabelle \ref{tab:gsvcomp} haben wir die GPU-Implementierung mit der aus Projekt \ref{p1} verglichen. Für große Eingaben erreichen wir eine Beschleunigung von fast 9. Für kleine Eingaben ist die Laufzeit der GPU-Variante hingegen recht konstant. Wir führen das auf den Overhead zurück, der zur Ansteuerung der GPU nötig ist. Dieser amortisiert sich erst bei größeren Problemgrößen.
 
-\begin{table}
+\begin{table}[h]
 	\centering
 	\begin{tabular}{r|r|r|r}
 		$l$ & $T_{CPU}[s]$ & $T_{GPU}[s]$ & Beschleunigung $S[s]$ \\
