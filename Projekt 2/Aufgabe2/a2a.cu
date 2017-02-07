@@ -48,8 +48,8 @@ int main() {
 	printf("RAM->GPU time:%f s, rate:%f GB/s\n",t,r);
 
 	gettimeofday(&time1,&zone);
-	//cudaMemcpy(d_b,d_a,size,cudaMemcpyDeviceToDevice);
-	Memcopy_add<<<1,__N__>>>(d_a,d_b,0);
+	cudaMemcpy(d_b,d_a,size,cudaMemcpyDeviceToDevice);
+	//Memcopy_add<<<1,__N__>>>(d_a,d_b,0);
 	
 	gettimeofday(&time2,&zone);
 	t=((time2.tv_usec-time1.tv_usec)+(time2.tv_sec-time1.tv_sec)*1000000)/1000000.0;
