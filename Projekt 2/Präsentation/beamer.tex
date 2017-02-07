@@ -130,15 +130,16 @@
 		\frametitle{Aufgabe 3 -- Asynchrone Parallelisierung}
 		\begin{itemize}
 			\item \textbf{Approximate Computing} \\
-			auf eine hohe Genauigkeit verzichtet wird, um im Gegenzug an Geschwindigkeit und/oder Energieersparnisse in den Berechnungen zu gewinnen. Dies wird erreicht, indem beispielsweise Datentypen niedriger Genauigkeit genutzt werden. (Konkret etwa: anstatt \texttt{double} \texttt{float}, oder anstatt \texttt{float} nur \texttt{half float} verwenden.)
-			
-			Dies ist unter Anderem dann sinnvoll, wenn die Eingangsdaten bereits gewisse Ungenauigkeiten aufweisen oder nur Schätzungen darstellen. Im Kontext des Praktikums, in welchem wir numerische Approximationen nutzen, stellt diese Technik einen Geschwindigkeitsgewinn mit vernachlässigbarer Ungenauigkeit dar, da die Natur von Approximationen bereits Ungenauigkeiten beinhaltet. Mehr dazu gegen Ende dieses Abschnitts.
+			Verzicht auf hohe Genauigkeit und im Gegenzug an Geschwindigkeit und/oder Energieersparnisse in den Berechnungen zu gewinnen. 
+				\vspace{2em}
 			
 			\item \textbf{Asynchronous Parallelization} \\
-			Um den Vorteil asynchroner Parallelisierung zu verdeutlichen, gehen wir zuvor näher auf die synchrone Variante ein. Als Beispiel soll ein evolutionärer Algorithmus dienen. Hier würde pro Thread jeweils eine Evolutionsstufe berechnet werden um anschließend auf allen anderen Threads dieser Iteration zu warten. Dies bedeutet für Threads, die ihre Aufgabe als erstes abschließen, dass eine Wartezeit entsteht, bis dann auch der letzte Thread zu einem Ergebnis gekommen ist. Asynchrone Parallelisierung eliminiert diese Wartezeiten, indem ein Thread einfach alle seine Iterationen durchlaufen kann ohne auf die Ergebnisse der anderen Threads zu warten (nach \cite{CompAsyncSync}). Dies bedeutet im Allgemeinen, dass die Threads die Aufgaben schneller abarbeiten können. Allerdings wird in diesem Kontext das Konstrukt von Generationen fallen gelassen. Dabei entstehende Ungenauigkeiten müssen in Kauf genommen werden. Weiter ist die Korrektheit des Ergebnisses nicht unbedingt trivial.
+			Ein Thread kann alle seine Iterationen durchlaufen kann ohne auf die Ergebnisse der anderen Threads zu warten \\
+			$\rightarrow$ eleminieren der Wartezeiten
+				\vspace{2em}
 			
 			\item \textbf{Relaxierte Parallelisierung} \\
-			Zu dieser Methode konnten wir nur wenig finden, das in unseren Kontext passt. Wir nehmen an, sie soll es nach der Raum- und Zeitdiskretisierung des stationären Problems erlauben, unabhängig zwischen den entstandenen zeitlichen Unterteilungen Berechnungen durchführen zu können. Damit diese Unabhängigkeit zustande kommt, bedarf es vorher einer Relaxierung des Problems. Insgesamt erlaubt dies eine schnellere Ausführung der Aufgaben, da keine Abhängigkeiten zu vorherigen Resultaten existieren. Somit entfallen Wartezeiten auf Kosten der Genauigkeit des Endresultats (nach \cite{HighOrder}).
+			Unabhängig zwischen den entstandenen zeitlichen Unterteilungen Berechnungen durchführen.
 		\end{itemize}
 	\end{frame}
 	\begin{frame}
@@ -176,36 +177,100 @@
 	\end{frame}
 	\begin{frame}
 		\frametitle{Aufgabe 3 -- Weitere Architekturen}
-		Wir haben \textbf{Approximate Computing} eingesetzt, um Rechenzeit auf Kosten der Genauigkeit einzusparen.
-		Diese Technik sollte in modernen CPUs die Geschwindigkeit kaum beeinflussen. Nach unserem Kenntnisstand haben CPUs keine speziellen \textbf{Floating Point Units} (FPU), um beispielsweise \texttt{float} und \texttt{double} getrennt zu verarbeiten. Stattdessen wird mit der gleichen Hardware in höherer Genauigkeit (etwa 80 Bit, Hardware abhängig) gerechnet.
-		Diese These konnten wir mit unserem Gauß-Seidel-Verfahren aus \ref{p1a4} bestätigen, da dieses mit dem Datentyp \texttt{float} (anstatt \texttt{double}) keine bessere Laufzeit aufwies.
+		Einsatz von \textbf{Approximate Computing} \\
+		\hspace{2em} $\rightarrow$ kürzere Rechenzeit auf Kosten der Genauigkeit \\
+		\vspace{2em}
+
+		In modernen CPUs Gleitkommazahlen intern mit 80\,Bit verarbeitet \\
+		\hspace{2em} $\rightarrow$ kein zeitlicher Unterschied zwischen \texttt{double} und \texttt{float}
 		
-		Ein Unterschied wäre möglicherweise bei sehr großen Datenmengen feststellbar. Da bei \texttt{double} das doppelte an Information in den Speicher und Caches geladen werden muss, wäre hier ein Leistungseinbruch denkbar. Dies wäre eher im Bereich von Single Multi-Core CPUs angesiedelt, da Many-Core- und MIC-Architekturen durch mehrere Speicheranbindungen und größeren Cache nicht so schnell neue Daten anfordern müssten.
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Aufgabe 3 -- Weitere Architekturen 2}
+		
+		Ein Unterschied bei sehr großen Datenmengen? \\ \vspace{2em}
+		Speicherbandbreite möglicherweise bei \texttt{double} als Engpass \\ 
+		Eher reine Multi-Core CPUs betroffen \\
+		Many-Core- und MIC-Architekturen weniger:
+		\begin{itemize}
+			\item größere Caches \\
+			\item mehrere Speicheranbindungen 
+		\end{itemize}
+
 	\end{frame}
 
 	\section{Aufgabe 4}
 	\subsection{Aufgabe 4}
+
 	\begin{frame}
-		\frametitle{Aufgabe 4 -- ILU-Zerlegung}
-		
+		\frametitle{Aufgabe 4 -- Einführung}
+
 		Gesucht: Dreiecksmatrizen $L,U$, sodass
 		\begin{equation*}
 			L\cdot U\approx A
 		\end{equation*}
+
+		\vspace{1em}
+
+		Approximate Computing herangehensweise \\
+		\hspace{2em} $\rightarrow$ Incomplete LU-Decomposition (ILU) \\
 		
-		Algorithmus 2
-		\begin{itemize}
-			\item Starke Abhängigkeit der Einträge \\
-			$\rightarrow$Schlecht parallelisierbar
-		\end{itemize}
+		\vspace{2em}
+		Algorithmus 1: Fixpunktiteration \\
+		Algorithmus 2: Gauß
+
+
+	\end{frame}
+
+
+
+
+
+	\begin{frame}
+		\frametitle{Aufgabe 4 -- ILU-Zerlegung}
+		
 		Algorithmus 1
 		\begin{itemize}
 			\item Einträge komplett unabhängig \\
-			$\rightarrow$Sehr gut parallelisierbar
+			$\rightarrow$ Sehr gut parallelisierbar
 			\item Pufferung zwischen Iterierten
-			\item Approximativ
+			\item Iterativ
+		\end{itemize}
+
+		\vspace{2em}
+
+		Algorithmus 2
+		\begin{itemize}
+			\item Starke Abhängigkeit der Einträge \\
+			$\rightarrow$ Schlecht parallelisierbar
 		\end{itemize}
 	\end{frame}
+
+
+	\begin{frame}
+		\frametitle{Aufgabe 4 -- Mathematische Sicht}
+		
+		Algorithmus 1
+		\begin{itemize}
+			\item Stabil \\
+			\item Anzahl an benötigten Schritten nicht bekannt
+		\end{itemize}
+
+		\vspace{2em}		
+
+		Algorithmus 2
+		\begin{itemize}
+			\item Keine Pivotwahl \\
+			$\rightarrow$ mögliche Stabilitätsprobleme \\
+			\item Nach $n$ Schritten fertig
+		\end{itemize}
+		
+	\end{frame}
+
+
+
+
 	\begin{frame}
 		\frametitle{Aufgabe 4 -- Speichermethodik}
 		Nach Algorithmus 2: $a_{ij}=0\Rightarrow l_{ij}=0$ und $U=L^T$ ($S_U$ entsprechend) \\
@@ -391,12 +456,45 @@
 	
 	\section{Fazit}
 	\subsection{Fazit}
+
+	\begin{frame}
+		\frametitle{Überblick -- Projekt 1}
+		\begin{itemize}
+			\item OpenMP
+			\item Testtools (Intel Thread Checker, OpenMP Profiler)
+			\item Quantitative Maßzahlen im Kontext von Parallelrechner
+			\item Vorteile und Gefahren der Parallelisierung
+			\item Verschiedene Architekturen und ihre Unterschiede
+			\item Gauß-Seidel-Verfahren
+			\item Partielle Differenzialgleichungen
+			\item Methode der Finiten Elemente
+			\item Krylow-Unterraumverfahren
+			\item CG-Verfahren
+		\end{itemize}		
+
+	\end{frame}
+
+
+	\begin{frame}
+		\frametitle{Überblick -- Projekt 2}
+		\begin{itemize}
+			\item CUDA -- GPU Architektur
+			\item Datentransfer zwischen Host und Device
+			\item Verschiedene Parallelisierungsmethoden
+			\item Gelerntes auf CPU-Architekturen übertragen
+			\item Vorkonditionierung
+			\item ILU-Zerlegung
+			\item Kondition und Stabilität
+		\end{itemize}		
+
+	\end{frame}
+
 	\begin{frame}
 		\frametitle{Fazit}
 		
 		\LARGE
 		\centering
-		Mit \emph{CUDA} lässt es sich parallelisieren.
+		Mit \emph{OpenMP} und \emph{CUDA} lässt es sich parallelisieren.
 	\end{frame}
 
 \end{document}
