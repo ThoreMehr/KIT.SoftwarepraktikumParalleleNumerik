@@ -282,7 +282,7 @@ E-Mail: \small\url{sebastien.thill@student.kit.edu}}
 % in the abstract
 \begin{abstract}
 Es gibt verschiedene Möglichkeiten, Algorithmen zu parallelisieren. Es gilt, sowohl Hardware als auch Parallelisierungsmethodik sinnvoll auszuwählen.
-Im Rahmen des Praktikums haben wir den Umgang mit \emph{OpenMP} zur parallel-Programmierung der CPU kennengelernt.
+Im Rahmen des Praktikums haben wir den Umgang mit \emph{OpenMP} zur Parallelprogrammierung der CPU kennengelernt.
 Für die Programmierung auf der Grafikkarte kam \emph{CUDA} zum Einsatz.
 Bei den parallelisierten Algorithmen handelt es sich um Komponenten zum Lösen der \emph{Finite-Elemente-Methode}.
 \end{abstract}
@@ -328,7 +328,7 @@ Hello World, this is Thread2
 		\hline
 		$10^9$ reduction & 28,76 & 14,77 & 1,95 & 1,86 & 15,46 &0,99 &29,05& 1,14 & 25,25\\
 	\end{tabular}
-	\caption{Laufzeiten der Berechnung von Pi unserer Parallelisierung gegenüber der sequentiellen Version. Getestet wurde auf dem Rechner \emph{i82sn07}. Um Ungenauigkeiten auszugleichen wurden die Zeiten jeweils über $10$ (für große Eingaben über $5$) Durchläufe gemittelt.}
+	\caption{Laufzeiten der Berechnung von $\pi$ unserer Parallelisierung gegenüber der sequentiellen Version. Getestet wurde auf dem Rechner \emph{i82sn07}. Um Ungenauigkeiten auszugleichen wurden die Zeiten jeweils über $10$ (für große Eingaben über $5$) Durchläufe gemittelt.}
 	\label{pi_runtime}
 \end{table*}
 Wie in Tabelle \ref{pi_runtime} zu sehen, nähert sich der \emph{Speedup} mit zunehmenden $N$ der Anzahl der Kerne an.\\
@@ -354,7 +354,7 @@ Die manuelle Variante hat eine schlechtere Performance, als die Variante ohne Pa
 	\caption{Laufzeiten des Mandelbrot Programms unserer Parallelisierung gegenüber der sequentiellen Version. Getestet wurde auf dem Rechner \emph{i82sn07}. Um Ungenauigkeiten auszugleichen wurden die Zeiten jeweils über $10$ (für große Eingaben über $5$) Durchläufe gemittelt.}
 	\label{mandel_runtime}
 \end{table*}
-Wie an der Tabelle \ref{mandel_runtime} abgelesen werden kann, beträgt die Beschleunigung für 2 Threads etwa $1,4$, für 16 Threads etwa 4 und für 32 Threads etwa 8. Dass die Beschleunigung schlechter ist, als bei der Berechnung von PI, liegt unserer Meinung nach daran, dass Speicherverwaltung und Caches einen wesentlichen Anteil der Laufzeit ausmachen.
+Wie in der Tabelle \ref{mandel_runtime} entnommen werden kann, beträgt die Beschleunigung für 2 Threads etwa 1,4, für 16 Threads etwa 4 und für 32 Threads etwa 8. Dass die Beschleunigung schlechter ist, als bei der Berechnung von $\pi$, liegt unserer Meinung nach daran, dass Speicherverwaltung und Caches einen wesentlichen Anteil der Laufzeit ausmachen.
 
 \subsection{Testtools}\label{p1a2}
 \subsubsection{Intel Thread Checker}\label{p1a2a}
@@ -394,7 +394,7 @@ In den Tabellen \ref{2b_1000} und \ref{2b_2000} wird der Einfluss von Optimierun
 		mittlere & 5,88 & 1,02 & 1,02 &  1,02 & 0,96 & 6,95 & 2,55 & 1,12 &  1,18 \\ \hline
 		äußere & 5,67 & 0,59 & 0,59 &  0,59 & 0,014 & 6,02 & 1,81 & 0,82 &  0,82 \\ \hline
 	\end{tabular}
-	\caption{Laufzeiten in s mit N=1000. Getestet wurde auf dem Rechner \emph{i82pc31}. Um Ungenauigkeiten auszugleichen, wurden die Zeiten jeweils über $10$ Durchläufe gemittelt.}
+	\caption{Laufzeiten in Sekunden mit N=1000. Getestet wurde auf dem Rechner \emph{i82pc31}. Um Ungenauigkeiten auszugleichen, wurden die Zeiten jeweils über $10$ Durchläufe gemittelt.}
 	\label{2b_1000}
 \end{table*}
 
@@ -415,7 +415,7 @@ In den Tabellen \ref{2b_1000} und \ref{2b_2000} wird der Einfluss von Optimierun
 		äußere&46,50&5,19&4,95&4,92&1,15&44,83&15,07&6,93&6,84\\
 		\hline
 	\end{tabular}
-	\caption{Laufzeiten in s mit N=2000. Getestet wurde auf dem Rechner \emph{i82pc31}. Um Ungenauigkeiten auszugleichen, wurden die Zeiten jeweils über $10$ Durchläufe gemittelt.}
+	\caption{Laufzeiten in Sekunden mit N=2000. Getestet wurde auf dem Rechner \emph{i82pc31}. Um Ungenauigkeiten auszugleichen, wurden die Zeiten jeweils über $10$ Durchläufe gemittelt.}
 	\label{2b_2000}
 \end{table*}
 \subsubsection{OpenMP-Profiler ompP}\label{p1a2c}
@@ -482,7 +482,7 @@ U(n) = \frac{I(n)}{n} = R(n) \cdot E(n) = \frac{P(n)}{n \cdot T(n)}
 \subsubsection{Probleme bei der Parallelisierung}	
 \begin{itemize}
 	\item \textbf{Race Condition} \\
-	Auch bekannt als Wettlaufsituation. Mehrere Fäden greifen lesend und schreibend auf die gleiche Variable zu. Durch den gleichzeitigen Zugriff auf die Variable durch die anderen Fäden hängt das Ergebnis von der konkreten Ausführungsreihenfolge ab. Das Ergebnis kann der Erwartung entsprechen, muss aber nicht. Die Lösung hierfür ist Synchronisation, beispielsweise mittels atomarer Variablenzugriffe oder Barriere. Damit kann sicher gestellt werden, dass kein anderer Faden die Variable manipuliert während ein Faden mit ihr arbeitet.
+	Auch bekannt als Wettlaufsituation. Mehrere Fäden greifen lesend und schreibend auf die gleiche Variable zu. Durch den gleichzeitigen Zugriff auf die Variable durch die anderen Fäden hängt das Ergebnis von der konkreten Ausführungsreihenfolge ab. Das Ergebnis kann der Erwartung entsprechen, muss aber nicht. Die Lösung hierfür ist Synchronisation, beiselsweise mittels atomarer Variablenzugriffe oder Barriere. Damit kann sicher gestellt werden, dass kein anderer Faden die Variable manipuliert während ein Faden mit ihr arbeitet.
 	
 	\item \textbf{Dead lock} \\
 	Auch bekannt als Verklemmung. Erfordert mindestens zwei Fäden, die gegenseitig auf eine Resource warten, die gerade vom jeweils anderen Faden bereits allokiert wurde (formal: Zyklus im Allokationsgraphen). Damit tatsächlich alle Beteiligten Fäden nicht mehr weiter laufen können, müssen folgende Bedingungen erfüllt sein:
@@ -572,7 +572,7 @@ für $j=1,\dots,n$. Es fällt auf, dass für jedes $u_j$ nur solche $u_i$ betrachte
 u_j=\frac{1}{a_{j,j}}(h^2f_j-\sum_{i=1, i\neq j}^{n}a_{j,1}u_i)
 \end{equation}
 Nach der Definition von $A$ ist klar, dass $a_{j,j}=4$ gilt. Für $i\neq j$ gilt $a_{i,j}\in\{0,-1\}$. Um die dünne Struktur von $A$ weiter auszunutzen, betrachten wir anschaulich, von welchen Gitterpunkten die Berechnung für einen Gitterpunkt $(x,y)$ konkret abhängt (genau das wird von $A$ beschrieben). Dargestellt wird dies in Abbildung\ref{gsv_depend}, wobei $A$ genau für die vier Nachbarknoten den Wert $-1$ annimmt, sonst 0 (außer für den Knoten selbst). Durch diese Betrachtung zerfällt die Summe der Zuweisung \ref{gsv_unifiedu} in vier bedingte Additionen, wie in Listing \ref{conditionalsum} illustriert.
-\begin{lstlisting}[frame=single, captionpos=b, caption={Ausnutzung der dünnen Struktur von $A$ zur Berechnung von $u_j$. Die Zeilen in $u$ sind genau $d$ Elemente lang, daher entspricht bspw. $j - d$ dem Zugriff auf den oberen Nachbar von $j$ aus gesehen. Die Bedingungen Prüfen genau darauf, ob es sich bei einem Nachbarknoten um einen Randpunkt handelt. Falls ja, so ist keine weitere Betrachtung nötig, da dessen Wert $0$ ist.}, label={conditionalsum}, basicstyle=\small, language=C]
+\begin{lstlisting}[frame=single, captionpos=b, caption={Ausnutzung der dünnen Struktur von $A$ zur Berechnung von $u_j$. Die Zeilen in $u$ sind genau $d$ Elemente lang, daher entspricht bspw. $j - d$ dem Zugriff auf den oberen Nachbar von $j$ aus gesehen. Die Bedingungen prüfen genau darauf, ob es sich bei einem Nachbarknoten um einen Randpunkt handelt. Falls ja, so ist keine weitere Betrachtung nötig, da dessen Wert $0$ ist.}, label={conditionalsum}, basicstyle=\small, language=C]
 double sum = h * h * f[j];
 
 // Linker Nachbarknoten
@@ -646,10 +646,10 @@ Der Grund, weshalb immer eine Diagonale ausgelassen werden muss, liegt in den vo
 \end{figure}
 
 Durch diese Schachbrett-artige Parallelisierung hat ein Berechnungsschritt die Gestalt:
-\begin{itemize}
-	\item Berechne Parallel über alle schwarzen Felder
-	\item Berechne Parallel über alle weißen Felder
-\end{itemize}
+\begin{enumerate}
+	\item Berechne parallel über alle schwarzen Felder
+	\item Berechne parallel über alle weißen Felder
+\end{enumerate}
 Es sei nicht zu verschweigen, dass hier im Gegensatz zur seriellen Variante sehr wohl mehrere $u$ gleichzeitig zu speichern sind. Sobald in einem Berechnungsschritt das Feld ganz rechts unten, also $u^{k+2-d}_{d,d}$, berechnet wurde, müssen im Falle des Abbruchs (weil das Abbruchkriterium aus \ref{p1a4a} erfüllt ist), alle $u^{k+2-d}_{x,y}$ noch immer bekannt sein, um $u^{k+2-d}$ als Ergebnis ausgeben zu können. Ebenso muss das Abbruchkriterium stets auf den Werten der gleichen Iterierten arbeiten, um exakt das gleiche Resultat wie die serielle Variante zu erhalten.
 
 In jedem Berechnungsschritt wird genaue eine Iterierte des Verfahrens berechnet. Allerdings gilt dies erst, sobald $d-1$ Schritte ausgeführt wurden, denn erst dann ist schließlich der Eintrag rechts unten $u^{k+2-d}_{d,d}=u^{1}_{d,d}$ berechnet (die \emph{Historie} muss erst gefüllt werden). So kommt es, dass die parallele Version bei gleichen Eingaben exakt die gleichen Ergebnisse wie die serielle Version ausgibt, jedoch dabei genau $d-1$ Iterationen mehr benötigt. Wie der Tabelle \ref{gsv_runtime} zu entnehmen, ist die parallele Version mit 32 Kernen bei großer Problemgröße ($l=9$) mit einem \emph{Speedup} von $7,57$ aber immerhin noch deutlich schneller. Die eher geringe Effizienz schreiben wir dem Synchronisationsaufwand sowie den eher Cache-unfreundlichen Speicherzugriffen zu.
@@ -787,13 +787,13 @@ Alphabetische Liste gängiger Krylow-Unterraum-Verfahren (nach \cite{KrylowUnterr
 
 Die häufig verwendeten Grundverfahren sind: CG-Verfahren, GMRES und Lanczos-Verfahren
 
-CG-Verfahren: Hierbei handelt es sich um einen iterativen Algorithmus und ist gedacht für große lineare, symmetrische, positiv definite und dünn besetzte Gleichungssysteme. Das CG-Verfahren liefert nach spätestens n (Dimension der Matrix) Schritten die exakte Lösung.
+CG-Verfahren: Hierbei handelt es sich um einen iterativen Algorithmus und ist gedacht für große lineare, symmetrische, positiv definite und dünn besetzte Gleichungssysteme. Das CG-Verfahren liefert nach spätestens $n$ (Dimension der Matrix) Schritten die exakte Lösung.
 
 GMRES: Ein iteratives Verfahren welches sich besonders für große, dünn besetzte lineare Gleichungssysteme eignet. GMRES kann und wird für nicht-symmetrische Matrizen eingesetzt, allerdings wird die exakte Lösung erst nach endlich vielen Schritten geliefert.
 
 Lanczos-Verfahren: Ebenfalls ein iterativer Algorithmus, welcher Eigenwerte mit den entsprechenden Eigenvektoren bestimmen kann, als auch lineare Gleichungssysteme lösen. Die Konvergenz vom Algorithmus ist von den Eigenwerten abhängig.
 
-Bei der Auswahl von diesen drei Verfahren für unser Problem, eignet sich das CG-Verfahren am besten, da die vom Problem gegebene Matrix alle Kriterien erfüllt. Des Weiteren ist die Konvergenz $n$ (nach \cite{Numa}) von Vorteil, da wir davon ausgehen können, dass wir schon viel früher eine Lösung erreicht haben werden welche unter einer gewissen Toleranz \emph{gut genug} sein wird.
+Bei der Auswahl von diesen drei Verfahren für unser Problem, eignet sich das CG-Verfahren am besten, da die vom Problem gegebene Matrix alle Kriterien erfüllt. Des weiteren ist die Konvergenz $n$ (nach \cite{Numa}) von Vorteil, da wir davon ausgehen können, dass wir schon viel früher eine Lösung erreicht haben werden welche unter einer gewissen Toleranz \emph{gut genug} sein wird.
 Gegen GMRES spricht nur die möglicherweise langsamere Konvergenz und die hier nicht benötigte Flexibilität auch nicht-symmetrische Matrizen bearbeiten zu können.
 Das Lanczos-Verfahren wäre eine Alternative, vor allem da die Eigenwerte und somit die Konvergenz im Voraus bekannt sind.
 
@@ -901,7 +901,7 @@ In \ref{lst:cudastarted} ist die Ausgabe unseres Programms zu sehen. In den folg
 
 
 \subsection{Datentransferrate}\label{p2a2}
-Wie Tabelle \ref{t2a} entnommen werden kann, Steigt die Transferrate vom Ram in den VRAM auf etwa 2,5 GB/s, während sich in der Gegenrichtung etwa 1,5GB/s erreichen lassen. Im VRAM konnten wir etwa 40 GB/s erreichen. Das Kopieren im RAM ist mit weniger als 2 GB/s deutlich langsamer und unterliegt starken Schwankungen.\\
+Wie Tabelle \ref{t2a} entnommen werden kann, Steigt die Transferrate vom RAM in den VRAM auf etwa 2,5 GB/s, während sich in der Gegenrichtung etwa 1,5GB/s erreichen lassen. Im VRAM konnten wir etwa 40 GB/s erreichen. Das Kopieren im RAM ist mit weniger als 2 GB/s deutlich langsamer und unterliegt starken Schwankungen.\\
 \begin{table}[h]
 	\centering
 	\begin{tabular}{r|r|r|r|r}
@@ -1070,7 +1070,7 @@ Die Matrizen $L$ und $U$ sind dünn besetzt, daher erscheint es sinnvoll, die Dat
 		0 & 0 & 0 & 0 & 0 & * & 0 & * & *
 	\end{pmatrix}
 \end{equation}
-Wobei Einträge mit $*$ bedeuten, dass nur an diesen Stellen Einträge $\neq0$ sein können. Rot eingefärbte $\color{red}0$en verweisen auf Einträge, die immer $0$ sind, aber in der von uns gewählten Speichermethodik dennoch Platz einnehmen. Insgesamt gibt es davon $4\cdot d$ Stück (im Beispiel liegen 8 davon außerhalb der Matrix und sind daher nicht sichtbar). Wegen $n=d\cdot d$ ist der Verschnitt für große $n$ zunehmend vernachlässigbar, sodass eine Platz sparendere Speicherung den zusätzlichen Programmieraufwand unserer Meinung nach nicht rechtfertigen würde.
+Wobei Einträge mit $*$ bedeuten, dass nur an diesen Stellen Einträge $\neq0$ sein können. Rot eingefärbte $\color{red}0$en verweisen auf Einträge, die immer $0$ sind, aber in der von uns gewählten Speichermethodik dennoch Platz einnehmen. Insgesamt gibt es davon $4\cdot d$ Stück (im Beispiel liegen 8 davon außerhalb der Matrix und sind daher nicht sichtbar). Wegen $n=d\cdot d$ ist der Verschnitt für große $n$ zunehmend vernachlässigbar, sodass eine platzsparendere Speicherung den zusätzlichen Programmieraufwand unserer Meinung nach nicht rechtfertigen würde.
 
 Bei Ausführung der Algorithmen ist uns aufgefallen, dass $L\cdot U$ tatsächlich eine gute Approximation für $A$ ist, allerdings nur für Einträge in denen $A$ selbst nicht $0$ ist. Bei $l=2,n=9$ erhielten wir beispielsweise
 \begin{equation*}
@@ -1272,20 +1272,20 @@ Als nächstes sollte dann ein erstes Verfahren, das Gauß-Seidel-Verfahren, sequen
 
 Daraufhin wurde unser parallelisiertes Verfahren zur Lösung einer partiellen Differentialgleichung eingesetzt. Hier wurde die Methode der Finiten Differenzen eingesetzt, um das Problem in uniforme Teile zu zerlegen. Diese Zerlegung nimmt einen Parameter entgegen um so die Feinheit der Unterteilung festzulegen. Dies erlaubte uns Unterschiede in benötigter Rechenzeit und maximalem Berechnungsfehler zu untersuchen.
 
-Als letzter Aspekt für das erste Projekt wurde aus mehreren Krylow-Unterraumverfahren das CG-Verfahren ausgesucht und implementiert. Dieses sollte das gleiche Problem wie auch schon vorher das Gauß-Seidel-Verfahren lösen (Poisson-Problem), aber mit der Erwartung dass es schneller zum gewünschten Resultat kommt, was wir auch tatsächlich beobachten konnten.
+Als letzter Aspekt für das erste Projekt wurde aus mehreren Krylow-Unterraumverfahren das CG-Verfahren ausgesucht und implementiert. Dieses sollte das gleiche Problem wie auch schon vorher das Gauß-Seidel-Verfahren lösen (Poisson-Gleichung), aber mit der Erwartung dass es schneller zum gewünschten Resultat kommt, was wir auch tatsächlich beobachten konnten.
 
 Das zweite Projekt hatte das Hauptaugenmerk nicht mehr auf der CPU als Hauptrecheneinheit, sondern der GPU, welche wir mit Hilfe von CUDA programmieren konnten.
 
 Erste Aufgaben waren das Auslesen der Architekturinformation von den verfügbaren Beschleuniger und die verschiedenen Datentransferraten zu ermitteln.
 
-Die vorherigen Programme wurde dann auch noch für eine Ausführung auf der GPU angepasst. Der daraus entstandene Geschwindigkeitszuwachs, verglichen zur CPU-Ausführung, wurde dann nochmals durch eine breit ausgelegte Literaturrecherche verbessert. Im Allgemeinen wird versucht, an einigen Stellen etwas an Genauigkeit einzusparen um somit eine erheblich höhere Geschwindigkeit zu erreichen. Wir haben eine Technik ausgewählt und diese auf unseren Programmen angewendet. Diese Resultate ließen dann Rückschlüsse über die interne Struktur der CPU und GPU zu. Zeitgleich hat dies unsere Ausführungszeit bei hoher Auflösung sehr stark verbessert.
+Die vorherigen Programme wurden dann auch noch für eine Ausführung auf der GPU angepasst. Der daraus entstandene Geschwindigkeitszuwachs, verglichen zur CPU-Ausführung, wurde dann nochmals durch eine breit ausgelegte Literaturrecherche verbessert. Im Allgemeinen wird versucht, an einigen Stellen etwas an Genauigkeit einzusparen um somit eine erheblich höhere Geschwindigkeit zu erreichen. Wir haben eine Technik ausgewählt und diese auf unseren Programmen angewendet. Diese Resultate ließen dann Rückschlüsse über die interne Struktur der CPU und GPU zu. Zeitgleich hat dies unsere Ausführungszeit bei hoher Auflösung sehr stark verbessert.
 
 Des weiteren wurde das Konzept der Vorkonditionierung anhand von zwei gegebenen Algorithmen eingeführt. Diese sollten kurz aus Sicht der Mathematik analysiert werden. Die Analyse lieferte uns Informationen zu Vor- und Nachteilen in der Paralleliserbarkeit und Stabilität.
 
 Mit allen Bausteinen des Praktikums sollte dann zuletzt ein vollständiges Programm entstehen, welches die Poisson-Gleichung aus dem ersten Projekt löst, unter Einhaltung eines gegebenen maximalen Fehlers. Durch die vielen einzelnen Stellen, an welchen der tolerierte Fehler der verschiedenen Verfahren angepasst werden konnte, war es uns möglich ein, schnelles Programm zu entwickeln, welches uns Einsichten in den Einfluss der verschiedenen Teile des Programm geliefert hat.
 Zu guter Letzt durften wir die Erfahrung machen, dass es hier tatsächlich sinnvoll ist, alle Komponenten auf der GPU auszuführen. Auch wenn der dabei beobachtete Geschwindigkeitszuwachs unter unseren Erwartungen lag, was wir auf den Aufwand der einzelnen Berechnungsschritte zurückgeführt haben.
 
-Das Praktikum hat uns vieles über numerische Aspekte gelehrt, als auch welche Techniken zur Parallelisierung von Programmen genutzt werden können. Insbesondere sind wir nun in der Lage, auf der CPU mittels OpenMP, als auch auf der Grafikkarte mittels Cuda, Programme zu parallelisieren und damit (hoffentlich) zu beschleunigen.
+Das Praktikum hat uns vieles über numerische Aspekte gelehrt, als auch welche Techniken zur Parallelisierung von Programmen genutzt werden können. Insbesondere sind wir nun in der Lage, auf der CPU mittels OpenMP, als auch auf der Grafikkarte mittels CUDA, Programme zu parallelisieren und damit (hoffentlich) zu beschleunigen.
 
 
 
