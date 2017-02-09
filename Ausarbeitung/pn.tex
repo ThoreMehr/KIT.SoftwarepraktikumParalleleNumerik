@@ -60,9 +60,6 @@
 % \documentclass[conference,compsoc]{../sty/IEEEtran}
 
 
-
-
-
 % Some very useful LaTeX packages include:
 % (uncomment the ones you want to load)
 
@@ -545,8 +542,8 @@ Im Folgenden werden einige parallele Architekturen genauer erläutert. Ein grober
 \end{table}
 
 
-
-\subsection{Parallelisierung Gauß-Seidel-Verfahren}\label{p1a4}
+\newpage
+\subsection{Gauß-Seidel-Verfahren}\label{p1a4}
 \subsubsection{Seriell}\label{p1a4a}
 Zu aller erst nehmen wir eine Differenzierung der in der Aufgabenstellung genannten Variablen vor. Unser $n$ bezeichne dasjenige, welches in der Beschreibung des Gauß-Seidel-Verfahrens auftritt. Das in dem gegebenen Problem genannte $n$ benennen wir zu $d$ um. Die restlichen Variablen behalten ihren Namen bei. Sei ein $l$ für das Verfahren vorgegeben, dann ergeben sich einige andere Größen wie folgt:
 \begin{equation}
@@ -906,52 +903,52 @@ In \ref{lst:cudastarted} ist die Ausgabe unseres Programms zu sehen. In den folg
 \subsection{Datentransferrate}\label{p2a2}
 Wie Tabelle \ref{t2a} entnommen werden kann, Steigt die Transferrate vom Ram in den VRAM auf etwa 2,5 GB/s, während sich in der Gegenrichtung etwa 1,5GB/s erreichen lassen. Im VRAM konnten wir etwa 40 GB/s erreichen. Das Kopieren im RAM ist mit weniger als 2 GB/s deutlich langsamer und unterliegt starken Schwankungen.\\
 \begin{table}[h]
-\footnotesize
-\begin{tabular}{c|c|c|c|c}
-N & Ram$\rightarrow$Ram & Ram$\rightarrow$GPU & GPU$\rightarrow$GPU & GPU$\rightarrow$Ram \\ 
-\hline 
-$10^4$ & 0,03 & 0,6 & 0,74 & 0,6 \\
-$10^5$ & 0,3 & 1,7 & 9,1 & 0,7 \\
-$10^6$ & 1,5 & 2,2 & 28,2 & 1,1 \\
-$10^7$ & 2,4 & 2,4 & 38,2 & 1,4
-\end{tabular}
-\caption{Transferraten in GB/s nach Aufgabe 2a.}
-\label{t2a}
+	\centering
+	\begin{tabular}{r|r|r|r|r}
+		N & \tiny RAM$\rightarrow$RAM & \tiny RAM$\rightarrow$VRAM & \tiny VRAM$\rightarrow$VRAM & \tiny VRAM$\rightarrow$RAM \\ 
+		\hline 
+		$10^4$ & 0,03 & 0,6 & 0,74 & 0,6 \\
+		$10^5$ & 0,3 & 1,7 & 9,1 & 0,7 \\
+		$10^6$ & 1,5 & 2,2 & 28,2 & 1,1 \\
+		$10^7$ & 2,4 & 2,4 & 38,2 & 1,4
+	\end{tabular}
+	\caption{Transferraten in GB/s nach Aufgabe 2a.}
+	\label{t2a}
 \end{table}
-Wie wir auch erwartet haben, bleiben die Transferraten RAM$\rightarrow$GPU und GPU$\rightarrow$RAM unverändert. Da diese Daten Tabelle \ref{t2a} entnommen werden können, sind sie in den Tabellen \ref{t2b_Mega} und \ref{t2b_10Mega} nicht weiter aufgeführt. Da noch addiert wird, sinkt die Transferrate im RAM. Mit steigender Blockgröße steigt die Leistung GPU$\rightarrow$GPU anfangs fast linear, bis die Kurve bei Blockgröße 24 abflacht.
+Wie wir auch erwartet haben, bleiben die Transferraten RAM$\rightarrow$VRAM und VRAM$\rightarrow$RAM unverändert. Da diese Daten Tabelle \ref{t2a} entnommen werden können, sind sie in den Tabellen \ref{t2b_Mega} und \ref{t2b_10Mega} nicht weiter aufgeführt. Da wir hier auf jeden Eintrag zusätzlich addieren etwas drauf addieren, sinkt die Transferrate im RAM. Mit steigender Blockgröße steigt die Leistung VRAM$\rightarrow$VRAM anfangs fast linear, bis die Kurve bei Blockgröße 24 abflacht.
 
 Die allgemein höhere Leistung mit größerer Problemgröße ist durch einen geringeren Anteil an Overhead zu erklären. Die SIMD-Register spielen eine wichtige Rolle. Durch diese wird ein Befehl gleichzeitig an viele der Rechenkerne geschickt. Dabei arbeiten diese den gleichen Befehl mit unterschiedlichen Daten ab. Bei der GTX 960 erfolgt dies mit 32 Befehlen parallel. Allerdings steht ein Teil der Einheiten still, wenn nicht genug parallele Befehle zur Verfügung stehen, da ein Warp immer nur von einem Block belegt werden kann. Daher sollte die Blockgröße immer in vielfachen von 32 gewählt werden.
 
 Abschließend ist zu diesen Übertragungsratentests zu sagen, dass die Aufgabe wesentlich Aufwändiger sein muss, als zu inkrementieren, um die Übertragung an die GPU zu rechtfertigen, da in diesem Beispiel Hin- und Rückübertragung auf bzw. von der GPU länger dauert, als die Arbeit nur mit der CPU durchzuführen.
 
 \begin{table}[h]
-\centering
-\begin{tabular}{c|c|c}
-B.g. & Ram$\rightarrow$Ram &  GPU$\rightarrow$GPU  \\ 
-\hline 
-4 & 1,2  & 4,0 \\
-8 & 1,2  & 7,5 \\
-16 & 1,2 & 14, \\
-24 & 1,2  & 19 \\
-32 & 1,2  & 22
-\end{tabular}
-\caption{Transferraten in GB/s nach Aufgabe 2b $N=10^6$ und verschiedenen Blockgrößen.}
-\label{t2b_Mega}
+	\centering
+	\begin{tabular}{r|r|r}
+		Blockgröße & RAM$\rightarrow$RAM &  VRAM$\rightarrow$VRAM  \\ 
+		\hline 
+		4 & 1,2  & 4,0 \\
+		8 & 1,2  & 7,5 \\
+		16 & 1,2 & 14, \\
+		24 & 1,2  & 19 \\
+		32 & 1,2  & 22
+	\end{tabular}
+	\caption{Transferraten in GB/s nach Aufgabe 2b $N=10^6$ und verschiedenen Blockgrößen.}
+	\label{t2b_Mega}
 \end{table}
 
 \begin{table}[h]
-\centering
-\begin{tabular}{c|c|c}
-B.g. & Ram$\rightarrow$Ram  & GPU$\rightarrow$GPU \\ 
-\hline 
-4 & 2,0 & 4,3 \\
-8 & 2,0 & 8,3 \\
-16 & 2,0 & 16,2\\
-24 & 2,0 & 22,3 \\
-32 & 2,0 &  30,1
-\end{tabular}
-\caption{Transferraten in GB/s nach Aufgabe 2b $N=10^7$und verschiedenen Blockgrößen.}
-\label{t2b_10Mega}
+	\centering
+	\begin{tabular}{r|r|r}
+		Blockgröße & RAM$\rightarrow$RAM  & VRAM$\rightarrow$VRAM \\ 
+		\hline 
+		4 & 2,0 & 4,3 \\
+		8 & 2,0 & 8,3 \\
+		16 & 2,0 & 16,2\\
+		24 & 2,0 & 22,3 \\
+		32 & 2,0 &  30,1
+	\end{tabular}
+	\caption{Transferraten in GB/s nach Aufgabe 2b $N=10^7$und verschiedenen Blockgrößen.}
+	\label{t2b_10Mega}
 \end{table}
 
 
@@ -1265,10 +1262,30 @@ Die maximale Seitenlänge, die diese Bedingung erfüllt ist $max_x=max_y=max_z=190
 Bei Würfeln die größer sind als $max_x=max_y=max_z=190$ passen die Daten nicht alle gleichzeitig in den Grafikspeicher, sie müssten demnach während der Berechnung zwischen Haupt- und Grafikspeicher ausgetauscht werden. Da diese Kopieoperationen vergleichsweise langsam sind, ist mit einer sehr starken Verschlechterung der Performanz zu rechnen.
 
 
-\subsubsection{Implementierung}
-\TODO{Speedup}
+\vspace{2em}
+\paragraph{\large\textbf{\emph{Unser Fazit}}}
+Im Rahmen des Praktikums wurden mehrere Themenbereiche aus der Informatik sowie der Mathematik behandelt.
 
+Das erste Projekt lies uns erste Erfahrungen mit OpenMP sammeln, indem die nicht deterministische Reihenfolge der Threadausführung gezeigt wurde. Daraufhin wurden Testtools (Intel Thread Checker und OpenMP Profiler) eingeführt, damit wir unsere Programme auf Fehler untersuchen konnten. Nach diesen ersten Schritten sollten wir uns Gedanken über Maße der parallelen Ausführung machen, welches uns zu mehreren quantitativen Maßzahlen im Kontext von Parallelrechnern geleitet hat. Zeitgleich sollten wir uns andere Architekturen und Beschleuniger ansehen und über ihre Vor- und Nachteile diskutieren. Des weiteren wurden typische Fehler, wie etwa Verklemmungen und Wettlaufsituationen, betrachtet und beschrieben, unter welchen Bedingungen diese eintreten können.
 
+Als nächstes sollte dann ein erstes Verfahren, das Gauß-Seidel-Verfahren, sequentiell implementiert werden, um es anschließend zu parallelisieren mithilfe des angeeigneten Wissen der vorherigen Aufgaben. Zusätzlich war es noch notwendig, eine geeignete Parallelisierungsmethodik zu finden, um eine Beschleunigung trotz Datenabhängigkeiten zu erreichen.
+
+Daraufhin wurde unser parallelisiertes Verfahren zur Lösung einer partiellen Differentialgleichung eingesetzt. Hier wurde die Methode der Finiten Differenzen eingesetzt, um das Problem in uniforme Teile zu zerlegen. Diese Zerlegung nimmt einen Parameter entgegen um so die Feinheit der Unterteilung festzulegen. Dies erlaubte uns Unterschiede in benötigter Rechenzeit und maximalem Berechnungsfehler zu untersuchen.
+
+Als letzter Aspekt für das erste Projekt wurde aus mehreren Krylow-Unterraumverfahren das CG-Verfahren ausgesucht und implementiert. Dieses sollte das gleiche Problem wie auch schon vorher das Gauß-Seidel-Verfahren lösen (Poisson-Problem), aber mit der Erwartung dass es schneller zum gewünschten Resultat kommt, was wir auch tatsächlich beobachten konnten.
+
+Das zweite Projekt hatte das Hauptaugenmerk nicht mehr auf der CPU als Hauptrecheneinheit, sondern der GPU, welche wir mit Hilfe von CUDA programmieren konnten.
+
+Erste Aufgaben waren das Auslesen der Architekturinformation von den verfügbaren Beschleuniger und die verschiedenen Datentransferraten zu ermitteln.
+
+Die vorherigen Programme wurde dann auch noch für eine Ausführung auf der GPU angepasst. Der daraus entstandene Geschwindigkeitszuwachs, verglichen zur CPU-Ausführung, wurde dann nochmals durch eine breit ausgelegte Literaturrecherche verbessert. Im Allgemeinen wird versucht, an einigen Stellen etwas an Genauigkeit einzusparen um somit eine erheblich höhere Geschwindigkeit zu erreichen. Wir haben eine Technik ausgewählt und diese auf unseren Programmen angewendet. Diese Resultate ließen dann Rückschlüsse über die interne Struktur der CPU und GPU zu. Zeitgleich hat dies unsere Ausführungszeit bei hoher Auflösung sehr stark verbessert.
+
+Des weiteren wurde das Konzept der Vorkonditionierung anhand von zwei gegebenen Algorithmen eingeführt. Diese sollten kurz aus Sicht der Mathematik analysiert werden. Die Analyse lieferte uns Informationen zu Vor- und Nachteilen in der Paralleliserbarkeit und Stabilität.
+
+Mit allen Bausteinen des Praktikums sollte dann zuletzt ein vollständiges Programm entstehen, welches die Poisson-Gleichung aus dem ersten Projekt löst, unter Einhaltung eines gegebenen maximalen Fehlers. Durch die vielen einzelnen Stellen, an welchen der tolerierte Fehler der verschiedenen Verfahren angepasst werden konnte, war es uns möglich ein, schnelles Programm zu entwickeln, welches uns Einsichten in den Einfluss der verschiedenen Teile des Programm geliefert hat.
+Zu guter Letzt durften wir die Erfahrung machen, dass es hier tatsächlich sinnvoll ist, alle Komponenten auf der GPU auszuführen. Auch wenn der dabei beobachtete Geschwindigkeitszuwachs unter unseren Erwartungen lag, was wir auf den Aufwand der einzelnen Berechnungsschritte zurückgeführt haben.
+
+Das Praktikum hat uns vieles über numerische Aspekte gelehrt, als auch welche Techniken zur Parallelisierung von Programmen genutzt werden können. Insbesondere sind wir nun in der Lage, auf der CPU mittels OpenMP, als auch auf der Grafikkarte mittels Cuda, Programme zu parallelisieren und damit (hoffentlich) zu beschleunigen.
 
 
 
