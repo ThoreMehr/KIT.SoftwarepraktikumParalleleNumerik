@@ -1,0 +1,31 @@
+A1 Getting started
+
+A2 Datentransferraten
+
+A3 GSV Implementierung
+Async Parallelisierungsmethoden
+Approx Computing Implementierung
+Programmierfehler
+Architekturen
+Architekturen 2
+
+A4 Einführung
+ILU-Zerlegung
+Mathematische Sicht
+Speichermethodik
+Ergebnis
+OpenMP
+
+A5 CG-Verfahren
+Poisson-Problem
+Vergleich
+Graph
+Genauigkeit
+Beschleuniger
+Beschleunigung
+Skalarprodukt
+
+A6 LBM
+Größere Würfel
+
+Überblick
